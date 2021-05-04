@@ -37,13 +37,20 @@ Page({
       }
     })
   },
+
+
+
+
+
   //调用getUserInfo部分
+  // 新建用户档案
 addUser(){
   // 创建用户档案前端需要传入参数：用户名 userName(string)
     wx.cloud.callFunction({
       name:'getUserInfo',
       data:{
       flag:3,
+      // 前端输入的用户名
       userName:"kent",
       },
       success:res=>{
@@ -53,7 +60,57 @@ addUser(){
         console.log('调用失败：',err)
       }
     })
+},
+// 更新用户名
+updateUser(){
+  // 创建用户档案前端需要传入参数：用户名 userName(string)
+    wx.cloud.callFunction({
+      name:'getUserInfo',
+      data:{
+      flag:2,
+      // 前端修改的用户名
+      userName:"kent Norman",
+      },
+      success:res=>{
+        console.log(res)
+      },
+      fail:err=>{
+        console.log('调用失败：',err)
+      }
+    })
+},
+//查询用户信息
+getInfo(){
+  wx.cloud.callFunction({
+    name:'getUserInfo',
+    data:{
+      flag:0
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })  
+},
+// 查询学习记录
+getHistory(){
+  wx.cloud.callFunction({
+    name:'getUserInfo',
+    data:{
+      flag:1,
+      skip:5
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
 }
+
 })
 
 
