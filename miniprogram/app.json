@@ -1,15 +1,43 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/my",
+    "pages/history/history",
+
+    "pages/chair/chair",
+    "pages/room/room",
+
+    "pages/signIn/signIn",
+
+    "pages/adminRoom/adminRoom",
+    "pages/adminRoomSetting/adminRoomSetting",
+    "pages/adminRoomHistory/adminRoomHistory",
+
+    "pages/about/about",
     "pages/test/test"
-   
+
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
+    "backgroundColor": "#fc6249",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "navigationStyle": "custom",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/index/index",
+      "iconPath": "",
+      "selectedIconPath": "",
+      "text": "自习室"
+    }, {
+      "pagePath": "pages/my/my",
+      "iconPath": "",
+      "selectedIconPath": "",
+      "text": "我的"
+    }],
+    "color": "b5b5b5",
+    "selectedColor": "fc6249"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
