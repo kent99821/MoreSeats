@@ -40,6 +40,7 @@
   "appid": "wx142825d0461b78c0",
   "projectname": "moreChair",
   "libVersion": "2.14.1",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []
