@@ -1,3 +1,24 @@
-<block>
-<button type="primary">获取自习室基本</button>
+<!-- 自习室信息相关 -->
+<!-- <block>
+<button type="primary" bindtap="getRooms">获取自习室基本</button>
 </block>
+<block>
+<button type="primary" bindtap="getRoom">获取自习室基本</button>
+</block> -->
+
+<!--个人信息相关 -->
+<block>
+<button type="primary" bindtap="getUserInfo" data-flag="{{0}}">查询用户信息</button>
+</block>
+<block>
+<button type="primary" bindtap="getUserInfo">查询学习记录</button>
+</block>
+<block>
+<button type="primary" bindtap="getUserInfo">修改用户名</button>
+</block>
+<block>
+<button type="primary" bindtap="addUser">新建用户档案</button>
+</block>
+
+
+
