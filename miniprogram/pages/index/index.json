@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-input":"wux-weapp/input/index"
+  }
 }
