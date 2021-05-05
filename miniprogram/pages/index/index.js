@@ -18,12 +18,40 @@ Page({
         style: 'background-color: #F4333C; color: white',
       }],
   },
+  
+
+  /*
+    获取缓存信息
+  */
+ getHistory(){
+
+  //  wx.setStorage({
+  //    data: [1,2,3,4,5,6],
+  //    key: 'historyList',
+  //  })
+   let val = wx.getStorageSync('historyList');
+   this.setData({historyList: val})
+  //  console.log(this.data.historyList);
+ },
+
+  /*
+    删除历史某个记录
+  */
+ deleteHistroryItem(e){
+  let index = e.data.val;
+  let val = this.data.historyList.splice(index, 1);
+  this.setData({historyList:val});
+},
+
+
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getHistory()
   },
 
   /**
