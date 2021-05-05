@@ -5,6 +5,7 @@ cloud.init()
 const db = cloud.database()
 // 初始化响应码reCode 结果result
 let reCode = 0
+// 查找用户记录的结果 查询自习室的结果  添加学习记录的结果 更新用户记录的结果 更新自习室的结果
 let result, oresult,hresult,uresult,rresult
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -41,16 +42,15 @@ exports.main = async (event, context) => {
       }
       // 理想状态
       else{
-      oresult.data[0].chairs.sitDown+=1
       oresult.data[0].chairs.infos[event.chairIndex].openId=wxContext.OPENID
       oresult.data[0].chairs.infos[event.chairIndex].state=true
-      oresult.data[0].count.pepSum+=1 
       rresult=await db.collection('rooms').where({
         roomId:event.roomId
       }).update({
       data:{
-      chairs:oresult.data[0].chairs,
-      count:oresult.data[0].count
+      "chairs.sitDown":oresult.data[0].chairs.sitDown+1,
+      "chairs.infos":oresult.data[0].chairs.infos,
+      "count.pepSum":oresult.data[0].count.pepSum+1
       }
       })
       uresult=await db.collection('users').where({

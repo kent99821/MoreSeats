@@ -30,6 +30,7 @@ exports.main = async (event, context) => {
         obj.sumTime = result.data[0].sumTime
         obj.isAdmin = result.data[0].isAdmin
         obj.userName = result.data[0].userName
+        obj.roomAdminList=result.data[0].roomAdminList
         return obj
       }
       //用于触底加载功能 初步完成跳过event.skip条记录 查询返回后面的记录
