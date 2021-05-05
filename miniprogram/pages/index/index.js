@@ -5,6 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    rooms: [
+      { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
+      { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
+      { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
+      { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }],
     test: {
       rooms: [
         { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
@@ -25,24 +30,33 @@ Page({
   */
  getHistory(){
 
-  //  wx.setStorage({
-  //    data: [1,2,3,4,5,6],
-  //    key: 'historyList',
-  //  })
-   let val = wx.getStorageSync('historyList');
-   this.setData({historyList: val})
-  //  console.log(this.data.historyList);
+
+  let val = wx.getStorageSync('rooms');
+  this.setData({rooms:val});
+
  },
 
   /*
     删除历史某个记录
   */
  deleteHistroryItem(e){
-  let index = e.data.val;
-  let val = this.data.historyList.splice(index, 1);
-  this.setData({historyList:val});
+   console.log(e.currentTarget.dataset.index)
+  let index = e.currentTarget.dataset.index;
+  console.log(index)
+  let val = this.data.rooms;
+  val.splice(index,1)
+  console.log(val)
+  wx.setStorageSync('rooms',val);
+  // console.log(this.data.rooms)
+  this.setData({rooms:val});
 },
 
+/*
+  复制内容
+*/
+getRoomId(e){
+
+},
 
 
 
