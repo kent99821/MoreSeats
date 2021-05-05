@@ -109,6 +109,27 @@ getHistory(){
       console.log('调用失败：',err)
     }
   }) 
+},
+
+
+
+
+// 签到部分
+signIn(){
+  wx.cloud.callFunction({
+    name:'signIn',
+    data:{
+    roomId:"123456",
+    chairIndex:2,
+    roomName:"海大图书馆"
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
 }
 
 })

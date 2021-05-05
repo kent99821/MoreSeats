@@ -9,7 +9,8 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 // 页面数据
 let resArray = []
-
+let result
+let obj = {}
 // 创建数据库实例
 const db = cloud.database()
 
@@ -36,10 +37,19 @@ exports.main = async (event, context) => {
 
   //flag(number):0 查询多个自习室基础信息 roomIds(string array) 
   else if (event.flag === 1) {
-    return await db.collection('rooms').where({
+    result = await db.collection('rooms').where({
       roomId: event.roomId
     }).get()
+    obj.chairs = result.data[0].chairs
+    obj.isOpen = result.data[0].isOpen
+    obj.openId = result.data[0].openId
+    obj.openTime = result.data[0].openTime
+    obj.roomId = result.data[0].roomId
+    obj.roomName = result.data[0].roomName
+    obj.roomNotice = result.data[0].roomNotice
+    obj.rule = result.data[0].rule
   }
+  return obj
 
 
 }
