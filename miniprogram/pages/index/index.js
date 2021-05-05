@@ -10,13 +10,7 @@ Page({
       { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
       { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
       { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }],
-    test: {
-      rooms: [
-        { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
-        { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
-        { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
-        { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }]
-    },
+
     right: [
       {
         text: 'Delete',
@@ -57,17 +51,44 @@ Page({
   复制内容
 */
 copyRoomId(e){
-  console.log(e.currentTarget.dataset.roomId)
-
+  console.log(e.currentTarget.dataset.roomid)
+          wx.setClipboardData({
+                data:  e.currentTarget.dataset.roomid,
+                success: function (res) {
+                  wx.getClipboardData({
+                    success: function (res) {
+                      wx.showToast({
+                        title: '复制成功'
+                      })
+                    }
+                  })
+                }
+              })
 },
 
 /*
 跳转
 */
-toRoom(){
-
+toRoom(e){
+  let val = e.currentTarget.dataset.roomid;
+  console.log(val)
+  wx.navigateTo({
+    url: '/pages/room/room?roomId='+val,
+  })
 },
-
+scanQR(){
+  let sthis = this;
+  wx.scanCode({
+        
+    success: (res) => {
+      let result = res.result;
+      console.log(result)
+      // _this.setData({
+        // result: result,
+      // })
+    }
+  })
+},
 
 
 

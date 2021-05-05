@@ -12,7 +12,7 @@
 </view>
 
 <wux-swipe-action-group>
-  <view wx:for="{{test.rooms}}" wx:key="index" class="room-card">
+  <view wx:for="{{rooms}}" wx:key="index" class="room-card">
     <wux-swipe-action useSlots class="room-card-body" autoClose right="{{ right }}">
       <view slot="right">
         <view class="right-button FCCC" bindtap="deleteCard" data-index="{{index}}">
