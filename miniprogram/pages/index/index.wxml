@@ -6,7 +6,7 @@
   </view>
   <view class="to-room-center"></view>
   <view class="to-room-side FRCC" bindtap="scanQR">
-    <image mode="aspectFit" class="to-room-side-icon" src="/images/idgo.png" />
+    <image mode="aspectFit" class="to-room-side-icon-2" src="/images/scan.png" />
     <view>扫码立即学习</view>
   </view>
 </view>
@@ -20,7 +20,7 @@
         </view>
       </view>
       <view class="room-card-body FRSC">
-        <view class="room-id FRCC">
+        <view class="room-id FRCC" bindtap="copyRoomId" data-roomId="{{item.roomId}}">
           <view class="room-id-body">
             #{{item.roomId}}
           </view>

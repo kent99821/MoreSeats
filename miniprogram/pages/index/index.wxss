@@ -32,6 +32,11 @@
   width: 70rpx;
   margin: 20rpx;
 }
+.to-room-side-icon-2 {
+  height: 45rpx;
+  width: 45rpx;
+  margin: 20rpx;
+}
 
 .to-room-center {
   border-right: 1rpx solid #ccc;
