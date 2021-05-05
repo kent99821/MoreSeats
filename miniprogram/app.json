@@ -18,26 +18,28 @@
 
   ],
   "window": {
-    "backgroundColor": "#fc6249",
+    "backgroundColor": "#e5e5e5",
+    "backgroundColorBottom": "#e5e5e5",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarBackgroundColor": "#e5e5e5",
     "navigationStyle": "custom",
     "enablePullDownRefresh": true
   },
   "tabBar": {
     "list": [{
       "pagePath": "pages/index/index",
-      "iconPath": "",
-      "selectedIconPath": "",
+      "iconPath": "images/test2.png",
+      "selectedIconPath": "images/index2.png",
       "text": "自习室"
     }, {
       "pagePath": "pages/my/my",
-      "iconPath": "",
-      "selectedIconPath": "",
+      "iconPath": "images/my.png",
+      "selectedIconPath": "images/test.png",
       "text": "我的"
     }],
-    "color": "b5b5b5",
-    "selectedColor": "fc6249"
+    "color": "#b5b5b5",
+    "selectedColor": "#fc6249",
+    "borderStyle": "white"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"
