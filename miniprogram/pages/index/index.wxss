@@ -1,10 +1,15 @@
 /* pages/index/index.wxss */
 @import '/miniprogram_npm/wux-weapp/styles/index.wxss';
 
+.top-img{
+  width: 100%;
+
+}
+
 .to-room {
   width: 690rpx;
   height: 100rpx;
-  margin-top: 300rpx;
+  /* margin-top: 300rpx; */
   margin-bottom: 20rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -19,11 +24,13 @@
   width: 50%;
   height: 100%;
   /* background-color: maroon; */
+  color: #ccc;
 }
 
 .to-room-side-icon {
   height: 70rpx;
   width: 70rpx;
+  margin: 20rpx;
 }
 
 .to-room-center {
@@ -35,17 +42,28 @@
   background-color: #fff;
   width: 690rpx;
   height: 235rpx;
-  margin-bottom: 40rpx;
+  margin-bottom: 20rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
   border-radius: 35rpx;
   overflow: hidden;
-  box-shadow: 0px 5px 19px -6px #696969;
+  box-shadow: 0px 5px 12px -4px #696969;
 }
 
 .room-card-body {
   width: 690rpx;
   height: 235rpx;
+}
+
+.right-button{
+  width: 140rpx;
+  height: 100%;
+  background-color: #e0e0e0;
+}
+
+.right-button-icon{
+  width: 80rpx;
+  height: 120rpx;
 }
 
 .room-id {
@@ -67,7 +85,7 @@
 
 .room-info {
   height: 235rpx;
-  width: 465rpx;
+  width: 425rpx;
   /* background-color: khaki; */
   padding-left: 30rpx;
 }
@@ -85,10 +103,11 @@
 }
 
 .room-info-name-body-text {
-  max-width: 450rpx;
+  max-width: 430rpx;
   font-size: 50rpx;
   margin-bottom: 8rpx;
   color: #65322c;
+  /* background-color: lightblue; */
 }
 
 .room-info-time {
@@ -104,8 +123,9 @@
 }
 
 .room-info-time-body-text {
-  max-width: 300rpx;
-  font-size: 40rpx;
+  max-width: 350rpx;
+  font-size: 35rpx;
+  /* background-color: lawngreen; */
 }
 
 .room-info-chairs {
@@ -126,8 +146,8 @@
 }
 
 .room-icon {
-  height: 235rpx;
-  width: 150rpx;
+  height: 225rpx;
+  width: 180rpx;
   /* background-color: rgb(39, 158, 122); */
 }
 
