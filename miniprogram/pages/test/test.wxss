@@ -2,3 +2,6 @@
 button{
   margin-block: 10rpx;
 }
+.top{
+  margin-top: 130rpx;
+}

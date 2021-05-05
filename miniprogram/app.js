@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: async function () {
     if (!wx.cloud) {
       console.error('请使用 2.2.3 或以上的基础库以使用云能力')
     } else {
@@ -13,12 +13,38 @@ App({
         traceUser: true,
       })
     }
+    await wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        console.log(res);
+        this.globalData.openid = res.result.openid
+        this.globalData.isNewPeople = res.result.isNewGuys
+        this.globalData.name = res.result.uname
+        this.globalData.isOP = res.result.isOP
+        this.globalData.distence = 0
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
+    })
 
-    this.globalData = {
-      openId:"",
-      isNewGuy:false,
-      
-      
-    }
+  },
+  globalData: {
+    openId: "",
+    isNewGuy: false,
+    isAdmin: false,
+    userName: "未登记",
+    sumTime: 0,
+    recordNum: 0,
+    isOver: true,
+    roomAdminList: [{}],
+
   }
 })
