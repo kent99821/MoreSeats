@@ -39,11 +39,13 @@ Page({
   /*
     删除历史某个记录
   */
- deleteHistroryItem(e){
+ deleteCard(e){
+  //  console.log(e.currentTarget.dataset)
    console.log(e.currentTarget.dataset.index)
   let index = e.currentTarget.dataset.index;
   console.log(index)
   let val = this.data.rooms;
+  console.log(val)
   val.splice(index,1)
   console.log(val)
   wx.setStorageSync('rooms',val);
@@ -54,7 +56,15 @@ Page({
 /*
   复制内容
 */
-getRoomId(e){
+copyRoomId(e){
+  console.log(e.currentTarget.dataset.roomId)
+
+},
+
+/*
+跳转
+*/
+toRoom(){
 
 },
 
@@ -100,7 +110,7 @@ getRoomId(e){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getHistory();
   },
 
   /**
