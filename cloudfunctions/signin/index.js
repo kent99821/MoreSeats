@@ -1,3 +1,9 @@
+/**
+ * date:2021.05.06
+ * author:kent
+ * state:finished
+ */
+
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init()
@@ -19,7 +25,6 @@ exports.main = async (event, context) => {
       user:result.data[0],
       reCode:201
     }
-
     return noEnd
   } else {
     oresult = await db.collection('rooms').where({

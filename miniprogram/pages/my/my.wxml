@@ -1,3 +1,4 @@
+
 <view class="center-card FRCC">
   <view class="center-card-inside FCCC">
     <view class="center-card-inside-top FCCC">
@@ -38,3 +39,4 @@
   </wux-cell>
   <wux-cell thumb="/images/about.png" title="关于" is-link url="/pages/about/about" open-type="navigateTo"></wux-cell>
 </view>
+

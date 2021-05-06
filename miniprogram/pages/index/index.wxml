@@ -1,3 +1,10 @@
+<wux-popup position="center" visible="{{ visible2 }}" bind:close="typeIn">
+  <sms-code unactive-class="sms-unActive" active-class="sms-active" code-type="number" code-count="6"
+    is-auto bindchangeCode="changeCode">
+  </sms-code>
+</wux-popup>
+
+
 <image src="/images/top.png" class="top-img"></image>
 <view class="to-room FRCC">
   <view class="to-room-side FRCC" bindtap="typeIn">
@@ -49,7 +56,7 @@
             </view>
           </view>
         </view>
-        <view class="room-icon FCCC"  bindtap="toRoom" data-roomId="{{item.roomId}}">
+        <view class="room-icon FCCC" bindtap="toRoom" data-roomId="{{item.roomId}}">
           <view class="room-icon-body FCCC">
             <image mode="aspectFit" class="room-icon-img" src="/images/door.png" />
           </view>
