@@ -32,7 +32,9 @@
             #{{item.roomId}}
           </view>
         </view>
-        <view class="room-info" bindtap="toRoom" data-roomId="{{item.roomId}}">
+        <view class="room-info" bindtap="toRoom" data-roomId="{{item.roomId}}" 
+          data-name="{{item.roomName}}"
+        >
           <view class="room-info-name FRSC">
             <view class="room-info-name-body">
               <view class="room-info-name-body-text wux-ellipsis">

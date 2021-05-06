@@ -14,9 +14,11 @@ Page({
   onLoad: function (options) {
 
     let aId =  options.roomId;
+    let aName = options.roomName;
+ 
     let val = wx.getStorageSync('rooms');
-    val = val.filter((item)=> item != aId);
-    val.splice(0,0, aId)
+    val = val.filter((item)=> item.roomId != aId);
+    val.splice(0,0, {roomId: aId, roomName: aName})
     val.splice(4);
     console.log(val)
     wx.setStorageSync('rooms', val)

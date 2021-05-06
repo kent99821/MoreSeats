@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    visible2: true,
+    visible2: false ,
     rooms: [
       { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
       { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
@@ -43,11 +43,11 @@ Page({
   let val = this.data.rooms;
   val.splice(index,1)
   console.log(val)
-  let roomsIdArr = [];
+  let roomsArr = [];
   val.forEach((item)=>{
-    roomsIdArr.push(item.roomId);
+    roomsArr.push({roomId: item.roomId, roomName: item.roomName});
   })
-  wx.setStorageSync('rooms',roomsIdArr);
+  wx.setStorageSync('rooms',roomsArr);
   // console.log(this.data.rooms)
   this.setData({rooms:val});
 },
@@ -76,9 +76,10 @@ copyRoomId(e){
 */
 toRoom(e){
   let val = e.currentTarget.dataset.roomid;
+  let name = e.currentTarget.dataset.name;
   console.log(val)
   wx.navigateTo({
-    url: '/pages/room/room?roomId='+val,
+    url: '/pages/room/room?roomId='+val+'&roomName='+name,
   })
 },
 scanQR(){
@@ -99,7 +100,7 @@ scanQR(){
  * 触发输入
  */
 typeIn(){
-
+  this.setData({visible2: true})
 },
 
   /**
