@@ -27,7 +27,9 @@ Page({
 
 
   let val = wx.getStorageSync('rooms');
-  this.setData({rooms:val});
+  // console.log(val)
+  
+  // this.setData({rooms:val});
 
  },
 
@@ -35,15 +37,16 @@ Page({
     删除历史某个记录
   */
  deleteCard(e){
-  //  console.log(e.currentTarget.dataset)
-   console.log(e.currentTarget.dataset.index)
+
   let index = e.currentTarget.dataset.index;
-  console.log(index)
   let val = this.data.rooms;
-  console.log(val)
   val.splice(index,1)
   console.log(val)
-  wx.setStorageSync('rooms',val);
+  let roomsIdArr = [];
+  val.forEach((item)=>{
+    roomsIdArr.push(item.roomId);
+  })
+  wx.setStorageSync('rooms',roomsIdArr);
   // console.log(this.data.rooms)
   this.setData({rooms:val});
 },
