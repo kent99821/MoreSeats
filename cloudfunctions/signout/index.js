@@ -1,8 +1,7 @@
 /**
- * date:2021.05.05
+ * date:2021.05.06
  * author:kent
- * state:finishing
- * howlong 记得赋值为0
+ * state:finished
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -14,7 +13,7 @@ const _ = db.command
  let PageData={
   openId:"", //初始化 openId
   userName:"",//用户名 
-  howlong:10,//时间差
+  howlong:0,//时间差
   reCode:0,//返回状态码
   uresult:{}, // users查询的结果
   hresult:{}, //history的查询结果
@@ -42,30 +41,30 @@ exports.main = async (event, context) => {
     PageData.reCode=201
     return PageData.reCode
   }else{
-    PageData.userName=uresult.data[0].userName
+    PageData.userName=PageData.uresult.data[0].userName
     // 查记录 方便计算
-  // PageData.hresult=await db.collection('history').where({
-  //   openId:PageData.openId,
-  //   roomId:event.roomId,
-  //   isOver:false,
-  //   chairIndex:event.chairIndex
-  // }).get()
-  // PageData.hresult.data[0].eTime=new Date()
-  // PageData.howlong=parseInt((PageData.hresult.data[0].eTime-PageData.hresult.data[0].sTime)/60000)
-  // PageData.hresult.data[0].howlong=PageData.howlong
-  // 更新history记录
-  // PageData.uhresult=await db.collection('history').where({
-  //   openId:PageData.openId,
-  //   roomId:event.roomId,
-  //   isOver:false,
-  //   chairIndex:event.chairIndex  
-  // }).update({
-  //   data:{
-  //     "eTime":PageData.hresult.data[0].eTime,
-  //     "howlong":PageData.hresult.data[0].howlong,
-  //     "isOver":true
-  //   }
-  // })
+  PageData.hresult=await db.collection('history').where({
+    openId:PageData.openId,
+    roomId:event.roomId,
+    isOver:false,
+    chairIndex:event.chairIndex
+  }).get()
+  PageData.hresult.data[0].eTime=new Date()
+  PageData.howlong=parseInt((PageData.hresult.data[0].eTime-PageData.hresult.data[0].sTime)/60000)
+  PageData.hresult.data[0].howlong=PageData.howlong
+  //更新history记录
+  PageData.uhresult=await db.collection('history').where({
+    openId:PageData.openId,
+    roomId:event.roomId,
+    isOver:false,
+    chairIndex:event.chairIndex  
+  }).update({
+    data:{
+      "eTime":PageData.hresult.data[0].eTime,
+      "howlong":PageData.hresult.data[0].howlong,
+      "isOver":true
+    }
+  })
     // return PageData.uhresult.errMsg: "collection.update:ok"
     PageData.rresult=await db.collection('rooms').where({
       roomId:event.roomId
@@ -82,19 +81,67 @@ exports.main = async (event, context) => {
       }
     })
       //return PageData.urresult.errMsg: "collection.update:ok"
+      // 查询排行榜中是否存在用户的记录
     PageData.rank=await db.collection('rooms').where({
       roomId:event.roomId,
       'count.rank.openId':PageData.openId
     }).get()
+    // 排行榜中没有用户的记录 在排行榜中加一条用户的记录
     if(PageData.rank.data.length===0){
-      PageData.arank=await db.collection('rooms').add({
+      PageData.arank=await db.collection('rooms').where({
+        roomId:event.roomId
+      }).update({
         data:{
-          // 'openId':PageData.openId,
-          // 'utimeSum':PageData.howlong,
-          // 'userName':PageData.userName
+        "count.rank":_.push({
+          openId:PageData.openId,
+          userName:PageData.userName,
+          utimeSum:PageData.howlong
+        })
         }
       })
+     //return PageData.arank.errMsg: "collection.update:ok"
+    }
+    //用户已经在排行榜上有记录 在该用户的记录中的时长加上
+    else{
+      PageData.urank=await db.collection('rooms').where({
+        roomId:event.roomId,
+        'count.rank.openId':PageData.openId
+      }).update({
+        data:{
+          'count.rank.$':{
+            userName:PageData.userName,
+            utimeSum:_.inc(PageData.howlong)
+          }
+        }
+      })
+      //return PageData.urank //errMsg: "collection.update:ok"
     } 
+
+    // 对users操作
+    PageData.uuresult=await db.collection('users').where({
+      openId:PageData.openId
+    }).update({
+      data:{
+      isOver:true,
+      recordNum:_.inc(1),
+      sumTime:_.inc(PageData.howlong)
+      }
+    })
+    // return PageData.uuresult
+    // errMsg: "collection.update:ok"
+    // 所有更新操作都完成后 返回成功码
+    if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.arank.errMsg==="collection.update:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
+      PageData.reCode=200
+      return PageData.reCode
+    }
+   else if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.urank.errMsg==="collection.update:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
+      PageData.reCode=200
+      return PageData.reCode
+    }
+    else{
+      PageData.reCode=405
+      return PageData.reCode
+    }
   }
   
 }

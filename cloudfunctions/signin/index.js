@@ -25,7 +25,6 @@ exports.main = async (event, context) => {
       user:result.data[0],
       reCode:201
     }
-
     return noEnd
   } else {
     oresult = await db.collection('rooms').where({
