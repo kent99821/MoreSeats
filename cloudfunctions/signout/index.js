@@ -2,6 +2,7 @@
  * date:2021.05.06
  * author:kent
  * state:finished
+ * content:update code
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -39,7 +40,11 @@ exports.main = async (event, context) => {
   // 之前已经签退
   if(PageData.uresult.data[0].isOver===true){
     PageData.reCode=201
-    return PageData.reCode
+    return {
+      "resCode":PageData.reCode,
+      "Msg":"之前已签退",
+      "data":{}
+     }
   }else{
     PageData.userName=PageData.uresult.data[0].userName
     // 查记录 方便计算
@@ -132,15 +137,27 @@ exports.main = async (event, context) => {
     // 所有更新操作都完成后 返回成功码
     if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.arank.errMsg==="collection.update:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
       PageData.reCode=200
-      return PageData.reCode
+      return {
+       "resCode":PageData.reCode,
+       "Msg":"签退成功",
+       "data":{}
+      }
     }
    else if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.urank.errMsg==="collection.update:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
       PageData.reCode=200
-      return PageData.reCode
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"签退成功",
+        "data":{}
+       }
     }
     else{
       PageData.reCode=405
-      return PageData.reCode
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"后台接口错误",
+        "data":{}
+       }
     }
   }
   

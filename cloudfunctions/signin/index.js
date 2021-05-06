@@ -2,6 +2,7 @@
  * date:2021.05.06
  * author:kent
  * state:finished
+ * content:update code
  */
 
 // 云函数入口文件
@@ -9,63 +10,88 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 // 初始化数据库
 const db = cloud.database()
+const _ = db.command
 // 初始化响应码reCode 结果result
-let reCode = 0
 // 查找用户记录的结果 查询自习室的结果  添加学习记录的结果 更新用户记录的结果 更新自习室的结果
-let result, oresult,hresult,uresult,rresult
+// let result, oresult,hresult,uresult,rresult
+let PageData={
+  reCode:0,
+  result:{},
+  oresult:{},
+  hresult:{},
+  uresult:{},
+  rresult:{}
+}
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  result = await db.collection('users').where({
+  PageData.result = await db.collection('users').where({
     openId: wxContext.OPENID
   }).get()
   // 上次签到是否结束
-  if (result.data[0].isOver === false) {
-    let noEnd={
-      user:result.data[0],
-      reCode:201
-    }
-    return noEnd
+  if (PageData.result.data[0].isOver === false) {
+      PageData.reCode=201
+    return {
+      "resCode":PageData.reCode,
+      "Msg":"签退成功",
+      "data":{user:PageData.result.data[0]}
+     }
+
   } else {
-    oresult = await db.collection('rooms').where({
+    PageData.oresult = await db.collection('rooms').where({
       roomId: event.roomId
     }).get()
     // 自习室是否存在
-    if (oresult.data.length === 0) {
-      reCode = 404
-      return reCode
+    if (PageData.oresult.data.length === 0) {
+      PageData.reCode = 404
+    return {
+      "resCode":PageData.reCode,
+      "Msg":"自习室不存在",
+      "data":{}
+     }
     } else {
       // 该位置已有人坐下
-      if (oresult.data[0].chairs.infos[event.chairIndex].openId !== "" && oresult.data[0].chairs.infos[event.chairIndex].state === true) {
-        reCode = 300
-        return reCode
+      if (PageData.oresult.data[0].chairs.infos[event.chairIndex].openId !== "" && PageData.oresult.data[0].chairs.infos[event.chairIndex].state === true) {
+        PageData.reCode = 300
+        return {
+          "resCode":PageData.reCode,
+          "Msg":"位置已被使用",
+          "data":{}
+         }
       }
       // 自习室没有开门
-      else if(oresult.data[0].isOpen===false){
-        reCode=500
-        return reCode
+      else if(PageData.oresult.data[0].isOpen===false){
+        PageData.reCode=500
+        return {
+          "resCode":PageData.reCode,
+          "Msg":"自习室未开启",
+          "data":{}
+         }
       }
       // 理想状态
       else{
-      oresult.data[0].chairs.infos[event.chairIndex].openId=wxContext.OPENID
-      oresult.data[0].chairs.infos[event.chairIndex].state=true
-      rresult=await db.collection('rooms').where({
+        // 更新自习室座位相关信息
+      PageData.oresult.data[0].chairs.infos[event.chairIndex].openId=wxContext.OPENID
+      PageData.oresult.data[0].chairs.infos[event.chairIndex].state=true
+      PageData.rresult=await db.collection('rooms').where({
         roomId:event.roomId
       }).update({
       data:{
-      "chairs.sitDown":oresult.data[0].chairs.sitDown+1,
-      "chairs.infos":oresult.data[0].chairs.infos,
-      "count.pepSum":oresult.data[0].count.pepSum+1
+      "chairs.sitDown":_.inc(1),
+      "chairs.infos":PageData.oresult.data[0].chairs.infos,
+      "count.pepSum":_.inc(1)
       }
       })
-      uresult=await db.collection('users').where({
+      // 更新用户的状态
+      PageData.uresult=await db.collection('users').where({
         openId:wxContext.OPENID
       }).update({
         data:{
           isOver:false
         }
       })
-      hresult=await db.collection('history').add({
+      // 新增历记录
+      PageData.hresult=await db.collection('history').add({
         data:{
         chairIndex:event.chairIndex,
         howlong:0,
@@ -77,13 +103,23 @@ exports.main = async (event, context) => {
         eTime:db.serverDate()  
         } 
       })
-      if(rresult.errMsg==="collection.update:ok"&&uresult.errMsg==="collection.update:ok"&&hresult.errMsg==="collection.add:ok"){
-        reCode=200
-        return reCode
+      // 签到成功
+      if(PageData.rresult.errMsg==="collection.update:ok"&&PageData.uresult.errMsg==="collection.update:ok"&&PageData.hresult.errMsg==="collection.add:ok"){
+        PageData.reCode=200
+        return {
+          "resCode":PageData.reCode,
+          "Msg":"签到成功",
+          "data":{}
+         }
       }
+      // 接口错误
       else{
-        reCode=405
-        return reCode
+        PageData.reCod=405
+        return {
+          "resCode":PageData.reCode,
+          "Msg":"后台接口错误",
+          "data":{}
+         }
       }
       }
     }
