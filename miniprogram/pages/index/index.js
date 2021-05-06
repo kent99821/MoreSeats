@@ -26,8 +26,9 @@ Page({
 
 
   let val = wx.getStorageSync('rooms');
-  // console.log(val)
-  
+  if(val){
+    //doing something
+  }
   // this.setData({rooms:val});
 
  },

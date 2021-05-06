@@ -20,10 +20,14 @@ Page({
     val.splice(4);
     console.log(val)
     wx.setStorageSync('rooms', val)
-    // wx.getStorageSync('rooms')
-    // console.log(options.roomId)
+
+
+
+
+
 
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -4,7 +4,7 @@
       累计打卡
     </view>
     <view class="center-card-inside-botm FCCC">
-      2次
+      {{userTotalVal}}次
     </view>
   </view>
   <view class="center-card-inside FCCC">
@@ -12,7 +12,7 @@
       学习时长
     </view>
     <view class="center-card-inside-botm FCCC">
-      883分钟
+      {{userTotalTime}}分钟
     </view>
   </view>
 
@@ -20,15 +20,16 @@
 <view class="top-body FRSS">
   <view class="top-user FRSC">
     <view class="top-user-icon FCCC">
-      <view class="top-user-icon-text">点击获取</view>
+      <open-data type="userAvatarUrl"  bindtap="test"></open-data>
+      <!-- <view class="top-user-icon-text">点击获取</view> -->
     </view>
     <view class="top-user-name wux-ellipsis">
-      用户名
+      <open-data type="userNickName" lang="zh_CN" bindtap="test"></open-data>
     </view>
     <image mode="aspectFit" class="top-user-pen" src="/images/pen.png" />
   </view>
 </view>
-
+<!-- <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button> -->
 <view class="list-body">
   <wux-cell thumb="/images/history.png" title="学习记录" is-link url="/pages/history/history" open-type="navigateTo">
   </wux-cell>
