@@ -114,7 +114,8 @@ getHistory(){
 
 
 
-// 签到部分
+
+// signIn签到部分
 signIn(){
   wx.cloud.callFunction({
     name:'signIn',
@@ -122,6 +123,46 @@ signIn(){
     roomId:"123456",
     chairIndex:2,
     roomName:"海大图书馆"
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+
+
+
+
+// signOut签退部分
+// 用户手动签退
+signout(){
+  wx.cloud.callFunction({
+    name:'signOut',
+    data:{
+    flag:0,
+    roomId:"123456",
+    chairIndex:2
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 系统云函数调用
+atsignout(){
+  wx.cloud.callFunction({
+    name:'signOut',
+    data:{
+    flag:1,
+    openId:"oU2sR5EK2DilhkExj2LhgSPHszAQ",
+    roomId:"123456",
+    chairIndex:2
     },
     success:res=>{
       console.log(res)
