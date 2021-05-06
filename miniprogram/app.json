@@ -10,6 +10,7 @@
     "pages/signIn/signIn",
 
     "pages/adminRoom/adminRoom",
+    "pages/adminRoomList/adminRoomList",
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
 
@@ -21,8 +22,8 @@
     "backgroundColor": "#e5e5e5",
     "backgroundColorBottom": "#e5e5e5",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#e5e5e5",
-    "navigationStyle": "custom",
+    "navigationBarBackgroundColor": "#ff795b",
+
     "enablePullDownRefresh": true,
     "backgroundColorTop": "#ff795a"
   },

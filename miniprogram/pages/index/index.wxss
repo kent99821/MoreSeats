@@ -1,5 +1,4 @@
 /* pages/index/index.wxss */
-@import '/miniprogram_npm/wux-weapp/styles/index.wxss';
 
 .top-img{
   width: 100%;
