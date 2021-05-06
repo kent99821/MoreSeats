@@ -49,10 +49,16 @@
           </view>
           <view class="room-info-chairs FRSS">
             <view class="room-info-chairs-body FRCC">
-              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire2.png" />
-              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire2.png" />
-              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire.png" />
+    
 
+           
+              <!-- <image mode="aspectFit" class="room-info-chairs-icons" src="{{item.len>=1?'/images/fire.png':'images/fire2.png'}}" /> -->
+              <image mode="aspectFit" class="room-info-chairs-icons" src="{{item.len>=1? '/images/fire2.png':'/images/fire.png'}}" /> 
+              <image mode="aspectFit" class="room-info-chairs-icons" src="{{item.len>=2? '/images/fire2.png':'/images/fire.png'}}"  />
+              <image mode="aspectFit" class="room-info-chairs-icons" src="{{item.len>=3? '/images/fire2.png':'/images/fire.png'}}"  />
+              <!-- <image mode="aspectFit" class="room-info-chairs-icons"src="{{item.len>=4? '/images/fire.png':'/images/fire2.png'}}"  /> -->
+              <!-- <image mode="aspectFit" class="room-info-chairs-icons"src="{{item.len>=5? '/images/fire.png':'/images/fire2.png'}}"  /> -->
+   
 
               <view class="room-info-chairs-text FRSC">{{item.sitDown}} / {{item.chairNum}}</view>
             </view>

@@ -7,7 +7,7 @@ Page({
   data: {
     visible2: false ,
     rooms: [
-      { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
+      { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12},
       { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
       { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
       { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }],
@@ -23,6 +23,7 @@ Page({
   /*
     获取缓存信息
   */
+
  getHistory(){
 
 
@@ -31,7 +32,28 @@ Page({
     //doing something
   }
   // this.setData({rooms:val});
-
+  this.getFireLen();
+ },
+ getFireLen(){
+  let val = this.data.rooms;
+  val.forEach((item)=>{
+    let len =0;
+    if(item.sitDown!==0)
+    len = parseFloat(item.sitDown/item.chairNum);
+    console.log(len);
+    if(len==0){
+      len =0;
+    }else if(len<=0.3332){
+      len = 1;
+    }else if(len<= 0.6665){
+      len = 2;
+    }else if(len<= 1){
+      len = 3;
+    }
+    item.len = len;
+  })
+  console.log(val)
+  this.setData({rooms: val})
  },
 
   /*
