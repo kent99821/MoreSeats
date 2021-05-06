@@ -43,9 +43,9 @@ Page({
     console.log(len);
     if(len==0){
       len =0;
-    }else if(len<=0.3332){
+    }else if(len<=0.3333334){
       len = 1;
-    }else if(len<= 0.6665){
+    }else if(len<=0.6666667){
       len = 2;
     }else if(len<= 1){
       len = 3;
