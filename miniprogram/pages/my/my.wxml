@@ -1,2 +1,39 @@
-<!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<view class="center-card FRCC">
+  <view class="center-card-inside FCCC">
+    <view class="center-card-inside-top FCCC">
+      累计打卡
+    </view>
+    <view class="center-card-inside-botm FCCC">
+      2次
+    </view>
+  </view>
+  <view class="center-card-inside FCCC">
+    <view class="center-card-inside-top FCCC">
+      学习时长
+    </view>
+    <view class="center-card-inside-botm FCCC">
+      883分钟
+    </view>
+  </view>
+
+</view>
+<view class="top-body FRSS">
+  <view class="top-user FRSC">
+    <view class="top-user-icon FCCC">
+      <view class="top-user-icon-text">点击获取</view>
+    </view>
+    <view class="top-user-name wux-ellipsis">
+      用户名
+    </view>
+    <image mode="aspectFit" class="top-user-pen" src="/images/pen.png" />
+  </view>
+</view>
+
+<view class="list-body">
+  <wux-cell thumb="/images/history.png" title="学习记录" is-link url="/pages/history/history" open-type="navigateTo">
+  </wux-cell>
+  <wux-cell thumb="/images/admin.png" title="管理的自习室" is-link url="/pages/adminRoomList/adminRoomList"
+    open-type="navigateTo">
+  </wux-cell>
+  <wux-cell thumb="/images/about.png" title="关于" is-link url="/pages/about/about" open-type="navigateTo"></wux-cell>
+</view>

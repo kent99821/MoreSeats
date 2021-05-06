@@ -1,3 +1,5 @@
+@import '/miniprogram_npm/wux-weapp/styles/index.wxss';
+
 page {
   background: #fff;
   display: flex;

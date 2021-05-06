@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell": "wux-weapp/cell/index"
+  },
+  "navigationBarTitleText": "共享自习室"
 }

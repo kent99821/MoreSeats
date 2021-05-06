@@ -1,1 +1,81 @@
 /* pages/my/my.wxss */
+
+.center-card {
+  position: absolute;
+  left: 50rpx;
+  top: 220rpx;
+  z-index: 0;
+  border-radius: 20rpx;
+  background-color: #fff;
+  height: 130rpx;
+  width: 650rpx;
+  box-shadow: 0px 4px 8px -4px #696969;
+}
+
+.center-card-inside {
+  width: 40%;
+  /* background-color: aquamarine; */
+  height: 100%;
+}
+
+.center-card-inside-top {
+  /* background-color: aquamarine; */
+  font-size: 28rpx;
+  height: 45%;
+  padding-top: 20rpx;
+  /* margin: 20rpx; */
+}
+
+.center-card-inside-botm {
+  /* background-color: salmon; */
+  font-size: 38rpx;
+  height: 55%;
+  padding-bottom: 18rpx;
+  /* margin: 20rpx; */
+}
+
+.top-body {
+  background-color: #ff795b;
+  height: 310rpx;
+  width: 100%;
+}
+
+.top-user {
+  margin-top: 20rpx;
+  /* background-color: lightgreen; */
+  height: 55%;
+  width: 100%;
+}
+
+.top-user-icon {
+  background-color: #fff;
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 80rpx;
+  overflow: hidden;
+  margin-left: 60rpx;
+}
+
+.top-user-icon-text {
+  color: #ff795b;
+  font-size: 30rpx;
+}
+
+.top-user-name {
+  margin-left: 30rpx;
+  font-size: 36rpx;
+  /* background-color: aqua; */
+  color: #fff;
+  max-width: 390rpx;
+}
+
+.top-user-pen {
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 20rpx;
+}
+
+.list-body {
+  width: 100%;
+  margin-top: 50rpx;
+}
