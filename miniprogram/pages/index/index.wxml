@@ -1,8 +1,71 @@
-<!--pages/index/index.wxml-->
-<text>pages/index/index.wxml</text>
-<wux-input>11111</wux-input>
-<view class="room-card"></view>
-<view class="room-card"></view>
-<view class="room-card"></view>
-<view class="room-card"></view>
-<view class="room-card"></view>
+<wux-popup position="center" visible="{{ visible2 }}" bind:close="typeIn">
+  <sms-code unactive-class="sms-unActive" active-class="sms-active" code-type="number" code-count="6"
+    is-auto bindchangeCode="changeCode">
+  </sms-code>
+</wux-popup>
+
+
+<image src="/images/top.png" class="top-img"></image>
+<view class="to-room FRCC">
+  <view class="to-room-side FRCC" bindtap="typeIn">
+    <image mode="aspectFit" class="to-room-side-icon" src="/images/idgo.png" />
+    <view>输入自习室号</view>
+  </view>
+  <view class="to-room-center"></view>
+  <view class="to-room-side FRCC" bindtap="scanQR">
+    <image mode="aspectFit" class="to-room-side-icon-2" src="/images/scan.png" />
+    <view>扫码立即学习</view>
+  </view>
+</view>
+
+<wux-swipe-action-group>
+  <view wx:for="{{rooms}}" wx:key="index" class="room-card">
+    <wux-swipe-action useSlots class="room-card-body" autoClose right="{{ right }}">
+      <view slot="right">
+        <view class="right-button FCCC" bindtap="deleteCard" data-index="{{index}}">
+          <image mode="aspectFit" class="right-button-icon" src="/images/delete.png" />
+        </view>
+      </view>
+      <view class="room-card-body FRSC">
+        <view class="room-id FRCC" bindtap="copyRoomId" data-roomId="{{item.roomId}}">
+          <view class="room-id-body">
+            #{{item.roomId}}
+          </view>
+        </view>
+        <view class="room-info" bindtap="toRoom" data-roomId="{{item.roomId}}">
+          <view class="room-info-name FRSC">
+            <view class="room-info-name-body">
+              <view class="room-info-name-body-text wux-ellipsis">
+                {{item.roomName}}</view>
+            </view>
+          </view>
+          <view class="room-info-time FRSC">
+            <image mode="aspectFit" class="room-info-time-body-icon" src="/images/clock.png" />
+            <view class="room-info-time-body-text wux-ellipsis">
+              {{item.openTime}}
+            </view>
+          </view>
+          <view class="room-info-chairs FRSS">
+            <view class="room-info-chairs-body FRCC">
+              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire2.png" />
+              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire2.png" />
+              <image mode="aspectFit" class="room-info-chairs-icons" src="/images/fire.png" />
+
+
+              <view class="room-info-chairs-text FRSC">{{item.sitDown}} / {{item.chairNum}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="room-icon FCCC" bindtap="toRoom" data-roomId="{{item.roomId}}">
+          <view class="room-icon-body FCCC">
+            <image mode="aspectFit" class="room-icon-img" src="/images/door.png" />
+          </view>
+        </view>
+      </view>
+    </wux-swipe-action>
+  </view>
+
+
+
+
+</wux-swipe-action-group>

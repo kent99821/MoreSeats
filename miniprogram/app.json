@@ -10,6 +10,7 @@
     "pages/signIn/signIn",
 
     "pages/adminRoom/adminRoom",
+    "pages/adminRoomList/adminRoomList",
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
 
@@ -18,26 +19,29 @@
 
   ],
   "window": {
-    "backgroundColor": "#fc6249",
+    "backgroundColor": "#e5e5e5",
+    "backgroundColorBottom": "#e5e5e5",
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationStyle": "custom",
-    "enablePullDownRefresh": true
+    "navigationBarBackgroundColor": "#ff795b",
+
+    "enablePullDownRefresh": true,
+    "backgroundColorTop": "#ff795a"
   },
-  "tabBar": {
+  "tabBar": { 
     "list": [{
       "pagePath": "pages/index/index",
-      "iconPath": "",
-      "selectedIconPath": "",
+      "iconPath": "images/index.png",
+      "selectedIconPath": "images/index2.png",
       "text": "自习室"
     }, {
       "pagePath": "pages/my/my",
-      "iconPath": "",
-      "selectedIconPath": "",
+      "iconPath": "images/my.png",
+      "selectedIconPath": "images/my2.png",
       "text": "我的"
     }],
-    "color": "b5b5b5",
-    "selectedColor": "fc6249"
+    "color": "#b5b5b5",
+    "selectedColor": "#fc6249",
+    "borderStyle": "black"
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

@@ -1,4 +1,4 @@
-// pages/room/room.js
+// pages/adminRoomList/adminRoomList.js
 Page({
 
   /**
@@ -12,16 +12,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    let aId =  options.roomId;
-    let val = wx.getStorageSync('rooms');
-    val = val.filter((item)=> item != aId);
-    val.splice(0,0, aId)
-    val.splice(4);
-    console.log(val)
-    wx.setStorageSync('rooms', val)
-    // wx.getStorageSync('rooms')
-    // console.log(options.roomId)
 
   },
 

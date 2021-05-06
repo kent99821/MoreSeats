@@ -1,1 +1,4 @@
 /* pages/adminRoomHistory/adminRoomHistory.wxss */
+.a{
+  width: 100%;
+}

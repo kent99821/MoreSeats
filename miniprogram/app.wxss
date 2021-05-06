@@ -1,7 +1,77 @@
+@import '/miniprogram_npm/wux-weapp/styles/index.wxss';
+
 page {
-  background: #f6f6f6;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Flex Column Center Center */
+.FCCC{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Flex Column flex-Start Center */
+.FCSC{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+}
+
+/* Flex Column Center Center */
+.FCCS{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Flex Column flex-Start Center */
+.FCSS{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Flex Row flex-Start Center */
+.FRSS{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Flex Row Center flex-Start */
+.FRCS{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+/* Flex Row flex-Start Center */
+.FRSC{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Flex Row Center flex-Start */
+.FRCC{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.FULL{
+  height: 100%;
+  width: 100%;
 }
