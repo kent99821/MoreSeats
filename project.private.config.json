@@ -29,6 +29,12 @@
           "pathName": "pages/my/my",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/adminRoomHistory/adminRoomHistory",
+          "pathName": "pages/adminRoomHistory/adminRoomHistory",
+          "query": "",
+          "scene": null
         }
       ]
     }
