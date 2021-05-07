@@ -123,6 +123,12 @@ Page({
    */
   typeIn(e) {
     console.log(e.detail.value);
+    if (e.detail.value.length === 6) {
+      wx.navigateTo({
+        url: '/pages/room/room?roomId=' + e.detail.value
+      })
+      this.toTypeInVisible()
+    }
   },
 
   /**
@@ -135,7 +141,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getHistory()
+
   },
 
   /**
@@ -149,6 +155,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getHistory()
 
   },
 
