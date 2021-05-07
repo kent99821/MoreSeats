@@ -33,7 +33,7 @@ exports.main = async (event, context) => {
       PageData.reCode=201
     return {
       "resCode":PageData.reCode,
-      "Msg":"签退成功",
+      "Msg":"上次学习未签退",
       "data":{user:PageData.result.data[0]}
      }
 

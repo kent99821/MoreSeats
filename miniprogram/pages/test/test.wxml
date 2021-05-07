@@ -1,17 +1,17 @@
 <!-- 自习室信息相关 -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="getRooms">获取一组自习室</button>
 </block>
 
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
-</block> 
+</block>  -->
 
 <!--个人信息相关 -->
- <!-- <block >
+ <block >
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
-</block> -->
-<!--
+</block>
+
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
 </block>
@@ -20,8 +20,9 @@
 </block>
 <block>
 <button type="primary" bindtap="addUser">新建用户档案</button>
-</block> -->
+</block>
 
+<!-- 签到 -->
  <!-- <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
 </block> -->
