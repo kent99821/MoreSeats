@@ -4,6 +4,5 @@
     "wux-popup": "wux-weapp/popup/index",
     "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
     "wux-swipe-action": "wux-weapp/swipe-action/index"
-  },
-  "navigationStyle": "custom"
+  }
 }

@@ -1,13 +1,22 @@
-<wux-popup position="center" visible="{{ visible2 }}" bind:close="typeIn">
-  <sms-code unactive-class="sms-unActive" active-class="sms-active" code-type="number" code-count="6"
-    is-auto bindchangeCode="changeCode">
-  </sms-code>
+<wux-popup position="top" visible="{{ typeInVisible }}" bind:close="toTypeInVisible" hasHeader="{{false}}"
+  hasFooter="{{false}}" wux-content-class="popup-body">
+  <view wx:if="{{typeInVisible}}" class="popup-body-type FRCC">
+    <!-- <view class="popup-body-type-icon">
+      <image mode="aspectFit" class="popup-body-type-icon-img" src="/images/idgo.png" />
+    </view> -->
+    <view class="popup-body-type-input">
+      <sms-code unactive-class="sms-unActive" active-class="sms-active" code-type="number" code-count="6" is-auto
+        bindchangeCode="typeIn">
+      </sms-code>
+    </view>
+
+  </view>
 </wux-popup>
 
 
-<image src="/images/top.png" class="top-img"></image>
+<image src="/images/top.png" mode="widthFix" class="top-img"></image>
 <view class="to-room FRCC">
-  <view class="to-room-side FRCC" bindtap="typeIn">
+  <view class="to-room-side FRCC" bindtap="toTypeInVisible">
     <image mode="aspectFit" class="to-room-side-icon" src="/images/idgo.png" />
     <view>输入自习室号</view>
   </view>
