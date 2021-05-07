@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    value:{},
   },
 
   /**
@@ -29,7 +29,9 @@ Page({
           console.log('----');
           aName = res.result.data.roomName;
           save();
-          // console.log(res.result.data.roomName)
+          console.log(res.result.data)
+          this.setData({value: res.result.data})
+
         },
         fail: err => {
           console.log('调用失败：', err)

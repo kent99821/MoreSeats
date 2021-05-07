@@ -14,10 +14,38 @@ Page({
   test(e){
     console.log(e)
   },
+  getUserValue(){
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        console.log(res);
+
+    
+        this.setData({
+          userTotalTime: res.result.data.sumTime,
+          userTotalVal : res.result.data.recordNum
+        })
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
+    })
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+  this.getUserValue();
+  // console.log('aaaaaaa');
+
   },
 
   /**

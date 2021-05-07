@@ -5,14 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    historyList:[],
+    skip: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  getHistoryList(){
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 1,
+        skip: this.data.historyList.length
+      },
+      success: res => {
+        console.log('----');
+        console.log(res)
+        console.log(this.data.skip)
+        this.setData({
+          historyList: [...this.data.historyList, ...res.result.data],
+        })
 
+        console.log(this.data.historyList)
+
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+
+  },
+  onLoad: function (options) {
+    this.getHistoryList();
   },
 
   /**
