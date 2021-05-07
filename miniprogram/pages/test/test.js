@@ -136,6 +136,7 @@ signIn(){
 
 
 
+
 // signOut签退部分
 // 用户手动签退
 signout(){
@@ -171,8 +172,26 @@ atsignout(){
       console.log('调用失败：',err)
     }
   }) 
-}
+},
 
+
+
+
+addroom(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:0,
+    roomName:"自习室1"
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+}
 })
 
 
