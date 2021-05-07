@@ -14,14 +14,40 @@ Page({
   onLoad: function (options) {
 
     let aId =  options.roomId;
-    let aName = options.roomName;
- 
-    let val = wx.getStorageSync('rooms');
-    val = val.filter((item)=> item.roomId != aId);
-    val.splice(0,0, {roomId: aId, roomName: aName})
-    val.splice(4);
-    console.log(val)
-    wx.setStorageSync('rooms', val)
+
+    let aName = options.roomName ;
+    if(options.roomName){
+      save();
+    }else{
+      wx.cloud.callFunction({
+        name: 'getRoomInfo',
+        data: {
+          flag: 1,
+          roomId: aId
+        },
+        success: res => {
+          console.log('----');
+          aName = res.result.data.roomName;
+          save();
+          // console.log(res.result.data.roomName)
+        },
+        fail: err => {
+          console.log('调用失败：', err)
+        }
+      })
+    }
+   
+   function save(){
+      let val = wx.getStorageSync('rooms');
+      val = val.filter((item)=> item.roomId != aId);
+      val.splice(0,0, {roomId: aId, roomName: aName})
+      val.splice(4);
+      console.log(val)
+      wx.setStorageSync('rooms', val);
+    }
+
+    
+
 
 
 
