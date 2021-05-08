@@ -1,19 +1,41 @@
-<view class="top-body FCCC">
+<view wx:if="{{showTop}}" class="top-body FCCC">
   <view class="top-body-2 FRCC">
     <view class="top-body-left FCCS">
       <view class="top-body-left-roomName FCCC">房间名</view>
       <view class="top-body-left-tags FRSC">
-        <view class="top-body-left-tags-1">1111</view>
-        <view class="top-body-left-tags-2">22222</view>
+        <view class="top-body-left-tags-1 FCCC">#123789</view>
+        <view class="top-body-left-tags-2 FCCC">1号座</view>
       </view>
     </view>
     <view class="top-body-right FREC">
       <view class="top-body-right-text FRCC">正在学习
-        <wux-icon type="ios-arrow-forward" class="top-body-right-text-icon" />
+        <wux-icon type="ios-arrow-forward" size="24" class="top-body-right-text-icon" />
       </view>
     </view>
   </view>
 </view>
-<view class="cards">
-
+<view wx:if="{{showTop}}" class="tips">已完成</view>
+<view class="{{showTop?'':'noTop'}}"></view>
+<view wx:for="{{20}}" class="cards FRCC">
+  <view class="cards-body FRSC">
+    <view class="cards-body-left FCCS">
+      <view class="cards-body-left-roomName FCCC">房间名</view>
+      <view class="cards-body-left-tags FRSC">
+        <view class="cards-body-left-tags-1 FCCC">#123789</view>
+        <view class="cards-body-left-tags-2 FCCC">1号座</view>
+      </view>
+    </view>
+    <view class="cards-body-right FCCC">
+      <view class="cards-body-right-date FREC">
+        2021.05.06
+      </view>
+      <view class="cards-body-right-sumtime FREC">
+        <!-- <view class="cards-body-right-sumtime-icon">
+          <image class="cards-body-right-sumtime-icon-img" src="/images/time.png"></image>
+        </view> -->
+        <view class="cards-body-right-sumtime-num">666</view>
+        <view class="cards-body-right-sumtime-tips">分钟</view>
+      </view>
+    </view>
+  </view>
 </view>

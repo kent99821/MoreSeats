@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "wux-icon": "wux-weapp/icon/index"
-  }
+  },
+  "navigationBarTitleText": "学习记录"
 }
