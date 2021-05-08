@@ -8,7 +8,7 @@
 </block>  -->
 
 <!--个人信息相关 -->
- <block >
+ <!-- <block >
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
 </block>
 
@@ -20,7 +20,7 @@
 </block>
 <block>
 <button type="primary" bindtap="addUser">新建用户档案</button>
-</block>
+</block> -->
 
 <!-- 签到 -->
  <!-- <block >
@@ -39,4 +39,37 @@
 </block> 
 <block>
 <button type="primary" bindtap="atsignout">管理员签退</button>
+</block>  -->
+<!-- 大boss 管理自习室相关 -->
+<!-- <block >
+<button class="top" type="primary" bindtap="addroom" >新建自习室</button>
+</block> -->
+
+ <block>
+<button type="primary" bindtap="updateName">修改自习室名</button>
+</block>
+
+<!-- <block>
+<button type="primary" bindtap="updateUser">修改公告</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">修改开放时段</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">修改打卡规则</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">座位修改</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">排名清零</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">自习室清退</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">强制签退</button>
+</block> -->
+<!-- <block>
+<button type="primary" bindtap="addUser">注销自习室</button>
 </block>  -->

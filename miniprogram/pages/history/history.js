@@ -7,6 +7,7 @@ Page({
   data: {
     historyList:[],
     skip: 0,
+    showTop:true
   },
 
   /**
