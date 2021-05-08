@@ -3,8 +3,8 @@
     <view class="top-body-left FCCS">
       <view class="top-body-left-roomName FCCC">房间名</view>
       <view class="top-body-left-tags FRSC">
-        <view class="top-body-left-tags-1 FCCC">{{historyList[0].roomName}}</view>
-        <view class="top-body-left-tags-2 FCCC">{{historyList[0].chairIndex}}号座</view>
+        <view class="top-body-left-tags-1 FCCC">{{topData.roomName}}</view>
+        <view class="top-body-left-tags-2 FCCC">{{topData.chairIndex}}号座</view>
       </view>
     </view>
     <view class="top-body-right FREC">

@@ -9,7 +9,7 @@ Page({
     historyList:[],
     skip: 0,
     showTop:false,
-
+    topData:{},
   },
 
   /**
@@ -23,30 +23,31 @@ Page({
     })
   },
   getHistoryList(){
-
+    let len  = this.data.historyList.length;
+    if(this.data.showTop==true) len++;
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
         flag: 1,
-        skip: this.data.historyList.length
+        skip: len
       },
       success: res => {
 
-        let changeDate = res.result.data;
-        changeDate.map((item)=>{
+        let changeData = res.result.data;
+        changeData.map((item)=>{
           item.sDate = item.sTime.split('T')[0].split('-').join('.');
         })
         this.setData({
-          historyList: [...this.data.historyList, ...changeDate],
+          historyList: [...this.data.historyList, ...changeData],
         })
-        if(this.data.historyList[0].isOver== false){
+        console.log(changeData)
+        if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
+          let cData = this.data.historyList;
+          cData.splice(0,1);
           this.setData({
             showTop: true,
-
-          })
-        }else{
-          this.setData({
-            showTop: false,
+            topData: this.data.historyList[0],
+            historyList: cData
           })
         }
 
