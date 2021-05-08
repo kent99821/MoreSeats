@@ -73,7 +73,25 @@ exports.main = async (event, context) => {
               }
             }
           })
-          return PageData.aresult
+          if (PageData.aresult.errMsg === "collection.add:ok") {
+            PageData.reCode = 200
+            return {
+              "resCode": PageData.reCode,
+              "Msg": "创建成功",
+              "data": {
+                roomId:PageData.croomId,
+                roomName:event.roomName
+              }
+            }
+          } else {
+            PageData.reCode = 201
+            return {
+              "resCode": PageData.reCode,
+              "Msg": "后台接口错误 创建失败",
+              "data": {}
+            }
+          }
+
         }
       }
   }
