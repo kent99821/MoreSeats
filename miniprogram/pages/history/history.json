@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-icon": "wux-weapp/icon/index"
+  }
 }

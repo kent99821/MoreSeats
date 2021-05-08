@@ -1,1 +1,53 @@
 /* pages/history/history.wxss */
+view {
+  border: 1px solid #63636396;
+}
+
+.top-body {
+  background-color: #fff;
+  height: 160rpx;
+  width: 100%;
+}
+
+.top-body-2 {
+  height: 70%;
+  width: 80%;
+}
+
+.top-body-left {
+  height: 100%;
+  width: 60%;
+}
+
+.top-body-left-roomName {
+  height: 60%;
+}
+
+.top-body-left-tags {
+  height: 40%;
+}
+
+.top-body-left-tags-1 {
+  height: 40rpx;
+
+}
+
+.top-body-left-tags-2 {
+  height: 40rpx;
+
+}
+
+.top-body-right {
+  height: 100%;
+  width: 40%;
+}
+
+.top-body-right-text {
+  font-size: 30rpx;
+}
+
+.top-body-right-text-icon{
+  margin: 20rpx;
+}
+
+.cards {}
