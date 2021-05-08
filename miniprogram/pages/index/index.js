@@ -40,7 +40,7 @@ Page({
       let len = 0;
       if (item.sitDown !== 0)
         len = parseFloat(item.sitDown / item.chairNum);
-      console.log(len);
+
       if (len == 0) {
         len = 0;
       } else if (len <= 0.3333334) {
@@ -52,7 +52,7 @@ Page({
       }
       item.len = len;
     })
-    console.log(val)
+ 
     this.setData({ rooms: val })
   },
 
@@ -64,13 +64,13 @@ Page({
     let index = e.currentTarget.dataset.index;
     let val = this.data.rooms;
     val.splice(index, 1)
-    console.log(val)
+ 
     let roomsArr = [];
     val.forEach((item) => {
       roomsArr.push({ roomId: item.roomId, roomName: item.roomName });
     })
     wx.setStorageSync('rooms', roomsArr);
-    // console.log(this.data.rooms)
+ 
     this.setData({ rooms: val });
   },
 
@@ -78,7 +78,7 @@ Page({
     复制内容
   */
   copyRoomId(e) {
-    console.log(e.currentTarget.dataset.roomid)
+ 
     wx.setClipboardData({
       data: e.currentTarget.dataset.roomid,
       success: function (res) {
