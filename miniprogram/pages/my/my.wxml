@@ -1,3 +1,4 @@
+<wux-dialog id='wux-dialog'></wux-dialog>
 
 <view class="center-card FRCC">
   <view class="center-card-inside FCCC">
@@ -21,7 +22,7 @@
 <view class="top-body FRSS">
   <view class="top-user FRSC">
     <view class="top-user-icon FCCC">
-      <open-data type="userAvatarUrl"  bindtap="test"></open-data>
+      <open-data type="userAvatarUrl" bindtap="test"></open-data>
       <!-- <view class="top-user-icon-text">点击获取</view> -->
     </view>
     <view class="top-user-name wux-ellipsis">
@@ -39,4 +40,3 @@
   </wux-cell>
   <wux-cell thumb="/images/about.png" title="关于" is-link url="/pages/about/about" open-type="navigateTo"></wux-cell>
 </view>
-

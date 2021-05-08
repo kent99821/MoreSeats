@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "wux-cell": "wux-weapp/cell/index",
-    "wux-dialog": "wux-weapp/dialog/index"
+    "wux-dialog": "wux-weapp/dialog/index",
+    "wux-button": "wux-weapp/button/index"
   },
   "navigationBarTitleText": "共享自习室",
   "enablePullDownRefresh": true
