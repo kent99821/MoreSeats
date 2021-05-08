@@ -1,4 +1,5 @@
 // pages/history/history.js
+var app = getApp();
 Page({
 
   /**
@@ -7,7 +8,7 @@ Page({
   data: {
     historyList:[],
     skip: 0,
-    showTop:true,
+    showTop:false,
 
   },
 
@@ -38,17 +39,20 @@ Page({
         this.setData({
           historyList: [...this.data.historyList, ...changeDate],
         })
-        // if(this.data.historyList[0].isOver== false){
-        //   this.setData({
-        //     showTop: true,
+        if(this.data.historyList[0].isOver== false){
+          this.setData({
+            showTop: true,
 
-        //   })
-        // }else{
-        //   this.setData({
-        //     showTop: false,
+          })
+        }else{
+          this.setData({
+            showTop: false,
+          })
+        }
 
-        //   })
-        // }
+        getApp().globalData.isOver = this.data.showTop;
+        // console.log(app.globalData.isOver)
+
         console.log(this.data.historyList)
 
       },
