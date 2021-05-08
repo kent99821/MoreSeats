@@ -6,15 +6,15 @@ Page({
    */
   data: {
     userName: '',
-    userTotalTime:NaN,
+    userTotalTime: NaN,
     userTotalVal: NaN,
- 
+
   },
 
-  test(e){
+  test(e) {
     console.log(e)
   },
-  getUserValue(){
+  getUserValue() {
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
@@ -23,10 +23,10 @@ Page({
       success: res => {
         console.log(res);
 
-    
+
         this.setData({
           userTotalTime: res.result.data.sumTime,
-          userTotalVal : res.result.data.recordNum
+          userTotalVal: res.result.data.recordNum
         })
       },
       fail: (res) => {
@@ -39,12 +39,33 @@ Page({
     })
 
   },
+
+  /**
+   * 修改姓名
+   */
+  changeName() {
+    $wuxDialog().prompt({
+      resetOnClose: true,
+      title: '提示',
+      content: '密码为8位数字',
+      fieldtype: 'number',
+      password: !0,
+      defaultText: '',
+      placeholder: '请输入Wi-Fi密码',
+      maxlength: 8,
+      onConfirm(e, response) {
+        const content = response.length === 8 ? `Wi-Fi密码到手了: ${response}` : `请输入正确的Wi-Fi密码`
+        alert(content)
+      },
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  this.getUserValue();
-  // console.log('aaaaaaa');
+    this.getUserValue();
+    // console.log('aaaaaaa');
 
   },
 

@@ -27,7 +27,7 @@
     <view class="top-user-name wux-ellipsis">
       <open-data type="userNickName" lang="zh_CN" bindtap="test"></open-data>
     </view>
-    <image mode="aspectFit" class="top-user-pen" src="/images/pen.png" />
+    <image mode="aspectFit" bindtap="changeName" class="top-user-pen" src="/images/pen.png" />
   </view>
 </view>
 <!-- <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button> -->

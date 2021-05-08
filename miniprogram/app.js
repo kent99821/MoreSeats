@@ -41,10 +41,6 @@ App({
     isNewGuy: false,
     isAdmin: false,
     userName: "未登记",
-    sumTime: 0,
-    recordNum: 0,
     isOver: true,
-    roomAdminList: [{}],
-
   }
 })
