@@ -11,8 +11,8 @@ cloud.init()
 const db = cloud.database()
 let PageData = {
   reCode: 0, //状态码
-  result: {}, //查询结果
-  aresult: {}, //添加结果
+  result: {}, //原结果
+  aresult: {}, //操作后结果
   croomId: "", //创建的roomid
 }
 
@@ -87,12 +87,57 @@ exports.main = async (event, context) => {
             PageData.reCode = 201
             return {
               "resCode": PageData.reCode,
-              "Msg": "后台接口错误 创建失败",
+              "Msg": "后台接口错误",
               "data": {}
             }
           }
 
         }
       }
+    case 1:
+    PageData.result=await db.collection('rooms').where({
+      roomId:event.roomId
+    }).update({
+      data:{
+        roomName:event.roomName
+      }
+    })
+    if(PageData.result.errMsg==="collection.update:ok"){
+    if(PageData.result.stats.updated===0){
+      PageData.reCode=404
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"自习室不存在",
+        "data":{}
+       }
+    }
+    else if(PageData.result.stats.updated===1){
+      PageData.reCode=200
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"修改成功",
+        "data":{
+          roomId:event.roomId,
+          roomName:event.roomName
+        }
+       }
+    }
+    else{
+      PageData.reCode=203
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"警告:修改记录的数量不符",
+        "data":{}
+       }
+    }
+    
+    }else{
+      PageData.reCode=405
+      return {
+        "resCode":PageData.reCode,
+        "Msg":"后台接口错误",
+        "data":{}
+       }
+    }
   }
 }
