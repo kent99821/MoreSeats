@@ -1,4 +1,6 @@
 // pages/my/my.js
+import { $wuxDialog } from '../../miniprogram_npm/wux-weapp/index.js'
+
 Page({
 
   /**
@@ -44,18 +46,18 @@ Page({
    * 修改姓名
    */
   changeName() {
-    $wuxDialog().prompt({
+    let username=getApp().globalData.userName
+    $wuxDialog('#wux-dialog').prompt({
       resetOnClose: true,
-      title: '提示',
-      content: '密码为8位数字',
-      fieldtype: 'number',
-      password: !0,
+      title: '修改姓名',
+      content: '最长16位字符',
+      fieldtype: 'text',
       defaultText: '',
-      placeholder: '请输入Wi-Fi密码',
-      maxlength: 8,
+      placeholder: getApp().globalData.userName,
+      maxlength: 16,
       onConfirm(e, response) {
         const content = response.length === 8 ? `Wi-Fi密码到手了: ${response}` : `请输入正确的Wi-Fi密码`
-        alert(content)
+        console.log(content)
       },
     })
   },
