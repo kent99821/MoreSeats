@@ -1,4 +1,5 @@
-<wux-dialog id='wux-dialog'></wux-dialog>
+<wux-dialog id='wux-dialog' />
+<wux-toptips id="wux-toptips" />
 
 <view class="center-card FRCC">
   <view class="center-card-inside FCCC">
@@ -26,7 +27,7 @@
       <!-- <view class="top-user-icon-text">点击获取</view> -->
     </view>
     <view class="top-user-name wux-ellipsis">
-      <open-data type="userNickName" lang="zh_CN" bindtap="test"></open-data>
+      {{userName}}
     </view>
     <image mode="aspectFit" bindtap="changeName" class="top-user-pen" src="/images/pen.png" />
   </view>
