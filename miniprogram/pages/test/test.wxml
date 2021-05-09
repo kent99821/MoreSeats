@@ -1,11 +1,11 @@
 <!-- 自习室信息相关 -->
-<!-- <block>
+<block>
 <button type="primary" bindtap="getRooms">获取一组自习室</button>
 </block>
 
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
-</block>  -->
+</block> 
 
 <!--个人信息相关 -->
  <!-- <block >
@@ -23,10 +23,10 @@
 </block> -->
 
 <!-- 签到 -->
- <block >
+ <!-- <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
 </block>
-<!--
+
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
 </block>
@@ -64,12 +64,12 @@
 <!-- <block>
 <button type="primary" bindtap="cleanRank">排名清零</button>
 </block> -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="forceOut">自习室清退</button>
-</block>
+</block> -->
 <!-- <block>
 <button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
 <!-- <block>
-<button type="primary" bindtap="addUser">注销自习室</button>
+<button type="primary" bindtap="removeRoom">注销自习室</button>
 </block>  -->
