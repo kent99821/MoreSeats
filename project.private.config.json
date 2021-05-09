@@ -37,8 +37,8 @@
           "scene": null
         },
         {
-          "name": "pages/history/history",
-          "pathName": "pages/history/history",
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "query": "",
           "scene": null
         }

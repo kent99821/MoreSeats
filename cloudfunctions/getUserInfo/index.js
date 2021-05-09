@@ -41,6 +41,8 @@ exports.main = async (event, context) => {
         PageData.obj.isAdmin = PageData.result.data[0].isAdmin
         PageData.obj.userName = PageData.result.data[0].userName
         PageData.obj.roomAdminList=PageData.result.data[0].roomAdminList
+        PageData.obj.isOver=PageData.result.data[0].isOver
+        PageData.obj.isNewGuys=false
         PageData.reCode=200
         return {
           "resCode":PageData.reCode,
@@ -50,9 +52,9 @@ exports.main = async (event, context) => {
       }
       //用于触底加载功能 初步完成跳过event.skip条记录 查询返回后面的记录
       case 1:
-        PageData.result = await db.collection('history').limit(event.skip===0?15:10).skip(event.skip).where({
-          openId:wxContext.OPENID
-        }).get()
+        PageData.result = await db.collection('history').limit(event.num).skip(event.skip).where({
+          openId:wxContext.OPENID,
+        }).orderBy('sTime','desc').get()
         PageData.reCode=200
         return {
           "resCode":PageData.reCode,

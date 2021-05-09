@@ -26,7 +26,7 @@ let PageData={
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   PageData.result = await db.collection('users').where({
-    openId: wxContext.OPENID
+    openId: event.openId 
   }).get()
   // 上次签到是否结束
   if (PageData.result.data[0].isOver === false) {
@@ -71,7 +71,7 @@ exports.main = async (event, context) => {
       // 理想状态
       else{
         // 更新自习室座位相关信息
-      PageData.oresult.data[0].chairs.infos[event.chairIndex].openId=wxContext.OPENID
+      PageData.oresult.data[0].chairs.infos[event.chairIndex].openId=event.openId 
       PageData.oresult.data[0].chairs.infos[event.chairIndex].state=true
       PageData.rresult=await db.collection('rooms').where({
         roomId:event.roomId
@@ -84,7 +84,7 @@ exports.main = async (event, context) => {
       })
       // 更新用户的状态
       PageData.uresult=await db.collection('users').where({
-        openId:wxContext.OPENID
+        openId:event.openId 
       }).update({
         data:{
           isOver:false
@@ -96,7 +96,7 @@ exports.main = async (event, context) => {
         chairIndex:event.chairIndex,
         howlong:0,
         isOver:false,
-        openId:wxContext.OPENID,
+        openId:event.openId ,
         roomId:event.roomId,
         roomName:event.roomName,
         sTime:db.serverDate(),

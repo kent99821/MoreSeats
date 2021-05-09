@@ -23,9 +23,9 @@
 </block> -->
 
 <!-- 签到 -->
- <!-- <block >
+ <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
-</block> -->
+</block>
 <!--
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
@@ -45,30 +45,30 @@
 <button class="top" type="primary" bindtap="addroom" >新建自习室</button>
 </block> -->
 
- <block>
+ <!-- <block>
 <button type="primary" bindtap="updateName">修改自习室名</button>
 </block>
 
-<!-- <block>
-<button type="primary" bindtap="updateUser">修改公告</button>
+<block>
+<button type="primary" bindtap="updateNotice">修改公告</button>
 </block> -->
 <!-- <block>
-<button type="primary" bindtap="addUser">修改开放时段</button>
+<button type="primary" bindtap="updateOTime">修改开放时段</button>
 </block> -->
 <!-- <block>
-<button type="primary" bindtap="addUser">修改打卡规则</button>
+<button type="primary" bindtap="updateRule">打卡规则</button>
 </block> -->
 <!-- <block>
-<button type="primary" bindtap="addUser">座位修改</button>
+<button type="primary" bindtap="updateChair">座位排布</button>
 </block> -->
 <!-- <block>
-<button type="primary" bindtap="addUser">排名清零</button>
+<button type="primary" bindtap="cleanRank">排名清零</button>
 </block> -->
+<block>
+<button type="primary" bindtap="forceOut">自习室清退</button>
+</block>
 <!-- <block>
-<button type="primary" bindtap="addUser">自习室清退</button>
-</block> -->
-<!-- <block>
-<button type="primary" bindtap="addUser">强制签退</button>
+<button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
 <!-- <block>
 <button type="primary" bindtap="addUser">注销自习室</button>
