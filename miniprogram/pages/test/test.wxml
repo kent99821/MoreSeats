@@ -1,11 +1,11 @@
 <!-- 自习室信息相关 -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="getRooms">获取一组自习室</button>
 </block>
 
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
-</block> 
+</block>  -->
 
 <!--个人信息相关 -->
  <!-- <block >
@@ -21,23 +21,32 @@
 <block>
 <button type="primary" bindtap="addUser">新建用户档案</button>
 </block> -->
+<!-- <block>
+<button type="primary" bindtap="appJS">查询用户openId</button>
+</block>
+<block>
+<button type="primary" bindtap="indexJs">查询用户信息isNewGuys isOver</button>
+</block>
+<block>
+<button type="primary" bindtap="myJs">查询用户部分信息</button>
+</block> -->
 
 <!-- 签到 -->
- <!-- <block >
+ <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
 </block>
 
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
 </block>
-<block>
+<!-- <block>
 <button type="primary" bindtap="updateUser">修改用户名</button>
 </block> -->
-<!-- 
-<block>
+
+<!-- <block>
 <button class="top" type="primary" bindtap="signout">用户签退</button>
-</block> 
-<block>
+</block>  -->
+<!-- <block>
 <button type="primary" bindtap="atsignout">管理员签退</button>
 </block>  -->
 <!-- 大boss 管理自习室相关 -->
@@ -73,3 +82,6 @@
 <!-- <block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
 </block>  -->
+<block>
+<button type="primary" bindtap="getRank">获取排行榜</button>
+</block> 

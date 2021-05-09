@@ -1,5 +1,5 @@
 /**
- * date:2021.05.06
+ * date:2021.05.09
  * author:kent
  * state:finished
  * content:update code
@@ -46,9 +46,9 @@ exports.main = async (event, context) => {
       }
       //用于触底加载功能 初步完成跳过event.skip条记录 查询返回后面的记录
       case 1:
-        PageData.result = await db.collection('history').limit(event.num).skip(event.skip).where({
+        PageData.result = await db.collection('history').where({
           openId: wxContext.OPENID,
-        }).orderBy('sTime', 'desc').get()
+        }).orderBy('sTime', 'desc').skip(event.skip).limit(event.num).get()
         PageData.reCode = 200
         return {
           "resCode": PageData.reCode,

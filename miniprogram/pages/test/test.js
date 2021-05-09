@@ -11,7 +11,7 @@ Page({
       name: 'getRoomInfo',
       data: {
         flag: 0,
-        roomIds: ['123456', '654321']
+        roomIds: ['123456']
       },
       success: res => {
         console.log(res)
@@ -111,6 +111,52 @@ getHistory(){
     }
   }) 
 },
+// 获取用户的openId
+appJS(){
+  wx.cloud.callFunction({
+    name:'getUserInfo',
+    data:{
+    flag:4
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 获取用户isOver
+indexJs(){
+  wx.cloud.callFunction({
+    name:'getUserInfo',
+    data:{
+    flag:5
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })   
+},
+// 获取用户学习次数 学习总时长 用户名 
+myJs(){
+  wx.cloud.callFunction({
+    name:'getUserInfo',
+    data:{
+    flag:6
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })     
+},
+
 
 
 
@@ -119,8 +165,7 @@ signIn(){
   wx.cloud.callFunction({
     name:'signIn',
     data:{
-    openId:"oU2sR5HRcKUvsfh-7R91TTgd8noU",
-    roomId:"306674",
+    roomId:"123456",
     chairIndex:2,
     roomName:"自习室1"
     },
@@ -346,7 +391,27 @@ removeRoom(){
     }
   })
 },
+
+//获取排行榜
+getRank(){
+  wx.cloud.callFunction({
+    name:'getRank',
+    data:{
+    roomId:"123456",
+    skip:0,
+    num:10
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })
+}
+
 })
+
 
 
 

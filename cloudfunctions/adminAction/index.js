@@ -192,7 +192,6 @@ exports.main = async (event, context) => {
               },
               count: {
                 pepSum: 0,
-                rank: [],
                 timeSum: 0
               },
               isOpen: true,

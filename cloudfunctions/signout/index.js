@@ -87,36 +87,33 @@ exports.main = async (event, context) => {
     })
       //return PageData.urresult.errMsg: "collection.update:ok"
       // 查询排行榜中是否存在用户的记录
-    PageData.rank=await db.collection('rooms').where({
+    PageData.rank=await db.collection('ranks').where({
       roomId:event.roomId,
-      'count.rank.openId':PageData.openId
+      openId:PageData.openId
     }).get()
     // 排行榜中没有用户的记录 在排行榜中加一条用户的记录
     if(PageData.rank.data.length===0){
-      PageData.arank=await db.collection('rooms').where({
-        roomId:event.roomId
-      }).update({
-        data:{
-        "count.rank":_.push({
-          openId:PageData.openId,
-          userName:PageData.userName,
-          utimeSum:PageData.howlong
-        })
+      PageData.arank=await db.collection('ranks').add(
+        {
+          data:{
+            openId:PageData.openId,
+            roomId:event.roomId,
+            userName:PageData.userName,
+            utimeSum:PageData.howlong
+          }
         }
-      })
-     //return PageData.arank.errMsg: "collection.update:ok"
+      )
+     //return PageData.arank.errMsg: "collection.add:ok"
     }
     //用户已经在排行榜上有记录 在该用户的记录中的时长加上
     else{
-      PageData.urank=await db.collection('rooms').where({
+      PageData.urank=await db.collection('ranks').where({
         roomId:event.roomId,
-        'count.rank.openId':PageData.openId
+        openId:PageData.openId
       }).update({
         data:{
-          'count.rank.$':{
             userName:PageData.userName,
             utimeSum:_.inc(PageData.howlong)
-          }
         }
       })
       //return PageData.urank //errMsg: "collection.update:ok"
@@ -135,7 +132,7 @@ exports.main = async (event, context) => {
     // return PageData.uuresult
     // errMsg: "collection.update:ok"
     // 所有更新操作都完成后 返回成功码
-    if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.arank.errMsg==="collection.update:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
+    if(PageData.uhresult.errMsg==="collection.update:ok"&&PageData.urresult.errMsg==="collection.update:ok"&&PageData.arank.errMsg==="collection.add:ok"&&PageData.uuresult.errMsg==="collection.update:ok"){
       PageData.reCode=200
       return {
        "resCode":PageData.reCode,
