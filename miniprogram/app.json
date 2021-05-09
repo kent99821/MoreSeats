@@ -1,19 +1,15 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/my/my",
+    "pages/index/index",
     "pages/history/history",
-
     "pages/chair/chair",
     "pages/room/room",
-
     "pages/signIn/signIn",
-
     "pages/adminRoom/adminRoom",
     "pages/adminRoomList/adminRoomList",
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
-
     "pages/about/about",
     "pages/test/test"
 

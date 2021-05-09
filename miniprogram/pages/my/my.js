@@ -7,9 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userTotalTime: NaN,
-    userTotalVal: NaN,
-    userName: globalData.userName
+    userTotalTime: '',
+    userTotalVal: '',
+    userName: '',
+    isNewGuys: false,
   },
   test(e) {
     console.log(e)
@@ -22,13 +23,24 @@ Page({
       },
       success: res => {
         console.log(res);
+       
+        if(res.result.data.isNewGuys== true){
+          this.setData({
+            userTotalTime: NaN,
+            userTotalVal: NaN,
+            userName: '未注册',
+            isNewGuys: res.result.data.isNewGuys
+          })
 
-
-        this.setData({
-          userTotalTime: res.result.data.sumTime,
-          userTotalVal: res.result.data.recordNum,
-          userName: res.result.data.userName,
-        })
+        }else{
+          this.setData({
+            userTotalTime: res.result.data.sumTime,
+            userTotalVal: res.result.data.recordNum,
+            userName: res.result.data.userName,
+            isNewGuys: res.result.data.isNewGuys
+          })
+    
+        }
       },
       fail: (res) => {
         wx.showToast({
@@ -41,50 +53,106 @@ Page({
 
   },
 
+/*
+查询用户是否已注册
+*/
+// checkUser(){
+//   wx.cloud.callFunction({
+//     name: 'getUserInfo',
+//     data: {
+//       flag: 5,
+//     },
+//     success: res => {
+//       console.log(res);
+//       this.setData
+//     },
+//     fail: (res) => {
+//       wx.showToast({
+//         title: '云开发出现了些问题，请联系管理员排查！',
+//         icon: "none"
+//       })
+//       console.log(res);
+//     }
+//   })
+// },
+
+
   /**
    * 修改姓名
    */
-  changeName() {
-    $wuxDialog().prompt({
-      resetOnClose: true,
-      title: '修改姓名',
-      content: '最长16位字符',
-      fieldtype: 'text',
-      defaultText: '',
-      placeholder: getApp().globalData.userName,
-      maxlength: 16,
-      onConfirm(e, response) {
-        console.log(response.replace(/(^\s*)|(\s*$)/g, "").length);
-        if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
-          wx.cloud.callFunction({
-            name: 'getUserInfo',
-            data: {
-              flag: 2,
-              userName: response
+
+  changeName(e) {
+    let that = this;
+    //判断是不是未注册用户， 未注册用户跳转指注册页面
+    if(this.data.isNewGuys){
+
+
+      $wuxDialog().open({
+        resetOnClose: true,
+        title: '提示',
+        content: '当前用户未注册',
+        buttons: [{
+                text: '取消',
             },
-            success: res => {
-              $wuxToptips().success({
-                text: '修改成功',
-                duration: 3000
-              })
-              this.getUserValue();
+            {
+                text: '注册',
+                type: 'primary',
+                onTap(e) {
+                  wx.navigateTo({
+                    url: '../signIn/signIn',
+                   })
+                },
             },
-            fail: (res) => {
-              wx.showToast({
-                title: '云开发出现了些问题，请联系管理员排查！',
-                icon: "none"
-              })
-              console.log(res);
-            }
-          })
-        } else
-          //失败通知
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
-          })
-      },
+        ],
     })
+
+    }
+
+    else {
+      $wuxDialog().prompt({
+        resetOnClose: true,
+        title: '修改姓名',
+        content: '最长16位字符',
+        fieldtype: 'text',
+        defaultText: '',
+        placeholder:that.data.userName,
+        maxlength: 16,
+        onConfirm(e, response) {
+          console.log(response.replace(/(^\s*)|(\s*$)/g, "").length);
+          if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
+            wx.cloud.callFunction({
+              name: 'getUserInfo',
+              data: {
+                flag: 2,
+                userName: response.replace(/(^\s*)|(\s*$)/g, "")
+              },
+              success: res => {
+                that.setData({
+                  userName:response.replace(/(^\s*)|(\s*$)/g, "")
+                })
+                $wuxToptips().success({
+                  text: '修改成功',
+                  duration: 3000
+                })
+              },
+              fail: (res) => {
+                wx.showToast({
+                  title: '云开发出现了些问题，请联系管理员排查！',
+                  icon: "none"
+                })
+                console.log(res);
+              }
+            })
+          } else
+            //失败通知
+            $wuxToptips().warn({
+              text: '修改失败',
+              duration: 3000
+            })
+        },
+      })
+    }
+
   },
 
   /**
@@ -92,7 +160,7 @@ Page({
    */
   onLoad: function (options) {
     this.getUserValue();
-    // console.log('aaaaaaa');
+   
 
   },
 

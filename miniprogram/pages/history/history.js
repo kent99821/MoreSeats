@@ -24,12 +24,17 @@ Page({
   },
   getHistoryList(){
     let len  = this.data.historyList.length;
-    if(this.data.showTop==true) len++;
+    let num =  15;
+    if(len>10) num = 10;
+    if(this.data.showTop==true) {
+      len++;
+    };
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
         flag: 1,
-        skip: len
+        skip: len,
+        num:num
       },
       success: res => {
 
@@ -40,7 +45,7 @@ Page({
         this.setData({
           historyList: [...this.data.historyList, ...changeData],
         })
-        console.log(changeData)
+        // console.log(changeData)
         if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
           let cData = this.data.historyList;
           cData.splice(0,1);
