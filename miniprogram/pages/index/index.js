@@ -5,11 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-<<<<<<< HEAD
-=======
     showTips:true,
     newGuysORtoChair:true,
->>>>>>> master
     typeInVisible: false,
     rooms: [
       { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
