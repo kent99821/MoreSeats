@@ -346,7 +346,7 @@ cleanRank(){
     data:{
     flag:6,
     roomId:"654321",
-    cleanPepSum:false,
+    cleanPepSum:true,
     cleanTimeSum:false
     },
     success:res=>{

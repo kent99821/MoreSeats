@@ -32,13 +32,13 @@
 </block> -->
 
 <!-- 签到 -->
- <block >
+ <!-- <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
-</block>
+</block> -->
 
-<block>
+<!-- <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
-</block>
+</block> -->
 <!-- <block>
 <button type="primary" bindtap="updateUser">修改用户名</button>
 </block> -->
@@ -70,9 +70,9 @@
 <!-- <block>
 <button type="primary" bindtap="updateChair">座位排布</button>
 </block> -->
-<!-- <block>
+<block>
 <button type="primary" bindtap="cleanRank">排名清零</button>
-</block> -->
+</block>
 <!-- <block>
 <button type="primary" bindtap="forceOut">自习室清退</button>
 </block> -->
@@ -82,6 +82,6 @@
 <!-- <block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
 </block>  -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="getRank">获取排行榜</button>
-</block> 
+</block>  -->
