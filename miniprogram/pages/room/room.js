@@ -26,7 +26,7 @@ Page({
           roomId: aId
         },
         success: res => {
-          console.log('----');
+          // console.log('----');
           aName = res.result.data.roomName;
           save();
           console.log(res.result.data)
@@ -41,9 +41,14 @@ Page({
    
    function save(){
       let val = wx.getStorageSync('rooms');
+ 
+     if(val) {
       val = val.filter((item)=> item.roomId != aId);
       val.splice(0,0, {roomId: aId, roomName: aName})
       val.splice(4);
+     }else{
+       val = [{roomId: aId, roomName: aName}]
+     }
       console.log(val)
       wx.setStorageSync('rooms', val);
     }
