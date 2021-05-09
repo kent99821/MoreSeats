@@ -44,7 +44,17 @@ getUserValue() {
       }else{
         this.setData({
           isNewGuys: false,
-          isOver : ''
+          isOver : res.result.data.isOver
+        })
+      }
+
+      if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
+        this.setData({
+          showTips: true
+        })
+      }else{
+        this.setData({
+          showTips: false
         })
       }
     },
