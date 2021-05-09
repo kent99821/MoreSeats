@@ -25,6 +25,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //flag(number):0 查询多个自习室具体信息 roomIds(string) 
   if (event.flag === 0) {
+    PageData.resArray=[]
     for (let index = 0; index < event.roomIds.length; index++) {
       let temp = await db.collection('rooms').where({
         roomId: event.roomIds[index]
