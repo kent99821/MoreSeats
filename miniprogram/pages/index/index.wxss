@@ -59,7 +59,7 @@
   margin-bottom: 20rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
-  /* background-color: #fff; */
+  background-color: #fff;
   border-radius: 35rpx;
   overflow: hidden;
   border: 1rpx solid #ccc;

@@ -5,15 +5,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    roomId: '',
+    chairIndex: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-  },
+    console.log(options)
+    this.setData({
+      roomId: options.roomId,
+      chairIndex: options.chairIndex
+    })
+  }, 
 
   /**
    * 生命周期函数--监听页面初次渲染完成

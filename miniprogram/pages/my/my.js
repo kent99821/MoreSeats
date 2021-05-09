@@ -1,4 +1,6 @@
 // pages/my/my.js
+import { $wuxDialog } from '../../miniprogram_npm/wux-weapp/index.js'
+
 Page({
 
   /**
@@ -6,15 +8,15 @@ Page({
    */
   data: {
     userName: '',
-    userTotalTime:NaN,
+    userTotalTime: NaN,
     userTotalVal: NaN,
- 
+
   },
 
-  test(e){
+  test(e) {
     console.log(e)
   },
-  getUserValue(){
+  getUserValue() {
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
@@ -23,10 +25,10 @@ Page({
       success: res => {
         console.log(res);
 
-    
+
         this.setData({
           userTotalTime: res.result.data.sumTime,
-          userTotalVal : res.result.data.recordNum
+          userTotalVal: res.result.data.recordNum
         })
       },
       fail: (res) => {
@@ -39,12 +41,33 @@ Page({
     })
 
   },
+
+  /**
+   * 修改姓名
+   */
+  changeName() {
+    let username=getApp().globalData.userName
+    $wuxDialog('#wux-dialog').prompt({
+      resetOnClose: true,
+      title: '修改姓名',
+      content: '最长16位字符',
+      fieldtype: 'text',
+      defaultText: '',
+      placeholder: getApp().globalData.userName,
+      maxlength: 16,
+      onConfirm(e, response) {
+        const content = response.length === 8 ? `Wi-Fi密码到手了: ${response}` : `请输入正确的Wi-Fi密码`
+        console.log(content)
+      },
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  this.getUserValue();
-  // console.log('aaaaaaa');
+    this.getUserValue();
+    // console.log('aaaaaaa');
 
   },
 

@@ -1,7 +1,7 @@
 @import '/miniprogram_npm/wux-weapp/styles/index.wxss';
 
 page {
-  background: #fff;
+  background: #f8f8f8;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -68,6 +68,14 @@ page {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
+}
+
+/* Flex Row flex-End Center*/
+.FREC{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
 }
 

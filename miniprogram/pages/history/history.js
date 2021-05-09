@@ -1,4 +1,5 @@
 // pages/history/history.js
+var app = getApp();
 Page({
 
   /**
@@ -7,25 +8,51 @@ Page({
   data: {
     historyList:[],
     skip: 0,
+    showTop:false,
+    topData:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  navigateToChair(){
+    let roomId = this.data.historyList[0].roomId;
+    let chairIndex = this.data.historyList[0].chairIndex;
+    wx.navigateTo({
+      url: '../chair/chair?roomId='+roomId+'&chairIndex='+chairIndex,
+    })
+  },
   getHistoryList(){
+    let len  = this.data.historyList.length;
+    if(this.data.showTop==true) len++;
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
         flag: 1,
-        skip: this.data.historyList.length
+        skip: len
       },
       success: res => {
-        console.log('----');
-        console.log(res)
-        console.log(this.data.skip)
-        this.setData({
-          historyList: [...this.data.historyList, ...res.result.data],
+
+        let changeData = res.result.data;
+        changeData.map((item)=>{
+          item.sDate = item.sTime.split('T')[0].split('-').join('.');
         })
+        this.setData({
+          historyList: [...this.data.historyList, ...changeData],
+        })
+        console.log(changeData)
+        if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
+          let cData = this.data.historyList;
+          cData.splice(0,1);
+          this.setData({
+            showTop: true,
+            topData: this.data.historyList[0],
+            historyList: cData
+          })
+        }
+
+        getApp().globalData.isOver = this.data.showTop;
+        // console.log(app.globalData.isOver)
 
         console.log(this.data.historyList)
 
@@ -72,14 +99,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.getHistoryList();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getHistoryList();
   },
 
   /**
