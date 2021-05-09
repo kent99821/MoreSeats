@@ -113,16 +113,15 @@ getHistory(){
 
 
 
-
-
 // signIn签到部分
 signIn(){
   wx.cloud.callFunction({
     name:'signIn',
     data:{
-    roomId:"123456",
+    openId:"oU2sR5HRcKUvsfh-7R91TTgd8noU",
+    roomId:"306674",
     chairIndex:2,
-    roomName:"海大图书馆"
+    roomName:"自习室1"
     },
     success:res=>{
       console.log(res)
@@ -199,7 +198,7 @@ updateName(){
     name:'adminAction',
     data:{
     flag:1,
-    roomId:"847383",
+    roomId:"306674",
     roomName:"自习室修改1"
     },
     success:res=>{
@@ -210,7 +209,127 @@ updateName(){
     }
   }) 
 },
+// 修改自习室公告
+updateNotice(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:2,
+    roomId:"306674",
+    roomNotice:"自习室修改1"
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 修改开放时间
+updateOTime(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:3,
+    roomId:"306674",
+    openTime:"8:00-22:00"
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 修改打卡规则
+updateRule(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:4,
+    roomId:"306674",
+    rule:{
+      type:1,
+      latitude:32, //纬度
+      longitude:32,//经度
+      size:100 //范围
+    }
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 修改座位排布
+updateChair(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:5,
+    roomId:"306674",
+    type:1,
+    chairNum:20,
+    group:[
+      {
+        groupName:"一楼",
+        groupSize:10
+      },
+      {
+        groupName:"二楼",
+        groupSize:10
+      }
+    ]
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 清除排名
+cleanRank(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:6,
+    roomId:"654321",
+    cleanPepSum:false,
+    cleanTimeSum:false
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  }) 
+},
+// 强制清退
+forceOut(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:7,
+    roomId:"306674",
+
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })
+}
 })
+
 
 
 

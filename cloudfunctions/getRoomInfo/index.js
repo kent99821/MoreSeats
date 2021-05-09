@@ -23,7 +23,7 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  //flag(number):0 查询单个自习室具体信息 roomId(string) 
+  //flag(number):0 查询多个自习室具体信息 roomIds(string) 
   if (event.flag === 0) {
     for (let index = 0; index < event.roomIds.length; index++) {
       let temp = await db.collection('rooms').where({
@@ -60,7 +60,7 @@ exports.main = async (event, context) => {
     }
   }
 
-  //flag(number):0 查询多个自习室基础信息 roomIds(string array) 
+  //flag(number):1 查询单个自习室基础信息 roomIds(string array) 
   else if (event.flag === 1) {
     PageData.result = await db.collection('rooms').where({
       roomId: event.roomId
@@ -91,7 +91,7 @@ exports.main = async (event, context) => {
     }
     
   }
-  return PageData.obj
+  
 
 
 

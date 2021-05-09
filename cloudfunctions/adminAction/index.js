@@ -9,11 +9,15 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 // 初始化数据库
 const db = cloud.database()
+const _ = db.command
 let PageData = {
   reCode: 0, //状态码
+  find: {}, //查询结果
   result: {}, //原结果
   aresult: {}, //操作后结果
+  uresult: {}, //更新user的操作结果
   croomId: "", //创建的roomid
+  chairsInfo:[]//查询得到的座位情况
 }
 //获取六位随机码
 function uuid() {
@@ -23,7 +27,7 @@ function uuid() {
   for (i = 0; i < 6; i++) uuid[i] = chars[0 | Math.random() * 10];
   return uuid.join('');
 }
-// 修改功能 自习室 公告 开放时段 
+// 修改功能: 自习室 公告 开放时段 打卡规则 座位排布
 async function update(event, flag) {
   switch (flag) {
     case 1:
@@ -53,8 +57,81 @@ async function update(event, flag) {
         }
       })
       break;
+    case 4:
+      PageData.result = await db.collection('rooms').where({
+        roomId: event.roomId
+      }).update({
+        data: {
+          rule: event.rule
+        }
+      })
+      break;
+    case 5:
+      var infos = Array(event.chairNum).fill({
+        openId: "",
+        state: false
+      })
+      PageData.result = await db.collection('rooms').where({
+        roomId: event.roomId
+      }).update({
+        data: {
+          "chairs.type": event.type,
+          "chairs.chairNum": event.chairNum,
+          "chairs.infos": infos,
+          "chairs.group": event.group
+        }
+      })
+      break;
+    case 6:
+      // 只清除排名
+      if (event.cleanPepSum === false && event.cleanTimeSum === false) {
+        PageData.result = await db.collection('rooms').where({
+          roomId: event.roomId
+        }).update({
+          data: {
+            "count.rank": []
+          }
+        })
+      }
+      // 清除排名和总人次
+      else if (event.cleanPepSum === true && event.cleanTimeSum === false) {
+        PageData.result = await db.collection('rooms').where({
+          roomId: event.roomId
+        }).update({
+          data: {
+            "count.rank": [],
+            "count.pepSum": 0
+          }
+        })
+      }
+      // 清除排名和总时长
+      else if (event.cleanPepSum === false && event.cleanTimeSum === true) {
+        PageData.result = await db.collection('rooms').where({
+          roomId: event.roomId
+        }).update({
+          data: {
+            "count.rank": [],
+            "count.timeSum": 0
+          }
+        })
+      }
+      // 清除排名 总人次 总时长
+      else {
+        PageData.result = await db.collection('rooms').where({
+          roomId: event.roomId
+        }).update({
+          data: {
+            "count.rank": [],
+            "count.pepSum": 0,
+            "count.timeSum": 0
+          }
+        })
+
+      }
+
   }
   if (PageData.result.errMsg === "collection.update:ok") {
+    // 此处可能会出现两种情况 自习室不存在或者是修改的参数与数据库的数值没有差异
     if (PageData.result.stats.updated === 0) {
       PageData.reCode = 404
       return {
@@ -94,7 +171,9 @@ async function update(event, flag) {
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
+
   switch (event.flag) {
+    // 新建自习室
     case 0:
       while (1) {
         PageData.croomId = uuid()
@@ -125,12 +204,24 @@ exports.main = async (event, context) => {
               rule: {
                 type: 0,
                 size: 0,
-                longtitude: 0,
+                longitude: 0,
                 latitude: 0
               }
             }
           })
-          if (PageData.aresult.errMsg === "collection.add:ok") {
+          // 更新users集合
+          PageData.uresult = await db.collection('users').where({
+            openId: wxContext.OPENID
+          }).update({
+            data: {
+              isAdmin:true,
+              roomAdminList: _.push({
+                roomId: PageData.croomId,
+                roomName: event.roomName
+              })
+            }
+          })
+          if (PageData.aresult.errMsg === "collection.add:ok" && PageData.uresult.errMsg === "collection.update:ok") {
             PageData.reCode = 200
             return {
               "resCode": PageData.reCode,
@@ -151,12 +242,52 @@ exports.main = async (event, context) => {
 
         }
       }
+      // 修改自习室名
       case 1:
         return update(event, 1)
+        // 修改公告
       case 2:
         return update(event, 2)
+        // 修改开放时段
       case 3:
         return update(event, 3)
+        // 修改打卡规则
+      case 4:
+        return update(event, 4)
+        // 修改座位排布
+      case 5:
+        return update(event, 5)
+        // 排名清零
+      case 6:
+        return update(event, 6)
+      case 7:
+        PageData.find=await db.collection('rooms').where({
+         roomId:event.roomId
+        }).field({
+          "chairs.infos":true,
+        }).get()
+        PageData.chairsInfo= PageData.find.data[0].chairs.infos
+        return PageData.chairsInfo
+        // for (let i = 0; i < PageData.chairsInfo.length; i++) {
+        //     if(PageData.chairsInfo[i].state===true){
+        //       cloud.callFunction({
+        //         name:'signOut',
+        //         data:{
+        //         flag:1,
+        //         openId:PageData.chairsInfo[i].openId,
+        //         roomId:event.roomId,
+        //         chairIndex:i
+        //         },
+        //         success:res=>{
+        //           console.log(res)
+        //         },
+        //         fail:err=>{
+        //           console.log('调用失败：',err)
+        //         }
+        //       }) 
+        //     }         
+           
+        // }
 
   }
 }

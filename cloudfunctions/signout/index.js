@@ -31,7 +31,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   if (event.flag === 0) {
     PageData.openId = wxContext.OPENID
-  } else {
+  } else if(event.flag===1) {
     PageData.openId = event.openId
   }
   PageData.uresult = await db.collection('users').where({
