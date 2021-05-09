@@ -6,7 +6,7 @@ Page({
    */
   data: {
     showTips:true,
-    newGuysORtoChair:true,
+
     typeInVisible: false,
     rooms: [
       { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
