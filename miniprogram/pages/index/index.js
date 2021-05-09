@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showTips:true,
+    showTips: true,
 
     typeInVisible: false,
     // rooms: [
@@ -19,64 +19,64 @@ Page({
         text: 'Delete',
         style: 'background-color: #F4333C; color: white',
       }],
-      // newGuysORtoChair:false,
-      isNewGuys:false,
-      isOver: true,
+    // newGuysORtoChair:false,
+    isNewGuys: false,
+    isOver: true,
   },
 
 
 
-/*
-获取用户信息
-*/
-getUserValue() {
-  wx.cloud.callFunction({
-    name: 'getUserInfo',
-    data: {
-      flag: 0,
-    },
-    success: res => {
-      // console.log(res.result.data.isNewGuys);
+  /*
+  获取用户信息
+  */
+  getUserValue() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        // console.log(res.result.data.isNewGuys);
 
-      if(res.result.data.isNewGuys){
-        this.setData({
-          isOver: true,
-          isNewGuys: true
+        if (res.result.data.isNewGuys) {
+          this.setData({
+            isOver: true,
+            isNewGuys: true
+          })
+        } else {
+          this.setData({
+            isNewGuys: false,
+            isOver: res.result.data.isOver
+          })
+        }
+        console.log(this.data.isNewGuys)
+        console.log(this.data.isOver)
+        // if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
+        //   this.setData({
+        //     showTips: true
+        //   })
+        // }else{
+        //   this.setData({
+        //     showTips: false
+        //   })
+        // }
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
         })
-      }else{
-        this.setData({
-          isNewGuys: false,
-          isOver : res.result.data.isOver
-        })
+        console.log(res);
       }
-      console.log(this.data.isNewGuys)
-      console.log(this.data.isOver)
-      // if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
-      //   this.setData({
-      //     showTips: true
-      //   })
-      // }else{
-      //   this.setData({
-      //     showTips: false
-      //   })
-      // }
-    },
-    fail: (res) => {
-      wx.showToast({
-        title: '云开发出现了些问题，请联系管理员排查！',
-        icon: "none"
-      })
-      console.log(res);
-    }
-  })
+    })
 
-},
+  },
 
-toChair(){
-  wx.navigateTo({
-    url: '../signIn/signIn',
-  })
-},
+  toChair() {
+    wx.navigateTo({
+      url: '../signIn/signIn',
+    })
+  },
 
 
   /*
@@ -91,7 +91,7 @@ toChair(){
 
     if (val) {
       //doing something
-      val = val.map((item)=>{
+      val = val.map((item) => {
         return item.roomId
       })
       console.log(val)
@@ -99,13 +99,13 @@ toChair(){
         name: 'getRoomInfo',
         data: {
           flag: 0,
-          roomIds: ['123456']
+          roomIds: val
         },
         success: res => {
           console.log('-----');
           console.log(res.result.data)
 
-          this.setData({rooms: res.result.data})
+          this.setData({ rooms: res.result.data })
 
         },
         fail: err => {
@@ -134,7 +134,7 @@ toChair(){
       }
       item.len = len;
     })
- 
+
     this.setData({ rooms: val })
   },
 
@@ -146,7 +146,7 @@ toChair(){
     let index = e.currentTarget.dataset.index;
     let val = this.data.rooms;
     val.splice(index, 1)
-    
+
     let roomsArr = [];
     val.forEach((item) => {
       roomsArr.push({ roomId: item.roomId, roomName: item.roomName });
@@ -164,7 +164,7 @@ toChair(){
     复制内容
   */
   copyRoomId(e) {
- 
+
     wx.setClipboardData({
       data: e.currentTarget.dataset.roomid,
       success: function (res) {
@@ -242,7 +242,7 @@ toChair(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getHistory()
   },
 
   /**
