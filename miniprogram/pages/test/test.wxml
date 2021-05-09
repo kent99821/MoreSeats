@@ -23,10 +23,10 @@
 </block> -->
 
 <!-- 签到 -->
- <block >
+ <!-- <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
 </block>
-<!--
+
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
 </block>
@@ -41,9 +41,9 @@
 <button type="primary" bindtap="atsignout">管理员签退</button>
 </block>  -->
 <!-- 大boss 管理自习室相关 -->
-<!-- <block >
+<block >
 <button class="top" type="primary" bindtap="addroom" >新建自习室</button>
-</block> -->
+</block>
 
  <!-- <block>
 <button type="primary" bindtap="updateName">修改自习室名</button>
@@ -64,12 +64,12 @@
 <!-- <block>
 <button type="primary" bindtap="cleanRank">排名清零</button>
 </block> -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="forceOut">自习室清退</button>
-</block>
+</block> -->
 <!-- <block>
 <button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
-<!-- <block>
-<button type="primary" bindtap="addUser">注销自习室</button>
-</block>  -->
+<block>
+<button type="primary" bindtap="removeRoom">注销自习室</button>
+</block> 

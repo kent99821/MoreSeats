@@ -15,7 +15,7 @@ let PageData = {
   find: {}, //查询结果
   result: {}, //原结果
   aresult: {}, //操作后结果
-  uresult: {}, //更新user的操作结果
+  uresult: {}, //更新的操作结果
   croomId: "", //创建的roomid
   chairsInfo:[]//查询得到的座位情况
 }
@@ -128,7 +128,7 @@ async function update(event, flag) {
         })
 
       }
-
+     
   }
   if (PageData.result.errMsg === "collection.update:ok") {
     // 此处可能会出现两种情况 自习室不存在或者是修改的参数与数据库的数值没有差异
@@ -260,6 +260,7 @@ exports.main = async (event, context) => {
         // 排名清零
       case 6:
         return update(event, 6)
+        //强制清退 只能从前端判别是否成功
       case 7:
         PageData.find=await db.collection('rooms').where({
          roomId:event.roomId
@@ -267,27 +268,91 @@ exports.main = async (event, context) => {
           "chairs.infos":true,
         }).get()
         PageData.chairsInfo= PageData.find.data[0].chairs.infos
-        return PageData.chairsInfo
-        // for (let i = 0; i < PageData.chairsInfo.length; i++) {
-        //     if(PageData.chairsInfo[i].state===true){
-        //       cloud.callFunction({
-        //         name:'signOut',
-        //         data:{
-        //         flag:1,
-        //         openId:PageData.chairsInfo[i].openId,
-        //         roomId:event.roomId,
-        //         chairIndex:i
-        //         },
-        //         success:res=>{
-        //           console.log(res)
-        //         },
-        //         fail:err=>{
-        //           console.log('调用失败：',err)
-        //         }
-        //       }) 
-        //     }         
+          //  对每一个位置进行签退
+        for (let i = 0; i < PageData.chairsInfo.length; i++) {
+            if(PageData.chairsInfo[i].state===true){
+              cloud.callFunction({
+                name:'signOut',
+                data:{
+                flag:1,
+                openId:PageData.chairsInfo[i].openId,
+                roomId:event.roomId,
+                chairIndex:i
+                },
+                success:res=>{
+                  console.log(res)
+                },
+                fail:err=>{
+                  console.log('调用失败：',err)
+                }
+              }) 
+            }         
            
-        // }
+        }
+        break;
+        // 注销自习室
+      case 8:
+        PageData.result=await db.collection('rooms').where({
+          roomId:event.roomId,
+          openId:wxContext.OPENID
+        }).remove()
+        //return PageData.result.errMsg: "collection.remove:ok"
+        PageData.uresult=await db.collection('users').where({
+          openId:wxContext.OPENID
+        }).update({
+          data:{
+             roomAdminList:_.pull({
+               "roomId":event.roomId
+             })
+          }
+        })
+        //return PageData.uresult.errMsg: "collection.update:ok"
+        PageData.find=await db.collection('users').where({
+          openId:wxContext.OPENID
+        }).get()
+        if(PageData.find.data[0].roomAdminList.length===0){
+          PageData.aresult=await db.collection('users').where({
+            openId:wxContext.OPENID
+          }).update({ 
+            data:{
+            isAdmin:false
+            }
+          })
+          if(PageData.result.errMsg==="collection.remove:ok"&&PageData.uresult.errMsg==="collection.update:ok"&&PageData.aresult.errMsg==="collection.update:ok"){
+            PageData.resCode=200
+            return {
+              "resCode":PageData.resCode,
+              "Msg":"删除成功",
+              "data":{}
+             }
+          }
+          else{
+            PageData.resCode=201
+            return {
+              "resCode":PageData.resCode,
+              "Msg":"删除失败",
+              "data":{}
+             }
+          }
+        }
+        else{
+          if(PageData.result.errMsg==="collection.remove:ok"&&PageData.uresult.errMsg==="collection.update:ok"){
+            PageData.resCode=200
+            return {
+              "resCode":PageData.resCode,
+              "Msg":"删除成功",
+              "data":{}
+             }
+          }
+          else{
+            PageData.resCode=201
+            return {
+              "resCode":PageData.resCode,
+              "Msg":"删除失败",
+              "data":{}
+             }
+        }
+        }
 
   }
 }

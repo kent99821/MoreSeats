@@ -100,7 +100,8 @@ getHistory(){
     name:'getUserInfo',
     data:{
       flag:1,
-      skip:5
+      skip:5,
+      num:10
     },
     success:res=>{
       console.log(res)
@@ -182,7 +183,7 @@ addroom(){
     name:'adminAction',
     data:{
     flag:0,
-    roomName:"自习室1"
+    roomName:"自习室3"
     },
     success:res=>{
       console.log(res)
@@ -327,7 +328,23 @@ forceOut(){
       console.log('调用失败：',err)
     }
   })
-}
+},
+removeRoom(){
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:8,
+    roomId:"632345",
+
+    },
+    success:res=>{
+      console.log(res)
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })
+},
 })
 
 
