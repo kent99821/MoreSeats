@@ -330,11 +330,13 @@ exports.main = async (event, context) => {
           break;
           // 注销自习室
         case 8:
+          // 删除rooms中的记录
           PageData.result = await db.collection('rooms').where({
             roomId: event.roomId,
             openId: wxContext.OPENID
           }).remove()
           //return PageData.result.errMsg: "collection.remove:ok"
+          // 修改users的roomadminList
           PageData.uresult = await db.collection('users').where({
             openId: wxContext.OPENID
           }).update({
@@ -345,6 +347,12 @@ exports.main = async (event, context) => {
             }
           })
           //return PageData.uresult.errMsg: "collection.update:ok"
+          // 删除相应的排行榜记录
+          PageData.rank=await db.collection('ranks').where({
+            roomId:event.roomId
+          }).remove()
+        //PageData.rank.errMsg === "collection.remove:ok"
+          
           PageData.find = await db.collection('users').where({
             openId: wxContext.OPENID
           }).get()
@@ -356,7 +364,7 @@ exports.main = async (event, context) => {
                 isAdmin: false
               }
             })
-            if (PageData.result.errMsg === "collection.remove:ok" && PageData.uresult.errMsg === "collection.update:ok" && PageData.aresult.errMsg === "collection.update:ok") {
+            if (PageData.result.errMsg === "collection.remove:ok" && PageData.uresult.errMsg === "collection.update:ok" && PageData.aresult.errMsg === "collection.update:ok"&&PageData.rank.errMsg === "collection.remove:ok") {
               PageData.resCode = 200
               return {
                 "resCode": PageData.resCode,
@@ -372,7 +380,7 @@ exports.main = async (event, context) => {
               }
             }
           } else {
-            if (PageData.result.errMsg === "collection.remove:ok" && PageData.uresult.errMsg === "collection.update:ok") {
+            if (PageData.result.errMsg === "collection.remove:ok" && PageData.uresult.errMsg === "collection.update:ok"&&PageData.rank.errMsg === "collection.remove:ok") {
               PageData.resCode = 200
               return {
                 "resCode": PageData.resCode,

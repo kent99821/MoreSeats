@@ -70,18 +70,18 @@
 <!-- <block>
 <button type="primary" bindtap="updateChair">座位排布</button>
 </block> -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="cleanRank">排名清零</button>
-</block>
+</block> -->
 <!-- <block>
 <button type="primary" bindtap="forceOut">自习室清退</button>
 </block> -->
 <!-- <block>
 <button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
-<!-- <block>
+<block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
-</block>  -->
+</block> 
 <!-- <block>
 <button type="primary" bindtap="getRank">获取排行榜</button>
 </block>  -->

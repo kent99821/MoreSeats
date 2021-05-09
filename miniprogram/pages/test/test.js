@@ -380,7 +380,7 @@ removeRoom(){
     name:'adminAction',
     data:{
     flag:8,
-    roomId:"632345",
+    roomId:"686254",
 
     },
     success:res=>{
