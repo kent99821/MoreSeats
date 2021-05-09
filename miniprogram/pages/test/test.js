@@ -329,6 +329,7 @@ forceOut(){
     }
   })
 },
+// 注销自习室
 removeRoom(){
   wx.cloud.callFunction({
     name:'adminAction',

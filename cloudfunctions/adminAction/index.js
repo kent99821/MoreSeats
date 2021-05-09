@@ -1,8 +1,8 @@
 /**
  * date:2021.05.06
  * author:kent
- * state:finishing
- * content:create
+ * state:finished
+ * content:
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')

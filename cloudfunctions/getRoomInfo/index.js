@@ -1,5 +1,5 @@
 /**
- * date:2021.05.06
+ * date:2021.05.09
  * author:kent
  * state:finished
  * content:updata code
@@ -28,17 +28,17 @@ exports.main = async (event, context) => {
     for (let index = 0; index < event.roomIds.length; index++) {
       let temp = await db.collection('rooms').where({
         roomId: event.roomIds[index]
+      }).field({
+        "chairs.sitDown":true,
+        "chairs.chairNum":true,
+        "roomId":true,
+        "roomName":true,
+        "openTime":true
       }).get()
       if(temp.data.length===0){
         break;
       }
-      PageData.resArray[index] = {
-        sitDown: temp.data[0].chairs.sitDown,
-        chairNum: temp.data[0].chairs.chairNum,
-        roomId: temp.data[0].roomId,
-        roomName: temp.data[0].roomName,
-        openTime: temp.data[0].openTime
-      }
+      PageData.resArray[index] = temp.data[0]
     }
     // return PageData.resArray
     // 判断结果的数组是否和传入的Id数组吻合
@@ -64,6 +64,15 @@ exports.main = async (event, context) => {
   else if (event.flag === 1) {
     PageData.result = await db.collection('rooms').where({
       roomId: event.roomId
+    }).field({
+      chairs:true,
+      isOpen:true,
+      openId:true,
+      openTime:true,
+      roomId:true,
+      roomName:true,
+      roomNotice:true,
+      rule:true
     }).get()
     if(PageData.result.data.length===0){
       PageData.resCode=404
@@ -74,19 +83,12 @@ exports.main = async (event, context) => {
        }
     }
     else{
-      PageData.obj.chairs = PageData.result.data[0].chairs
-      PageData.obj.isOpen = PageData.result.data[0].isOpen
-      PageData.obj.openId = PageData.result.data[0].openId
-      PageData.obj.openTime = PageData.result.data[0].openTime
-      PageData.obj.roomId = PageData.result.data[0].roomId
-      PageData.obj.roomName = PageData.result.data[0].roomName
-      PageData.obj.roomNotice = PageData.result.data[0].roomNotice
-      PageData.obj.rule = PageData.result.data[0].rule
+
       PageData.resCode=200
       return {
         "resCode":PageData.resCode,
         "Msg":"查询成功",
-        "data":PageData.obj
+        "data":PageData.result.data[0]
        }
     }
     

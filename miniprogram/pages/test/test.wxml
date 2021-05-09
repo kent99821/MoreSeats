@@ -1,11 +1,11 @@
 <!-- 自习室信息相关 -->
-<!-- <block>
+<block>
 <button type="primary" bindtap="getRooms">获取一组自习室</button>
 </block>
 
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
-</block>  -->
+</block> 
 
 <!--个人信息相关 -->
  <!-- <block >
@@ -41,9 +41,9 @@
 <button type="primary" bindtap="atsignout">管理员签退</button>
 </block>  -->
 <!-- 大boss 管理自习室相关 -->
-<block >
+<!-- <block >
 <button class="top" type="primary" bindtap="addroom" >新建自习室</button>
-</block>
+</block> -->
 
  <!-- <block>
 <button type="primary" bindtap="updateName">修改自习室名</button>
@@ -70,6 +70,6 @@
 <!-- <block>
 <button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
-</block> 
+</block>  -->
