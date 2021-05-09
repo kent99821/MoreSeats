@@ -64,6 +64,7 @@ view {
 
 .top-body-right-text-icon {
   margin: 20rpx;
+  margin-top: 30rpx;
 }
 
 .tips {
