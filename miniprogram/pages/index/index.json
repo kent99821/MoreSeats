@@ -3,7 +3,9 @@
     "sms-code": "miniprogram-sms-code/index",
     "wux-popup": "wux-weapp/popup/index",
     "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
-    "wux-swipe-action": "wux-weapp/swipe-action/index"
+    "wux-swipe-action": "wux-weapp/swipe-action/index",
+    "wux-icon": "wux-weapp/icon/index"
+
   },
   "enablePullDownRefresh": true,
   "navigationBarTitleText": "moreChairs"

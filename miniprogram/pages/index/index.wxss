@@ -1,4 +1,33 @@
 /* pages/index/index.wxss */
+view {
+  /* border: 1px solid #000; */
+}
+
+.tips {
+  position: absolute;
+  top: 135rpx;
+  left: 70rpx;
+  height: 80rpx;
+  width: 300rpx;
+  /* background-color: aquamarine; */
+  color: #ff795a;
+}
+
+.tips-left {}
+
+.tips-signin-top {
+  font-size: 40rpx;
+  margin-bottom: -10rpx;
+}
+
+.tips-signin-btm {
+  font-size: 20rpx;
+}
+
+.tips-right {
+  margin-top: 10rpx;
+  margin-left: 8rpx;
+}
 
 .popup-body {
   margin: 80rpx;
