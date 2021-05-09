@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showTips:true,
-    newGuysORtoChair:false,
+
     typeInVisible: false,
     rooms: [
       { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
@@ -19,8 +18,9 @@ Page({
         text: 'Delete',
         style: 'background-color: #F4333C; color: white',
       }],
-      isNewGuys: '',
-      isOver: '',
+      // newGuysORtoChair:false,
+      isNewGuys:false,
+      isOver: true,
   },
 
 
@@ -35,7 +35,8 @@ getUserValue() {
       flag: 0,
     },
     success: res => {
-      console.log(res);
+      // console.log(res.result.data.isNewGuys);
+
       if(res.result.data.isNewGuys){
         this.setData({
           isOver: true,
@@ -47,16 +48,17 @@ getUserValue() {
           isOver : res.result.data.isOver
         })
       }
-
-      if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
-        this.setData({
-          showTips: true
-        })
-      }else{
-        this.setData({
-          showTips: false
-        })
-      }
+      console.log(this.data.isNewGuys)
+      console.log(this.data.isOver)
+      // if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
+      //   this.setData({
+      //     showTips: true
+      //   })
+      // }else{
+      //   this.setData({
+      //     showTips: false
+      //   })
+      // }
     },
     fail: (res) => {
       wx.showToast({
@@ -67,6 +69,12 @@ getUserValue() {
     }
   })
 
+},
+
+toChair(){
+  wx.navigateTo({
+    url: '../signIn/signIn',
+  })
 },
 
 
