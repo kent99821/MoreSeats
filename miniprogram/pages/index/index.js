@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showTips:true,
+    newGuysORtoChair:false,
     typeInVisible: false,
     rooms: [
       { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
@@ -17,7 +19,45 @@ Page({
         text: 'Delete',
         style: 'background-color: #F4333C; color: white',
       }],
+      isNewGuys: '',
+      isOver: '',
   },
+
+
+
+/*
+获取用户信息
+*/
+getUserValue() {
+  wx.cloud.callFunction({
+    name: 'getUserInfo',
+    data: {
+      flag: 0,
+    },
+    success: res => {
+      console.log(res);
+      if(res.result.data.isNewGuys){
+        this.setData({
+          isOver: true,
+          isNewGuys: true
+        })
+      }else{
+        this.setData({
+          isNewGuys: false,
+          isOver : ''
+        })
+      }
+    },
+    fail: (res) => {
+      wx.showToast({
+        title: '云开发出现了些问题，请联系管理员排查！',
+        icon: "none"
+      })
+      console.log(res);
+    }
+  })
+
+},
 
 
   /*
@@ -141,7 +181,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getHistory()
+    this.getHistory();
+    this.getUserValue();
   },
 
   /**

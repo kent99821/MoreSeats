@@ -19,12 +19,8 @@ App({
         flag: 0,
       },
       success: res => {
-        console.log(res);
-        this.globalData.openid = res.result.openid
-        this.globalData.isNewPeople = res.result.isNewGuys
-        this.globalData.name = res.result.uname
-        this.globalData.isOP = res.result.isOP
-        this.globalData.distence = 0
+        console.log(res)
+        this.globalData.openid = res.result.data.openId
       },
       fail: (res) => {
         wx.showToast({
@@ -38,9 +34,5 @@ App({
   },
   globalData: {
     openId: "",
-    isNewGuy: false,
-    isAdmin: false,
-    userName: "未登记",
-    isOver: true,
   }
 })
