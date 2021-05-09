@@ -53,8 +53,8 @@ exports.main = async (event, context) => {
       //用于触底加载功能 初步完成跳过event.skip条记录 查询返回后面的记录
       case 1:
         PageData.result = await db.collection('history').limit(event.num).skip(event.skip).where({
-          openId:wxContext.OPENID
-        }).get()
+          openId:wxContext.OPENID,
+        }).orderBy('sTime','desc').get()
         PageData.reCode=200
         return {
           "resCode":PageData.reCode,
