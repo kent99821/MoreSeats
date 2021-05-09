@@ -2,20 +2,23 @@
   <view wx:if="{{newGuysORtoChair}}" class="FRCC" bindtap="toSignIn">
     <view class="tips-left FCCS">
       <view class="tips-signin-top"> Hi，新人!</view>
-      <view class="tips-signin-btm"> 首次使用需做登记哦</view>
+      <view class="tips-signin-btm FRCC"> 首次使用需做登记哦
+        <wux-icon type="ios-arrow-forward FRCC" size="10" class="tips-signin-btm-icon" />
+      </view>
     </view>
     <view class="tips-right">
-      <wux-icon type="ios-arrow-forward" size="24" class="tips-right" />
     </view>
   </view>
   <view wx:if="{{!newGuysORtoChair}}" class="FRCC" bindtap="toChair">
     <view class="tips-left FCCS">
       <view class="tips-signin-top"> 正在学习</view>
-      <view class="tips-signin-btm"> 前往座位</view>
+      <view class="tips-signin-btm FRCC"> 前往座位
+        <wux-icon type="ios-arrow-forward" size="10" class="tips-signin-btm-icon" />
+      </view>
     </view>
-    <view class="tips-right">
+    <!-- <view class="tips-right">
       <wux-icon type="ios-arrow-forward" size="24" class="tips-right" />
-    </view>
+    </view> -->
   </view>
 </view>
 

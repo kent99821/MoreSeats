@@ -24,6 +24,11 @@ view {
   font-size: 20rpx;
 }
 
+.tips-signin-btm-icon{
+  margin-top: 3rpx;
+  margin-left: 7rpx;
+}
+
 .tips-right {
   margin-top: 10rpx;
   margin-left: 8rpx;
