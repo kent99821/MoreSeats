@@ -94,17 +94,15 @@ toChair(){
       val = val.map((item)=>{
         return item.roomId
       })
-      // console.log(val)
+      console.log(val)
       wx.cloud.callFunction({
         name: 'getRoomInfo',
         data: {
           flag: 0,
-          roomIds: val
+          roomIds: ['123456']
         },
         success: res => {
-          // console.log('----');
-          // aName = res.result.data.roomName;
-          // save();
+          console.log('-----');
           console.log(res.result.data)
 
           this.setData({rooms: res.result.data})
