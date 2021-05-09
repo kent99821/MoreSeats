@@ -8,11 +8,11 @@ Page({
     showTips:true,
 
     typeInVisible: false,
-    rooms: [
-      { "roomId": "122222", "roomName": "小黑屋屋屋屋屋习室1", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
-      { "roomId": "333456", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
-      { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
-      { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }],
+    // rooms: [
+    //   { "roomId": "123456", "roomName": "海大图书馆", openTime: "7 : 00 ~ 23 : 00", "chairNum": 50, "sitDown": 12 },
+    //   { "roomId": "654321", "roomName": "小习室2", openTime: "5:00~12:30", "chairNum": 5, "sitDown": 2 },
+    //   { "roomId": "160456", "roomName": "小屋习室3", openTime: "全天开放", "chairNum": 23, "sitDown": 0 },
+    //   { "roomId": "120456", "roomName": "黑屋习室4", openTime: "7:00~8:00", "chairNum": 150, "sitDown": 64 }],
 
     right: [
       {
@@ -87,11 +87,36 @@ toChair(){
 
 
     let val = wx.getStorageSync('rooms');
+    console.log(val)
+
     if (val) {
       //doing something
+      val = val.map((item)=>{
+        return item.roomId
+      })
+      // console.log(val)
+      wx.cloud.callFunction({
+        name: 'getRoomInfo',
+        data: {
+          flag: 0,
+          roomIds: val
+        },
+        success: res => {
+          // console.log('----');
+          // aName = res.result.data.roomName;
+          // save();
+          console.log(res.result.data)
+
+          this.setData({rooms: res.result.data})
+
+        },
+        fail: err => {
+          console.log('调用失败：', err)
+        }
+      })
     }
     // this.setData({rooms:val});
-    this.getFireLen();
+    // this.getFireLen();
   },
   getFireLen() {
     let val = this.data.rooms;
@@ -123,13 +148,17 @@ toChair(){
     let index = e.currentTarget.dataset.index;
     let val = this.data.rooms;
     val.splice(index, 1)
- 
+    
     let roomsArr = [];
     val.forEach((item) => {
       roomsArr.push({ roomId: item.roomId, roomName: item.roomName });
     })
+    // console.log(roomsArr)
     wx.setStorageSync('rooms', roomsArr);
- 
+    wx.setStorage({
+      data: roomsArr,
+      key: 'rooms',
+    })
     this.setData({ rooms: val });
   },
 
