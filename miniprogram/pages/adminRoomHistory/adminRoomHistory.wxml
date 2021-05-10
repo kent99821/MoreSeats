@@ -1,26 +1,75 @@
-<!--pages/adminRoomHistory/adminRoomHistory.wxml-->
-<text>pages/adminRoomHistory/adminRoomHistory.wxml</text>
-<wux-popup closable visible="{{ visible1 }}" class="a" title="Delete" content="Are you sure???" bind:close="onClose1" bind:closed="onClosed1">
-    <view slot="footer" class="popup__button" bindtap="close1">OK</view>
-</wux-popup>
+<view class="tips">正在学习</view>
+<wux-swipe-action-group>
+  <view wx:for="{{3}}" class="cards FRCC">
+    <wux-swipe-action useSlots>
+      <view class="cards-body FRSC">
+        <view class="cards-body-left FCCS">
+          <view class="cards-body-left-roomName  wux-ellipsis">用户名1234565454d654a4</view>
+          <view class="cards-body-left-tags FCCC">
+            <view class="cards-body-left-tags-2 FCCC">2号座</view>
+          </view>
+        </view>
+        <view class="cards-body-right FCCC">
+          <view class="cards-body-right-date FREC">
+            0000-00-00 00:00
+          </view>
+          <view class="cards-body-right-sumtime FREC">
+            <view class="cards-body-right-sumtime-num">0000</view>
+            <view class="cards-body-right-sumtime-tips">分钟</view>
+          </view>
+        </view>
+      </view>
+      <view slot="left" class="cards-left FCCC">
+        <view class="cards-left-body">
+          User:oU2sas
+        </view>
+      </view>
+      <view slot="right" class="cards-right-btns FRSC">
+        <view class="cards-right-btn-1 FCCC">
+          强退
+        </view>
+        <view class="cards-right-btn-2 FCCC">
+          结束
+        </view>
+      </view>
+    </wux-swipe-action>
+  </view>
+</wux-swipe-action-group>
 
-<wux-popup position="bottom" visible="{{ visible2 }}" class="a" bind:close="onClose2">
-    <wux-cell-group title="Your fathers">
-        <wux-cell hover-class="none" title="Jack Ma"></wux-cell>
-        <wux-cell hover-class="none" title="Pony"></wux-cell>
-        <wux-cell hover-class="none">
-            <wux-button block type="balanced" bindtap="close2">Yes</wux-button>
-        </wux-cell>
-    </wux-cell-group>
-</wux-popup>
 
-<view class="page" class="a">
-    <view class="page__hd">
-        <view class="page__title">Popup</view>
-        <view class="page__desc">弹出框</view>
-    </view>
-    <view class="page__bd page__bd_spacing">
-        <wux-button block type="light" bind:click="open1">Default</wux-button>
-        <wux-button block type="light" bind:click="open2">Popup</wux-button>
-    </view>
+
+<view class="tips">已完成</view>
+<view wx:for="{{3}}" class="cards FRCC">
+  <wux-swipe-action-group>
+
+    <wux-swipe-action autoClose useSlots>
+      <view class="cards-body FRSC">
+        <view class="cards-body-left FCCS">
+          <view class="cards-body-left-roomName  wux-ellipsis">用户名1234565454d654a4</view>
+          <view class="cards-body-left-tags FCCC">
+            <view class="cards-body-left-tags-2 FCCC">2号座</view>
+          </view>
+        </view>
+        <view class="cards-body-right FCCC">
+          <view class="cards-body-right-date FREC">
+            0000-00-00 00:00
+          </view>
+          <view class="cards-body-right-sumtime FREC">
+            <view class="cards-body-right-sumtime-num">0000</view>
+            <view class="cards-body-right-sumtime-tips">分钟</view>
+          </view>
+        </view>
+      </view>
+      <view slot="left" class="cards-left FCCC">
+        <view class="cards-left-body">
+          User:oU2sas
+        </view>
+      </view>
+      <view slot="right" class="cards-left FCCC">
+        <view class="cards-left-body-o">
+          User:oU2sas
+        </view>
+      </view>
+    </wux-swipe-action>
+  </wux-swipe-action-group>
 </view>

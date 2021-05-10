@@ -1,4 +1,138 @@
-/* pages/adminRoomHistory/adminRoomHistory.wxss */
-.a{
+/* pages/history/history.wxss */
+view {
+  /* border: 1px solid #63636396; */
+}
+
+.tips {
+  font-size: 34rpx;
+  /* width: 100%; */
+  margin-top: 10rpx;
+  margin-left: 75rpx;
+  margin-bottom: 10rpx;
+  color: #535353;
+}
+
+.noTop {
+  margin-top: 35rpx;
+}
+
+.cards {
+  width: 680rpx;
+  margin-left: 35rpx;
+  height: 100rpx;
+  margin-bottom: 15rpx;
+  border-radius: 15rpx;
+  box-shadow: 0rpx 5rpx 10rpx -3rpx #ccc;
+  overflow: hidden;
+}
+
+.cards-body {
+  width: 680rpx;
+  background-color: #fff;
+  height: 100rpx;
+  border-bottom-left-radius: 15rpx;
+
+}
+
+.cards-body-left {
+  height: 80%;
+  /* padding-top: 10%; */
+  /* padding-bottom: 11%; */
+  width: 63%;
+  margin-bottom: 8rpx;
+  margin-left: 40rpx;
+  background-color: #fff;
+  color: #747474;
+}
+
+.cards-body-left-roomName {
+  height: 70%;
+  font-size: 42rpx;
+  max-width: 370rpx;
+}
+
+.cards-body-left-tags {
+  height: 30%;
+  font-size: 15rpx;
+  margin-left: 5rpx;
+}
+
+.cards-body-left-tags-2 {
+  border: 1px solid #747474;
+  border-radius: 8rpx;
+  padding-left: 5rpx;
+  padding-right: 5rpx;
+}
+
+.cards-body-right {
+  width: 37%;
+  margin-right: 40rpx;
+  /* height: 100%rpx; */
+}
+
+.cards-body-right-date {
+  height: 27rpx;
   width: 100%;
+  margin-top: 7rpx;
+  margin-bottom: 7rpx;
+  font-size: 25rpx;
+  color: #d1d1d1;
+}
+
+.cards-body-right-sumtime {
+  height: 50rpx;
+  width: 100%;
+  color: #747474;
+}
+
+/* .cards-body-right-sumtime-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.cards-body-right-sumtime-icon-img {
+  width: 40rpx;
+  height: 40rpx;
+} */
+
+.cards-body-right-sumtime-num {
+  font-size: 60rpx;
+}
+
+.cards-body-right-sumtime-tips {
+  font-size: 20rpx;
+  align-self: flex-end;
+}
+
+.cards-left {
+  width: 30rpx;
+  height: 100%;
+  background-color: #f1f1f1;
+}
+
+.cards-left-body {
+  font-size: 15rpx;
+  transform: rotate(90deg);
+  text-align: center;
+  /* height: 100rpx; */
+}
+
+.cards-left-body-o {
+  font-size: 15rpx;
+  transform: rotate(270deg);
+  text-align: center;
+  /* height: 100rpx; */
+}
+
+.cards-right-btns {
+  width: 200rpx;
+}
+
+.cards-right-btn-1 {
+  width: 50%;
+  border-right: 1px solid #000;
+}
+
+.cards-right-btn-2 {
+  width: 50%;
 }

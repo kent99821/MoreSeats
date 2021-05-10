@@ -1,41 +1,125 @@
+var app = getApp();
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-      visible1: false,
-      visible2: false,
+    historyList:[],
+    skip: 0,
+    showTop:false,
+    topData:{},
+    test:[{
+        
+    }]
   },
-  open1() {
-      this.setData({
-          visible1: true,
-      })
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  navigateToChair(){
+    let roomId = this.data.historyList[0].roomId;
+    let chairIndex = this.data.historyList[0].chairIndex;
+    wx.navigateTo({
+      url: '../chair/chair?roomId='+roomId+'&chairIndex='+chairIndex,
+    })
   },
-  open2() {
-      this.setData({
-          visible2: true,
-      })
+  getHistoryList(){
+    let len  = this.data.historyList.length;
+    let num =  15;
+    if(len>10) num = 10;
+    if(this.data.showTop==true) {
+      len++;
+    };
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 1,
+        skip: len,
+        num:num
+      },
+      success: res => {
+
+        let changeData = res.result.data;
+        changeData.map((item)=>{
+          item.sDate = item.sTime.split('T')[0].split('-').join('.');
+        })
+        this.setData({
+          historyList: [...this.data.historyList, ...changeData],
+        })
+        // console.log(changeData)
+        if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
+          let cData = this.data.historyList;
+          cData.splice(0,1);
+          this.setData({
+            showTop: true,
+            topData: this.data.historyList[0],
+            historyList: cData
+          })
+        }
+
+        getApp().globalData.isOver = this.data.showTop;
+        // console.log(app.globalData.isOver)
+
+        console.log(this.data.historyList)
+
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+
   },
-  close1() {
-      this.setData({
-          visible1: false,
-      })
+  onLoad: function (options) {
+    // this.getHistoryList();
   },
-  close2() {
-      this.setData({
-          visible2: false,
-      })
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
   },
-  onClose(key) {
-      console.log('onClose')
-      this.setData({
-          [key]: false,
-      })
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
   },
-  onClose1() {
-      this.onClose('visible1')
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
   },
-  onClose2() {
-      this.onClose('visible2')
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
   },
-  onClosed1() {
-      console.log('onClosed')
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    // this.getHistoryList();
   },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    // this.getHistoryList();
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })

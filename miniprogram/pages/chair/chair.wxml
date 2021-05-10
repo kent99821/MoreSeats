@@ -1,2 +1,4 @@
 <!--pages/chair/chair.wxml-->
 <text>pages/chair/chair.wxml</text>
+<text>room:{{roomId}}</text>
+<text>chair:{{chairIndex}}</text>
