@@ -6,7 +6,7 @@ view {
 .tips {
   font-size: 34rpx;
   /* width: 100%; */
-  margin-top: 10rpx;
+  margin-top: 25rpx;
   margin-left: 75rpx;
   margin-bottom: 10rpx;
   color: #535353;
