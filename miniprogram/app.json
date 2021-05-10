@@ -10,6 +10,7 @@
     "pages/adminRoomList/adminRoomList",
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
+    "pages/adminRoomNow/adminRoomNow",
     "pages/about/about",
     "pages/test/test"
 

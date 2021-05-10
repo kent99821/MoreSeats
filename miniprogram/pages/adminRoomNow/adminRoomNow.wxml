@@ -1,0 +1,37 @@
+<view class="tips"></view>
+<wux-swipe-action-group>
+  <view wx:for="{{3}}" class="cards FRCC">
+    <wux-swipe-action useSlots>
+      <view class="cards-body FRSC">
+        <view class="cards-body-left FCCS">
+          <view class="cards-body-left-roomName  wux-ellipsis">用户名1234565454d654a4</view>
+          <view class="cards-body-left-tags FCCC">
+            <view class="cards-body-left-tags-2 FCCC">2号座</view>
+          </view>
+        </view>
+        <view class="cards-body-right FCCC">
+          <view class="cards-body-right-date FREC">
+            0000-00-00 00:00
+          </view>
+          <view class="cards-body-right-sumtime FREC">
+            <view class="cards-body-right-sumtime-num">0000</view>
+            <view class="cards-body-right-sumtime-tips">分钟</view>
+          </view>
+        </view>
+      </view>
+      <view slot="left" class="cards-left FCCC">
+        <view class="cards-left-body">
+          User:oU2sas
+        </view>
+      </view>
+      <view slot="right" class="cards-right-btns FRSC">
+        <view class="cards-right-btn-1 FCCC">
+          强退
+        </view>
+        <view class="cards-right-btn-2 FCCC">
+          结束
+        </view>
+      </view>
+    </wux-swipe-action>
+  </view>
+</wux-swipe-action-group>
