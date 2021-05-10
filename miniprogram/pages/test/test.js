@@ -346,7 +346,7 @@ cleanRank(){
     data:{
     flag:6,
     roomId:"654321",
-    cleanPepSum:false,
+    cleanPepSum:true,
     cleanTimeSum:false
     },
     success:res=>{
@@ -380,7 +380,7 @@ removeRoom(){
     name:'adminAction',
     data:{
     flag:8,
-    roomId:"632345",
+    roomId:"686254",
 
     },
     success:res=>{
