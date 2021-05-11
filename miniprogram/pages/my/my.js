@@ -1,6 +1,7 @@
 // pages/my/my.js
 import { $wuxDialog, $wuxToptips } from '../../miniprogram_npm/wux-weapp/index.js'
 const { globalData } = getApp()
+var app = getApp();
 Page({
 
   /**
@@ -22,7 +23,7 @@ Page({
         flag: 0,
       },
       success: res => {
-        console.log(res);
+        // console.log(res);
        
         if(res.result.data.isNewGuys== true){
           this.setData({
@@ -39,6 +40,10 @@ Page({
             userName: res.result.data.userName,
             isNewGuys: res.result.data.isNewGuys
           })
+          console.log(res.result.data.roomAdminList);
+          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
+          // getApp().globalData.roomAdminList = [1,2,3,4]
+          console.log(app.globalData.roomAdminList)
     
         }
       },
@@ -47,7 +52,7 @@ Page({
           title: '云开发出现了些问题，请联系管理员排查！',
           icon: "none"
         })
-        console.log(res);
+        // console.log(res);
       }
     })
 
@@ -86,7 +91,6 @@ Page({
     //判断是不是未注册用户， 未注册用户跳转指注册页面
     if(this.data.isNewGuys){
 
-
       $wuxDialog().open({
         resetOnClose: true,
         title: '提示',
@@ -118,7 +122,7 @@ Page({
         placeholder:that.data.userName,
         maxlength: 16,
         onConfirm(e, response) {
-          console.log(response.replace(/(^\s*)|(\s*$)/g, "").length);
+          // console.log(response.replace(/(^\s*)|(\s*$)/g, "").length);
           if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
             wx.cloud.callFunction({
               name: 'getUserInfo',
@@ -140,7 +144,7 @@ Page({
                   title: '云开发出现了些问题，请联系管理员排查！',
                   icon: "none"
                 })
-                console.log(res);
+                // console.log(res);
               }
             })
           } else

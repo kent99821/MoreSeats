@@ -49,8 +49,8 @@ Page({
             isOver: res.result.data.isOver
           })
         }
-        console.log(this.data.isNewGuys)
-        console.log(this.data.isOver)
+        // console.log(this.data.isNewGuys)
+        // console.log(this.data.isOver)
         // if(res.result.data.isNewGuys || (!res.result.data.isNewGuys&& !res.result.data.isOver)){
         //   this.setData({
         //     showTips: true
@@ -74,10 +74,14 @@ Page({
 
   toChair() {
     wx.navigateTo({
+      url: '../chair/chair',
+    })
+  },
+  totoSignin(){
+    wx.navigateTo({
       url: '../signIn/signIn',
     })
   },
-
 
   /*
     获取缓存信息
@@ -87,14 +91,14 @@ Page({
 
 
     let val = wx.getStorageSync('rooms');
-    console.log(val)
+    // console.log(val)
 
     if (val) {
       //doing something
       val = val.map((item) => {
         return item.roomId
       })
-      console.log(val)
+      // console.log(val)
       wx.cloud.callFunction({
         name: 'getRoomInfo',
         data: {
@@ -102,8 +106,8 @@ Page({
           roomIds: val
         },
         success: res => {
-          console.log('-----');
-          console.log(res.result.data)
+          // console.log('-----');
+          // console.log(res.result.data)
 
           this.setData({ rooms: res.result.data })
 
@@ -185,7 +189,7 @@ Page({
   toRoom(e) {
     let val = e.currentTarget.dataset.roomid;
     let name = e.currentTarget.dataset.name;
-    console.log(val)
+    // console.log(val)
     wx.navigateTo({
       url: '/pages/room/room?roomId=' + val + '&roomName=' + name,
     })

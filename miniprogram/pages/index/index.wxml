@@ -1,6 +1,6 @@
 <view class="tips FRSC" wx:if="{{isNewGuys||(!isNewGuys && !isOver)}}">
   <view wx:if="{{isNewGuys}}" class="FRCC" bindtap="toSignIn">
-    <view class="tips-left FCCS">
+    <view class="tips-left FCCS" bindtap="toSignin">
       <view class="tips-signin-top"> Hi，新人!</view>
       <view class="tips-signin-btm FRCC"> 首次使用需做登记哦
         <wux-icon type="ios-arrow-forward FRCC" size="10" class="tips-signin-btm-icon" />

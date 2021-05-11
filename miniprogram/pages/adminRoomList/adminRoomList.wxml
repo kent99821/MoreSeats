@@ -1,3 +1,6 @@
+<wux-dialog id='wux-dialog' />
+<wux-toptips id="wux-toptips" />
+
 <view class="c">
   <wux-cell title="创建自习室" hasLine="{{false}}" isLink></wux-cell>
 
