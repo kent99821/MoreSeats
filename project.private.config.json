@@ -59,6 +59,12 @@
           "pathName": "pages/adminRoomList/adminRoomList",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/signIn/signIn",
+          "pathName": "pages/signIn/signIn",
+          "query": "",
+          "scene": null
         }
       ]
     }
