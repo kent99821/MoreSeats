@@ -36,7 +36,8 @@ exports.main = async (event, context) => {
           "chairs.chairNum":true,
           "roomId":true,
           "roomName":true,
-          "openTime":true
+          "openTime":true,
+          "roomNotice":true
         }).get()
         if(temp.data.length===0){
           break;
