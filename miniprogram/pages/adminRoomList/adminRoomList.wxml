@@ -1,6 +1,8 @@
-<view class="to-new" title="带说明的列表项">
-  <wux-cell title="标题文字"></wux-cell>
+<view class="c">
+  <wux-cell title="创建自习室" hasLine="{{false}}" isLink></wux-cell>
+
 </view>
+
 <wux-swipe-action-group>
   <view wx:for="{{2}}" class="FCCC">
     <wux-swipe-action useSlots class="card FCCC" autoClose right="{{ right }}">

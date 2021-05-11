@@ -2,9 +2,11 @@ view {
   /* border: 1px solid #cccccc; */
 }
 
-.toNew {
+.c {
   width: 100%;
+  background-color: #fff;
 }
+
 
 .card {
   margin-top: 25rpx;
