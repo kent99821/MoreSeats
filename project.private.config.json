@@ -53,6 +53,12 @@
           "pathName": "pages/adminRoomNow/adminRoomNow",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/adminRoomList/adminRoomList",
+          "pathName": "pages/adminRoomList/adminRoomList",
+          "query": "",
+          "scene": null
         }
       ]
     }

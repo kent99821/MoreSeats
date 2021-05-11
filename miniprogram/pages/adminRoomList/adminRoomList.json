@@ -1,3 +1,12 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell-group": "wux-weapp/cell-group/index",
+    "wux-cell": "wux-weapp/cell/index",
+    "wux-icon": "wux-weapp/icon/index",
+    "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
+    "wux-swipe-action": "wux-weapp/swipe-action/index"
+
+  },
+  "navigationBarTitleText": "管理的自习室列表"
+
 }

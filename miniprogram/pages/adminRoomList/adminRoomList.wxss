@@ -1,1 +1,135 @@
-/* pages/adminRoomList/adminRoomList.wxss */
+view {
+  /* border: 1px solid #cccccc; */
+}
+
+.toNew {
+  width: 100%;
+}
+
+.card {
+  margin-top: 25rpx;
+  height: 320rpx;
+  width: 680rpx;
+  margin-left: 35rpx;
+  background-color: #fff;
+  border-radius: 30rpx;
+  box-shadow: 0px 5px 12px -4px #696969;
+  overflow: hidden;
+}
+
+.card-body {
+  height: 320rpx;
+  width: 680rpx;
+  /* background-color: aquamarine; */
+}
+
+.body-row-1 {
+  width: 640rpx;
+  height: 25%;
+}
+
+.roomname {
+  font-size: 55rpx;
+  margin-top: 10rpx;
+  max-width: 590rpx;
+  margin-right: 10rpx;
+}
+
+.ch-1 {
+  margin-top: 22rpx;
+  /* border: 1px solid #000; */
+  width: 40rpx;
+  height: 40rpx;
+  align-self: center;
+}
+
+.body-row-2 {
+  width: 640rpx;
+  height: 15%;
+}
+
+.cards-body-left-tags-1 {
+  border: 1px solid #747474;
+  border-radius: 8rpx;
+  padding-left: 5rpx;
+  padding-right: 5rpx;
+  font-size: 20rpx;
+}
+
+.opentime {
+  margin-left: 20rpx;
+  height: 100%;
+}
+
+.opentime-text {
+  max-width: 445rpx;
+  font-size: 30rpx;
+  margin-right: 10rpx;
+}
+
+.ch-2 {
+  /* margin-top: 8rpx; */
+  /* border: 1px solid #000; */
+  width: 30rpx;
+  height: 30rpx;
+  align-self: center;
+}
+
+.opentime-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.body-row-3 {
+  width: 640rpx;
+  height: 15%;
+}
+
+.notice-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.notice-text {
+  max-width: 560rpx;
+  font-size: 30rpx;
+  margin-right: 10rpx;
+}
+
+.body-row-4 {
+  width: 100%;
+  /* border: 1px solid #000; */
+  height: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.btns {
+  /* border: 1px solid #000; */
+  width: 640rpx;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.btn {
+  height: 110rpx;
+  width: 110rpx;
+  border: 1px solid #000;
+  border-radius: 15rpx;
+}
+
+.right-button {
+  width: 140rpx;
+  height: 100%;
+  background-color: #e0e0e0;
+}
+
+.right-button-icon {
+  width: 80rpx;
+  height: 120rpx;
+}
