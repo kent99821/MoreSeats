@@ -90,13 +90,14 @@ exports.main = async (event, context) => {
           isOver:false
         }
       })
-      // 新增历记录
+      // 新增历史记录
       PageData.hresult=await db.collection('history').add({
         data:{
         chairIndex:event.chairIndex,
         howlong:0,
         isOver:false,
         openId:wxContext.OPENID ,
+        userName:PageData.result.data[0].userName,
         roomId:event.roomId,
         roomName:event.roomName,
         sTime:db.serverDate(),
