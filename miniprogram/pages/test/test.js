@@ -21,13 +21,32 @@ Page({
       }
     })
   },
-  //flag(number):0 查询单个自习室具体信息 roomId(string) 
+  //flag(number):1 查询单个自习室具体信息 roomId(string) 
   getRoom() {
     wx.cloud.callFunction({
       name: 'getRoomInfo',
       data: {
         flag: 1,
         roomId: '123456'
+      },
+      success: res => {
+        console.log(res)
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+  },
+  //  //flag(number):2查询单个自习室具体信息 roomId(string) isOver(boolean) 
+  getLearn(){
+    wx.cloud.callFunction({
+      name: 'getRoomInfo',
+      data: {
+        flag: 2,
+        roomId: '454914',
+        isOver:true,
+        skip:0,
+        num:5
       },
       success: res => {
         console.log(res)

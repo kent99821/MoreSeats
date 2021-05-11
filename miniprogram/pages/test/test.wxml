@@ -6,7 +6,9 @@
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
 </block>  -->
-
+<block>
+<button class="top" type="primary" bindtap="getLearn">获取自习室学习情况</button>
+</block> 
 <!--个人信息相关 -->
  <!-- <block >
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
@@ -79,9 +81,9 @@
 <!-- <block>
 <button type="primary" bindtap="atsignout">强制签退</button>
 </block> -->
-<block>
+<!-- <block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
-</block> 
+</block>  -->
 <!-- <block>
 <button type="primary" bindtap="getRank">获取排行榜</button>
 </block>  -->
