@@ -33,7 +33,6 @@ App({
 
   },
   globalData: {
-
-    openId: "",
+    // openId: "",
   }
 })
