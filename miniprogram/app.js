@@ -13,27 +13,31 @@ App({
         traceUser: true,
       })
     }
-    await wx.cloud.callFunction({
-      name: 'getUserInfo',
-      data: {
-        flag: 0,
-      },
-      success: res => {
-        console.log(res)
-        this.globalData.openid = res.result.data.openId
-      },
-      fail: (res) => {
-        wx.showToast({
-          title: '云开发出现了些问题，请联系管理员排查！',
-          icon: "none"
-        })
-        console.log(res);
-      }
-    })
+    // await wx.cloud.callFunction({
+    //   name: 'getUserInfo',
+    //   data: {
+    //     flag: 0,
+    //   },
+    //   success: res => {
+    //     console.log(res)
+    //     this.globalData.openid = res.result.data.openId
+    //   },
+    //   fail: (res) => {
+    //     wx.showToast({
+    //       title: '云开发出现了些问题，请联系管理员排查！',
+    //       icon: "none"
+    //     })
+    //     console.log(res);
+    //   }
+    // })
 
   },
   globalData: {
+<<<<<<< HEAD
     openId: "",
     roomAdminList:[{roomId: "454914", roomName: "前端"},{roomId: "131696", roomName: "开发"}]
+=======
+    // openId: "",
+>>>>>>> 8db2931e7f8b1d3b2f99f9e0626d88bc12b54ca1
   }
 })
