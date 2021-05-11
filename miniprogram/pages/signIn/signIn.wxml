@@ -1,2 +1,4 @@
 <!--pages/signIn/signIn.wxml-->
-<text>pages/signIn/signIn.wxml</text>
+<view class="root FCCC">
+  <view>游客登记</view>
+</view>
