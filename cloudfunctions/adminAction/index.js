@@ -1,8 +1,8 @@
 /**
- * date:2021.05.06
+ * date:2021.05.11
  * author:kent
  * state:finished
- * content:
+ * content:update flag=0
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -138,7 +138,7 @@ exports.main = async (event, context) => {
             openTime: "",
             roomId: PageData.croomId,
             roomName: event.roomName,
-            roomNotice: {},
+            roomNotice: "",
             rule: {
               type: 0,
               size: 0,
