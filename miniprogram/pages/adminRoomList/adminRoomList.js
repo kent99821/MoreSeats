@@ -43,7 +43,42 @@ Page({
       url: '../',
     })
   },
-
+  deleteItem(e){
+  let index =  e.currentTarget.dataset.index;
+  let roomId = this.data.roomsList[index].roomId;
+  console.log(roomId);
+  wx.cloud.callFunction({
+    name:'adminAction',
+    data:{
+    flag:8,
+    roomId:roomId,
+    },
+    success:res=>{
+      console.log(res)
+      let changeList = this.data.roomsList;
+      changeList.splice(index,1);
+      this.setData({
+        roomsList: changeList
+      })
+    },
+    fail:err=>{
+      console.log('调用失败：',err)
+    }
+  })
+  },
+  toadminRoomNow(e){
+    let roomId =  e.currentTarget.dataset.roomid;
+    wx.navigateTo({
+      url: '../adminRoomNow/adminRoomNow?roomId='+roomId,
+    })
+  },
+  toHistory(e){
+    let roomId =  e.currentTarget.dataset.roomid;
+    wx.navigateTo({
+      // url: '../history/adminRoomNow?roomId='+roomId,
+      url: '../history/history?roomId='+roomId
+    })
+  },
   changeValue(e){
     // console.log(e.currentTarget.dataset);
     console.log(e)
@@ -65,7 +100,17 @@ Page({
           roomId: roomId,
         }
       }
-    }else if(type==2){
+    }else if(type==1){
+      postData = {
+        title: '修改开放时间',
+        defaultText: changeItem[0].openTime,
+        data: {
+          flag: 3,
+          roomId: roomId,
+        }
+      }
+    }
+    else if(type==2){
       postData = {
         title: '修改公告内容',
         defaultText: changeItem[0].roomNotice,
@@ -86,6 +131,7 @@ console.log(postData);
         maxlength: 16,
         onConfirm(e, response) {
          if(type==0) postData.data.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
+         else if(type==1) postData.data.openTime= response.replace(/(^\s*)|(\s*$)/g, "");
          else if(type==2) postData.data.roomNotice =  response.replace(/(^\s*)|(\s*$)/g, "");
           if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
             console.log(postData.data)
@@ -101,7 +147,15 @@ console.log(postData);
                     }
                     return item
                   })
-                }else if(type==2){
+                }else if(type==1){
+                  changeList = changeList.map((item)=>{
+                    if(item.roomId== roomId){
+                      item.openTime = response.replace(/(^\s*)|(\s*$)/g, "");
+                    }
+                    return item
+                  })
+                }
+                else if(type==2){
                   changeList = changeList.map((item)=>{
                     if(item.roomId== roomId){
                       item.roomNotice = response.replace(/(^\s*)|(\s*$)/g, "");

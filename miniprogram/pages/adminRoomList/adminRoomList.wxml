@@ -17,7 +17,7 @@
             <wux-icon type="md-create" size="25" />
           </view>
         </view>
-        <view class="body-row-2 FRSC">
+        <view class="body-row-2 FRSC"  bindtap="changeValue"  data-roomid="{{item.roomId}}" data-type="1">
           <view class="cards-body-left-tags-1 FCCC">#{{item.roomId}}</view>
           <!-- 修改开放时间 -->
           <view class="opentime FRSC" bindtap="修改开放时间">
@@ -38,15 +38,15 @@
         </view>
         <view class="body-row-4">
           <view class="btns FRCC">
-            <view class="btn FRCC" bindtap="">正在学习</view>
-            <view class="btn FRCC" bindtap="">历史记录</view>
+            <view class="btn FRCC" data-roomid="{{item.roomId}}"   bindtap="toadminRoomNow">正在学习</view>
+            <view class="btn FRCC" data-roomid="{{item.roomId}}"  bindtap="toHistory">历史记录</view>
             <view class="btn FRCC" bindtap="">统计排名</view>
             <view class="btn FRCC" bindtap="">打卡规则</view>
             <view class="btn FRCC" bindtap="">座位管理</view>
           </view>
         </view>
       </view>
-      <view slot="right">
+      <view slot="right" bindtap="deleteItem" data-index="{{index}}">
         <view class="right-button FCCC" bindtap="deleteCard" data-index="{{index}}">
           <image mode="aspectFit" class="right-button-icon" src="/images/delete.png" />
         </view>

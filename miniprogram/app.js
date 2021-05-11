@@ -35,7 +35,6 @@ App({
   globalData: {
     roomAdminList:[
       {roomId: "454914", roomName: "前端"},
-       {roomId: "331820", roomName: "开发"}
     ]
   }
 })
