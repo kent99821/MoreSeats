@@ -44,30 +44,74 @@ Page({
     })
   },
 
-  changeRoomName(){
-
+  changeValue(e){
+    // console.log(e.currentTarget.dataset);
+    console.log(e)
     let that = this;
+    let type = e.currentTarget.dataset.type;
+    let roomId = e.currentTarget.dataset.roomid;
+    let changeItem = this.data.roomsList.filter((item)=> item.roomId == roomId )
+    console.log(changeItem)
+    let postData= {};
+    
+    // console.log(changeItem)
+    console.log(changeItem[0].roomName)
+    if(type==0){
+      postData = {
+        title: '修改自习室名字',
+        defaultText: changeItem[0].roomName,
+        data: {
+          flag: 1,
+          roomId: roomId,
+        }
+      }
+    }else if(type==2){
+      postData = {
+        title: '修改公告内容',
+        defaultText: changeItem[0].roomNotice,
+        data: {
+          flag: 2,
+          roomId: roomId,
+        }
+      }
+    }
 
+console.log(postData);
       $wuxDialog().prompt({
         resetOnClose: true,
-        title: '修改姓名',
+        title: postData.title,
         content: '最长16位字符',
         fieldtype: 'text',
-        defaultText: '',
-        placeholder:that.data.userName,
+        defaultText: postData.defaultText,
         maxlength: 16,
         onConfirm(e, response) {
-          // console.log(response.replace(/(^\s*)|(\s*$)/g, "").length);
+         if(type==0) postData.data.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
+         else if(type==2) postData.data.roomNotice =  response.replace(/(^\s*)|(\s*$)/g, "");
           if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
+            console.log(postData.data)
             wx.cloud.callFunction({
-              name: 'getUserInfo',
-              data: {
-                flag: 2,
-                userName: response.replace(/(^\s*)|(\s*$)/g, "")
-              },
+              name:'adminAction',
+              data:postData.data,
               success: res => {
+                let changeList = that.data.roomsList;
+                if(type==0){
+                  changeList = changeList.map((item)=>{
+                    if(item.roomId== roomId){
+                      item.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
+                    }
+                    return item
+                  })
+                }else if(type==2){
+                  changeList = changeList.map((item)=>{
+                    if(item.roomId== roomId){
+                      item.roomNotice = response.replace(/(^\s*)|(\s*$)/g, "");
+                    }
+                    return item
+                  })
+                }
+
                 that.setData({
-                  userName:response.replace(/(^\s*)|(\s*$)/g, "")
+                  roomsList: changeList
                 })
                 $wuxToptips().success({
                   text: '修改成功',

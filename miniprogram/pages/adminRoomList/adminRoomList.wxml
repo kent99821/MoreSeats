@@ -7,31 +7,31 @@
 </view>
 
 <wux-swipe-action-group>
-  <view wx:for="{{2}}" class="FCCC">
+  <view wx:for="{{roomsList}}" class="FCCC">
     <wux-swipe-action useSlots class="card FCCC" autoClose right="{{ right }}">
       <view class="card-body FCSC">
         <!-- 修改自习室名 -->
-        <view class="body-row-1 FRSS" bindtap="修改自习室名">
-          <view class="roomname wux-ellipsis">海大图书guan </view>
+        <view class="body-row-1 FRSS" data-roomid="{{item.roomId}}" data-type="0" bindtap="changeValue">
+          <view class="roomname wux-ellipsis">{{item.roomName}} </view>
           <view class="ch-1 FCCC">
             <wux-icon type="md-create" size="25" />
           </view>
         </view>
         <view class="body-row-2 FRSC">
-          <view class="cards-body-left-tags-1 FCCC">#{{123456}}</view>
+          <view class="cards-body-left-tags-1 FCCC">#{{item.roomId}}</view>
           <!-- 修改开放时间 -->
           <view class="opentime FRSC" bindtap="修改开放时间">
             <image src="/images/clock.png" mode="widthFix" class="opentime-icon"></image>
-            <view class="opentime-text wux-ellipsis">12 : 34 ~ 15 : 86 </view>
+            <view class="opentime-text wux-ellipsis">{{item.openTime}}</view>
             <view class="ch-2 FCCC">
               <wux-icon type="md-create" size="15" />
             </view>
           </view>
         </view>
         <!-- 修改公告 -->
-        <view class="body-row-3 FRSC" bindtap="修改公告">
+        <view class="body-row-3 FRSC" bindtap="changeValue"  data-roomid="{{item.roomId}}" data-type="2">
           <image src="/images/notice.png" mode="widthFix" class="notice-icon"></image>
-          <view class="notice-text wux-ellipsis">这是公告这是公告这是公告这是公告这是公告这是公告这是公告</view>
+          <view class="notice-text wux-ellipsis">{{item.roomNotice}}</view>
           <view class="ch-2 FCCC">
             <wux-icon type="md-create" size="15" />
           </view>
