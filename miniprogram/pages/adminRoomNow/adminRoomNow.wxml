@@ -1,20 +1,20 @@
 <view class="tips"></view>
 <wux-swipe-action-group>
-  <view wx:for="{{3}}" class="cards FRCC">
+  <view wx:for="{{userList}}" class="cards FRCC">
     <wux-swipe-action useSlots>
       <view class="cards-body FRSC">
         <view class="cards-body-left FCCS">
-          <view class="cards-body-left-roomName  wux-ellipsis">用户名1234565454d654a4</view>
+          <view class="cards-body-left-roomName  wux-ellipsis">{{item.userName}}</view>
           <view class="cards-body-left-tags FCCC">
-            <view class="cards-body-left-tags-2 FCCC">2号座</view>
+            <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex}}号座</view>
           </view>
         </view>
         <view class="cards-body-right FCCC">
           <view class="cards-body-right-date FREC">
-            0000-00-00 00:00
+            {{item.sTime}}
           </view>
           <view class="cards-body-right-sumtime FREC">
-            <view class="cards-body-right-sumtime-num">0000</view>
+            <view class="cards-body-right-sumtime-num">{{item.howlong}}</view>
             <view class="cards-body-right-sumtime-tips">分钟</view>
           </view>
         </view>
@@ -28,7 +28,7 @@
         <view class="cards-right-btn-1 FCCC">
           强退
         </view>
-        <view class="cards-right-btn-2 FCCC">
+        <view class="cards-right-btn-2 FCCC" bindtap="signOut" data-index="{{index}}">
           结束
         </view>
       </view>
