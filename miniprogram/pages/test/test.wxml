@@ -6,9 +6,9 @@
 <block>
 <button class="top" type="primary" bindtap="getRoom">获取自习室基本</button>
 </block>  -->
-<block>
+<!-- <block>
 <button class="top" type="primary" bindtap="getLearn">获取自习室学习情况</button>
-</block> 
+</block>  -->
 <!--个人信息相关 -->
  <!-- <block >
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
@@ -34,9 +34,9 @@
 </block> -->
 
 <!-- 签到 -->
- <!-- <block >
+ <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
-</block> -->
+</block>
 
 <!-- <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
@@ -45,9 +45,9 @@
 <button type="primary" bindtap="updateUser">修改用户名</button>
 </block> -->
 
-<!-- <block>
+<block>
 <button class="top" type="primary" bindtap="signout">用户签退</button>
-</block>  -->
+</block> 
 <!-- <block>
 <button type="primary" bindtap="atsignout">管理员签退</button>
 </block>  -->

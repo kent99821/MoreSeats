@@ -101,7 +101,8 @@ exports.main = async (event, context) => {
         roomId:event.roomId,
         roomName:event.roomName,
         sTime:db.serverDate(),
-        eTime:db.serverDate()  
+        eTime:db.serverDate(),
+        todo:[]  
         } 
       })
       // 签到成功

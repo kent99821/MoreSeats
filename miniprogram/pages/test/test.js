@@ -209,7 +209,8 @@ signout(){
     data:{
     flag:0,
     roomId:"123456",
-    chairIndex:2
+    chairIndex:2,
+    todo:[{task:"python作业",isFinish:true}]
     },
     success:res=>{
       console.log(res)

@@ -2,7 +2,7 @@
  * date:2021.05.06
  * author:kent
  * state:finished
- * content:update code
+ * content:update flag:0
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -58,18 +58,35 @@ exports.main = async (event, context) => {
   PageData.howlong=parseInt((PageData.hresult.data[0].eTime-PageData.hresult.data[0].sTime)/60000)
   PageData.hresult.data[0].howlong=PageData.howlong
   //更新history记录
-  PageData.uhresult=await db.collection('history').where({
-    openId:PageData.openId,
-    roomId:event.roomId,
-    isOver:false,
-    chairIndex:event.chairIndex  
-  }).update({
-    data:{
-      "eTime":PageData.hresult.data[0].eTime,
-      "howlong":PageData.hresult.data[0].howlong,
-      "isOver":true
+    if(event.flag===0){
+      PageData.uhresult=await db.collection('history').where({
+        openId:PageData.openId,
+        roomId:event.roomId,
+        isOver:false,
+        chairIndex:event.chairIndex  
+      }).update({
+        data:{
+          "eTime":PageData.hresult.data[0].eTime,
+          "howlong":PageData.hresult.data[0].howlong,
+          "isOver":true,
+          "todo":event.todo
+        }
+      })
     }
-  })
+    else{
+      PageData.uhresult=await db.collection('history').where({
+        openId:PageData.openId,
+        roomId:event.roomId,
+        isOver:false,
+        chairIndex:event.chairIndex  
+      }).update({
+        data:{
+          "eTime":PageData.hresult.data[0].eTime,
+          "howlong":PageData.hresult.data[0].howlong,
+          "isOver":true
+        }
+      })
+    }
     // return PageData.uhresult.errMsg: "collection.update:ok"
     PageData.rresult=await db.collection('rooms').where({
       roomId:event.roomId
