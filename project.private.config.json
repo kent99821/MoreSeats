@@ -71,6 +71,12 @@
           "pathName": "pages/chair/chair",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/rank/rank",
+          "pathName": "pages/rank/rank",
+          "query": "roomId=123456",
+          "scene": null
         }
       ]
     }
