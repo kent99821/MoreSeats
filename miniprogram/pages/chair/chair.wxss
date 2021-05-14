@@ -1,1 +1,174 @@
 /* pages/chair/chair.wxss */
+.ntc {
+  width: 100%;
+  height: 0;
+  z-index: 999;
+}
+
+.ctr {
+  width: 85%;
+}
+
+.top {
+  height: 170rpx;
+  width: 100%;
+  /* background-color: aqua; */
+  color: #888;
+  z-index: -1;
+  font-size: 38rpx;
+}
+
+.body {
+  width: 100%;
+  height: 100vh;
+  /* background-color: #ff795b; */
+}
+
+.cont {
+  height: 75%;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.time-img {
+  height: 80%;
+  font-size: 60rpx;
+  width: 80%;
+}
+
+.time-img-body {
+  width: 100%;
+  height: 100%;
+}
+
+.time-text {
+  height: 15%;
+  font-size: 60rpx;
+}
+
+.todo {
+  /* border: 1px solid #000; */
+  box-shadow: 0px 5px 12px -4px #696969;
+  background-color: #fff;
+  border-radius: 35rpx;
+  height: 80%;
+  width: 90%;
+  overflow: hidden;
+}
+
+.todo-top {
+  font-size: 40rpx;
+  color: #fff;
+  width: 100%;
+  /* height: 20%; */
+  text-align: center;
+  background-color: #ff795b;
+}
+
+.todo-cont {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color: aqua; */
+}
+
+.todo-one {
+  height: 70rpx;
+  width: 100%;
+  background-color: #e0e0e0;
+  /* border: 1px solid #000; */
+}
+
+.todo-one-1 {
+  height: 70rpx;
+  width: 100%;
+}
+
+.right-button {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.right-button-icon {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.todo-one-left {
+  width: 70rpx;
+  /* background-color: aquamarine; */
+  height: 70rpx;
+}
+
+.todo-one-right {
+  /* background-color: aquamarine; */
+  width: 750rpx;
+  height: 70rpx;
+  border-bottom: 1px solid #ccc;
+  /* margin-left: 20rpx; */
+}
+
+.is-finish {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-one-edit {
+  /* background-color: aqua; */
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.todo-one-text {
+  font-size: 40rpx;
+  /* background-color: #ff795b; */
+  max-width: 545rpx;
+}
+
+.todo-last {
+  height: 100rpx;
+}
+
+.wux-segment__item {
+  border-color: #ff795b !important;
+  color: #ff795b !important;
+}
+
+.wux-segment__item--current {
+  background: #ff795b !important;
+  color: #fff !important;
+}
+
+.sign-btn {
+  width: 400rpx;
+  height: 70rpx;
+  border-radius: 15rpx;
+  margin-top: 30rpx;
+}
+
+.btn-1 {
+  background-color: green;
+  color: #fff;
+}
+
+.btn-2 {
+  color: red;
+  background-color: #fff;
+}
+
+.btn-3 {
+  background-color: #ccc;
+  color: #000;
+}
+
+.callAdmin {
+  margin-top: 20rpx;
+  font-size: 25rpx;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.botm {
+  width: 100%;
+  height: 30%;
+}

@@ -65,6 +65,12 @@
           "pathName": "pages/signIn/signIn",
           "query": "",
           "scene": null
+        },
+        {
+          "name": "pages/chair/chair",
+          "pathName": "pages/chair/chair",
+          "query": "",
+          "scene": null
         }
       ]
     }

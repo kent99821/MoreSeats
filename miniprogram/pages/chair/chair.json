@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-segmented-control": "wux-weapp/segmented-control/index",
+    "wux-notice-bar": "wux-weapp/notice-bar/index",
+    "wux-icon": "wux-weapp/icon/index",
+    "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
+    "wux-swipe-action": "wux-weapp/swipe-action/index",
+    "wux-popup": "wux-weapp/popup/index"
+  }
 }
