@@ -76,7 +76,8 @@ Page({
     let roomId =  e.currentTarget.dataset.roomid;
     wx.navigateTo({
       // url: '../history/adminRoomNow?roomId='+roomId,
-      url: '../history/history?roomId='+roomId
+      // url: '../a='+roomId
+      url:'../adminRoomHistory/adminRoomHistory?roomId='+roomId,
     })
   },
   changeValue(e){
