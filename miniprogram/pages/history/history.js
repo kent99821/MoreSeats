@@ -46,7 +46,7 @@ Page({
           historyList: [...this.data.historyList, ...changeData],
         })
         // console.log(changeData)
-        if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
+        if(this.data.showTop==false && this.data.historyList.length>0 &&  this.data.historyList[0].isOver== false){
           let cData = this.data.historyList;
           cData.splice(0,1);
           this.setData({
