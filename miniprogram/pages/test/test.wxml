@@ -12,12 +12,12 @@
 <!--个人信息相关 -->
  <!-- <block >
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
-</block>
+</block> -->
 
 <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
 </block>
-<block>
+<!-- <block>
 <button type="primary" bindtap="updateUser">修改用户名</button>
 </block>
 <block>

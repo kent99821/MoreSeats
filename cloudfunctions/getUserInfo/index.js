@@ -9,6 +9,7 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 // 初始化数据库
 const db = cloud.database()
+const $ = db.command.aggregate
 // 页面数据
 let PageData = {
   resCode: 0, //状态码

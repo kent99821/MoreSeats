@@ -119,7 +119,7 @@ getHistory(){
     name:'getUserInfo',
     data:{
       flag:1,
-      skip:5,
+      skip:0,
       num:10
     },
     success:res=>{
@@ -185,7 +185,7 @@ signIn(){
     name:'signIn',
     data:{
     roomId:"123456",
-    chairIndex:2,
+    chairIndex:0,
     roomName:"自习室1"
     },
     success:res=>{
@@ -209,7 +209,7 @@ signout(){
     data:{
     flag:0,
     roomId:"123456",
-    chairIndex:2,
+    chairIndex:0,
     todo:[{task:"python作业",isFinish:true}]
     },
     success:res=>{

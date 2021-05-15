@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "moment-timezone": "^0.5.33",
     "wx-server-sdk": "~2.4.0"
   }
 }
