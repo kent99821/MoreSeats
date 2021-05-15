@@ -5,6 +5,10 @@
     "wux-icon": "wux-weapp/icon/index",
     "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
     "wux-swipe-action": "wux-weapp/swipe-action/index",
-    "wux-popup": "wux-weapp/popup/index"
+    "wux-popup": "wux-weapp/popup/index",
+    "wux-cell": "wux-weapp/cell/index",
+    "wux-dialog": "wux-weapp/dialog/index",
+    "wux-button": "wux-weapp/button/index",
+    "wux-toptips": "wux-weapp/toptips/index"
   }
 }

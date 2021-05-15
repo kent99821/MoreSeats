@@ -1,3 +1,7 @@
+
+<wux-dialog id='wux-dialog' />
+<wux-toptips id="wux-toptips" />
+
 <wux-notice-bar id="ntc" class="ntc" loop content="{{'这是公告这是公告这是公告这是公告这是公告这是公告这是公告'}}" mode="closable" />
 
 <wux-popup closable visible="{{ mapShow }}" title="确保在自习室范围内" bind:close="mapClose">
@@ -7,7 +11,8 @@
 
 
 <view class="body FCSC">
-  <view class="top FRCE">纸上得来终觉浅，绝知此事要躬行</view>
+  <!-- <view class="top FRCE">纸上得来终觉浅，绝知此事要躬行</view> -->
+  <view class="top FRCE">{{quotes}}</view>
   <view class="cont FCCC">
     <block wx:if="{{show===0}}">
       <view class="time-img">
@@ -17,26 +22,26 @@
     </block>
     <block wx:else>
       <view class="todo">
-        <view class="todo-top FCCC">学习事项</view>
+        <view class="todo-top FCCC" bindtap="addToDo">学习事项</view>
         <scroll-view scroll-y class="todo-cont">
           <wux-swipe-action-group>
             <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC">
 
               <view class="todo-one-1 FRSC">
-                <view class="todo-one-left FCCC">
-                  <block wx:if="{{item.s}}">
+                <view class="todo-one-left FCCC" bindtap="changStatus" data-index="{{index}}">
+                  <block wx:if="{{!item.s}}">
                     <wux-icon type="md-square-outline" size="20" color="#ff795b" />
                   </block>
-                  <block wx:else>
+                  <block wx:else >
                     <wux-icon type="md-checkbox-outline" size="20" color="#ffb4a3" />
                   </block>
                 </view>
                 <view class="todo-one-right FRSC">
-                  <view class="todo-one-text wux-ellipsis {{item.s?'':'is-finish'}}">{{item.c}}
+                  <view class="todo-one-text wux-ellipsis {{!item.s?'':'is-finish'}}">{{item.c}}
                   </view>
-                  <view class="todo-one-edit FCCC">
+                  <view class="todo-one-edit FCCC" bindtap="{{!item.s?'editCard':null}}" data-index="{{index}}">
                     <image mode="aspectFit" class="right-button-icon"
-                      src="/images/{{item.s?'pen':'pen-disable'}}.png" />
+                      src="/images/{{!item.s?'pen':'pen-disable'}}.png" />
                   </view>
                 </view>
               </view>
@@ -59,9 +64,8 @@
   </view>
   <view class="botm FCSC">
     <wux-segmented-control class="ctr" theme="royal" bind:change="changeCTL" values="{{ ['时长', '事项'] }}" />
-
-    <view wx:if="{{btnType===0}}" class="sign-btn FRCC btn-1" bindtap="signIn">坐下</view>
-    <view wx:elif="{{btnType===1}}" class="sign-btn FRCC btn-2" bindtap="signOut">签退</view>
+    <view wx:if="{{btnType===0}}" class="sign-btn FRCC btn-1" bindtap="trySignIn">坐下</view>
+    <view wx:elif="{{btnType===1}}" class="sign-btn FRCC btn-2" bindtap="trySignOut">签退</view>
     <view wx:elif="{{btnType===2}}" class="sign-btn FRCC btn-3" bindtap="warningTips">被占用</view>
     <button open-type="contact" class="callAdmin" bindcontact="handleContact">联系管理</button>
   </view>
