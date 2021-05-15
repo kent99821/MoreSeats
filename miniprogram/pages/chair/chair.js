@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    roomId: '',
-    chairIndex: '',
+    roomId: '123456',
+    chairIndex: '7',
     btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
     show: 0,//中间显示 0:时长 1:事项
     todo: [
@@ -26,6 +26,7 @@ Page({
 
   },
   deleteCard(e){
+    console.log('et')
     // console.log(e.currentTarget.dataset.index)
     let  todo = this.data.todo;
     let index = e.currentTarget.dataset.index;
@@ -146,31 +147,70 @@ Page({
       }
     })
   },
-  trysignIn(){
+  trySignIn(){
+    console.log(this.data.roomId)
+    console.log(this.data.chairIndex)
     wx.cloud.callFunction({
       name:'signIn',
       data:{
-      roomId:this.data.roomId,
-      chairIndex:this.data.chairIndex,
-      roomName:"自习室1"
+      // roomId:this.data.roomId,
+      roomId:'123456',
+      chairIndex: '2',
+      // chairIndex:this.data.chairIndex,
       },
       success:res=>{
         console.log(res)
+        console.log('这边还要改')
+        this.setData({
+          btnType: 1
+        })
       },
       fail:err=>{
         console.log('调用失败：',err)
       }
     }) 
   },
+  trySignOut(){
+    wx.cloud.callFunction({
+      name: 'signOut',
+      data: {
+        flag:0,
+        chairIndex: this.data.chairIndex,
+        roomId : this.data.roomId
+      },
+      success:(res)=>{
+        console.log(res)
+        this.setData({
+          btnType: 0
+        })
+      },
+      fail: (err)=>{
+        console.log(err);
+      }
+    })
+  },
+
   readyPage(){
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data:{
+        flag:1,
+        skip:0,
+        num: 1
+      },
+      success:(res)=>{
+        if(res.result.data.length>0){
+          console.log(res.result.data[0])
+        }
+      }
+    })
     this.getTodoData();
-    this.getQuotes()
+    this.getQuotes();
   },
   onLoad: function (options) {
-
     this.setData({
-      roomId: options.roomId,
-      chairIndex: options.chairIndex
+      roomId: options.roomId|| this.data.roomId,
+      chairIndex: options.chairIndex|| this.data.chairIndex
     })
   },
 

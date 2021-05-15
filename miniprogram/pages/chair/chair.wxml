@@ -64,9 +64,8 @@
   </view>
   <view class="botm FCSC">
     <wux-segmented-control class="ctr" theme="royal" bind:change="changeCTL" values="{{ ['时长', '事项'] }}" />
-
-    <view wx:if="{{btnType===0}}" class="sign-btn FRCC btn-1" bindtap="signIn">坐下</view>
-    <view wx:elif="{{btnType===1}}" class="sign-btn FRCC btn-2" bindtap="signOut">签退</view>
+    <view wx:if="{{btnType===0}}" class="sign-btn FRCC btn-1" bindtap="trySignIn">坐下</view>
+    <view wx:elif="{{btnType===1}}" class="sign-btn FRCC btn-2" bindtap="trySignOut">签退</view>
     <view wx:elif="{{btnType===2}}" class="sign-btn FRCC btn-3" bindtap="warningTips">被占用</view>
     <button open-type="contact" class="callAdmin" bindcontact="handleContact">联系管理</button>
   </view>
