@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-icon": "wux-weapp/icon/index",
+    "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
+    "wux-swipe-action": "wux-weapp/swipe-action/index"
+  },
+  "navigationBarTitleText": "自习室记录"
 }

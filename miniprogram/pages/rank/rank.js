@@ -1,54 +1,71 @@
-// pages/rank/rank.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    historyList: [],
+    rankList: [],
+    skip: 0,
+    showTop: false,
+    topData: {},
     roomId: "",
-    rank: [{
-      openId: "watermelon-1",
-      roomId: "123456",
-      uTimeSum: 20,
-      userName: "watermelon"
+    test: [{
+
     }]
   },
-  getRank: function (skip, num) {
-    let roomId = this.data.roomId
-    wx.cloud.callFunction({
-      name: 'getRank',
-      data: {
-        roomId,
-        skip,
-        num
-      },
-      success: res => {
-        console.log(res)
-      },
-      fail: (res) => {
-        wx.showToast({
-          title: '云开发出现了些问题，请联系管理员排查！',
-          icon: "none"
-        })
-        console.log(res);
-      }
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
+  navigateToChair() {
+    let roomId = this.data.historyList[0].roomId;
+    let chairIndex = this.data.historyList[0].chairIndex;
+    wx.navigateTo({
+      url: '../chair/chair?roomId=' + roomId + '&chairIndex=' + chairIndex,
+    })
+  },
+  getHistoryList() {
+    let len = this.data.historyList.length;
+    let num = 15;
+    if (len > 10) num = 10;
+    if (this.data.showTop == true) {
+      len++;
+    };
+    wx.cloud.callFunction({
+      name: 'getRank',
+      data: {
+        skip: len,
+        num: num,
+        roomId: this.data.roomId
+      },
+      success: res => {
+        console.log(res);
+        let changeData = res.result.data;
+        this.setData({
+          historyList: [...this.data.historyList, ...changeData],
+        })
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+
+  },
   onLoad: function (options) {
-    console.log(options.roomId);
     this.setData({
       roomId: options.roomId
     })
+    console.log(options.roomId);
+    this.getHistoryList();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    // this.getRank(0, 2)
+
   },
 
   /**
@@ -76,14 +93,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    // this.getHistoryList();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getHistoryList();
   },
 
   /**
