@@ -8,7 +8,7 @@ Page({
   data: {
     roomId: '123456',
     chairIndex: 2,
-    btnType: 1,//下方按钮 0:坐下 1:签退 2:被占用
+    btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
     show: 0,//中间显示 0:时长 1:事项
     todo: [
       { s: false, c: "123" },
@@ -17,7 +17,8 @@ Page({
     ],
     mapShow: false,
     quotes:'',
-    time: '00:00:00'
+    time: '00:00:00',
+    sTime: null,
     // getTodoBool: false // 是否
   },
 
@@ -25,19 +26,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   setTime(){
+    if(!this.data.sTime) return ;
     let a = '21:34:00';
-    let getS = (aTime)=>{
-      let num = aTime.split(':');
-      let totalNum = 0;
-      totalNum= parseInt(num[0]*60*60)+ parseInt(num[1]*60)+parseInt(num[2]);
-      return totalNum;
-    }
-    let nowTime = (new Date()).toTimeString().split(' ')[0]
-    let  val=  getS(nowTime)- getS(a) 
+    a = this.data.sTime;
+    let val = (Date.now()- a)/1000;
     let h, m, s;
     h = parseInt(val/(60*60));
     m = parseInt((val-(h*60*60))/(60));
-    s = val%60;
+    s = parseInt(val%60);
     let parseTime= (h)=>{
       return (h<10?('0'+h):(h))
     }
@@ -185,7 +181,8 @@ Page({
         console.log('这边还要改')
         if(res.result.resCode==200){
           this.setData({
-            btnType: 1
+            btnType: 1,
+            sTime: new Date()
           })
         }else if(res.result.resCode==  300){
           this.setData({
@@ -212,7 +209,9 @@ Page({
       success:(res)=>{
         console.log(res)
         this.setData({
-          btnType: 0
+          btnType: 0,
+          sTime:null,
+          time:'00:00:00'
         })
       },
       fail: (err)=>{
@@ -229,7 +228,6 @@ Page({
         skip:0,
         num: 2
       },
-      
       success:(res)=>{
         console.log(res)
         if(res.result.data.length>0){
@@ -245,8 +243,10 @@ Page({
               this.setData({
                 btnType: 1
               })
-              console.log(res.sTime)
-              this.setTime(res.sTime)
+              this.setData({
+                sTime: (new Date(res.result.data[0].ssTime)).valueOf()
+              })
+              this.setTime();
               this.getTodoData();
             }
           }
