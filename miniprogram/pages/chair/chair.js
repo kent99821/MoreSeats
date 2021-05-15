@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    roomId: '123456',
-    chairIndex: '7',
+    roomId: '454914',
+    chairIndex: 1,
     btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
     show: 0,//中间显示 0:时长 1:事项
     todo: [
@@ -154,8 +154,8 @@ Page({
       name:'signIn',
       data:{
       // roomId:this.data.roomId,
-      roomId:'123456',
-      chairIndex: '2',
+      roomId:this.data.roomId,
+      chairIndex: this.data.chairIndex,
       // chairIndex:this.data.chairIndex,
       },
       success:res=>{
@@ -171,12 +171,13 @@ Page({
     }) 
   },
   trySignOut(){
+
     wx.cloud.callFunction({
       name: 'signOut',
       data: {
         flag:0,
-        chairIndex: this.data.chairIndex,
-        roomId : this.data.roomId
+        chairIndex:'464914',
+        roomId : 1
       },
       success:(res)=>{
         console.log(res)

@@ -50,7 +50,7 @@ Page({
       name: 'getRoomInfo',
       data: {
         flag: 2,
-        roomId: roomId,
+        roomId: '454914',
         isOver:false,
         skip:0,
         num:5
@@ -58,14 +58,17 @@ Page({
       success: res => {
         console.log(res)
         let userList = res.result.data;
-       userList= userList.map((item)=>{
-         let sTime = item.sTime
-          item.sTime = sTime.split('T')[0].split('-').join('.')+' '+ sTime.split('T')[1].split('.')[0].split(':')[0]+sTime.split('T')[1].split('.')[0].split(':')[1];
-          return item;
-        })
-        this.setData({
-          userList: res.result.data
-        })
+        if(userList.length>0){
+          userList= userList.map((item)=>{
+            let sTime = item.sTime
+             item.sTime = sTime.split('T')[0].split('-').join('.')+' '+ sTime.split('T')[1].split('.')[0].split(':')[0]+sTime.split('T')[1].split('.')[0].split(':')[1];
+             return item;
+           })
+           this.setData({
+             userList: res.result.data
+           })
+        }
+
       },
       fail: err => {
         console.log('调用失败：', err)
