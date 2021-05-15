@@ -1,0 +1,38 @@
+<wxs module="m1">
+  var numberToFix= function (value) {
+  return value.toFixed(1)
+  }
+  var stringToFix= function (value) {
+  return value.slice(0,6)
+  }
+  module.exports.numberToFix=numberToFix;
+  module.exports.stringToFix=stringToFix;
+</wxs>
+<view class="tips"></view>
+<view wx:for="{{historyList}}" class="cards FRCC">
+  <wux-swipe-action-group>
+    <wux-swipe-action autoClose useSlots>
+      <view class="cards-body FRSC">
+        <view class="cards-body-left FCCS">
+          <view class="cards-body-left-roomName  wux-ellipsis">{{item.userName}}</view>
+        </view>
+        <view class="cards-body-right FCCC">
+          <view class="cards-body-right-sumtime FREC">
+            <view class="cards-body-right-sumtime-num">{{m1.numberToFix(item.utimeSum/60)}}</view>
+            <view class="cards-body-right-sumtime-tips">小时</view>
+          </view>
+        </view>
+      </view>
+      <view slot="left" class="cards-left FCCC">
+        <view class="cards-left-body">
+          No.{{index+1}}
+        </view>
+      </view>
+      <view slot="right" class="cards-left FCCC">
+        <view class="cards-left-body-o">
+          User:{{m1.stringToFix(item.openId)}}
+        </view>
+      </view>
+    </wux-swipe-action>
+  </wux-swipe-action-group>
+</view>

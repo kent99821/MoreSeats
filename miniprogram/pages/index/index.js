@@ -268,6 +268,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.getHistory();
+    this.getUserValue();
+
   },
 
   /**

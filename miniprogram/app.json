@@ -7,6 +7,7 @@
     "pages/room/room",
     "pages/signIn/signIn",
     "pages/adminRoom/adminRoom",
+    "pages/rank/rank",
     "pages/adminRoomList/adminRoomList",
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
@@ -22,7 +23,7 @@
     "navigationBarBackgroundColor": "#ff795b",
     "backgroundColorTop": "#ff795a"
   },
-  "tabBar": { 
+  "tabBar": {
     "backgroundColor": "#fff",
     "list": [{
       "pagePath": "pages/index/index",
