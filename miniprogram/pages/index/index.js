@@ -77,7 +77,7 @@ Page({
       url: '../chair/chair',
     })
   },
-  totoSignin(){
+  totoSignin() {
     wx.navigateTo({
       url: '../signIn/signIn',
     })
@@ -88,7 +88,6 @@ Page({
   */
 
   getHistory() {
-
 
     let val = wx.getStorageSync('rooms');
     // console.log(val)
@@ -246,7 +245,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getHistory()
+    this.getHistory();
+    this.getUserValue();
   },
 
   /**
