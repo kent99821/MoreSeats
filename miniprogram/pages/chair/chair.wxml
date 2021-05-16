@@ -18,7 +18,7 @@
       <view class="time-img">
         <image mode="aspectFit" class="time-img-body" src="/images/people.png"></image>
       </view>
-      <view class="time-text">{{'00:00:00'}}</view>
+      <view class="time-text">{{time}}</view>
     </block>
     <block wx:else>
       <view class="todo">

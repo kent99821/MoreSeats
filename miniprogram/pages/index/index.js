@@ -37,7 +37,7 @@ Page({
       },
       success: res => {
         // console.log(res.result.data.isNewGuys);
-
+        console.log(res)
         if (res.result.data.isNewGuys) {
           this.setData({
             isOver: true,

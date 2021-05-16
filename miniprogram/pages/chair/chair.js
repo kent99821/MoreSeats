@@ -7,7 +7,7 @@ Page({
    */
   data: {
     roomId: '123456',
-    chairIndex: '7',
+    chairIndex: 2,
     btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
     show: 0,//中间显示 0:时长 1:事项
     todo: [
@@ -17,12 +17,30 @@ Page({
     ],
     mapShow: false,
     quotes:'',
+    time: '00:00:00',
+    sTime: null,
+    // getTodoBool: false // 是否
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   setTime(){
+    if(!this.data.sTime) return ;
+    let a = '21:34:00';
+    a = this.data.sTime;
+    let val = (Date.now()- a)/1000;
+    let h, m, s;
+    h = parseInt(val/(60*60));
+    m = parseInt((val-(h*60*60))/(60));
+    s = parseInt(val%60);
+    let parseTime= (h)=>{
+      return (h<10?('0'+h):(h))
+    }
+    // console.log(parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))
+    this.setData({
+      time: parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s)
+    })
 
   },
   deleteCard(e){
@@ -154,16 +172,24 @@ Page({
       name:'signIn',
       data:{
       // roomId:this.data.roomId,
-      roomId:'123456',
-      chairIndex: '2',
+      roomId:this.data.roomId,
+      chairIndex: this.data.chairIndex,
       // chairIndex:this.data.chairIndex,
       },
       success:res=>{
         console.log(res)
         console.log('这边还要改')
-        this.setData({
-          btnType: 1
-        })
+        if(res.result.resCode==200){
+          this.setData({
+            btnType: 1,
+            sTime: new Date()
+          })
+        }else if(res.result.resCode==  300){
+          this.setData({
+            btnType: 2
+          })
+        }
+
       },
       fail:err=>{
         console.log('调用失败：',err)
@@ -171,17 +197,21 @@ Page({
     }) 
   },
   trySignOut(){
+
+    
     wx.cloud.callFunction({
       name: 'signOut',
       data: {
         flag:0,
-        chairIndex: this.data.chairIndex,
+        chairIndex:this.data.chairIndex,
         roomId : this.data.roomId
       },
       success:(res)=>{
         console.log(res)
         this.setData({
-          btnType: 0
+          btnType: 0,
+          sTime:null,
+          time:'00:00:00'
         })
       },
       fail: (err)=>{
@@ -189,22 +219,41 @@ Page({
       }
     })
   },
-
   readyPage(){
+    setInterval(()=> this.setTime(),1000);
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data:{
         flag:1,
         skip:0,
-        num: 1
+        num: 2
       },
       success:(res)=>{
+        console.log(res)
         if(res.result.data.length>0){
           console.log(res.result.data[0])
+          let val =  res.result.data[0];
+          if(val.isOver){
+            wx.setStorageSync('todo', [])
+            console.log('---')
+            console.log(wx.getStorageSync('todo'))
+            this.getTodoData()
+          }else {
+            if(this.data.roomId== val.roomId && this.data.chairIndex== val.chairIndex) {
+              this.setData({
+                btnType: 1
+              })
+              this.setData({
+                sTime: (new Date(res.result.data[0].ssTime)).valueOf()
+              })
+              this.setTime();
+              this.getTodoData();
+            }
+          }
         }
       }
     })
-    this.getTodoData();
+
     this.getQuotes();
   },
   onLoad: function (options) {
