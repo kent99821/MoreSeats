@@ -1,6 +1,6 @@
 /* pages/history/history.wxss */
 view {
-  border: 1px solid #63636396;
+  /* border: 1px solid #63636396; */
 }
 
 .top-body {
@@ -109,7 +109,7 @@ view {
 .cards-body-left-roomName {
   height: 70%;
   font-size: 42rpx;
-  max-width: 370rpx;
+  width: 370rpx;
 }
 
 .cards-body-left-tags {

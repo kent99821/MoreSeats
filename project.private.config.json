@@ -75,7 +75,7 @@
         {
           "name": "pages/rank/rank",
           "pathName": "pages/rank/rank",
-          "query": "roomId=123456",
+          "query": "roomId=123456&pep=123&tim=154234",
           "scene": null
         }
       ]
