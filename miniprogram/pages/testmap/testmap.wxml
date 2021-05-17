@@ -1,0 +1,6 @@
+<!--pages/testmap/testmap.wxml-->
+<!-- <text>pages/testmap/testmap.wxml</text> -->
+<!-- <map   latitude='21.26331' longitude= '110.33427' id='room'> -->
+<!-- </map> -->
+<map   latitude='21.151574' longitude= '110.309033' id='room'>
+</map>

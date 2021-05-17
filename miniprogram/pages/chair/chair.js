@@ -6,8 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    roomId: '123456',
-    chairIndex: 2,
+    roomId: '',
+    chairIndex: -1,
     btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
     show: 0,//中间显示 0:时长 1:事项
     todo: [
@@ -15,7 +15,7 @@ Page({
       { s: true, c: "fdasdfsa" },
       { s: false, c: "6c6sa5dxxxxc4" }
     ],
-    mapShow: false,
+    mapShow: true,
     quotes:'',
     time: '00:00:00',
     sTime: null,
@@ -42,6 +42,23 @@ Page({
       time: parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s)
     })
 
+  },
+  displayMap(){
+    const query = wx.createSelectorQuery()
+    query.select('#the-id').boundingClientRect()
+    query.selectViewport().scrollOffset()
+    query.exec(function(res){
+      res[0].top       // #the-id节点的上边界坐标
+      res[1].scrollTop // 显示区域的竖直滚动位置
+      console.log(res[1].scrollTop)
+    })
+    console.log(query)
+    wx.getLocation({
+      success: res=>{
+        console.log('----')
+        console.log(res)
+      }
+    })
   },
   deleteCard(e){
     console.log('et')
@@ -197,8 +214,6 @@ Page({
     }) 
   },
   trySignOut(){
-
-    
     wx.cloud.callFunction({
       name: 'signOut',
       data: {
@@ -221,6 +236,7 @@ Page({
   },
   readyPage(){
     setInterval(()=> this.setTime(),1000);
+    this.displayMap();
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data:{
@@ -229,14 +245,14 @@ Page({
         num: 2
       },
       success:(res)=>{
-        console.log(res)
+        // console.log(res)
         if(res.result.data.length>0){
-          console.log(res.result.data[0])
+          // console.log(res.result.data[0])
           let val =  res.result.data[0];
           if(val.isOver){
             wx.setStorageSync('todo', [])
-            console.log('---')
-            console.log(wx.getStorageSync('todo'))
+            // console.log('---')
+            // console.log(wx.getStorageSync('todo'))
             this.getTodoData()
           }else {
             if(this.data.roomId== val.roomId && this.data.chairIndex== val.chairIndex) {
@@ -248,6 +264,11 @@ Page({
               })
               this.setTime();
               this.getTodoData();
+            }else{
+              console.log('上次未结束')
+              wx.navigateTo({
+                url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+              })
             }
           }
         }
@@ -257,6 +278,9 @@ Page({
     this.getQuotes();
   },
   onLoad: function (options) {
+    wx.setNavigationBarTitle(
+      {title: '房间号'+options.roomId+ ' 座位号'+ options.chairIndex}
+    )
     this.setData({
       roomId: options.roomId|| this.data.roomId,
       chairIndex: options.chairIndex|| this.data.chairIndex
