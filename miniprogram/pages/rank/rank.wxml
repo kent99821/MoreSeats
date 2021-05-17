@@ -13,13 +13,13 @@
     <view class="top-body-side FCCC">
       <view class="top-body-side-text FCCC">已签到人次</view>
       <view class="top-body-side-show FRSC">
-        {{ 12}}
+        {{pep}}
       </view>
     </view>
     <view class="top-body-side FCCC">
       <view class="top-body-side-text FCCC">产生总时长/小时</view>
       <view class="top-body-side-show FRSC">
-        {{12.1}}
+        {{tim}}
       </view>
     </view>
 

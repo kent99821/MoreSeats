@@ -1,2 +1,64 @@
-<!--pages/room/room.wxml-->
-<text>pages/room/room.wxml</text>
+<view class="top FCCC">
+
+  <view class="top-body">
+
+    <view class="room-name FRSC wux-ellipsis">海大自习室</view>
+    <view class="room-share FRCC">
+      <image class="room-share-img" src="/images/share.png"></image>
+    </view>
+    <view class="room-center FRSC">
+      <view class="room-center-tag FCCC">#123456</view>
+      <image class="room-center-openTime-icon" src="/images/clock2.png"></image>
+      <view class="room-center-openTime wux-ellipsis">7:30 ~ 22:30</view>
+
+    </view>
+    <view class="room-notic FRSC">
+      <view class="room-notic-icon FCCC">
+        <image class="room-notic-icon-icon" src="/images/notice.png"></image>
+      </view>
+      <view class="room-notic-text wux-ellipsis">咕咕咕咕咕咕过过</view>
+    </view>
+    <view class="room-take FRCC">
+      <view class="room-take-text">打卡规则</view>
+    </view>
+    <view class="room-rank FRCC">
+      <image class="room-share-img" src="/images/rank.png"></image>
+    </view>
+
+
+  </view>
+
+</view>
+
+<view class="chairs-body">
+  <van-tabs animated swipeable active="{{tabIndex}}" sticky>
+    <block wx:for="{{value.chairs.group}}">
+      <van-tab class="FRCC" title="{{index}}">
+        <view wx:for="{{item.groupSize}}" wx:for-index="chairTabIndex">{{index}}-{{}}</view>
+      </van-tab>
+    </block>
+  </van-tabs>
+
+
+
+
+
+
+
+
+
+  <!-- <wux-tabs wux-class="chairs-tabs" scroll controlled="{{true}}" current="{{tabIndex}}">
+    <block wx:for="{{ chairs.group }}" wx:key="index">
+      <wux-tab bindtap="onTabsChange" data-index="{{index}}" key="{{index}}">
+        <view class="tab-one-text wux-ellipsis"> {{item.groupName}}</view>
+      </wux-tab>
+    </block>
+  </wux-tabs>
+  <swiper current="{{ tabIndex }}" bind:change="onSwiperChange">
+    <block wx:for="{{ chairs.group }}" wx:key="index">
+      <swiper-item>
+        <view class="content">{{ item.groupName }}</view>
+      </swiper-item>
+    </block>
+  </swiper> -->
+</view>

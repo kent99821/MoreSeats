@@ -75,6 +75,12 @@
         {
           "name": "pages/rank/rank",
           "pathName": "pages/rank/rank",
+          "query": "roomId=123456&pep=123&tim=154234",
+          "scene": null
+        },
+        {
+          "name": "pages/room/room",
+          "pathName": "pages/room/room",
           "query": "roomId=123456",
           "scene": null
         }
