@@ -5,20 +5,298 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value:{},
+    value: {
+
+    },
+    tabIndex: 1,
+    chairs: {
+      chairNum: 77,
+      group: [{
+        groupName: "撤硕右转十几个",
+        groupSize: 2
+      }, {
+        groupName: "A",
+        groupSize: 3
+      }, {
+        groupName: "Afwefwefasfafawffafdfewfawefasfafawffafdfewfawefasfafawffafdfewfawefwaef",
+        groupSize: 4
+      }, {
+        groupName: "A",
+        groupSize: 5
+      }, {
+        groupName: "A",
+        groupSize: 6
+      }, {
+        groupName: "A",
+        groupSize: 7
+      }, {
+        groupName: "A",
+        groupSize: 8
+      }, {
+        groupName: "A",
+        groupSize: 9
+      }, {
+        groupName: "A",
+        groupSize: 10
+      }, {
+        groupName: "A",
+        groupSize: 11
+      }, {
+        groupName: "A",
+        groupSize: 12
+      }],
+      infos: [
+        {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: false
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        }, {
+          openId: "",
+          state: true
+        },
+
+
+
+
+      ],
+      sitDown: 19,
+      type: 1
+    },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-    let aId =  options.roomId;
-
-    let aName = options.roomName ;
-    if(options.roomName){
+    let aId = options.roomId;
+    let aName = options.roomName;
+    if (options.roomName) {
       save();
-    }else{
+    } else {
       wx.cloud.callFunction({
         name: 'getRoomInfo',
         data: {
@@ -30,7 +308,7 @@ Page({
           aName = res.result.data.roomName;
           save();
           console.log(res.result.data)
-          this.setData({value: res.result.data})
+          this.setData({ value: res.result.data })
 
         },
         fail: err => {
@@ -38,22 +316,22 @@ Page({
         }
       })
     }
-   
-   function save(){
+
+    function save() {
       let val = wx.getStorageSync('rooms');
- 
-     if(val) {
-      val = val.filter((item)=> item.roomId != aId);
-      val.splice(0,0, {roomId: aId, roomName: aName})
-      val.splice(4);
-     }else{
-       val = [{roomId: aId, roomName: aName}]
-     }
+
+      if (val) {
+        val = val.filter((item) => item.roomId != aId);
+        val.splice(0, 0, { roomId: aId, roomName: aName })
+        val.splice(4);
+      } else {
+        val = [{ roomId: aId, roomName: aName }]
+      }
       console.log(val)
       wx.setStorageSync('rooms', val);
     }
 
-    
+
 
 
 
@@ -111,5 +389,21 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  /**
+   * 左右滑动页面触发
+   */
+  onSwiperChange: function (e) {
+    this.setData({
+      tabIndex: e.detail.current
+    })
+  },
+  /**
+   * 点击tab触发
+   */
+  onTabsChange: function (e) {
+    this.setData({
+      tabIndex: e.currentTarget.dataset.index
+    })
   }
 })
