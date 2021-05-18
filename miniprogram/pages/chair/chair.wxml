@@ -17,7 +17,7 @@
   <view class="cont FCCC">
     <block wx:if="{{show===0}}">
       <view class="time-img">
-        <image mode="aspectFit" class="time-img-body" src="/images/people.png"></image>
+        <image mode="aspectFit" class="time-img-body" src="/images/people.jpg"></image>
       </view>
       <view class="time-text">{{time}}</view>
     </block>

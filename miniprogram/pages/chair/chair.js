@@ -52,6 +52,7 @@ Page({
       res[1].scrollTop // 显示区域的竖直滚动位置
       console.log(res[1].scrollTop)
     })
+    console.log('test')
     console.log(query)
     wx.getLocation({
       success: res=>{
