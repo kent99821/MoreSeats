@@ -69,7 +69,7 @@
         {
           "name": "pages/chair/chair",
           "pathName": "pages/chair/chair",
-          "query": "",
+          "query": "roomId=123456&chairIndex=0",
           "scene": null
         },
         {

@@ -1,8 +1,6 @@
 {
   "usingComponents": {
-
-    "wux-tabs": "wux-weapp/tabs/index",
-    "wux-tab": "wux-weapp/tab/index",
+    "van-popup": "@vant/weapp/popup/index",
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index"
 

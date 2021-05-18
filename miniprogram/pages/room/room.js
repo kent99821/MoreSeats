@@ -8,42 +8,24 @@ Page({
     value: {
 
     },
+    popupShow: false, popupContent: "123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456",
+    isAdmin: false,
     tabIndex: 1,
+    tabChairsIndex: 0,
     chairs: {
       chairNum: 77,
       group: [{
-        groupName: "撤硕右转十几个",
-        groupSize: 2
-      }, {
-        groupName: "A",
-        groupSize: 3
-      }, {
-        groupName: "Afwefwefasfafawffafdfewfawefasfafawffafdfewfawefasfafawffafdfewfawefwaef",
-        groupSize: 4
-      }, {
-        groupName: "A",
-        groupSize: 5
-      }, {
-        groupName: "A",
-        groupSize: 6
-      }, {
-        groupName: "A",
+        groupName: "A区",
         groupSize: 7
       }, {
-        groupName: "A",
-        groupSize: 8
+        groupName: "AA区",
+        groupSize: 27
       }, {
-        groupName: "A",
-        groupSize: 9
+        groupName: "AAAAA区",
+        groupSize: 27
       }, {
-        groupName: "A",
-        groupSize: 10
-      }, {
-        groupName: "A",
-        groupSize: 11
-      }, {
-        groupName: "A",
-        groupSize: 12
+        groupName: "ssssssssasdadaasdasdasd",
+        groupSize: 50
       }],
       infos: [
         {
@@ -286,6 +268,7 @@ Page({
       sitDown: 19,
       type: 1
     },
+    chairsStates: [],
   },
 
   /**
@@ -308,8 +291,20 @@ Page({
           aName = res.result.data.roomName;
           save();
           console.log(res.result.data)
-          this.setData({ value: res.result.data })
-
+          // this.setData({ value: res.result.data })
+          let tabChairsIndex = []
+          let lastChairsIndex = 0
+          // res.result.data.chairs.group.
+          this.data.chairs.group.forEach((item, index) => {
+            let temp = item.groupSize + lastChairsIndex
+            tabChairsIndex.push({ start: lastChairsIndex, size: item.groupSize, name: item.groupName })
+            lastChairsIndex = temp
+          });
+          // console.log(this.data.chairs.infos.length);
+          this.setData({
+            tabChairsIndex,
+            chairsStates: this.data.chairs.infos
+          })
         },
         fail: err => {
           console.log('调用失败：', err)
@@ -404,6 +399,17 @@ Page({
   onTabsChange: function (e) {
     this.setData({
       tabIndex: e.currentTarget.dataset.index
+    })
+  },
+  onClosePopup: function (e) {
+    this.setData({
+      popupShow: false
+    })
+  },
+  onShowPopup: function (e) {
+    console.log(e.currentTarget.dataset.popuptype);
+    this.setData({
+      popupShow: true,
     })
   }
 })

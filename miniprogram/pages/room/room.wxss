@@ -5,6 +5,13 @@ view {
   padding: 0;
 }
 
+.popup {
+  width: 700rpx;
+  height: 100rpx;
+  /* background-color: chartreuse; */
+  word-break: break-all;
+}
+
 .top {
   height: 170rpx;
   width: 100%;
@@ -126,18 +133,130 @@ view {
 
 .chairs-body {
   width: 100%;
-  height: 500rpx;
+  height: 100%;
   /* background-color: royalblue; */
 }
 
-.chairs-tabs {
+.oneTab {
+  width: 100vw;
+  height: 100%;
+  /* background-color: aqua; */
+}
+
+.oneTab-body {
+  width: 100vw;
+  height: 100%;
+  /* background-color: rgb(184, 53, 97); */
+  /* padding: 20rpx; */
+}
+
+.oneTab-chair {
+  width: 160rpx;
+  height: 140rpx;
+  /* border: 1px solid #000; */
+  /* background-color: #9b9391; */
+  margin: 10rpx;
+}
+
+.oneTab-chair-icon {
   width: 100%;
-  /* height: 100rpx; */
-  /* z-index: 99; */
-  background-color: saddlebrown;
+  height: 110rpx;
+}
+
+.oneTab-chair-icon-img {
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.oneTab-chair-text {
+  width: 100%;
+  height: 30rpx;
+  font-size: 26rpx;
+  /* background-color: #fff; */
 }
 
 .tab-one-text {
   font-size: 30rpx;
   max-width: 600rpx;
+}
+
+.useless {
+  height: 81vh;
+
+}
+
+.oneChair {
+  /* width: 150rpx;
+  height: 150rpx; */
+  background-color: #ff9178;
+}
+
+.botm {
+  width: 100%;
+  height: 90rpx;
+  position: fixed;
+  /* top: 90%; */
+  bottom: 0;
+  background-color: #fff;
+  z-index: 9999;
+}
+
+.botm-color {
+  width: 50%;
+  height: 100%;
+  /* background-color: burlywood; */
+  font-size: 25rpx;
+}
+
+.botm-color-g-c1 {
+  width: 70rpx;
+  height: 28rpx;
+  border-radius: 10rpx;
+  background-color: #ff7454;
+}
+
+.botm-color-g-c2 {
+  width: 70rpx;
+  height: 28rpx;
+  border-radius: 10rpx;
+  background-color: #6dd96a;
+  margin-left: 25rpx;
+}
+
+.botm-color-g-t1 {
+  color: #ff7454;
+  margin-left: 10rpx;
+}
+
+.botm-color-g-t2 {
+  color: #6dd96a;
+  margin-left: 10rpx;
+}
+
+.botm-info {
+  width: 25%;
+  height: 100%;
+  /* background-color: chocolate; */
+}
+
+.botm-info-icon {
+  width: 70rpx;
+  height: 70rpx;
+  /* margin-right: 5rpx; */
+}
+
+.botm-info-text {
+  font-size: 20rpx;
+  margin-top: 5rpx;
+}
+
+.last-btn {
+  width: 25%;
+  height: 100%;
+  /* background-color: darkgoldenrod; */
+}
+
+.unline {
+  border-bottom: 1px solid #000;
+
 }
