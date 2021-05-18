@@ -15,11 +15,22 @@ Page({
       { s: true, c: "fdasdfsa" },
       { s: false, c: "6c6sa5dxxxxc4" }
     ],
-    mapShow: true,
+    mapShow: false,
     quotes:'',
     time: '00:00:00',
     sTime: null,
+    // latitude:21.154481,
+    // longitude: 110.297833,
+    latitude: '',
+    longitude:'',
     // getTodoBool: false // 是否
+    waitBool: false,
+    rule: {
+      latitude: '',
+      size:'',
+      longitude: '',
+      type:''
+    }
   },
 
   /**
@@ -43,27 +54,26 @@ Page({
     })
 
   },
-  displayMap(){
-    const query = wx.createSelectorQuery()
-    query.select('#the-id').boundingClientRect()
-    query.selectViewport().scrollOffset()
-    query.exec(function(res){
-      res[0].top       // #the-id节点的上边界坐标
-      res[1].scrollTop // 显示区域的竖直滚动位置
-      console.log(res[1].scrollTop)
-    })
-    console.log('test')
-    console.log(query)
-    wx.getLocation({
-      success: res=>{
-        console.log('----')
-        console.log(res)
-      }
-    })
-  },
+  // displayMap(){
+  //   const query = wx.createSelectorQuery()
+  //   query.select('#the-id').boundingClientRect()
+  //   query.selectViewport().scrollOffset()
+  //   query.exec(function(res){
+  //     res[0].top       // #the-id节点的上边界坐标
+  //     res[1].scrollTop // 显示区域的竖直滚动位置
+  //   })
+
+  //   wx.getLocation({
+  //     success: res=>{
+  //       console.log(res)
+  //       this.setData({
+  //         latitude: res.latitude,
+  //         longitude: res.longitude
+  //       })
+  //     }
+  //   })
+  // },
   deleteCard(e){
-    console.log('et')
-    // console.log(e.currentTarget.dataset.index)
     let  todo = this.data.todo;
     let index = e.currentTarget.dataset.index;
     todo.splice(index,1);
@@ -71,10 +81,9 @@ Page({
       todo
     });
     wx.setStorageSync('todo', todo)
-
   },
   editCard(e) {
-    console.log(e.currentTarget.dataset.index)
+
     let that = this;
     let index = e.currentTarget.dataset.index;
     let defaultText = this.data.todo[index].c
@@ -113,7 +122,6 @@ Page({
   changStatus(e){
     let index = e.currentTarget.dataset.index;
     let todo = this.data.todo;
-    // console.log(this.data.todo)
     todo[index].s = !todo[index].s ;
     this.setData({
       todo
@@ -134,10 +142,10 @@ Page({
       onConfirm(e, response) {
         if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
           let todo = that.data.todo || [];
-          console.log(that.data.todo)
+         
           // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
           todo.splice(0,0,{s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") })
-          console.log(todo)
+
           that.setData({
             todo
           })
@@ -175,17 +183,64 @@ Page({
         this.setData({
           quotes: res.data
         })
-        console.log(this.data.quotes)
-        console.log(res)
+    
+
       },
       fail:(err)=>{
         console.log(err)
       }
     })
   },
+  
   trySignIn(){
-    console.log(this.data.roomId)
-    console.log(this.data.chairIndex)
+    function GetDistance( lat1,  lng1,  lat2,  lng2){
+      var radLat1 = lat1*Math.PI / 180.0;
+      var radLat2 = lat2*Math.PI / 180.0;
+      var a = radLat1 - radLat2;
+      var  b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
+      var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+      Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+      s = s *6378.137 ;// EARTH_RADIUS;
+      s = Math.round(s * 10000) / 10000;
+      return s;
+  }
+    let out = 0;
+    console.log(this.data.rule)
+    if(this.data.rule.type==1){
+      wx.getLocation({
+        success: res=>{
+          // console.log(res)
+          console.log(res.latitude)
+          console.log(this.data.rule.latitude)
+         let distance= GetDistance(res.latitude,res.longitude, this.data.rule.latitude, this.data.rule.longitude)*1000;
+         console.log(distance)
+         if(distance> this.data.rule.size) {
+          this.setData({
+            latitude: this.data.rule.latitude,
+            longitude:this.data.rule.longitude,
+            mapShow: true
+          })
+          wx.showToast({
+            title: '不在自习室范围',
+            icon: 'error',
+            duration: 2000
+          })
+         }else{
+          this.signIn();
+         }
+
+        }
+      })
+    }else{
+      this.signIn();
+    }
+
+
+  },
+  signIn(){
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
       name:'signIn',
       data:{
@@ -197,6 +252,7 @@ Page({
       success:res=>{
         console.log(res)
         console.log('这边还要改')
+        wx.hideLoading()
         if(res.result.resCode==200){
           this.setData({
             btnType: 1,
@@ -215,19 +271,34 @@ Page({
     }) 
   },
   trySignOut(){
+    if(this.data.waitBool) return ;
+    this.setData({
+      waitBool: true
+    })
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.cloud.callFunction({
       name: 'signOut',
       data: {
         flag:0,
         chairIndex:this.data.chairIndex,
-        roomId : this.data.roomId
+        roomId : this.data.roomId,
+        todo:this.data.todo
       },
       success:(res)=>{
+        wx.setStorage({
+          data: '',
+          key: 'todo',
+        })
         console.log(res)
+        wx.hideLoading()
         this.setData({
           btnType: 0,
           sTime:null,
-          time:'00:00:00'
+          time:'00:00:00',
+          waitBool: false,
+          todo: [],
         })
       },
       fail: (err)=>{
@@ -237,13 +308,13 @@ Page({
   },
   readyPage(){
     setInterval(()=> this.setTime(),1000);
-    this.displayMap();
+    // this.displayMap();
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data:{
         flag:1,
         skip:0,
-        num: 2
+        num: 1
       },
       success:(res)=>{
         // console.log(res)
@@ -278,14 +349,38 @@ Page({
 
     this.getQuotes();
   },
+  getRoomRule(){
+
+    wx.cloud.callFunction({
+      name: 'getRoomInfo',
+      data: {
+        flag: 1,
+        roomId: this.data.roomId,
+      },
+      success: res => {
+        console.log(res)
+        let rule = res.result.data.rule
+        this.setData({
+          rule: rule,
+          latitude: rule.latitude,
+          longitude: rule.longitude
+        })
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+  },
   onLoad: function (options) {
     wx.setNavigationBarTitle(
       {title: '房间号'+options.roomId+ ' 座位号'+ options.chairIndex}
     )
+
     this.setData({
       roomId: options.roomId|| this.data.roomId,
       chairIndex: options.chairIndex|| this.data.chairIndex
     })
+    this.getRoomRule()
   },
 
   /**
@@ -350,9 +445,7 @@ Page({
   /**
    * 坐下
    */
-  signIn: function () {
 
-  },
   /**
    * 签退
    */
