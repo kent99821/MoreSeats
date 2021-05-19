@@ -1,8 +1,8 @@
 /**
- * date:2021.05.09
+ * date:2021.05.19
  * author:kent
  * state:finished
- * content:update code
+ * content:update flag 3
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -13,6 +13,7 @@ const $ = db.command.aggregate
 // 页面数据
 let PageData = {
   resCode: 0, //状态码
+  find: {},
   result: {}, //查询结果对象
   obj: {} //返回参数对象
 }
@@ -83,32 +84,46 @@ exports.main = async (event, context) => {
 
           // 添加用户  输入用户名 其余默认
           case 3:
-            PageData.result = await db.collection('users').add({
-              data: {
-                isAdmin: false,
-                isOver: true,
-                openId: wxContext.OPENID,
-                recordNum: 0,
-                roomAdminList: [],
-                sumTime: 0,
-                userName: event.userName
-              },
-            })
-            if (PageData.result.errMsg === "collection.add:ok") {
-              PageData.reCode = 200
+            PageData.find = await db.collection('users').where({
+              openId: wxContext.OPENID
+            }).get()
+
+            if (PageData.find.data.length !== 0) {
+              PageData.reCode = 203
               return {
                 "resCode": PageData.reCode,
-                "Msg": "新建成功",
+                "Msg": "此用户已存在",
                 "data": {}
               }
             } else {
-              PageData.reCode = 201
-              return {
-                "resCode": PageData.reCode,
-                "Msg": "新建失败",
-                "data": {}
+              PageData.result = await db.collection('users').add({
+                data: {
+                  isAdmin: false,
+                  isOver: true,
+                  openId: wxContext.OPENID,
+                  recordNum: 0,
+                  roomAdminList: [],
+                  sumTime: 0,
+                  userName: event.userName
+                },
+              })
+              if (PageData.result.errMsg === "collection.add:ok") {
+                PageData.reCode = 200
+                return {
+                  "resCode": PageData.reCode,
+                  "Msg": "新建成功",
+                  "data": {}
+                }
+              } else {
+                PageData.reCode = 201
+                return {
+                  "resCode": PageData.reCode,
+                  "Msg": "新建失败",
+                  "data": {}
+                }
               }
             }
+
             case 4:
               PageData.reCode = 200
               return {
