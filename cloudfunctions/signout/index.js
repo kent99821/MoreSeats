@@ -4,6 +4,10 @@
  * state:finished
  * content:update flag:0
  */
+
+
+
+
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 cloud.init()
@@ -26,6 +30,9 @@ const _ = db.command
   arank:{},//排行榜的添加结果
   urank:{}//排行榜的更新结果
 }
+
+
+
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -54,7 +61,7 @@ exports.main = async (event, context) => {
     isOver:false,
     chairIndex:event.chairIndex
   }).get()
-  PageData.hresult.data[0].eTime=new Date()
+  PageData.hresult.data[0].eTime=new Date(moment().tz("Asia/Shanghai").format())
   PageData.howlong=parseInt((PageData.hresult.data[0].eTime-PageData.hresult.data[0].sTime)/60000)
   PageData.hresult.data[0].howlong=PageData.howlong
   //更新history记录

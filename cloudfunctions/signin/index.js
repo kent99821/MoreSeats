@@ -11,6 +11,9 @@ cloud.init()
 // 初始化数据库
 const db = cloud.database()
 const _ = db.command
+
+const moment = require("moment-timezone"); // 需在 package.json 中指定并安装依赖
+
 // 初始化响应码resCode 结果result
 // 查找用户记录的结果 查询自习室的结果  添加学习记录的结果 更新用户记录的结果 更新自习室的结果
 // let result, oresult,hresult,uresult,rresult
@@ -100,8 +103,9 @@ exports.main = async (event, context) => {
         userName:PageData.result.data[0].userName,
         roomId:event.roomId,
         roomName:event.roomName,
-        sTime:db.serverDate(),
-        eTime:db.serverDate(),
+        sTime:new Date(),
+        eTime:new Date(),
+        ssTime:moment().tz("Asia/Shanghai").format(),
         todo:[]  
         } 
       })
