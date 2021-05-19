@@ -50,8 +50,8 @@
                 历史记录
               </view>
             </view>
-            <view class="btn FCCC" data-roomid="{{item.roomId}}" data-pep="{{item.roomId}}" data-tim="{{item.roomId}}"
-              bindtap="torank">
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" data-pep="{{item.count.pepSum}}"
+              data-tim="{{item.count.timeSum}}" bindtap="torank">
               <image class="icon-img" mode="aspectFit" src="/images/list-rank.png"></image>
               <view class="icon-text FCCC">
                 统计排名

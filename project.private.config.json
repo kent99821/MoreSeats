@@ -83,6 +83,18 @@
           "pathName": "pages/room/room",
           "query": "roomId=123456",
           "scene": null
+        },
+        {
+          "name": "pages/adminRule/adminRule",
+          "pathName": "pages/adminRule/adminRule",
+          "query": "roomId=123456",
+          "scene": null
+        },
+        {
+          "name": "pages/adminChairs/adminChairs",
+          "pathName": "pages/adminChairs/adminChairs",
+          "query": "roomId=123456",
+          "scene": null
         }
       ]
     }
