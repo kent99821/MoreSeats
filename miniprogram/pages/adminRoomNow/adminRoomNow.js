@@ -8,7 +8,7 @@ Page({
     userList: [],
     roomId: ''
   },
-  signOut(e){
+  signOut(e) {
     console.log(e.currentTarget.dataset.index);
     let index = e.currentTarget.dataset.index;
     let item = this.data.userList[index];
@@ -16,14 +16,14 @@ Page({
     console.log(this.data.roomId)
     console.log(item.chairIndex)
     wx.cloud.callFunction({
-      name:'signOut',
-      data:{
-      flag:1,
-      openId:item.openId,
-      roomId:this.data.roomId,
-      chairIndex:item.chairIndex
+      name: 'signOut',
+      data: {
+        flag: 1,
+        openId: item.openId,
+        roomId: this.data.roomId,
+        chairIndex: item.chairIndex
       },
-      success:res=>{
+      success: res => {
         console.log(res)
         let userList = this.data.userList;
         userList.splice(index, 1);
@@ -31,10 +31,10 @@ Page({
           userList: userList
         })
       },
-      fail:err=>{
-        console.log('调用失败：',err)
+      fail: err => {
+        console.log('调用失败：', err)
       }
-    }) 
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -42,31 +42,31 @@ Page({
   onLoad: function (options) {
 
 
-    let roomId =  options.roomId
-    if(!roomId) roomId = '454914'
+    let roomId = options.roomId
+    // if(!roomId) roomId = '454914'
     console.log(roomId)
-    this.setData({roomId: roomId})
+    this.setData({ roomId: roomId })
     wx.cloud.callFunction({
       name: 'getRoomInfo',
       data: {
         flag: 2,
-        roomId: '454914',
-        isOver:false,
-        skip:0,
-        num:5
+        roomId: roomId,
+        isOver: false,
+        skip: 0,
+        num: 5
       },
       success: res => {
         console.log(res)
         let userList = res.result.data;
-        if(userList.length>0){
-          userList= userList.map((item)=>{
+        if (userList.length > 0) {
+          userList = userList.map((item) => {
             let sTime = item.sTime
-             item.sTime = sTime.split('T')[0].split('-').join('.')+' '+ sTime.split('T')[1].split('.')[0].split(':')[0]+sTime.split('T')[1].split('.')[0].split(':')[1];
-             return item;
-           })
-           this.setData({
-             userList: res.result.data
-           })
+            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] + sTime.split('T')[1].split('.')[0].split(':')[1];
+            return item;
+          })
+          this.setData({
+            userList: res.result.data
+          })
         }
 
       },
