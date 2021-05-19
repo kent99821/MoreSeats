@@ -1,4 +1,5 @@
 // pages/index/index.js
+var app = getApp();
 Page({
 
   /**
@@ -44,6 +45,8 @@ Page({
             isNewGuys: true
           })
         } else {
+          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
+          // console.log(app.globalData.roomAdminList);
           this.setData({
             isNewGuys: false,
             isOver: res.result.data.isOver
@@ -73,8 +76,22 @@ Page({
   },
 
   toChair() {
-    wx.navigateTo({
-      url: '../chair/chair',
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data:{
+        flag:1,
+        skip:0,
+        num: 1
+      },
+      success:(res)=>{
+        if(res.result.data.length>0){
+          let val =  res.result.data[0];
+          console.log('上次未结束')
+          wx.navigateTo({
+            url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+          })
+        }
+      }
     })
   },
   totoSignin() {

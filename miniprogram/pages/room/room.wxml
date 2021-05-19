@@ -5,21 +5,21 @@
 </van-popup>
 <view class="top FCCC">
   <view class="top-body">
-    <view class="room-name FRSC wux-ellipsis">海大自习室</view>
+    <view class="room-name FRSC wux-ellipsis">{{roomData.roomName}}</view>
     <view class="room-share FRCC">
       <image class="room-share-img" src="/images/share.png"></image>
     </view>
     <view class="room-center FRSC">
-      <view class="room-center-tag FCCC">#123456</view>
+      <view class="room-center-tag FCCC">#{{roomData.roomId}}</view>
       <image class="room-center-openTime-icon" src="/images/clock2.png" bindtap="onShowPopup" data-popupType="0">
       </image>
-      <view class="room-center-openTime wux-ellipsis" bindtap="onShowPopup" data-popupType="0">7:30 ~ 22:30</view>
+      <view class="room-center-openTime wux-ellipsis" bindtap="onShowPopup" data-popupType="0">{{roomData.openTime}}</view>
     </view>
     <view class="room-notic FRSC" bindtap="onShowPopup" data-popupType="1">
       <view class="room-notic-icon FCCC">
         <image class="room-notic-icon-icon" src="/images/notice.png"></image>
       </view>
-      <view class="room-notic-text wux-ellipsis">咕咕咕咕咕咕过过</view>
+      <view class="room-notic-text wux-ellipsis">{{roomData.roomNotice}}</view>
     </view>
     <view class="room-take FRCC" bindtap="onShowPopup" data-popupType="2">
       <view class="room-take-text">打卡规则</view>
@@ -34,11 +34,11 @@
     <block wx:for="{{tabChairsIndex}}">
       <van-tab class="oneTab FRCS" title="{{item.name}}">
         <view class="FRCSW oneTab-body">
-          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{index-1}}">
+          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{chairTabIndex+item.start+1}}">
             <!-- {{chairTabIndex+item.start+1}}-{{chairsStates[chairTabIndex+item.start].state}} -->
             <view class="oneTab-chair-icon FCCC">
               <image class="oneTab-chair-icon-img" mode="aspectFill"
-                src="/images/chair-{{chairsStates[chairTabIndex+item.start].state?0:1}}.png"></image>
+                src="/images/chair-{{chairsStates[chairTabIndex+item.start].state?1:0}}.png"></image>
             </view>
             <view class="oneTab-chair-text FCCC">
               {{chairTabIndex+item.start+1}}
@@ -59,7 +59,7 @@
   </view>
   <view class="botm-info FRCC">
     <image src="/images/chair-3.png" class="botm-info-icon"></image>
-    <view class="botm-info-text">123/1245</view>
+    <view class="botm-info-text">{{roomData.chairs.sitDown}}/{{roomData.chairs.chairNum}}</view>
   </view>
   <view class="last-btn FRCC">
     <block wx:if="{{false}}">
