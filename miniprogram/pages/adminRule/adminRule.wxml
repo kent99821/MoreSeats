@@ -1,2 +1,6 @@
-<!--pages/adminRule/adminRule.wxml-->
-<text>pages/adminRule/adminRule.wxml</text>
+<wux-cell title="打卡限制" class="f">
+  <wux-switch slot="footer" value="{{ islimit }}" bind:change="onSwitchChange" />
+</wux-cell>
+<wux-picker cols="{{1}}" class="f" cascade options="{{ options }}" bind:confirm="onConfirm">
+  <wux-cell title="限制类型" is-link disabled="{{! islimit}}" extra="{{  typeName }}" />
+</wux-picker>

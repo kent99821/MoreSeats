@@ -1,3 +1,9 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell": "wux-weapp/cell/index",
+    "wux-popup-select": "wux-weapp/popup-select/index",
+    "wux-switch": "wux-weapp/switch/index",
+    "wux-picker": "wux-weapp/picker/index"
+  },
+  "navigationBarTitleText": "打卡规则设置"
 }
