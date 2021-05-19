@@ -34,7 +34,7 @@
     <block wx:for="{{tabChairsIndex}}">
       <van-tab class="oneTab FRCS" title="{{item.name}}">
         <view class="FRCSW oneTab-body">
-          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{index-1}}">
+          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{chairTabIndex+item.start+1}}">
             <!-- {{chairTabIndex+item.start+1}}-{{chairsStates[chairTabIndex+item.start].state}} -->
             <view class="oneTab-chair-icon FCCC">
               <image class="oneTab-chair-icon-img" mode="aspectFill"

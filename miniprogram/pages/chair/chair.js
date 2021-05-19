@@ -205,8 +205,9 @@ Page({
       return s;
   }
     let out = 0;
-    console.log(this.data.rule)
+    // console.log(this.data.rule)
     if(this.data.rule.type==1){
+      console.log('位置签到')
       wx.getLocation({
         success: res=>{
           // console.log(res)
@@ -228,7 +229,13 @@ Page({
          }else{
           this.signIn();
          }
-
+        },
+        fail: err=>{
+          wx.showToast({
+            title: '请开启位置信息',
+            icon: 'error',
+            duration: 2000
+          }) 
         }
       })
     }else{
@@ -373,7 +380,7 @@ Page({
   },
   onLoad: function (options) {
     wx.setNavigationBarTitle(
-      {title: '房间号'+options.roomId+ ' 座位号'+ options.chairIndex}
+      {title: '房间号'+options.roomId+ ' 座位号'+ (parseInt(options.chairIndex)+1)}
     )
 
     this.setData({
