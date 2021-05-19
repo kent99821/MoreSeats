@@ -1,4 +1,5 @@
 // pages/room/room.js
+var app = getApp();
 Page({
 
   /**
@@ -12,6 +13,7 @@ Page({
     isAdmin: false,
     tabIndex: 1,
     tabChairsIndex: 0,
+    roomData: {},
     chairs: {
       chairNum: 77,
       group: [{
@@ -276,6 +278,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let adminList  = app.globalData.roomAdminList.map((item)=>{
+      return  item.roomId;
+    })
+    console.log(adminList)
     let aId = options.roomId;
     this.setData({
       roomId: aId
@@ -291,34 +297,42 @@ Page({
           roomId: aId
         },
         success: res => {
-          // console.log('----');
           aName = res.result.data.roomName;
           save();
           console.log(res.result.data)
           // this.setData({ value: res.result.data })
+          const roomData = res.result.data;
           let tabChairsIndex = []
           let lastChairsIndex = 0
           // res.result.data.chairs.group.
-          let group = this.data.chairs.group
+          // let group = this.data.chairs.group
+          let group = res.result.data.chairs.group
           console.log(group)
-          this.data.chairs.group.forEach((item, index) => {
+          this.setData({
+            roomData:roomData
+          })
+          
+          group.forEach((item, index) => {
             let temp = item.groupSize + lastChairsIndex
-            console.log(temp);
+            // console.log(temp);
             tabChairsIndex.push({ start: lastChairsIndex, size: item.groupSize, name: item.groupName })
             lastChairsIndex = temp
           });
-          console.log(tabChairsIndex);
-          // console.log(this.data.chairs.infos.length);
+    
+          // let 
+          // for(let i ; i< lastChairsIndex; i++){
+          //   chairsStates
+          // }
           this.setData({
             tabChairsIndex,
-            chairsStates: this.data.chairs.infos
+            chairsStates: roomData.chairs.infos
           })
         },
         fail: err => {
           console.log('调用失败：', err)
         }
       })
-    
+    // }
  
     function save() {
       let val = wx.getStorageSync('rooms');
@@ -332,17 +346,25 @@ Page({
       console.log(val)
       wx.setStorageSync('rooms', val);
     }
-    save();
+    
   },
   toChair(e){
     const chairIndex = e.currentTarget.dataset.chairindex-1;
-    // console.log(e.currentTarget.dataset.chairindex)
+    if(this.data.roomData.chairs.infos[chairIndex].state){
+      wx.showToast({
+        title: '此位置已有人',
+        icon: 'error',
+      })
+      return;
+    }
     console.log(e.currentTarget.dataset.chairindex);
     wx.navigateTo({
       url: '../chair/chair?roomId='+ this.data.roomId+'&chairIndex='+chairIndex,
     })
   },
+  getIsAdmin(){
 
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -414,8 +436,27 @@ Page({
   },
   onShowPopup: function (e) {
     console.log(e.currentTarget.dataset.popuptype);
+    console.log(this.data.roomData)
+    let type = e.currentTarget.dataset.popuptype;
+    let popupContent = '';
+    if(type==0){
+      popupContent = this.data.roomData.openTime
+    }else if(type==1){
+      popupContent = this.data.roomData.roomNotice
+    }else{
+      if(this.data.roomData.rule.type==0){
+        popupContent = '直接签到'
+      }else if(this.data.roomData.rule.type==1){
+        popupContent = `在'${this.data.roomData.roomName}'的${this.data.roomData.rule.size}m内打卡`
+      }else{
+        popupContent='使用人脸验证打卡'
+      }
+      
+    }
+  
     this.setData({
       popupShow: true,
+      popupContent
     })
   }
 })
