@@ -193,6 +193,11 @@ Page({
       url: '/pages/room/room?roomId=' + val + '&roomName=' + name,
     })
   },
+  toSignIn(e) {
+    wx.navigateTo({
+      url: '/pages/signIn/signIn',
+    })
+  },
   scanQR() {
     let sthis = this;
     wx.scanCode({
@@ -230,6 +235,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.startPullDownRefresh()
     this.getHistory();
     this.getUserValue();
   },
@@ -247,6 +253,7 @@ Page({
   onShow: function () {
     this.getHistory();
     this.getUserValue();
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -270,6 +277,7 @@ Page({
     this.getHistory();
     this.getUserValue();
 
+    wx.stopPullDownRefresh()
   },
 
   /**

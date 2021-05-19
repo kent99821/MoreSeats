@@ -34,10 +34,9 @@
 </view>
 <!-- <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button> -->
 <view class="list-body">
-  <wux-cell thumb="/images/history.png" title="学习记录" is-link url="/pages/history/history" open-type="navigateTo">
+  <wux-cell thumb="/images/history.png" title="学习记录" is-link bind:click="toHsty">
   </wux-cell>
-  <wux-cell thumb="/images/admin.png" title="管理的自习室" is-link url="/pages/adminRoomList/adminRoomList"
-    open-type="navigateTo">
+  <wux-cell thumb="/images/admin.png" title="管理的自习室" is-link bind:click="toAdmin">
   </wux-cell>
   <wux-cell thumb="/images/about.png" title="关于" is-link url="/pages/about/about" open-type="navigateTo"></wux-cell>
 </view>
