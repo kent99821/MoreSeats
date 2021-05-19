@@ -1,8 +1,8 @@
 /**
- * date:2021.05.09
+ * date:2021.05.19
  * author:kent
  * state:finished
- * content:updata code
+ * content:updata flag 0
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -37,7 +37,8 @@ exports.main = async (event, context) => {
           "roomId":true,
           "roomName":true,
           "openTime":true,
-          "roomNotice":true
+          "roomNotice":true,
+          "count":true
         }).get()
         if(temp.data.length===0){
           break;
