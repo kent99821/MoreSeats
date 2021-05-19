@@ -1,4 +1,11 @@
-<!--pages/signIn/signIn.wxml-->
-<view class="root FCCC">
-  <view>游客登记</view>
+<wux-toptips id="wux-toptips" />
+
+<view class="root FCSC">
+  <view class="top FCCC">
+    <view>在使用座位打卡与创建自习室功能过程前，</view>
+    <view>让我们来做个简单的信息登记。</view>
+  </view>
+  <van-field class="input" model:value="{{ name }}" required clearable label="姓名" placeholder="请输入姓名" />
+  <view class="tips">您的信息将会被用于自习室排名展示以及自习室管理者。</view>
+  <view class="btn FCCC" bindtap="ok">确定</view>
 </view>

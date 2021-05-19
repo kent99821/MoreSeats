@@ -3,3 +3,31 @@
   height: 100vh;
   width: 100%;
 }
+
+.top {
+  margin: 50rpx;
+  color: #333;
+  font-size: 30rpx;
+  width: 90vw;
+  word-break: break-all;
+}
+
+.btn {
+  justify-self: flex-end;
+  width: 180rpx;
+  height: 60rpx;
+  background-color: #ff795b;
+  color: #fff;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+}
+
+.tips {
+  color: #cccccc;
+  margin: 10rpx;
+  font-size: 20rpx;
+}
+
+.input {
+  width: 100%;
+}

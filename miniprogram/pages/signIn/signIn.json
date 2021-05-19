@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "van-field": "@vant/weapp/field/index",
+    "wux-toptips": "wux-weapp/toptips/index"
+  },
+  "navigationBarTitleText": "信息登记"
 }
