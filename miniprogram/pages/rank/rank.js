@@ -11,6 +11,8 @@ Page({
     showTop: false,
     topData: {},
     roomId: "",
+    pep: -1,
+    tim: -1,
     test: [{
 
     }]
@@ -55,7 +57,9 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      roomId: options.roomId
+      roomId: options.roomId,
+      pep: options.pep,
+      tim: (options.tim/60).toFixed(1)
     })
     console.log(options.roomId);
     this.getHistoryList();

@@ -13,9 +13,15 @@
     "pages/adminRoomHistory/adminRoomHistory",
     "pages/adminRoomNow/adminRoomNow",
     "pages/about/about",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/testmap/testmap"
 
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于自习室的范围签到" 
+    }
+  },
   "window": {
     "backgroundColor": "#e5e5e5",
     "backgroundColorBottom": "#e5e5e5",

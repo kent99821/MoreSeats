@@ -4,8 +4,9 @@
 
 <wux-notice-bar id="ntc" class="ntc" loop content="{{'这是公告这是公告这是公告这是公告这是公告这是公告这是公告'}}" mode="closable" />
 
-<wux-popup closable visible="{{ mapShow }}" title="确保在自习室范围内" bind:close="mapClose">
-  这里放地图
+<wux-popup closable visible="{{ mapShow }}"  ititle="确保在自习室范围内" bind:close="mapClose">
+  <map id= 'the-id' latitude='{{latitude}}' longitude= '{{longitude}}'>
+  </map>
 </wux-popup>
 
 
@@ -16,9 +17,9 @@
   <view class="cont FCCC">
     <block wx:if="{{show===0}}">
       <view class="time-img">
-        <image mode="aspectFit" class="time-img-body" src="/images/people.png"></image>
+        <image mode="aspectFit" class="time-img-body" src="/images/people.jpg"></image>
       </view>
-      <view class="time-text">{{'00:00:00'}}</view>
+      <view class="time-text">{{time}}</view>
     </block>
     <block wx:else>
       <view class="todo">

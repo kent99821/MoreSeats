@@ -21,7 +21,7 @@
 
 </view>
 <view class="top-body FRSS">
-  <view class="top-user FRSC">
+  <view class="top-user FRSC" bindtap="changeName">
     <view class="top-user-icon FCCC">
       <open-data type="userAvatarUrl" bindtap="test"></open-data>
       <!-- <view class="top-user-icon-text">点击获取</view> -->
@@ -29,7 +29,7 @@
     <view class="top-user-name wux-ellipsis">
       {{userName}}
     </view>
-    <image mode="aspectFit" bindtap="changeName" class="top-user-pen" src="/images/pen.png" />
+    <image mode="aspectFit" class="top-user-pen" src="/images/pen-disable.png" />
   </view>
 </view>
 <!-- <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button> -->

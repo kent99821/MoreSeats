@@ -8,8 +8,25 @@
   module.exports.numberToFix=numberToFix;
   module.exports.stringToFix=stringToFix;
 </wxs>
+<view bindtap="navigateToChair" class="top-body FCCC">
+  <view class="top-body-2 FRCC">
+    <view class="top-body-side FCCC">
+      <view class="top-body-side-text FCCC">已签到人次</view>
+      <view class="top-body-side-show FRSC">
+        {{pep}}
+      </view>
+    </view>
+    <view class="top-body-side FCCC">
+      <view class="top-body-side-text FCCC">产生总时长/小时</view>
+      <view class="top-body-side-show FRSC">
+        {{tim}}
+      </view>
+    </view>
+
+  </view>
+</view>
 <view class="tips"></view>
-<view wx:for="{{historyList}}" class="cards FRCC">
+<view wx:for="{{historyList}}" class="cards FRCC card-{{index}}">
   <wux-swipe-action-group>
     <wux-swipe-action autoClose useSlots>
       <view class="cards-body FRSC">

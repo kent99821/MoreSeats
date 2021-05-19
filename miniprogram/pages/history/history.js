@@ -37,7 +37,6 @@ Page({
         num:num
       },
       success: res => {
-
         let changeData = res.result.data;
         changeData.map((item)=>{
           item.sDate = item.sTime.split('T')[0].split('-').join('.');
@@ -46,7 +45,7 @@ Page({
           historyList: [...this.data.historyList, ...changeData],
         })
         // console.log(changeData)
-        if(this.data.showTop==false &&  this.data.historyList[0].isOver== false){
+        if(this.data.showTop==false && this.data.historyList.length>0 &&  this.data.historyList[0].isOver== false){
           let cData = this.data.historyList;
           cData.splice(0,1);
           this.setData({
@@ -55,12 +54,8 @@ Page({
             historyList: cData
           })
         }
-
         getApp().globalData.isOver = this.data.showTop;
-        // console.log(app.globalData.isOver)
-
         console.log(this.data.historyList)
-
       },
       fail: err => {
         console.log('调用失败：', err)

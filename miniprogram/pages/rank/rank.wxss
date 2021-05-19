@@ -3,10 +3,59 @@ view {
   /* border: 1px solid #63636396; */
 }
 
+.top-body {
+  background-color: #fff;
+  height: 140rpx;
+  width: 100%;
+  box-shadow: 0px 5px 12px -4px #ccc;
+  /* position: relative; */
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  z-index: 99999;
+}
+
+.top-body-2 {
+  height: 70%;
+  width: 80%;
+}
+
+.top-body-side {
+  height: 100%;
+  width: 50%;
+  color: #ff7454;
+}
+
+.top-body-side-text {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+}
+
+.top-body-side-show {
+
+  font-size: 40rpx;
+}
+
+.top-body-right {
+  height: 100%;
+  width: 50%;
+}
+
+.top-body-right-text {
+  font-size: 28rpx;
+  color: #ff1f1f;
+}
+
+.top-body-right-text-icon {
+  /* margin: 20rpx; */
+  margin-left: 10rpx;
+  margin-top: 9rpx;
+}
+
 .tips {
   font-size: 34rpx;
   /* width: 100%; */
-  margin-top: 25rpx;
+  margin-top: 170rpx;
   margin-left: 75rpx;
   margin-bottom: 10rpx;
   color: #535353;
@@ -24,6 +73,18 @@ view {
   border-radius: 15rpx;
   box-shadow: 0rpx 5rpx 10rpx -3rpx #ccc;
   overflow: hidden;
+}
+
+.card-0 {
+  box-shadow: 0rpx 0rpx 20rpx -3rpx #ffd700;
+}
+
+.card-1 {
+  box-shadow: 0rpx 0rpx 20rpx -3rpx #d4d4d4;
+}
+
+.card-2 {
+  box-shadow: 0rpx 0rpx 20rpx -3rpx #fc9b5f;
 }
 
 .cards-body {
@@ -48,7 +109,7 @@ view {
 .cards-body-left-roomName {
   height: 70%;
   font-size: 42rpx;
-  max-width: 370rpx;
+  width: 370rpx;
 }
 
 .cards-body-left-tags {

@@ -1,4 +1,7 @@
 /* pages/my/my.wxss */
+view {
+  /* border: 1px solid #000; */
+}
 
 .center-card {
   position: absolute;
@@ -70,9 +73,11 @@
 }
 
 .top-user-pen {
-  width: 35rpx;
-  height: 35rpx;
-  margin-left: 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+
+
+  /* margin-left: 20rpx; */
 }
 
 .list-body {

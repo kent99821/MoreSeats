@@ -1,2 +1,74 @@
-<!--pages/room/room.wxml-->
-<text>pages/room/room.wxml</text>
+<van-popup position="top"
+  custom-style="height:170rpx;display:flex;flex-direction:row;justify-content:center;align-items:center;"
+  overlay-style="color:#FFFFFF;" bind:close="onClose" show="{{ popupShow }}" bind:close="onClosePopup">
+  <view class="popup">{{popupContent}}</view>
+</van-popup>
+<view class="top FCCC">
+  <view class="top-body">
+    <view class="room-name FRSC wux-ellipsis">海大自习室</view>
+    <view class="room-share FRCC">
+      <image class="room-share-img" src="/images/share.png"></image>
+    </view>
+    <view class="room-center FRSC">
+      <view class="room-center-tag FCCC">#123456</view>
+      <image class="room-center-openTime-icon" src="/images/clock2.png" bindtap="onShowPopup" data-popupType="0">
+      </image>
+      <view class="room-center-openTime wux-ellipsis" bindtap="onShowPopup" data-popupType="0">7:30 ~ 22:30</view>
+    </view>
+    <view class="room-notic FRSC" bindtap="onShowPopup" data-popupType="1">
+      <view class="room-notic-icon FCCC">
+        <image class="room-notic-icon-icon" src="/images/notice.png"></image>
+      </view>
+      <view class="room-notic-text wux-ellipsis">咕咕咕咕咕咕过过</view>
+    </view>
+    <view class="room-take FRCC" bindtap="onShowPopup" data-popupType="2">
+      <view class="room-take-text">打卡规则</view>
+    </view>
+    <view class="room-rank FRCC">
+      <image class="room-share-img" src="/images/rank.png"></image>
+    </view>
+  </view>
+</view>
+<view class="chairs-body">
+  <van-tabs animated swipeable active="{{tabIndex}}" sticky>
+    <block wx:for="{{tabChairsIndex}}">
+      <van-tab class="oneTab FRCS" title="{{item.name}}">
+        <view class="FRCSW oneTab-body">
+          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{index-1}}">
+            <!-- {{chairTabIndex+item.start+1}}-{{chairsStates[chairTabIndex+item.start].state}} -->
+            <view class="oneTab-chair-icon FCCC">
+              <image class="oneTab-chair-icon-img" mode="aspectFill"
+                src="/images/chair-{{chairsStates[chairTabIndex+item.start].state?0:1}}.png"></image>
+            </view>
+            <view class="oneTab-chair-text FCCC">
+              {{chairTabIndex+item.start+1}}
+            </view>
+          </view>
+          <view class="useless"></view>
+        </view>
+      </van-tab>
+    </block>
+  </van-tabs>
+</view>
+<view class="botm FRSC">
+  <view class="botm-color FRCC">
+    <view class="botm-color-g-c1"></view>
+    <view class="botm-color-g-t1">已占用</view>
+    <view class="botm-color-g-c2"></view>
+    <view class="botm-color-g-t2">未占用</view>
+  </view>
+  <view class="botm-info FRCC">
+    <image src="/images/chair-3.png" class="botm-info-icon"></image>
+    <view class="botm-info-text">123/1245</view>
+  </view>
+  <view class="last-btn FRCC">
+    <block wx:if="{{false}}">
+      <image src="/images/toadminmsg.png" class="botm-info-icon "></image>
+      <view class="botm-info-text unline">联系管理</view>
+    </block>
+    <block wx:else>
+      <image src="/images/toadminpage.png" class="botm-info-icon "></image>
+      <view class="botm-info-text unline">管理</view>
+    </block>
+  </view>
+</view>
