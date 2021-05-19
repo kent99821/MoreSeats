@@ -266,7 +266,8 @@ Page({
 
       ],
       sitDown: 19,
-      type: 1
+      type: 1,
+      roomId: ''
     },
     chairsStates: [],
   },
@@ -276,6 +277,9 @@ Page({
    */
   onLoad: function (options) {
     let aId = options.roomId;
+    this.setData({
+      roomId: aId
+    })
     let aName = options.roomName;
     if (options.roomName) {
       save();
@@ -311,7 +315,7 @@ Page({
         }
       })
     }
-
+    
     function save() {
       let val = wx.getStorageSync('rooms');
 
@@ -326,16 +330,14 @@ Page({
       wx.setStorageSync('rooms', val);
     }
 
-
-
-
-
-
-
-
-
   },
-
+  toChair(){
+    const chairIndex = e.currentTarget.dataset.chairIndex;
+    // console.log(e.currentTarget.dataset.chairIndex);
+    wx.navigateTo({
+      url: '../chair/chair?roomId='+ this.data.roomId+'&chairIndex='+chairIndex,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
