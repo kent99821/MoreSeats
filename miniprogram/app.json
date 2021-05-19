@@ -12,6 +12,8 @@
     "pages/adminRoomSetting/adminRoomSetting",
     "pages/adminRoomHistory/adminRoomHistory",
     "pages/adminRoomNow/adminRoomNow",
+    "pages/adminRule/adminRule",
+    "pages/adminChairs/adminChairs",
     "pages/about/about",
     "pages/test/test",
     "pages/testmap/testmap"
