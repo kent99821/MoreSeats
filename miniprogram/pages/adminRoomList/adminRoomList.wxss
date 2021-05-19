@@ -35,6 +35,7 @@ view {
   margin-top: 10rpx;
   max-width: 590rpx;
   margin-right: 10rpx;
+  /* color: #ff795a; */
 }
 
 .ch-1 {
@@ -51,11 +52,12 @@ view {
 }
 
 .cards-body-left-tags-1 {
-  border: 1px solid #747474;
+  border: 1px solid #ff795a;
   border-radius: 8rpx;
   padding-left: 5rpx;
   padding-right: 5rpx;
   font-size: 20rpx;
+  color: #ff795a;
 }
 
 .opentime {
@@ -121,7 +123,8 @@ view {
 .btn {
   height: 110rpx;
   width: 110rpx;
-  border: 1px solid #000;
+
+  /* border: 1px solid #000; */
   border-radius: 15rpx;
 }
 
@@ -134,4 +137,22 @@ view {
 .right-button-icon {
   width: 80rpx;
   height: 120rpx;
+}
+
+.icon-img {
+  height: 80%;
+  width: 100%;
+  /* background-color: red; */
+}
+
+.icon-text {
+  height: 20%;
+  width: 100%;
+  /* background-color: #696969; */
+  color: #888888;
+  font-size: 20rpx;
+}
+
+.useless {
+  height: 50rpx;
 }

@@ -14,39 +14,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let val = app.globalData.roomAdminList.map((item) => {
-      return item.roomId;
-    })
-    console.log(val)
     wx.cloud.callFunction({
-      name: 'getRoomInfo',
+      name: 'getUserInfo',
       data: {
         flag: 0,
-        roomIds: val
       },
       success: res => {
-        // console.log('-----');
-        // console.log(app.globalData.roomAdminList)
-        // console.log(res)
-        this.setData({
-          roomsList: res.result.data
+        console.log(res.result.data.roomAdminList)
+        let val = res.result.data.roomAdminList.map((item) => {
+          return item.roomId;
         })
-        console.log(this.data.roomsList)
+
+        wx.cloud.callFunction({
+          name: 'getRoomInfo',
+          data: {
+            flag: 0,
+            roomIds: val
+          },
+          success: res => {
+            // console.log('-----');
+            // console.log(app.globalData.roomAdminList)
+            // console.log(res)
+            this.setData({
+              roomsList: res.result.data
+            })
+            console.log(this.data.roomsList)
+          },
+          fail: err => {
+            console.log('调用失败：', err)
+          }
+        })
       },
       fail: err => {
         console.log('调用失败：', err)
       }
     })
+
   },
   toCreateRoom() {
-    const that=this
+    const that = this
     $wuxDialog().prompt({
       resetOnClose: true,
       title: "新建自习室",
       content: '最长16位字符',
       fieldtype: 'text',
       placeholder: "请输入房间名",
-      maxlength: 10,
+      maxlength: 16,
       onConfirm(e, response) {
         let n = response.replace(/(^\s*)|(\s*$)/g, "");
 
@@ -113,9 +126,27 @@ Page({
   toHistory(e) {
     let roomId = e.currentTarget.dataset.roomid;
     wx.navigateTo({
-      // url: '../history/adminRoomNow?roomId='+roomId,
-      // url: '../a='+roomId
       url: '../adminRoomHistory/adminRoomHistory?roomId=' + roomId,
+    })
+  },
+  torank(e) {
+    let roomId = e.currentTarget.dataset.roomid;
+    let pep = e.currentTarget.dataset.pep;
+    let tim = e.currentTarget.dataset.tim;
+    wx.navigateTo({
+      url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
+    })
+  },
+  torule(e) {
+    let roomId = e.currentTarget.dataset.roomid;
+    wx.navigateTo({
+      url: '../adminRule/adminRule?roomId=' + roomId,
+    })
+  },
+  tosettingChairs(e) {
+    let roomId = e.currentTarget.dataset.roomid;
+    wx.navigateTo({
+      url: '../adminChairs/adminChairs?roomId=' + roomId,
     })
   },
   changeValue(e) {
@@ -134,6 +165,7 @@ Page({
       postData = {
         title: '修改自习室名字',
         defaultText: changeItem[0].roomName,
+        len: 16,
         data: {
           flag: 1,
           roomId: roomId,
@@ -142,6 +174,7 @@ Page({
     } else if (type == 1) {
       postData = {
         title: '修改开放时间',
+        len: 30,
         defaultText: changeItem[0].openTime,
         data: {
           flag: 3,
@@ -152,6 +185,7 @@ Page({
     else if (type == 2) {
       postData = {
         title: '修改公告内容',
+        len: 100,
         defaultText: changeItem[0].roomNotice,
         data: {
           flag: 2,
@@ -164,10 +198,10 @@ Page({
     $wuxDialog().prompt({
       resetOnClose: true,
       title: postData.title,
-      content: '最长16位字符',
       fieldtype: 'text',
       defaultText: postData.defaultText,
-      maxlength: 16,
+      content: `最长${postData.len}位字符`,
+      maxlength: postData.len,
       onConfirm(e, response) {
         if (type == 0) postData.data.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
         else if (type == 1) postData.data.openTime = response.replace(/(^\s*)|(\s*$)/g, "");
@@ -227,26 +261,6 @@ Page({
           })
       },
     })
-
-
-
-
-
-    wx.cloud.callFunction({
-      name: 'adminAction',
-      data: {
-        flag: 1,
-        roomId: "306674",
-        roomName: "自习室修改1"
-      },
-      success: res => {
-        console.log(res)
-      },
-      fail: err => {
-        console.log('调用失败：', err)
-      }
-    })
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

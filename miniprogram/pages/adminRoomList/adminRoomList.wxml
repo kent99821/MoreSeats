@@ -17,10 +17,10 @@
             <wux-icon type="md-create" size="25" />
           </view>
         </view>
-        <view class="body-row-2 FRSC" >
+        <view class="body-row-2 FRSC">
           <view class="cards-body-left-tags-1 FCCC">#{{item.roomId}}</view>
           <!-- 修改开放时间 -->
-          <view class="opentime FRSC"  bindtap="changeValue"  data-roomid="{{item.roomId}}" data-type="1" >
+          <view class="opentime FRSC" bindtap="changeValue" data-roomid="{{item.roomId}}" data-type="1">
             <image src="/images/clock.png" mode="widthFix" class="opentime-icon"></image>
             <view class="opentime-text wux-ellipsis">{{item.openTime}}</view>
             <view class="ch-2 FCCC">
@@ -29,7 +29,7 @@
           </view>
         </view>
         <!-- 修改公告 -->
-        <view class="body-row-3 FRSC" bindtap="changeValue"  data-roomid="{{item.roomId}}" data-type="2">
+        <view class="body-row-3 FRSC" bindtap="changeValue" data-roomid="{{item.roomId}}" data-type="2">
           <image src="/images/notice.png" mode="widthFix" class="notice-icon"></image>
           <view class="notice-text wux-ellipsis">{{item.roomNotice}}</view>
           <view class="ch-2 FCCC">
@@ -38,11 +38,37 @@
         </view>
         <view class="body-row-4">
           <view class="btns FRCC">
-            <view class="btn FRCC" data-roomid="{{item.roomId}}"   bindtap="toadminRoomNow">正在学习</view>
-            <view class="btn FRCC" data-roomid="{{item.roomId}}"  bindtap="toHistory">历史记录</view>
-            <view class="btn FRCC" bindtap="">统计排名</view>
-            <view class="btn FRCC" bindtap="">打卡规则</view>
-            <view class="btn FRCC" bindtap="">座位管理</view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toadminRoomNow">
+              <image class="icon-img" mode="aspectFit" src="/images/list-live.png"></image>
+              <view class="icon-text FCCC">
+                正在学习
+              </view>
+            </view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toHistory">
+              <image class="icon-img" mode="aspectFit" src="/images/list-history.png"></image>
+              <view class="icon-text FCCC">
+                历史记录
+              </view>
+            </view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" data-pep="{{item.roomId}}" data-tim="{{item.roomId}}"
+              bindtap="torank">
+              <image class="icon-img" mode="aspectFit" src="/images/list-rank.png"></image>
+              <view class="icon-text FCCC">
+                统计排名
+              </view>
+            </view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="torule">
+              <image class="icon-img" mode="aspectFit" src="/images/list-rule.png"></image>
+              <view class="icon-text FCCC">
+                打卡规则
+              </view>
+            </view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="tosettingChairs">
+              <image class="icon-img" mode="aspectFit" src="/images/list-chairs.png"></image>
+              <view class="icon-text FCCC">
+                座位管理
+              </view>
+            </view>
           </view>
         </view>
       </view>
@@ -54,3 +80,4 @@
     </wux-swipe-action>
   </view>
 </wux-swipe-action-group>
+<view class="useless"></view>
