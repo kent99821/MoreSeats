@@ -1,2 +1,23 @@
-<!--pages/adminChairs/adminChairs.wxml-->
-<text>pages/adminChairs/adminChairs.wxml</text>
+<wux-toptips id="wux-toptips" />
+
+<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="如何显示自习室的座位"
+  bind:select="onSelect" />
+<wux-cell-group class="f">
+  <wux-cell title="座位显示" bindtap="openSelect" is-link extra="{{  typeName }}" />
+  <wux-cell disabled="{{type==1}}" title="座位数量">
+    <van-stepper disabled="{{type==1}}" slot="footer" integer="{{true}}" min="0" value="{{ chairNum }}" step="10"
+      bind:change="sizeChange" />
+  </wux-cell>
+</wux-cell-group>
+<wux-cell-group wx:if="{{type==1}}" class="f" title="分组设置" />
+
+<view wx:if="{{type==1}}" class="FRSS f w">
+  <van-sidebar active-key="{{ activeTab }}">
+    <van-sidebar-item wx:for="{{group}}" title="{{item.groupName}}" />
+    <van-sidebar-item title="增加一组" />
+  </van-sidebar>
+  <view class="oneTab">1</view>
+</view>
+<view class="b FCCC">
+  <view class="btn FCCC" bindtap="postConfig">确定</view>
+</view>
