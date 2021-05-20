@@ -2,7 +2,7 @@
   "usingComponents": {
     "wux-cell": "wux-weapp/cell/index",
     "wux-cell-group": "wux-weapp/cell-group/index",
-    "wux-switch": "wux-weapp/switch/index",
+    "wux-input": "wux-weapp/input/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "wux-toptips": "wux-weapp/toptips/index",

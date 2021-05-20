@@ -12,12 +12,43 @@
 <wux-cell-group wx:if="{{type==1}}" class="f" title="分组设置" />
 
 <view wx:if="{{type==1}}" class="FRSS f w">
-  <van-sidebar active-key="{{ activeTab }}">
+  <van-sidebar active-key="{{ activeTab }}" bind:change="onTabChange">
     <van-sidebar-item wx:for="{{group}}" title="{{item.groupName}}" />
     <van-sidebar-item title="增加一组" />
   </van-sidebar>
-  <view class="oneTab">1</view>
+  <view class="oneTab">
+    <block wx:if="{{activeTab != group.length}}">
+      <wux-cell-group class="">
+        <wux-cell>
+          <wux-input controlled bind:change="onNameChange" value="{{group[activeTab].groupName}}" label="分组名称"
+            placeholder="6字符内显示最佳" maxlength="12" />
+        </wux-cell>
+        <wux-cell title="座位数量">
+          <van-stepper slot="footer" integer="{{true}}" min="0" controlled value="{{ group[activeTab].groupSize }}"
+            bind:change="groupSizeChange" />
+        </wux-cell>
+      </wux-cell-group>
+      <view class="btni FCCC">
+        <view class="btnii1 FCCC" bindtap="delGroup"> 删除 </view>
+      </view>
+    </block>
+    <block wx:else>
+      <wux-cell-group class="">
+        <wux-cell>
+          <wux-input controlled bind:change="onnNameChange" value="{{newGroup.groupName}}" label="分组名称"
+            placeholder="6字符内显示最佳" maxlength="12" />
+        </wux-cell>
+        <wux-cell title="座位数量">
+          <van-stepper slot="footer" integer="{{true}}" min="0" controlled value="{{ newGroup.groupSize }}"
+            bind:change="ngroupSizeChange" />
+        </wux-cell>
+      </wux-cell-group>
+      <view class="btni FCCC">
+        <view class="btnii2 FCCC" bindtap="newGroup"> 新建 </view>
+      </view>
+    </block>
+  </view>
 </view>
 <view class="b FCCC">
-  <view class="btn FCCC" bindtap="postConfig">确定</view>
+  <view class="btn FCCC" bindtap="postConfig">保存</view>
 </view>

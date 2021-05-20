@@ -1,4 +1,7 @@
-import { $wuxDialog, $wuxToptips } from '../../miniprogram_npm/wux-weapp/index.js'
+import {
+  $wuxDialog,
+  $wuxToptips
+} from '../../miniprogram_npm/wux-weapp/index.js'
 // pages/adminRule/adminRule.js
 Page({
   /**
@@ -6,12 +9,32 @@ Page({
    */
   data: {
     typeName: "平铺",
-    activeTab:1,
-    type: 0,
+    group: [{
+        groupName: "A",
+        groupSize: 10
+      },
+      {
+        groupName: "B",
+        groupSize: 1
+      },
+      {
+        groupName: "C",
+        groupSize: 10
+      },
+      {
+        groupName: "D",
+        groupSize: 10
+      },
+    ],
+    newGroup: {
+      groupName: "",
+      groupSize: 0
+    },
+    activeTab: 1,
+    type: 1,
     chairNum: 0,
     show: false,
-    actions: [
-      {
+    actions: [{
         name: '平铺',
         subname: '适用于小型自习室',
         type: 0
@@ -25,7 +48,8 @@ Page({
         disabled: true,
         subname: '按真实座位排布显示',
         type: 2
-      },],
+      },
+    ],
     roomId: ""
   },
   getConfig: async function (roomId) {
@@ -60,29 +84,24 @@ Page({
     wx.showLoading({
       title: '请求中',
     })
-    console.log({
-      type: this.data.islimit ? 1 : 0,
-      size: this.data.size,
-      longitude: this.data.longitude,
-      latitude: this.data.latitude,
-    });
+
     await wx.cloud.callFunction({
       name: 'adminAction',
       data: {
-        flag: 4,
-        rule: {
-          type: this.data.islimit ? 1 : 0,
-          size: this.data.size,
-          longitude: this.data.longitude,
-          latitude: this.data.latitude,
-        },
+        flag: 5,
+        type: this.data.type,
+        group: this.data.group,
+        chairNum: this.data.chairNum,
         roomId: this.data.roomId
       },
       success: res => {
         console.log(res);
         wx.hideLoading()
         //
-
+        $wuxToptips().success({
+          text: '修改成功',
+          duration: 3000
+        })
 
       },
       fail: (res) => {
@@ -99,7 +118,11 @@ Page({
     this.setData({
       typeName: e.detail.name,
       show: false,
-      type: e.detail.type
+      type: e.detail.type,
+      group: [{
+        groupSize: this.data.chairNum,
+        groupName: "无分组"
+      }]
     })
   },
   openSelect: function () {
@@ -115,7 +138,74 @@ Page({
   sizeChange: function (e) {
     console.log(e);
     this.setData({
-      size: e.detail,
+      chairNum: e.detail,
+    })
+  },
+  onTabChange: function (e) {
+    console.log(e);
+    this.setData({
+      activeTab: e.detail,
+    })
+  },
+  onNameChange: function (e) {
+    console.log(e);
+    this.setData({
+      [`group[${this.data.activeTab}].groupName`]: e.detail.value,
+    })
+  },
+  groupSizeChange: function (e) {
+    console.log(e);
+    this.setData({
+      [`group[${this.data.activeTab}].groupSize`]: e.detail,
+    })
+    this.count()
+
+  },
+  onnNameChange: function (e) {
+    console.log(e);
+    this.setData({
+      ['newGroup.groupName']: e.detail.value,
+    })
+  },
+  ngroupSizeChange: function (e) {
+    console.log(e);
+    this.setData({
+      ['newGroup.groupSize']: e.detail,
+    })
+  },
+  newGroup: function (e) {
+    // this.data.group.push(this.data.newGroup)
+    if (this.data.newGroup.groupName.length == 0) {
+      $wuxToptips().warn({
+        text: '新建失败，名称不可为空',
+        duration: 3000
+      })
+      return
+    }
+
+    this.setData({
+      [`group[${this.data.group.length}]`]: this.data.newGroup,
+      activeTab: this.data.activeTab + 1
+    })
+    this.count()
+
+  },
+  delGroup: function (e) {
+    // this.data.group.push(this.data.newGroup)
+    this.data.group.splice(this.data.activeTab, 1)
+    this.setData({
+      group: this.data.group
+    })
+    this.count()
+
+  },
+  count: function () {
+    let sum = 0
+    this.data.group.forEach(i => {
+      sum += i.groupSize
+    })
+    this.setData({
+      chairNum: sum
     })
   },
   /**
@@ -127,53 +217,4 @@ Page({
     })
     this.getConfig(options.roomId)
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
