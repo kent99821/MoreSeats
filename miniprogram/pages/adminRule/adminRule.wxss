@@ -2,3 +2,17 @@
   width: 100vw;
   height: 100%;
 }
+
+.b {
+  width: 100%;
+  margin-top: 50rpx;
+}
+
+.btn {
+  width: 180rpx;
+  height: 60rpx;
+  background-color: #ff795b;
+  color: #fff;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+}

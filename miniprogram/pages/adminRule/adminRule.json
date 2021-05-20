@@ -1,9 +1,10 @@
 {
   "usingComponents": {
     "wux-cell": "wux-weapp/cell/index",
-    "wux-popup-select": "wux-weapp/popup-select/index",
+    "wux-cell-group": "wux-weapp/cell-group/index",
     "wux-switch": "wux-weapp/switch/index",
-    "wux-picker": "wux-weapp/picker/index"
+    "wux-input-number": "wux-weapp/input-number/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index"
   },
   "navigationBarTitleText": "打卡规则设置"
 }

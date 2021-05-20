@@ -1,6 +1,19 @@
-<wux-cell title="打卡限制" class="f">
-  <wux-switch slot="footer" value="{{ islimit }}" bind:change="onSwitchChange" />
-</wux-cell>
-<wux-picker cols="{{1}}" class="f" cascade options="{{ options }}" bind:confirm="onConfirm">
-  <wux-cell title="限制类型" is-link disabled="{{! islimit}}" extra="{{  typeName }}" />
-</wux-picker>
+<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="更改打卡规则类型"
+  bind:select="onSelect" />
+<wux-cell-group class="f">
+  <wux-cell title="打卡限制">
+    <wux-switch slot="footer" value="{{ islimit }}" bind:change="onSwitchChange" />
+  </wux-cell>
+  <wux-cell title="限制类型" bindtap="openSelect" is-link disabled="{{! islimit}}" extra="{{  typeName }}" />
+</wux-cell-group>
+
+<wux-cell-group class="f" title="范围设定" wx:if="{{islimit}}">
+  <wux-cell title="范围中心定位" bindtap="mapSelect" is-link extra="{{ hasMap?'已':'未' }}选择" />
+  <wux-cell title="范围半径（米）">
+    <wux-input-number slot="footer" value="{{size}}" step="{{ 5 }}" min="{{ 5 }}" controlled max="{{ 100 }}" longpress
+      color="assertive" bind:change="sizeChange"/>
+  </wux-cell>
+</wux-cell-group>
+<view class="b FCCC">
+  <view class="btn FCCC" bindtap="postConfig">确定</view>
+</view>

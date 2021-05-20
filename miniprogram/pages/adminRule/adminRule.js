@@ -1,22 +1,26 @@
 // pages/adminRule/adminRule.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     islimit: false,
-    typeArr: [],
-    typeName: "范围打",
-    size: 0,
+    typeName: "范围打卡",
+    size: 5,
     latitude: 0,
     longitude: 0,
-    options: [{ label: '范围打卡', value: 1 },
-    { label: '范卡', value: 3 },
-    {
-      label: 'CV打卡', value: 2,
-      // disabled: true
-    },],
+    show: false,
+    hasMap: false,
+    actions: [
+      {
+        name: '范围打卡',
+        subname: '限制用户仅在范围内打卡'
+      },
+      {
+        name: 'CV打卡（开发中）',
+        disabled: true,
+        subname: '智能识别打卡与签退'
+      },],
     roomId: ""
   },
   getConfig: async function (roomId) {
@@ -29,9 +33,15 @@ Page({
       success: res => {
         console.log(res.result.data.rule)
         this.setData({
-          islimit: res.result.data.rule.type === 0,
-          ...res.result.data.rule
+          islimit: res.result.data.rule.type !== 0,
+          ...res.result.data.rule,
+          hasMap: res.result.data.latitude !== 0
         })
+        if (res.result.data.rule.size === 0) {
+          this.setData({
+            size: 5
+          })
+        }
       },
       fail: (res) => {
         wx.showToast({
@@ -42,17 +52,73 @@ Page({
       }
     })
   },
-  onConfirm: function (e) {
-    console.log(e);
-    this.setData({
-      typeName: e.detail.label,
-      typeArr: e.detail.value
+  postConfig: async function () {
+    wx.showLoading({
+      title: '请求中',
+    })
+    console.log({
+      type: this.data.islimit ? 1 : 0,
+      size: this.data.size,
+      longitude: this.data.longitude,
+      latitude: this.data.latitude,
+    });
+    await wx.cloud.callFunction({
+      name: 'adminAction',
+      data: {
+        flag: 4,
+        rule: {
+          type: this.data.islimit ? 1 : 0,
+          size: this.data.size,
+          longitude: this.data.longitude,
+          latitude: this.data.latitude,
+        },
+        roomId: this.data.roomId
+      },
+      success: res => {
+        console.log(res);
+        wx.hideLoading()
+        //
+
+
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
     })
   },
-  onValueChange: function (e) {
+  mapSelect: function (e) {
+    wx.chooseLocation({
+      success: (e) => {
+        console.log(e);
+        this.setData({
+          longitude: e.longitude,
+          latitude: e.latitude,
+          hasMap: true
+        })
+      }
+    })
+
+  },
+  onSelect: function (e) {
     console.log(e);
     this.setData({
-      typeArr: e.detail.value
+      typeName: e.detail.name,
+      show: false,
+      type: 1
+    })
+  },
+  openSelect: function () {
+    this.setData({
+      show: true
+    })
+  },
+  closeSelect: function () {
+    this.setData({
+      show: false
     })
   },
   onSwitchChange: function () {
@@ -60,6 +126,12 @@ Page({
       islimit: !this.data.islimit,
       // 'config.type': !this.data.config.type,
 
+    })
+  },
+  sizeChange: function (e) {
+    console.log(e);
+    this.setData({
+      size: e.detail.value,
     })
   },
   /**
