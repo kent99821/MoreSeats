@@ -1,4 +1,6 @@
-<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="更改打卡规则类型"
+<wux-toptips id="wux-toptips" />
+
+<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="如何对用户打卡作限制"
   bind:select="onSelect" />
 <wux-cell-group class="f">
   <wux-cell title="打卡限制">
@@ -10,8 +12,7 @@
 <wux-cell-group class="f" title="范围设定" wx:if="{{islimit}}">
   <wux-cell title="范围中心定位" bindtap="mapSelect" is-link extra="{{ hasMap?'已':'未' }}选择" />
   <wux-cell title="范围半径（米）">
-    <wux-input-number slot="footer" value="{{size}}" step="{{ 5 }}" min="{{ 5 }}" controlled max="{{ 100 }}" longpress
-      color="assertive" bind:change="sizeChange"/>
+    <van-stepper slot="footer" value="{{ size }}" disable-input step="5" min="5" max="100"  bind:change="sizeChange" />
   </wux-cell>
 </wux-cell-group>
 <view class="b FCCC">

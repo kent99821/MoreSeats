@@ -3,8 +3,9 @@
     "wux-cell": "wux-weapp/cell/index",
     "wux-cell-group": "wux-weapp/cell-group/index",
     "wux-switch": "wux-weapp/switch/index",
-    "wux-input-number": "wux-weapp/input-number/index",
-    "van-action-sheet": "@vant/weapp/action-sheet/index"
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "wux-toptips": "wux-weapp/toptips/index"
   },
   "navigationBarTitleText": "打卡规则设置"
 }

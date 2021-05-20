@@ -1,3 +1,4 @@
+import { $wuxDialog, $wuxToptips } from '../../miniprogram_npm/wux-weapp/index.js'
 // pages/adminRule/adminRule.js
 Page({
   /**
@@ -78,7 +79,10 @@ Page({
         console.log(res);
         wx.hideLoading()
         //
-
+        $wuxToptips().success({
+          text: '修改成功',
+          duration: 3000
+        })
 
       },
       fail: (res) => {
@@ -131,7 +135,7 @@ Page({
   sizeChange: function (e) {
     console.log(e);
     this.setData({
-      size: e.detail.value,
+      size: e.detail,
     })
   },
   /**
