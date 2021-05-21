@@ -28,40 +28,29 @@ Page({
     let len = this.data.historyList.length;
     let num = 15;
     if (len > 10) num = 10;
-    if (this.data.showTop == true) {
-      len++;
-    };
+
     wx.cloud.callFunction({
-      name: 'getUserInfo',
+      name: 'getRoomInfo',
       data: {
-        flag: 1,
+        flag: 2,
+        roomId: this.data.roomId,
+        isOver: true,
         skip: len,
         num: num
       },
       success: res => {
-
-        let changeData = res.result.data;
-        changeData.map((item) => {
-          item.sDate = item.sTime.split('T')[0].split('-').join('.');
-        })
-        this.setData({
-          historyList: [...this.data.historyList, ...changeData],
-        })
-        // console.log(changeData)
-        if (this.data.showTop == false && this.data.historyList[0].isOver == false) {
-          let cData = this.data.historyList;
-          cData.splice(0, 1);
+        console.log(res)
+        let historyList = res.result.data;
+        if (historyList.length > 0) {
+          historyList = historyList.map((item) => {
+            let sTime = item.sTime
+            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+            return item;
+          })
           this.setData({
-            showTop: true,
-            topData: this.data.historyList[0],
-            historyList: cData
+            historyList: [...this.data.historyList,...res.result.data]
           })
         }
-
-        getApp().globalData.isOver = this.data.showTop;
-        // console.log(app.globalData.isOver)
-
-        console.log(this.data.historyList)
 
       },
       fail: err => {
@@ -76,34 +65,7 @@ Page({
     // if (!roomId) roomId = '454914'
     // console.log(roomId)
     this.setData({ roomId: roomId })
-    wx.cloud.callFunction({
-      name: 'getRoomInfo',
-      data: {
-        flag: 2,
-        roomId: roomId,
-        isOver: true,
-        skip: 0,
-        num: 12
-      },
-      success: res => {
-        console.log(res)
-        let userList = res.result.data;
-        if (userList.length > 0) {
-          userList = userList.map((item) => {
-            let sTime = item.sTime
-            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] + sTime.split('T')[1].split('.')[0].split(':')[1];
-            return item;
-          })
-          this.setData({
-            userList: res.result.data
-          })
-        }
-
-      },
-      fail: err => {
-        console.log('调用失败：', err)
-      }
-    })
+    this.getHistoryList()
   },
 
   /**
@@ -145,6 +107,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    // console.log('test')
     this.getHistoryList();
   },
 

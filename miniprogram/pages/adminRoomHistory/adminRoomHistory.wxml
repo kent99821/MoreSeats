@@ -1,11 +1,11 @@
 <view class="tips"></view>
-<view wx:for="{{userList}}" class="cards FRCC">
+<view wx:for="{{historyList}}" class="cards FRCC">
   <wux-swipe-action-group>
 
     <wux-swipe-action autoClose useSlots>
       <view class="cards-body FRSC">
         <view class="cards-body-left FCCS">
-          <view class="cards-body-left-roomName  wux-ellipsis">用户名{{item.userName}}</view>
+          <view class="cards-body-left-roomName  wux-ellipsis">{{item.userName}}</view>
           <view class="cards-body-left-tags FCCC">
             <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex}}号座</view>
           </view>
