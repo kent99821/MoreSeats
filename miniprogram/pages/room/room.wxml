@@ -62,13 +62,14 @@
     <view class="botm-info-text">{{roomData.chairs.sitDown}}/{{roomData.chairs.chairNum}}</view>
   </view>
   <view class="last-btn FRCC">
-    <block wx:if="{{false}}">
+    <block wx:if="{{!isAdmin}}">
       <image src="/images/toadminmsg.png" class="botm-info-icon "></image>
-      <view class="botm-info-text unline">联系管理</view>
+      <!-- <view class="botm-info-text unline">联系管理</view> -->
+      <view open-type="contact"class="botm-info-text unline" bindcontact="handleContact">联系管理</view>
     </block>
-    <block wx:else>
-      <image src="/images/toadminpage.png" class="botm-info-icon "></image>
-      <view class="botm-info-text unline">管理</view>
+    <block wx:else >
+      <image src="/images/toadminpage.png" class="botm-info-icon" bindtap="toAdminRoom"></image>
+      <view class="botm-info-text unline" bindtap="toAdminRoom">管理</view>
     </block>
   </view>
 </view>
