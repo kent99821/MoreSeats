@@ -8,6 +8,63 @@ Page({
     userList: [],
     roomId: ''
   },
+
+  getHistoryList(){
+    let len = this.data.userList.length;
+    let num = 15;
+   
+    if (len > 10) num = 10;
+    console.log(this.data.roomId)
+    wx.cloud.callFunction({
+      name: 'getRoomInfo',
+      data: {
+        flag: 2,
+        roomId: this.data.roomId,
+        isOver: false,
+        skip: len,
+        num: num
+      },
+      success: res => {
+        console.log(res)
+        let userList = res.result.data;
+        if (userList.length > 0) {
+          userList = userList.map((item) => {
+            let sTime = item.sTime
+            item.howlong= getTime((new Date(sTime)).valueOf());
+
+            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+            return item;
+          })
+          this.setData({
+            userList: [...this.data.userList,...userList ]
+          })
+        }
+
+      },
+      fail: err => {
+        console.log('调用失败：', err)
+      }
+    })
+
+   function getTime(aTime){
+
+      let a = '21:34:00';
+      a = aTime;
+      let val = (Date.now()- a)/1000;
+ 
+      return parseInt(val/60);
+    //   let h, m, s;
+    //   h = parseInt(val/(60*60));
+    //   m = parseInt((val-(h*60*60))/(60));
+    //   s = parseInt(val%60);
+    //   let parseTime= (h)=>{
+    //     return (h<10?('0'+h):(h))
+    //   }
+    //   console.log(parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))
+    //  return  (parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))/60
+  
+    }
+  },
   signOut(e) {
     console.log(e.currentTarget.dataset.index);
     let index = e.currentTarget.dataset.index;
@@ -41,39 +98,40 @@ Page({
    */
   onLoad: function (options) {
 
-
+    console.log(options)
     let roomId = options.roomId
     // if(!roomId) roomId = '454914'
     console.log(roomId)
     this.setData({ roomId: roomId })
-    wx.cloud.callFunction({
-      name: 'getRoomInfo',
-      data: {
-        flag: 2,
-        roomId: roomId,
-        isOver: false,
-        skip: 0,
-        num: 5
-      },
-      success: res => {
-        console.log(res)
-        let userList = res.result.data;
-        if (userList.length > 0) {
-          userList = userList.map((item) => {
-            let sTime = item.sTime
-            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] + sTime.split('T')[1].split('.')[0].split(':')[1];
-            return item;
-          })
-          this.setData({
-            userList: res.result.data
-          })
-        }
+    this.getHistoryList()
+    // wx.cloud.callFunction({
+    //   name: 'getRoomInfo',
+    //   data: {
+    //     flag: 2,
+    //     roomId: roomId,
+    //     isOver: false,
+    //     skip: 0,
+    //     num: 15
+    //   },
+    //   success: res => {
+    //     console.log(res)
+    //     let userList = res.result.data;
+    //     if (userList.length > 0) {
+    //       userList = userList.map((item) => {
+    //         let sTime = item.sTime
+    //         item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] + sTime.split('T')[1].split('.')[0].split(':')[1];
+    //         return item;
+    //       })
+    //       this.setData({
+    //         userList: res.result.data
+    //       })
+    //     }
 
-      },
-      fail: err => {
-        console.log('调用失败：', err)
-      }
-    })
+    //   },
+    //   fail: err => {
+    //     console.log('调用失败：', err)
+    //   }
+    // })
   },
 
   /**
@@ -115,7 +173,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getHistoryList()
   },
 
   /**
