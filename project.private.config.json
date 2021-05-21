@@ -95,6 +95,12 @@
           "pathName": "pages/adminChairs/adminChairs",
           "query": "roomId=123456",
           "scene": null
+        },
+        {
+          "name": "pages/getQR/getQR",
+          "pathName": "pages/getQR/getQR",
+          "query": "roomId=123456",
+          "scene": null
         }
       ]
     }

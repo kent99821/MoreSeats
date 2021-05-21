@@ -14,6 +14,7 @@
     "pages/adminRoomNow/adminRoomNow",
     "pages/adminRule/adminRule",
     "pages/adminChairs/adminChairs",
+    "pages/getQR/getQR",
     "pages/about/about",
     "pages/test/test",
     "pages/testmap/testmap"
