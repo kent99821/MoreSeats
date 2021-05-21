@@ -269,7 +269,8 @@ Page({
       ],
       sitDown: 19,
       type: 1,
-      roomId: ''
+      roomId: '',
+      isAdmin: false
     },
     chairsStates: [],
   },
@@ -277,6 +278,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  toAdminRoom(){
+    wx.navigateTo({
+      url: '../adminRoom/adminRoom?roomId'+this.data.roomId,
+    })
+  },
+  toRank(){
+    wx.navigateTo({
+      url: '../rank/rank?roomId'+ this.data.roomId+'&pep=123&tim=154234',
+    })
+  },
   onLoad: function (options) {
     let adminList  = app.globalData.roomAdminList.map((item)=>{
       return  item.roomId;
@@ -346,7 +357,7 @@ Page({
       console.log(val)
       wx.setStorageSync('rooms', val);
     }
-    
+    this.getIsAdmin()
   },
   toChair(e){
     const chairIndex = e.currentTarget.dataset.chairindex-1;
@@ -363,8 +374,15 @@ Page({
     })
   },
   getIsAdmin(){
-
-},
+    console.log(app.globalData.roomAdminList)
+    app.globalData.roomAdminList.forEach(item=>{
+      if(item.roomId== this.data.roomId){
+        this.setData({
+          isAdmin: true
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
