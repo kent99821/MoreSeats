@@ -38,16 +38,11 @@
         </view>
         <view class="body-row-4">
           <view class="btns FRCC">
-            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toadminRoomNow">
-              <image class="icon-img" mode="aspectFit" src="/images/list-live.png"></image>
-              <view class="icon-text FCCC">
-                正在学习
-              </view>
-            </view>
+
             <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toHistory">
               <image class="icon-img" mode="aspectFit" src="/images/list-history.png"></image>
               <view class="icon-text FCCC">
-                历史记录
+                学习记录
               </view>
             </view>
             <view class="btn FCCC" data-roomid="{{item.roomId}}" data-pep="{{item.count.pepSum}}"
@@ -67,6 +62,12 @@
               <image class="icon-img" mode="aspectFit" src="/images/list-chairs.png"></image>
               <view class="icon-text FCCC">
                 座位管理
+              </view>
+            </view>
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toadminRoomNow">
+              <image class="icon-img" mode="aspectFit" src="/images/list-live.png"></image>
+              <view class="icon-text FCCC">
+                物料资源
               </view>
             </view>
           </view>

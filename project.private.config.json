@@ -33,7 +33,7 @@
         {
           "name": "pages/adminRoomHistory/adminRoomHistory",
           "pathName": "pages/adminRoomHistory/adminRoomHistory",
-          "query": "",
+          "query": "roomId=123456",
           "scene": null
         },
         {

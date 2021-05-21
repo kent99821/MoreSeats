@@ -83,7 +83,7 @@ Page({
         roomId: roomId,
         isOver: true,
         skip: 0,
-        num: 5
+        num: 12
       },
       success: res => {
         console.log(res)
@@ -145,7 +145,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    // this.getHistoryList();
+    this.getHistoryList();
   },
 
   /**
