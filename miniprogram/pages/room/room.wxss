@@ -44,8 +44,8 @@ view {
 }
 
 .room-share-img {
-  height: 100%;
-  width: 100%;
+  height: 85%;
+  width: 85%;
 }
 
 .room-center {
@@ -126,10 +126,14 @@ view {
   height: 80rpx;
   width: 80rpx;
   left: 635rpx;
-  top: 80rpx;
+  top: 90rpx;
   position: absolute;
 }
 
+.room-rank-img {
+  width: 70%;
+  height: 70%;
+}
 
 .chairs-body {
   width: 100%;
