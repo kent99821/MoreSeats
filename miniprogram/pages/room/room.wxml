@@ -24,8 +24,8 @@
     <view class="room-take FRCC" bindtap="onShowPopup" data-popupType="2">
       <view class="room-take-text">打卡规则</view>
     </view>
-    <view class="room-rank FRCC">
-      <image class="room-rank-img" src="/images/list-rank.png"></image>
+    <view class="room-rank FRCC" bindtap="toRank">
+      <image class="room-rank-img" src="/images/list-rank.png" ></image>
     </view>
   </view>
 </view>
