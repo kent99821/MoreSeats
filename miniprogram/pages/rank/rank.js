@@ -32,9 +32,7 @@ Page({
     let len = this.data.historyList.length;
     let num = 15;
     if (len > 10) num = 10;
-    if (this.data.showTop == true) {
-      len++;
-    };
+
     wx.cloud.callFunction({
       name: 'getRank',
       data: {
