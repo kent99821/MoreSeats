@@ -1,3 +1,12 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "wux-cell": "wux-weapp/cell/index",
+    "wux-cell-group": "wux-weapp/cell-group/index",
+    "wux-switch": "wux-weapp/switch/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "wux-toptips": "wux-weapp/toptips/index"
+
+  },
+  "navigationBarTitleText": "获取物料资源"
 }

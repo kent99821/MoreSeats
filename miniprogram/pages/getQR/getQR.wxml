@@ -1,2 +1,34 @@
-<!--pages/getQR/getQR.wxml-->
-<text>pages/getQR/getQR.wxml</text>
+<wux-toptips id="wux-toptips" />
+
+<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="如何对用户打卡作限制"
+  bind:select="onSelect" />
+<wux-cell-group class="f">
+  <wux-cell title="物料类型" bindtap="openSelect" is-link extra="{{  typeName }}" />
+</wux-cell-group>
+<block wx:if="{{true}}">
+  <wux-cell-group class="f" title="生成座位码">
+    <wux-cell title="起始座位号">
+      <van-stepper slot="footer" value="{{ num1 }}" min="1" bind:change="num1Change" />
+    </wux-cell>
+    <wux-cell title="生成数量">
+      <van-stepper slot="footer" value="{{ num2 }}" step="10" min="1" max="50" bind:change="num2Change" />
+    </wux-cell>
+  </wux-cell-group>
+  <view class="tips FCCC">
+    <view>若起始座位号设为5，生成数量设为10，则生成5~14号座位码。</view>
+    <view>生成的座位码永久有效，无需重复生成。</view>
+  </view>
+</block>
+<block wx:else>
+  <view class="tips FCCC">
+    <view>若起始座位号设为5，生成数量设为10，则生成5~14号座位码。</view>
+    <view>生成的座位码永久有效，无需重复生成。</view>
+  </view>
+</block>
+<view class="b FCCC">
+  <view class="btn FCCC" bindtap="postConfig">生成</view>
+</view>
+<view wx:if="{{true}}" class="dn">
+
+
+</view>
