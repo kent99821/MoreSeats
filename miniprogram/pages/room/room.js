@@ -359,7 +359,16 @@ Page({
 
   },
   onLoad: function (options) {
-    let aId = options.roomId;
+    // let a =  wx.getLaunchOptionsSync()
+    // console.log(a) 
+    console.log(options)
+    let aId ;
+    if(options.scene){
+      aId = options.scene.split('%3D')[1];
+    }else{
+      aId =options.roomId;
+    }
+    
     this.setData({
       roomId: aId
     })

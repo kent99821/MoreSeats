@@ -379,13 +379,25 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options)
+    let roomId , chairIndex;
+    if(options.scene){
+      // aId = options.scene.split('%26')[0].split('%3D')[1];
+      roomId =options.scene.split('%26')[1].split('%3D')[1];
+      chairIndex= options.scene.split('%26')[0].split('%3D')[1];
+    }else{
+      roomId =options.roomId;
+      chairIndex= options.chairIndex;
+    }
+
+
     wx.setNavigationBarTitle(
-      {title: '房间号'+options.roomId+ ' 座位号'+ (parseInt(options.chairIndex)+1)}
+      {title: '房间号'+roomId+ ' 座位号'+ (parseInt(chairIndex)+1)}
     )
 
     this.setData({
-      roomId: options.roomId|| this.data.roomId,
-      chairIndex: options.chairIndex|| this.data.chairIndex
+      roomId: roomId,
+      chairIndex:chairIndex
     })
     this.getRoomRule()
   },

@@ -226,7 +226,14 @@ Page({
     let sthis = this;
     wx.scanCode({
 
+
       success: (res) => {
+        let a ='/' +res.path;
+        wx.navigateTo({
+          url: a,
+        })
+        console.log(res)
+        console.log(res.path)
         let result = res.result;
         console.log(result)
         // _this.setData({
