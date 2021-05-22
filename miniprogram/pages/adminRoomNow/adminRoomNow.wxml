@@ -11,7 +11,7 @@
         </view>
         <view class="cards-body-right FCCC">
           <view class="cards-body-right-date FREC">
-            {{item.sTime}}
+            {{item.ssTime}}
           </view>
           <view class="cards-body-right-sumtime FREC">
             <view class="cards-body-right-sumtime-num">{{item.howlong}}</view>

@@ -49,8 +49,8 @@ Page({
         let historyList = res.result.data;
         if (historyList.length > 0) {
           historyList = historyList.map((item) => {
-            let sTime = item.sTime
-            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+            let sTime = item.ssTime
+            item.ssTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
             return item;
           })
           this.setData({

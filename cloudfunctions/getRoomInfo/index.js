@@ -100,7 +100,7 @@ exports.main = async (event, context) => {
         isOver:event.isOver
       }).field({
       chairIndex:true,
-      sTime:true,
+      ssTime:true,
       howlong:true,
       openId:true,
       userName:true

@@ -37,9 +37,10 @@ Page({
         num:num
       },
       success: res => {
+        console.log(res);
         let changeData = res.result.data;
         changeData.map((item)=>{
-          item.sDate = item.sTime.split('T')[0].split('-').join('.');
+          item.sDate = item.ssTime.split('T')[0].split('-').join('.');
         })
         this.setData({
           historyList: [...this.data.historyList, ...changeData],

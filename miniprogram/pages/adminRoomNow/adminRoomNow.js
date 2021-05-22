@@ -29,10 +29,10 @@ Page({
         let userList = res.result.data;
         if (userList.length > 0) {
           userList = userList.map((item) => {
-            let sTime = item.sTime
+            let sTime = item.ssTime
             item.howlong= getTime((new Date(sTime)).valueOf());
 
-            item.sTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+            item.ssTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
             return item;
           })
           this.setData({
