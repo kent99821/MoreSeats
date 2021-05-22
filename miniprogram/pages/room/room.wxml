@@ -7,7 +7,8 @@
   <view class="top-body">
     <view class="room-name FRSC wux-ellipsis">{{roomData.roomName}}</view>
     <view class="room-share FRCC">
-      <image class="room-share-img" src="/images/share.png"></image>
+      <button class="room-share-img"  style="background-image:  url(/images/share.png);background-repeat:no-repeat ;background-size: 90rpx 90rpx; border: 0;background-color: transparent;" open-type="share"></button>
+      <!-- <image class="room-share-img" src="/images/share.png"></image> -->
     </view>
     <view class="room-center FRSC">
       <view class="room-center-tag FCCC">#{{roomData.roomId}}</view>
