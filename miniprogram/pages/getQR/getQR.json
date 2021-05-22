@@ -5,7 +5,8 @@
     "wux-switch": "wux-weapp/switch/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-action-sheet": "@vant/weapp/action-sheet/index",
-    "wux-toptips": "wux-weapp/toptips/index"
+    "wux-toptips": "wux-weapp/toptips/index",
+    "wux-vcode": "wux-weapp/vcode/index"
 
   },
   "navigationBarTitleText": "获取物料资源"
