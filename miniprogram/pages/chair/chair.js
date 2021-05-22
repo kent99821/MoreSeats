@@ -394,8 +394,8 @@ Page({
     let roomId , chairIndex;
     if(options.scene){
       console.log(options.scene)
-      chairIndex =options.scene.split('%26')[1].split('%3D')[1];
-      roomId= options.scene.split('%26')[0].split('%3D')[1];
+      chairIndex =options.scene.split('%26')[0].split('%3D')[1];
+      roomId= options.scene.split('%26')[1].split('%3D')[1];
     }else{
       roomId =options.roomId;
       chairIndex= options.chairIndex;
