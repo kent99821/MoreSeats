@@ -96,7 +96,9 @@ view {
   background-color: #fff;
   border-radius: 35rpx;
   overflow: hidden;
-  border: 1rpx solid #ccc;
+  /* border: 1rpx solid #ccc; */
+  box-shadow: 0px 5px 10px -4px #696969;
+
   /* box-shadow: 0px 5px 19px -6px #696969; */
 }
 
@@ -114,8 +116,8 @@ view {
 }
 
 .to-room-side-icon-2 {
-  height: 45rpx;
-  width: 45rpx;
+  height: 70rpx;
+  width: 70rpx;
   margin: 20rpx;
 }
 
