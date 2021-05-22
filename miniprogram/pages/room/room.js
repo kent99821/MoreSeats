@@ -359,8 +359,10 @@ Page({
 
   },
   onLoad: function (options) {
-    // let a =  wx.getLaunchOptionsSync()
-    // console.log(a) 
+    console.log('参数值')
+    let a =  wx.getLaunchOptionsSync()
+    console.log(a) 
+    console.log('-----------------')
     console.log(options)
     let aId ;
     if(options.scene){
