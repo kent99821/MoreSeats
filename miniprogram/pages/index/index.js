@@ -126,7 +126,7 @@ Page({
           // console.log(res.result.data)
 
           this.setData({ rooms: res.result.data })
-
+          this.getFireLen();
         },
         fail: err => {
           console.log('调用失败：', err)
@@ -134,15 +134,22 @@ Page({
       })
     }
     // this.setData({rooms:val});
-    // this.getFireLen();
+
   },
   getFireLen() {
     let val = this.data.rooms;
+
     val.forEach((item) => {
       let len = 0;
-      if (item.sitDown !== 0)
-        len = parseFloat(item.sitDown / item.chairNum);
+      // console.log(item.chairs.chairNum)
+      let a = item.chairs.sitDown,b = item.chairs.chairNum;
 
+      if (a != 0  && b!=0)
+      {
+        len = parseFloat(a / b);
+      }
+
+        // console.log(item)
       if (len == 0) {
         len = 0;
       } else if (len <= 0.3333334) {
