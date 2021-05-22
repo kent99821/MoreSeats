@@ -22,7 +22,7 @@
 <block wx:else>
   <view class="tips FCCC">
     <view>若起始座位号设为5，生成数量设为10，则生成5~14号座位码。</view>
-    <view>生成的座位码永久有效，无需重复生成。</view>
+    <view>数量越多生成时间越长，生成的座位码永久有效，无需重复生成。</view>
   </view>
 </block>
 <view wx:if="{{codeShow}}" class="b FRCC">
@@ -32,7 +32,7 @@
   <input class="in" placeholder="请输入验证码" maxlength="3" bindinput="typeInCode" />
   <view class="btn FCCC" bindtap="postConfig">生成</view>
 </view>
-<view wx:if="{{true}}" class="dn FRCC">
+<view wx:if="{{true}}" bindtap="cpurl" class="dn FCCC">
+  <view class="ut"></view>
   <view class="url FCCC">{{res}}</view>
-
 </view>

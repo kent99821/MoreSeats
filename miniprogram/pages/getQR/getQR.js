@@ -19,7 +19,7 @@ Page({
     typeName: "",
     type: -1,
     isRes: false,
-    res: "https://636c-cloud1-8gmb0klh8ea93cef-1305797871.tcb.qcloud.la/qr/room.123456.toroom.zip",
+    res: "请点击生成",
     actions: [{
       name: '座位码',
       subname: '可张贴在实体座位上，扫码跳转对应座位页面',
@@ -40,13 +40,18 @@ Page({
 
 
 
-
-
-
-
-
-
-
+  cpurl: function () {
+    wx.setClipboardData({
+      data: this.data.res,
+      success(res) {
+        wx.getClipboardData({
+          success(res) {
+            console.log(res.data) // data
+          }
+        })
+      }
+    })
+  },
   typeInCode: function (e) {
     console.log(e);
     this.setData({
@@ -91,6 +96,9 @@ Page({
     })
   },
   postConfig: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
     if (this.data.type == -1) {
       $wuxToptips().warn({
         text: '请选择类型',
@@ -105,6 +113,9 @@ Page({
       })
       return
     }
+    wx.showLoading({
+      title: '生成中',
+    })
     wx.cloud.callFunction({
       name: 'getQR',
       data: {
@@ -118,6 +129,11 @@ Page({
         this.setData({
           isRes: true,
           res: res.result.tempFileURL,
+        })
+        wx.hideLoading()
+        $wuxToptips().success({
+          text: '点击下方复制链接，前往浏览器下载',
+          duration: 3000
         })
       },
       fail: (res) => {
