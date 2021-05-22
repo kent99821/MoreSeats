@@ -2,7 +2,7 @@
  * date:2021.05.10
  * author:kent
  * state:finished
- * content:update flag 8
+ * content:update flag 0
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')

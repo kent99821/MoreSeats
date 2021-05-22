@@ -1,8 +1,8 @@
 /**
- * date:2021.05.11
+ * date:2021.05.22
  * author:kent
  * state:finished
- * content:add history:userName
+ * content:update add history 
  */
 
 // 云函数入口文件
@@ -102,7 +102,7 @@ exports.main = async (event, context) => {
         openId:wxContext.OPENID ,
         userName:PageData.result.data[0].userName,
         roomId:event.roomId,
-        roomName:event.roomName,
+        roomName:PageData.oresult.data[0].roomName,
         sTime:new Date(),
         eTime:new Date(),
         ssTime:moment().tz("Asia/Shanghai").format(),

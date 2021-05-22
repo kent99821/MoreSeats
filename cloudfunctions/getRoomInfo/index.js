@@ -1,8 +1,8 @@
 /**
- * date:2021.05.19
+ * date:2021.05.22
  * author:kent
  * state:finished
- * content:updata flag 0
+ * content:updata flag 2
  */
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
@@ -104,7 +104,7 @@ exports.main = async (event, context) => {
       howlong:true,
       openId:true,
       userName:true
-      }).skip(event.skip).limit(event.num).get()
+      }).orderBy('sTime', 'desc').skip(event.skip).limit(event.num).get()
       if(PageData.result.data.length===0){
         PageData.resCode=404
         return {
