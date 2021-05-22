@@ -61,6 +61,9 @@ Page({
       placeholder: "请输入房间名",
       maxlength: 16,
       onConfirm(e, response) {
+        wx.showLoading({
+          title: '创建中',
+        })
         let n = response.replace(/(^\s*)|(\s*$)/g, "");
 
         if (n.length !== 0 && n.length < 17) {
@@ -72,8 +75,9 @@ Page({
             },
             success: res => {
               that.onLoad()
+              wx.hideLoading()
               $wuxToptips().success({
-                text: '修改成功',
+                text: '创建成功',
                 duration: 3000
               })
             },
@@ -95,6 +99,9 @@ Page({
     })
   },
   deleteItem(e) {
+    wx.showLoading({
+      title: '删除中',
+    })
     let index = e.currentTarget.dataset.index;
     let roomId = this.data.roomsList[index].roomId;
     console.log(roomId);
@@ -106,13 +113,23 @@ Page({
       },
       success: res => {
         console.log(res)
+        wx.hideLoading()
         let changeList = this.data.roomsList;
         changeList.splice(index, 1);
         this.setData({
           roomsList: changeList
         })
+        $wuxToptips().success({
+          text: '删除成功',
+          duration: 3000
+        })
       },
       fail: err => {
+        wx.hideLoading()
+        $wuxToptips().warn({
+          text: '删除失败',
+          duration: 3000
+        })
         console.log('调用失败：', err)
       }
     })
@@ -203,6 +220,9 @@ Page({
       content: `最长${postData.len}位字符`,
       maxlength: postData.len,
       onConfirm(e, response) {
+        wx.showLoading({
+          title: '修改中',
+        })
         if (type == 0) postData.data.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
         else if (type == 1) postData.data.openTime = response.replace(/(^\s*)|(\s*$)/g, "");
         else if (type == 2) postData.data.roomNotice = response.replace(/(^\s*)|(\s*$)/g, "");
@@ -240,25 +260,30 @@ Page({
               that.setData({
                 roomsList: changeList
               })
+              wx.hideLoading()
               $wuxToptips().success({
                 text: '修改成功',
                 duration: 3000
               })
             },
             fail: (res) => {
-              wx.showToast({
-                title: '云开发出现了些问题，请联系管理员排查！',
-                icon: "none"
+              wx.hideLoading()
+              $wuxToptips().success({
+                text: '修改失败',
+                duration: 3000
               })
               // console.log(res);
             }
           })
         } else
-          //失败通知
+        //失败通知
+        {
+          wx.hideLoading()
           $wuxToptips().warn({
             text: '修改失败',
             duration: 3000
           })
+        }
       },
     })
   },
@@ -309,5 +334,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  toCard: function (e) {
+    let index = e.currentTarget.dataset.index;
+    let roomId = this.data.roomsList[index].roomId;
+    wx.navigateTo({
+      url: `/pages/room/room?roomId=${roomId}`,
+    })
   }
 })

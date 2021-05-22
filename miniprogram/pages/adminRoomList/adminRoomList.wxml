@@ -21,7 +21,7 @@
           <view class="cards-body-left-tags-1 FCCC">#{{item.roomId}}</view>
           <!-- 修改开放时间 -->
           <view class="opentime FRSC" bindtap="changeValue" data-roomid="{{item.roomId}}" data-type="1">
-            <image src="/images/clock.png" mode="widthFix" class="opentime-icon"></image>
+            <image src="/images/clock2.png" mode="widthFix" class="opentime-icon"></image>
             <view class="opentime-text wux-ellipsis">{{item.openTime}}</view>
             <view class="ch-2 FCCC">
               <wux-icon type="md-create" size="15" />
@@ -74,8 +74,13 @@
         </view>
       </view>
       <view slot="right" bindtap="deleteItem" data-index="{{index}}">
-        <view class="right-button FCCC" bindtap="deleteCard" data-index="{{index}}">
+        <view class="right-button FCCC">
           <image mode="aspectFit" class="right-button-icon" src="/images/delete.png" />
+        </view>
+      </view>
+      <view slot="left" data-le="1" bindtap="toCard" data-index="{{index}}">
+        <view class="right-button-2 FCCC">
+          <image mode="aspectFit" class="right-button-icon" src="/images/door.png" />
         </view>
       </view>
     </wux-swipe-action>
