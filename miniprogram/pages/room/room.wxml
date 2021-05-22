@@ -7,7 +7,8 @@
   <view class="top-body">
     <view class="room-name FRSC wux-ellipsis">{{roomData.roomName}}</view>
     <view class="room-share FRCC">
-      <image class="room-share-img" src="/images/share.png"></image>
+      <button class="room-share-img"  style="background-image:  url(/images/share.png);background-repeat:no-repeat ;background-size: 90rpx 90rpx; border: 0;background-color: transparent;" open-type="share"></button>
+      <!-- <image class="room-share-img" src="/images/share.png"></image> -->
     </view>
     <view class="room-center FRSC">
       <view class="room-center-tag FCCC">#{{roomData.roomId}}</view>
@@ -24,8 +25,8 @@
     <view class="room-take FRCC" bindtap="onShowPopup" data-popupType="2">
       <view class="room-take-text">打卡规则</view>
     </view>
-    <view class="room-rank FRCC">
-      <image class="room-rank-img" src="/images/list-rank.png"></image>
+    <view class="room-rank FRCC" bindtap="toRank">
+      <image class="room-rank-img" src="/images/list-rank.png" ></image>
     </view>
   </view>
 </view>

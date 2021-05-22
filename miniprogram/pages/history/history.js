@@ -16,10 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   navigateToChair(){
-    let roomId = this.data.historyList[0].roomId;
-    let chairIndex = this.data.historyList[0].chairIndex;
+
+    // console.log(this.data.topData)
     wx.navigateTo({
-      url: '../chair/chair?roomId='+roomId+'&chairIndex='+chairIndex,
+      url: '../chair/chair?roomId='+this.data.topData.roomId+'&chairIndex='+this.data.topData.chairIndex,
     })
   },
   getHistoryList(){
@@ -46,13 +46,19 @@ Page({
         })
         // console.log(changeData)
         if(this.data.showTop==false && this.data.historyList.length>0 &&  this.data.historyList[0].isOver== false){
-          let cData = this.data.historyList;
-          cData.splice(0,1);
+          let cData =[]
+          this.data.historyList.forEach((item,index)=>{
+            if(index>=1){
+              cData.push(item)
+            }
+          })
+          console.log(this.data.historyList)
           this.setData({
             showTop: true,
             topData: this.data.historyList[0],
             historyList: cData
           })
+          console.log(this.data.topData)
         }
         getApp().globalData.isOver = this.data.showTop;
         console.log(this.data.historyList)

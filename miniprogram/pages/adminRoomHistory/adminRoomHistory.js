@@ -17,14 +17,20 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  navigateToChair() {
-    let roomId = this.data.historyList[0].roomId;
-    let chairIndex = this.data.historyList[0].chairIndex;
+  // navigateToChair() {
+  //   let roomId = this.data.historyList[0].roomId;
+  //   let chairIndex = this.data.historyList[0].chairIndex;
+  //   wx.navigateTo({
+  //     url: '../chair/chair?roomId=' + roomId + '&chairIndex=' + chairIndex,
+  //   })
+  // },
+  navigateToNow(){
+    let roomId = this.data.roomId;
     wx.navigateTo({
-      url: '../chair/chair?roomId=' + roomId + '&chairIndex=' + chairIndex,
+      url: '../adminRoomNow/adminRoomNow?roomId=' + roomId,
     })
   },
-  getHistoryList() {
+    getHistoryList() {
     let len = this.data.historyList.length;
     let num = 15;
     if (len > 10) num = 10;

@@ -136,3 +136,18 @@ view {
 .cards-right-btn-2 {
   width: 50%;
 }
+.top-body-2 {
+  height: 70%;
+  width: 80%;
+}
+.top-body {
+  background-color: #fff;
+  height: 140rpx;
+  width: 100%;
+  box-shadow: 0px 5px 12px -4px #ccc;
+  /* position: relative; */
+  position: fixed;
+  top: 0;
+  margin-top: 0;
+  z-index: 99999;
+}

@@ -86,7 +86,7 @@
                 src="{{item.len>=2? '/images/fire2.png':'/images/fire.png'}}" />
               <image mode="aspectFit" class="room-info-chairs-icons"
                 src="{{item.len>=3? '/images/fire2.png':'/images/fire.png'}}" />
-              <view class="room-info-chairs-text FRSC">{{item.sitDown}} / {{item.chairNum}}</view>
+              <view class="room-info-chairs-text FRSC">{{item.chairs.sitDown}} / {{item.chairs.chairNum}}</view>
             </view>
           </view>
         </view>

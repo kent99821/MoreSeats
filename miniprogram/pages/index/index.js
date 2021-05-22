@@ -126,7 +126,7 @@ Page({
           // console.log(res.result.data)
 
           this.setData({ rooms: res.result.data })
-
+          this.getFireLen();
         },
         fail: err => {
           console.log('调用失败：', err)
@@ -134,15 +134,22 @@ Page({
       })
     }
     // this.setData({rooms:val});
-    // this.getFireLen();
+
   },
   getFireLen() {
     let val = this.data.rooms;
+
     val.forEach((item) => {
       let len = 0;
-      if (item.sitDown !== 0)
-        len = parseFloat(item.sitDown / item.chairNum);
+      // console.log(item.chairs.chairNum)
+      let a = item.chairs.sitDown,b = item.chairs.chairNum;
 
+      if (a != 0  && b!=0)
+      {
+        len = parseFloat(a / b);
+      }
+
+        // console.log(item)
       if (len == 0) {
         len = 0;
       } else if (len <= 0.3333334) {
@@ -235,13 +242,47 @@ Page({
   typeIn(e) {
     console.log(e.detail.value);
     if (e.detail.value.length === 6) {
-      wx.navigateTo({
-        url: '/pages/room/room?roomId=' + e.detail.value
-      })
+      this.tryToRoom(e.detail.value)
+      // wx.navigateTo({
+      //   url: '/pages/room/room?roomId=' + e.detail.value
+      // })
       this.toTypeInVisible()
     }
   },
-
+  tryToRoom(roomId){
+    wx.showLoading({
+      title: '加载中',
+    })
+  wx.cloud.callFunction({
+    name: 'getRoomInfo',
+    data:{
+      flag:1,
+      roomId
+    },
+    success:(res)=>{
+      wx.hideLoading({
+      })
+      if(res.result.resCode==404){
+        wx.showToast({
+          title: '自习室不存在',
+          icon: 'error',
+          duration: 2000
+        })
+      }else{
+        wx.navigateTo({
+        url: '/pages/room/room?roomId=' + roomId
+      })
+      }
+      // if(res.result.data.length>0){
+      //   let val =  res.result.data[0];
+      //   console.log('上次未结束')
+      //   wx.navigateTo({
+      //     url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+      //   })
+      // }
+    }
+  })
+},
   /**
    * 
    */

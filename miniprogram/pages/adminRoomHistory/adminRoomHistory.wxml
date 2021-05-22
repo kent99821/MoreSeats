@@ -1,4 +1,21 @@
 <view class="tips"></view>
+<view bindtap="navigateToNow" class="top-body FCCC">
+<view class="top-body-2 FRCC">
+        正在学习
+    <!-- <view class="top-body-side FCCC">
+      <view class="top-body-side-text FCCC">已签到人次</view>
+      <view class="top-body-side-show FRSC">
+        {{pep}}
+      </view>
+    </view>
+    <view class="top-body-side FCCC">
+      <view class="top-body-side-text FCCC">产生总时长/小时</view>
+      <view class="top-body-side-show FRSC">
+        {{tim}}
+      </view>
+    </view> -->
+  </view>
+  </view>
 <view wx:for="{{historyList}}" class="cards FRCC">
   <wux-swipe-action-group>
 
@@ -7,7 +24,7 @@
         <view class="cards-body-left FCCS">
           <view class="cards-body-left-roomName  wux-ellipsis">{{item.userName}}</view>
           <view class="cards-body-left-tags FCCC">
-            <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex}}号座</view>
+            <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex-(-1)}}号座</view>
           </view>
         </view>
         <view class="cards-body-right FCCC">
