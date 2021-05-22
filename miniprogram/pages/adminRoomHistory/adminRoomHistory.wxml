@@ -1,21 +1,8 @@
 <view class="tips"></view>
-<view bindtap="navigateToNow" class="top-body FCCC">
-<view class="top-body-2 FRCC">
-        正在学习
-    <!-- <view class="top-body-side FCCC">
-      <view class="top-body-side-text FCCC">已签到人次</view>
-      <view class="top-body-side-show FRSC">
-        {{pep}}
-      </view>
-    </view>
-    <view class="top-body-side FCCC">
-      <view class="top-body-side-text FCCC">产生总时长/小时</view>
-      <view class="top-body-side-show FRSC">
-        {{tim}}
-      </view>
-    </view> -->
-  </view>
-  </view>
+<view class="top-body FCCC">
+  <wux-cell class="f" title="正在学习" bindtap="navigateToNow" hasLine="{{false}}" is-link extra="管理" />
+</view>
+
 <view wx:for="{{historyList}}" class="cards FRCC">
   <wux-swipe-action-group>
 

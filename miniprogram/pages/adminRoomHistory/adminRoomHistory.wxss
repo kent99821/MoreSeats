@@ -3,15 +3,21 @@ view {
   /* border: 1px solid #63636396; */
 }
 
+.f {
+  width: 100%;
+}
+
 .tips {
   font-size: 34rpx;
   /* width: 100%; */
-  margin-top: 25rpx;
+  margin-top: 120rpx;
   margin-left: 75rpx;
   margin-bottom: 10rpx;
   color: #535353;
 }
-
+.wux-cell__text{
+  color: #ff795a;
+}
 .noTop {
   margin-top: 35rpx;
 }
@@ -136,13 +142,15 @@ view {
 .cards-right-btn-2 {
   width: 50%;
 }
+
 .top-body-2 {
   height: 70%;
   width: 80%;
 }
+
 .top-body {
   background-color: #fff;
-  height: 140rpx;
+  height: 100rpx;
   width: 100%;
   box-shadow: 0px 5px 12px -4px #ccc;
   /* position: relative; */

@@ -1,6 +1,8 @@
 {
   "usingComponents": {
     "wux-icon": "wux-weapp/icon/index",
+    "wux-cell": "wux-weapp/cell/index",
+    "wux-cell-group": "wux-weapp/cell-group/index",
     "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
     "wux-swipe-action": "wux-weapp/swipe-action/index"
   },
