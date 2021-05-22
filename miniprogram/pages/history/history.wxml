@@ -4,7 +4,7 @@
       <view class="top-body-left-roomName FCCC">{{topData.roomName}}</view>
       <view class="top-body-left-tags FRSC">
         <view class="top-body-left-tags-1 FCCC">#{{topData.roomId}}</view>
-        <view class="top-body-left-tags-2 FCCC">{{topData.chairIndex+1}}号座</view>
+        <view class="top-body-left-tags-2 FCCC">{{(topData.chairIndex-(-1))}}号座</view>
       </view>
     </view>
     <view class="top-body-right FREC">
@@ -22,7 +22,7 @@
       <view class="cards-body-left-roomName FCCC">{{item.roomName}}</view>
       <view class="cards-body-left-tags FRSC">
         <view class="cards-body-left-tags-1 FCCC">#{{item.roomId}}</view>
-        <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex+1}}号座</view>
+        <view class="cards-body-left-tags-2 FCCC">{{(topData.chairIndex-(-1))}}号座</view>
       </view>
     </view>
     <view class="cards-body-right FCCC">

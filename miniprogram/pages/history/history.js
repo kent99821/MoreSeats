@@ -16,10 +16,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   navigateToChair(){
-    let roomId = this.data.historyList[0].roomId;
-    let chairIndex = this.data.historyList[0].chairIndex;
+
+    // console.log(this.data.topData)
     wx.navigateTo({
-      url: '../chair/chair?roomId='+roomId+'&chairIndex='+(parseInt(chairIndex)-1),
+      url: '../chair/chair?roomId='+this.data.topData.roomId+'&chairIndex='+this.data.topData.chairIndex,
     })
   },
   getHistoryList(){
