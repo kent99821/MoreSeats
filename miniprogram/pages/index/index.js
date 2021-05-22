@@ -235,13 +235,47 @@ Page({
   typeIn(e) {
     console.log(e.detail.value);
     if (e.detail.value.length === 6) {
-      wx.navigateTo({
-        url: '/pages/room/room?roomId=' + e.detail.value
-      })
+      this.tryToRoom(e.detail.value)
+      // wx.navigateTo({
+      //   url: '/pages/room/room?roomId=' + e.detail.value
+      // })
       this.toTypeInVisible()
     }
   },
-
+  tryToRoom(roomId){
+    wx.showLoading({
+      title: '加载中',
+    })
+  wx.cloud.callFunction({
+    name: 'getRoomInfo',
+    data:{
+      flag:1,
+      roomId
+    },
+    success:(res)=>{
+      wx.hideLoading({
+      })
+      if(res.result.resCode==404){
+        wx.showToast({
+          title: '自习室不存在',
+          icon: 'error',
+          duration: 2000
+        })
+      }else{
+        wx.navigateTo({
+        url: '/pages/room/room?roomId=' + roomId
+      })
+      }
+      // if(res.result.data.length>0){
+      //   let val =  res.result.data[0];
+      //   console.log('上次未结束')
+      //   wx.navigateTo({
+      //     url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+      //   })
+      // }
+    }
+  })
+},
   /**
    * 
    */
