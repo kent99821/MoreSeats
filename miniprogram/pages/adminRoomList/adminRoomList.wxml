@@ -64,7 +64,7 @@
                 座位管理
               </view>
             </view>
-            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="toadminRoomNow">
+            <view class="btn FCCC" data-roomid="{{item.roomId}}" bindtap="togetQR">
               <image class="icon-img" mode="aspectFit" src="/images/list-live.png"></image>
               <view class="icon-text FCCC">
                 物料资源

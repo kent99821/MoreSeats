@@ -341,5 +341,11 @@ Page({
     wx.navigateTo({
       url: `/pages/room/room?roomId=${roomId}`,
     })
-  }
+  },
+  togetQR(e) {
+    let roomId = e.currentTarget.dataset.roomid;
+    wx.navigateTo({
+      url: '../getQR/getQR?roomId=' + roomId,
+    })
+  },
 })

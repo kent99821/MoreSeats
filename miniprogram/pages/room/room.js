@@ -280,7 +280,7 @@ Page({
    */
   toAdminRoom(){
     wx.navigateTo({
-      url: '../adminRoom/adminRoom?roomId'+this.data.roomId,
+      url: '../adminRoomList/adminRoomList',
     })
   },
   toRank(){
