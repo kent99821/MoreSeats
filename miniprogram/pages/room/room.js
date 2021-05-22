@@ -288,16 +288,13 @@ Page({
       url: '../rank/rank?roomId'+ this.data.roomId+'&pep=123&tim=154234',
     })
   },
-  onLoad: function (options) {
+  pageInit(){
     let adminList  = app.globalData.roomAdminList.map((item)=>{
       return  item.roomId;
     })
     console.log(adminList)
-    let aId = options.roomId;
-    this.setData({
-      roomId: aId
-    })
-    let aName = options.roomName;
+    let aId = this.data.roomId;
+    let aName ="";
     // if (options.roomName) {
     //   save();
     // } else {
@@ -360,21 +357,54 @@ Page({
     this.getIsAdmin()
 
 
-
+  },
+  onLoad: function (options) {
+    let aId = options.roomId;
+    this.setData({
+      roomId: aId
+    })
+    this.pageInit()
   },
   toChair(e){
-    const chairIndex = e.currentTarget.dataset.chairindex-1;
+    let chairIndex = e.currentTarget.dataset.chairindex-1;
     if(this.data.roomData.chairs.infos[chairIndex].state){
-      wx.showToast({
-        title: '此位置已有人',
-        icon: 'error',
+      // chairIndex = chairIndex+1;
+      wx.cloud.callFunction({
+        name: 'getUserInfo',
+        data:{
+          flag:1,
+          skip:0,
+          num: 1
+        },
+        success:(res)=>{
+          if(res.result.data.length>0){
+            let val =  res.result.data[0];
+
+            if(val.roomId == this.data.roomId && val.chairIndex== chairIndex){
+              wx.navigateTo({
+                url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+              })
+            }else{
+              wx.showToast({
+                title: '此位置已有人',
+                icon: 'error',
+              })
+            }
+
+          }
+        }
       })
-      return;
+
+
+
+     
+    }else{
+      wx.navigateTo({
+        url: '../chair/chair?roomId='+ this.data.roomId+'&chairIndex='+chairIndex,
+      })
     }
-    console.log(e.currentTarget.dataset.chairindex);
-    wx.navigateTo({
-      url: '../chair/chair?roomId='+ this.data.roomId+'&chairIndex='+chairIndex,
-    })
+    // console.log(e.currentTarget.dataset.chairindex);
+
   },
   getIsAdmin(){
     console.log(app.globalData.roomAdminList)
@@ -416,7 +446,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.pageInit()
   },
 
   /**
