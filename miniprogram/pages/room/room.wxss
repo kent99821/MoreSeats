@@ -61,9 +61,10 @@ view {
 .room-center-tag {
   height: 35rpx;
   font-size: 32rpx;
-  border: 1px solid #747474;
+  border: 1px solid #ff795a;
   border-radius: 8rpx;
   padding-left: 5rpx;
+  color: #ff795a;
   border-radius: 10rpx;
   padding-right: 5rpx;
 }
