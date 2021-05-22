@@ -9,8 +9,9 @@
 }
 
 .btn {
-  width: 180rpx;
-  height: 60rpx;
+  width: 640rpx;
+  height: 80rpx;
+  margin-bottom: 30rpx;
   background-color: #ff795b;
   color: #fff;
   border-radius: 15rpx;

@@ -16,5 +16,5 @@
   </wux-cell>
 </wux-cell-group>
 <view class="b FCCC">
-  <view class="btn FCCC" bindtap="postConfig">确定</view>
+  <view class="btn FCCC" bindtap="postConfig">保存</view>
 </view>
