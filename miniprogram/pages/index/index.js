@@ -229,16 +229,13 @@ Page({
 
       success: (res) => {
         let a ='/' +res.path;
+        let scene = a.split('?')[1].slice(6)
+        scene = decodeURIComponent(scene);
+        let path = a.split('?')[0]
         wx.navigateTo({
-          url: a,
+          url: path+"?"+scene,
         })
-        console.log(res)
-        console.log(res.path)
-        let result = res.result;
-        console.log(result)
-        // _this.setData({
-        // result: result,
-        // })
+
       }
     })
   },

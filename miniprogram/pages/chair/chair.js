@@ -367,11 +367,18 @@ Page({
       success: res => {
         console.log(res)
         let rule = res.result.data.rule
+
         this.setData({
           rule: rule,
-          latitude: rule.latitude,
-          longitude: rule.longitude
+
         })
+        if(rule.type==1){
+          this.setData({
+            rule: rule,
+            latitude: rule.latitude,
+            longitude: rule.longitude,
+          })
+        }
       },
       fail: err => {
         console.log('调用失败：', err)
@@ -379,12 +386,16 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log('参数值')
+    let a =  wx.getLaunchOptionsSync()
+    console.log(a) 
+    console.log('-----------------')
     console.log(options)
     let roomId , chairIndex;
     if(options.scene){
-      // aId = options.scene.split('%26')[0].split('%3D')[1];
-      roomId =options.scene.split('%26')[1].split('%3D')[1];
-      chairIndex= options.scene.split('%26')[0].split('%3D')[1];
+      console.log(options.scene)
+      chairIndex =options.scene.split('%26')[1].split('%3D')[1];
+      roomId= options.scene.split('%26')[0].split('%3D')[1];
     }else{
       roomId =options.roomId;
       chairIndex= options.chairIndex;
