@@ -31,7 +31,7 @@
   </view>
 </view>
 <view class="chairs-body">
-  <van-tabs animated swipeable active="{{tabIndex}}" sticky>
+  <van-tabs id="tabs" animated swipeable active="{{tabIndex}}" sticky>
     <block wx:for="{{tabChairsIndex}}">
       <van-tab class="oneTab FRCS" title="{{item.name}}">
         <view class="FRCSW oneTab-body">

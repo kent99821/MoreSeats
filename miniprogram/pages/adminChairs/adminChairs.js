@@ -30,7 +30,7 @@ Page({
       groupName: "",
       groupSize: 0
     },
-    activeTab: 1,
+    activeTab: 0,
     type: 1,
     chairNum: 0,
     show: false,
