@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   PageData.result=await db.collection('ranks').where({
     roomId:event.roomId,
-  }).orderBy('uTimeSum', 'desc').skip(event.skip).limit(event.num).get()
+  }).orderBy('utimeSum', 'desc').skip(event.skip).limit(event.num).get()
  return PageData.result
 
 }
