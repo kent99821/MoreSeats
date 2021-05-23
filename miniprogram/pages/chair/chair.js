@@ -16,41 +16,42 @@ Page({
       { s: false, c: "6c6sa5dxxxxc4" }
     ],
     mapShow: false,
-    quotes:'',
+    quotes: '',
     time: '00:00:00',
     sTime: null,
     // latitude:21.154481,
     // longitude: 110.297833,
     latitude: '',
-    longitude:'',
+    longitude: '',
     // getTodoBool: false // 是否
     waitBool: false,
+    roomNotice:"",
     rule: {
       latitude: '',
-      size:'',
+      size: '',
       longitude: '',
-      type:''
+      type: ''
     }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  setTime(){
-    if(!this.data.sTime) return ;
+  setTime() {
+    if (!this.data.sTime) return;
     let a = '21:34:00';
     a = this.data.sTime;
-    let val = (Date.now()- a)/1000;
+    let val = (Date.now() - a) / 1000;
     let h, m, s;
-    h = parseInt(val/(60*60));
-    m = parseInt((val-(h*60*60))/(60));
-    s = parseInt(val%60);
-    let parseTime= (h)=>{
-      return (h<10?('0'+h):(h))
+    h = parseInt(val / (60 * 60));
+    m = parseInt((val - (h * 60 * 60)) / (60));
+    s = parseInt(val % 60);
+    let parseTime = (h) => {
+      return (h < 10 ? ('0' + h) : (h))
     }
     // console.log(parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))
     this.setData({
-      time: parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s)
+      time: parseTime(h) + ":" + parseTime(m) + ':' + parseTime(s)
     })
 
   },
@@ -73,10 +74,10 @@ Page({
   //     }
   //   })
   // },
-  deleteCard(e){
-    let  todo = this.data.todo;
+  deleteCard(e) {
+    let todo = this.data.todo;
     let index = e.currentTarget.dataset.index;
-    todo.splice(index,1);
+    todo.splice(index, 1);
     this.setData({
       todo
     });
@@ -92,13 +93,13 @@ Page({
       title: '事项内容',
       // content: '最长16位字符',
       fieldtype: 'text',
-      defaultText:defaultText,
-      placeholder:that.data.userName,
+      defaultText: defaultText,
+      placeholder: that.data.userName,
       maxlength: -1,
       onConfirm(e, response) {
         if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
           let todo = that.data.todo;
-          todo[index].c= response.replace(/(^\s*)|(\s*$)/g, "");
+          todo[index].c = response.replace(/(^\s*)|(\s*$)/g, "");
           that.setData({
             todo
           })
@@ -115,36 +116,36 @@ Page({
             duration: 3000
           })
       },
-    })     
-  
+    })
+
 
   },
-  changStatus(e){
+  changStatus(e) {
     let index = e.currentTarget.dataset.index;
     let todo = this.data.todo;
-    todo[index].s = !todo[index].s ;
+    todo[index].s = !todo[index].s;
     this.setData({
       todo
     })
     wx.setStorageSync('todo', todo)
   },
-  addToDo(e){
-    
-    let that =this;
+  addToDo(e) {
+
+    let that = this;
     $wuxDialog().prompt({
       resetOnClose: true,
       title: '事项内容',
       // content: '最长16位字符',
       fieldtype: 'text',
       defaultText: '',
-      placeholder:that.data.userName,
+      placeholder: that.data.userName,
       maxlength: -1,
       onConfirm(e, response) {
         if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
           let todo = that.data.todo || [];
-         
+
           // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
-          todo.splice(0,0,{s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") })
+          todo.splice(0, 0, { s: false, c: response.replace(/(^\s*)|(\s*$)/g, "") })
 
           that.setData({
             todo
@@ -161,124 +162,124 @@ Page({
             duration: 3000
           })
       },
-    })     
+    })
   },
 
-  getTodoData(){
+  getTodoData() {
     let todo = (wx.getStorageSync('todo') || this.data.todo);
     this.setData({
       todo
     })
   },
-  getQuotes(){
+  getQuotes() {
     wx.request({
       url: 'https://v1.hitokoto.cn',
       data: {
         c: 'k',
-        encode:'text',
-        charset:"utf-8",
-        max_length:15
+        encode: 'text',
+        charset: "utf-8",
+        max_length: 15
       },
-      success:(res)=>{
+      success: (res) => {
         this.setData({
           quotes: res.data
         })
-    
+
 
       },
-      fail:(err)=>{
+      fail: (err) => {
         console.log(err)
       }
     })
   },
-  
-  trySignIn(){
-    function GetDistance( lat1,  lng1,  lat2,  lng2){
-      var radLat1 = lat1*Math.PI / 180.0;
-      var radLat2 = lat2*Math.PI / 180.0;
+
+  trySignIn() {
+    function GetDistance(lat1, lng1, lat2, lng2) {
+      var radLat1 = lat1 * Math.PI / 180.0;
+      var radLat2 = lat2 * Math.PI / 180.0;
       var a = radLat1 - radLat2;
-      var  b = lng1*Math.PI / 180.0 - lng2*Math.PI / 180.0;
-      var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
-      Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
-      s = s *6378.137 ;// EARTH_RADIUS;
+      var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
+      var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
+        Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+      s = s * 6378.137;// EARTH_RADIUS;
       s = Math.round(s * 10000) / 10000;
       return s;
-  }
+    }
     let out = 0;
     // console.log(this.data.rule)
-    if(this.data.rule.type==1){
+    if (this.data.rule.type == 1) {
       console.log('位置签到')
       wx.getLocation({
-        success: res=>{
+        success: res => {
           // console.log(res)
           console.log(res.latitude)
           console.log(this.data.rule.latitude)
-         let distance= GetDistance(res.latitude,res.longitude, this.data.rule.latitude, this.data.rule.longitude)*1000;
-         console.log(distance)
-         if(distance> this.data.rule.size) {
-          this.setData({
-            latitude: this.data.rule.latitude,
-            longitude:this.data.rule.longitude,
-            mapShow: true
-          })
-          wx.showToast({
-            title: '不在自习室范围',
-            icon: 'error',
-            duration: 2000
-          })
-         }else{
-          this.signIn();
-         }
+          let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
+          console.log(distance)
+          if (distance > this.data.rule.size) {
+            this.setData({
+              latitude: this.data.rule.latitude,
+              longitude: this.data.rule.longitude,
+              mapShow: true
+            })
+            wx.showToast({
+              title: '不在自习室范围',
+              icon: 'error',
+              duration: 2000
+            })
+          } else {
+            this.signIn();
+          }
         },
-        fail: err=>{
+        fail: err => {
           wx.showToast({
             title: '请开启位置信息',
             icon: 'error',
             duration: 2000
-          }) 
+          })
         }
       })
-    }else{
+    } else {
       this.signIn();
     }
 
 
   },
-  signIn(){
+  signIn() {
     wx.showLoading({
       title: '加载中',
     })
     wx.cloud.callFunction({
-      name:'signIn',
-      data:{
-      // roomId:this.data.roomId,
-      roomId:this.data.roomId,
-      chairIndex: this.data.chairIndex,
-      // chairIndex:this.data.chairIndex,
+      name: 'signIn',
+      data: {
+        // roomId:this.data.roomId,
+        roomId: this.data.roomId,
+        chairIndex: this.data.chairIndex,
+        // chairIndex:this.data.chairIndex,
       },
-      success:res=>{
+      success: res => {
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
-        if(res.result.resCode==200){
+        if (res.result.resCode == 200) {
           this.setData({
             btnType: 1,
             sTime: new Date()
           })
-        }else if(res.result.resCode==  300){
+        } else if (res.result.resCode == 300) {
           this.setData({
             btnType: 2
           })
         }
 
       },
-      fail:err=>{
-        console.log('调用失败：',err)
+      fail: err => {
+        console.log('调用失败：', err)
       }
-    }) 
+    })
   },
-  trySignOut(){
-    if(this.data.waitBool) return ;
+  trySignOut() {
+    if (this.data.waitBool) return;
     this.setData({
       waitBool: true
     })
@@ -288,12 +289,12 @@ Page({
     wx.cloud.callFunction({
       name: 'signOut',
       data: {
-        flag:0,
-        chairIndex:this.data.chairIndex,
-        roomId : this.data.roomId,
-        todo:this.data.todo
+        flag: 0,
+        chairIndex: this.data.chairIndex,
+        roomId: this.data.roomId,
+        todo: this.data.todo
       },
-      success:(res)=>{
+      success: (res) => {
         wx.setStorage({
           data: '',
           key: 'todo',
@@ -302,39 +303,39 @@ Page({
         wx.hideLoading()
         this.setData({
           btnType: 0,
-          sTime:null,
-          time:'00:00:00',
+          sTime: null,
+          time: '00:00:00',
           waitBool: false,
           todo: [],
         })
       },
-      fail: (err)=>{
+      fail: (err) => {
         console.log(err);
       }
     })
   },
-  readyPage(){
-    setInterval(()=> this.setTime(),1000);
+  readyPage() {
+    setInterval(() => this.setTime(), 1000);
     // this.displayMap();
     wx.cloud.callFunction({
       name: 'getUserInfo',
-      data:{
-        flag:1,
-        skip:0,
+      data: {
+        flag: 1,
+        skip: 0,
         num: 1
       },
-      success:(res)=>{
+      success: (res) => {
         // console.log(res)
-        if(res.result.data.length>0){
+        if (res.result.data.length > 0) {
           // console.log(res.result.data[0])
-          let val =  res.result.data[0];
-          if(val.isOver){
+          let val = res.result.data[0];
+          if (val.isOver) {
             wx.setStorageSync('todo', [])
             // console.log('---')
             // console.log(wx.getStorageSync('todo'))
             this.getTodoData()
-          }else {
-            if(this.data.roomId== val.roomId && this.data.chairIndex== val.chairIndex) {
+          } else {
+            if (this.data.roomId == val.roomId && this.data.chairIndex == val.chairIndex) {
               this.setData({
                 btnType: 1
               })
@@ -343,10 +344,10 @@ Page({
               })
               this.setTime();
               this.getTodoData();
-            }else{
+            } else {
               console.log('上次未结束')
               wx.navigateTo({
-                url: '../chair/chair?roomId='+ val.roomId+'&chairIndex='+val.chairIndex,
+                url: '../chair/chair?roomId=' + val.roomId + '&chairIndex=' + val.chairIndex,
               })
             }
           }
@@ -356,7 +357,7 @@ Page({
 
     this.getQuotes();
   },
-  getRoomRule(){
+  getRoomRule() {
 
     wx.cloud.callFunction({
       name: 'getRoomInfo',
@@ -370,9 +371,9 @@ Page({
 
         this.setData({
           rule: rule,
-
+          roomNotice:res.result.data.roomNotice
         })
-        if(rule.type==1){
+        if (rule.type == 1) {
           this.setData({
             rule: rule,
             latitude: rule.latitude,
@@ -387,28 +388,28 @@ Page({
   },
   onLoad: function (options) {
     console.log('参数值')
-    let a =  wx.getLaunchOptionsSync()
-    console.log(a) 
+    let a = wx.getLaunchOptionsSync()
+    console.log(a)
     console.log('-----------------')
     console.log(options)
-    let roomId , chairIndex;
-    if(options.scene){
+    let roomId, chairIndex;
+    if (options.scene) {
       console.log(options.scene)
-      chairIndex =options.scene.split('%26')[0].split('%3D')[1];
-      roomId= options.scene.split('%26')[1].split('%3D')[1];
-    }else{
-      roomId =options.roomId;
-      chairIndex= options.chairIndex;
+      chairIndex = options.scene.split('%26')[0].split('%3D')[1];
+      roomId = options.scene.split('%26')[1].split('%3D')[1];
+    } else {
+      roomId = options.roomId;
+      chairIndex = options.chairIndex;
     }
 
 
     wx.setNavigationBarTitle(
-      {title: '房间号'+roomId+ ' 座位号'+ (parseInt(chairIndex)+1)}
+      { title: '房间号' + roomId + ' 座位号' + (parseInt(chairIndex) + 1) }
     )
 
     this.setData({
       roomId: roomId,
-      chairIndex:chairIndex
+      chairIndex: chairIndex
     })
     this.getRoomRule()
   },

@@ -84,6 +84,7 @@ Page({
           tabChairsIndex,
           chairsStates: roomData.chairs.infos
         })
+        this.selectComponent('#tabs').resize();
       },
       fail: err => {
         console.log('调用失败：', err)
@@ -164,6 +165,9 @@ Page({
       })
     }
     // console.log(e.currentTarget.dataset.chairindex);
+
+  },
+  handleContact(){
 
   },
   getIsAdmin() {

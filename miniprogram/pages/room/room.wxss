@@ -29,14 +29,14 @@ view {
 
 .room-name {
   height: 70rpx;
-  max-width: 600rpx;
+  max-width: 680rpx;
   position: absolute;
   left: 35rpx;
   color: #ff9178;
   font-size: 50rpx;
 }
 
-.room-share {
+/* .room-share {
   height: 90rpx;
   width: 90rpx;
   top: 0;
@@ -47,7 +47,7 @@ view {
 .room-share-img {
   height: 100%;
   width: 100%;
-}
+} */
 
 .room-center {
   position: absolute;
@@ -127,8 +127,8 @@ view {
 
   height: 80rpx;
   width: 80rpx;
-  left: 635rpx;
-  top: 90rpx;
+  left: 645rpx;
+  top: 86rpx;
   position: absolute;
 }
 
@@ -240,7 +240,7 @@ view {
 }
 
 .botm-info {
-  width: 25%;
+  width: 50%;
   height: 100%;
   /* background-color: chocolate; */
 }
@@ -248,12 +248,13 @@ view {
 .botm-info-icon {
   width: 70rpx;
   height: 70rpx;
-  /* margin-right: 5rpx; */
+  margin-left: 20rpx;
 }
 
 .botm-info-text {
   font-size: 20rpx;
   margin-top: 5rpx;
+  margin-right: 30rpx;
 }
 
 .last-btn {
