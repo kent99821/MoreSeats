@@ -7,14 +7,15 @@
   <view class="top-body">
     <view class="room-name FRSC wux-ellipsis">{{roomData.roomName}}</view>
     <view class="room-share FRCC">
-      <button class="room-share-img"  style="background-image:  url(/images/share.png);background-repeat:no-repeat ;background-size: 90rpx 90rpx; border: 0;background-color: transparent;" open-type="share"></button>
+      <!-- <button class="room-share-img"  style="background-image:  url(/images/share.png);background-repeat:no-repeat ;background-size: 90rpx 90rpx; border: 0;background-color: transparent;" open-type="share"></button> -->
       <!-- <image class="room-share-img" src="/images/share.png"></image> -->
     </view>
     <view class="room-center FRSC">
       <view class="room-center-tag FCCC">#{{roomData.roomId}}</view>
       <image class="room-center-openTime-icon" src="/images/clock2.png" bindtap="onShowPopup" data-popupType="0">
       </image>
-      <view class="room-center-openTime wux-ellipsis" bindtap="onShowPopup" data-popupType="0">{{roomData.openTime}}</view>
+      <view class="room-center-openTime wux-ellipsis" bindtap="onShowPopup" data-popupType="0">{{roomData.openTime}}
+      </view>
     </view>
     <view class="room-notic FRSC" bindtap="onShowPopup" data-popupType="1">
       <view class="room-notic-icon FCCC">
@@ -26,7 +27,7 @@
       <view class="room-take-text">打卡规则</view>
     </view>
     <view class="room-rank FRCC" bindtap="toRank">
-      <image class="room-rank-img" src="/images/list-rank.png" ></image>
+      <image class="room-rank-img" src="/images/list-rank.png"></image>
     </view>
   </view>
 </view>
@@ -35,7 +36,8 @@
     <block wx:for="{{tabChairsIndex}}">
       <van-tab class="oneTab FRCS" title="{{item.name}}">
         <view class="FRCSW oneTab-body">
-          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  bindtap="toChair" data-chairIndex="{{chairTabIndex+item.start+1}}">
+          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"
+            bindtap="toChair" data-chairIndex="{{chairTabIndex+item.start+1}}">
             <!-- {{chairTabIndex+item.start+1}}-{{chairsStates[chairTabIndex+item.start].state}} -->
             <view class="oneTab-chair-icon FCCC">
               <image class="oneTab-chair-icon-img" mode="aspectFill"
@@ -58,19 +60,18 @@
     <view class="botm-color-g-c2"></view>
     <view class="botm-color-g-t2">未占用</view>
   </view>
-  <view class="botm-info FRCC">
+  <view class="botm-info FREC">
     <image src="/images/chair-3.png" class="botm-info-icon"></image>
     <view class="botm-info-text">{{roomData.chairs.sitDown}}/{{roomData.chairs.chairNum}}</view>
-  </view>
-  <view class="last-btn FRCC">
-    <block wx:if="{{!isAdmin}}">
-      <image src="/images/toadminmsg.png" class="botm-info-icon "></image>
-      <!-- <view class="botm-info-text unline">联系管理</view> -->
-      <view open-type="contact"class="botm-info-text unline" bindcontact="handleContact">联系管理</view>
-    </block>
-    <block wx:else >
+    <block wx:if="{{isAdmin}}">
       <image src="/images/toadminpage.png" class="botm-info-icon" bindtap="toAdminRoom"></image>
       <view class="botm-info-text unline" bindtap="toAdminRoom">管理</view>
     </block>
   </view>
+  <!-- <view class="last-btn FRCC"> -->
+  <!-- <block > -->
+  <!-- <image src="/images/toadminmsg.png" class="botm-info-icon "></image>
+      <view class="botm-info-text unline" bindtap="handleContact">联系管理</view> -->
+  <!-- </block> -->
+  <!-- </view> -->
 </view>

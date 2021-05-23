@@ -167,6 +167,9 @@ Page({
     // console.log(e.currentTarget.dataset.chairindex);
 
   },
+  handleContact(){
+
+  },
   getIsAdmin() {
     console.log(app.globalData.roomAdminList)
     app.globalData.roomAdminList.forEach(item => {
