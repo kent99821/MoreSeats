@@ -184,9 +184,9 @@ signIn(){
   wx.cloud.callFunction({
     name:'signIn',
     data:{
-    roomId:"123456",
+    roomId:"729067",
     chairIndex:0,
-    roomName:"自习室1"
+    roomName:"自习室cesh"
     },
     success:res=>{
       console.log(res)
@@ -248,7 +248,7 @@ addroom(){
     name:'adminAction',
     data:{
     flag:0,
-    roomName:"自习室3"
+    roomName:"自习室cesh"
     },
     success:res=>{
       console.log(res)
@@ -337,7 +337,7 @@ updateChair(){
     name:'adminAction',
     data:{
     flag:5,
-    roomId:"306674",
+    roomId:"729067",
     type:1,
     chairNum:20,
     group:[
@@ -383,7 +383,7 @@ forceOut(){
     name:'adminAction',
     data:{
     flag:7,
-    roomId:"306674",
+    roomId:"729067",
 
     },
     success:res=>{
@@ -400,7 +400,7 @@ removeRoom(){
     name:'adminAction',
     data:{
     flag:8,
-    roomId:"686254",
+    roomId:"729067",
 
     },
     success:res=>{

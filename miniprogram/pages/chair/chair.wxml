@@ -4,9 +4,10 @@
 
 <wux-notice-bar id="ntc" class="ntc" loop content="{{roomNotice}}" mode="closable" />
 
-<wux-popup closable visible="{{ mapShow }}"  ititle="确保在自习室范围内" bind:close="mapClose">
-  <map id= 'the-id' latitude='{{latitude}}' longitude= '{{longitude}}'>
-  </map>
+<wux-popup class="FCCC" closable visible="{{ mapShow }}"  ititle="确保在自习室范围内" bind:close="mapClose">
+  <!-- <map id= 'the-id' latitude='{{latitude}}' longitude= '{{longitude}}'>
+  </map> -->
+  <view class="mapbody">1</view>
 </wux-popup>
 
 

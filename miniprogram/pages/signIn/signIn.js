@@ -1,5 +1,7 @@
 // pages/signIn/signIn.js
-import { $wuxToptips } from '../../miniprogram_npm/wux-weapp/index.js'
+import {
+  $wuxToptips
+} from '../../miniprogram_npm/wux-weapp/index.js'
 
 Page({
 
@@ -98,6 +100,7 @@ Page({
             duration: 2000
           })
         }
+        getApp().globalData.isNewGuys = false
         setTimeout(function () {
           wx.navigateBack()
         }, 1000)

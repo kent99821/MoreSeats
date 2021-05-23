@@ -87,12 +87,12 @@ Page({
       $wuxDialog().open({
         resetOnClose: true,
         title: '提示',
-        content: '当前用户未注册',
+        content: '当前用户未登记',
         buttons: [{
           text: '取消',
         },
         {
-          text: '注册',
+          text: '前往登记',
           type: 'primary',
           onTap(e) {
             wx.navigateTo({

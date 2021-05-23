@@ -1,5 +1,8 @@
 // pages/chair/chair.js
-import { $wuxDialog, $wuxToptips } from '../../miniprogram_npm/wux-weapp/index.js'
+import {
+  $wuxDialog,
+  $wuxToptips
+} from '../../miniprogram_npm/wux-weapp/index.js'
 Page({
 
   /**
@@ -8,12 +11,20 @@ Page({
   data: {
     roomId: '',
     chairIndex: -1,
-    btnType: 0,//下方按钮 0:坐下 1:签退 2:被占用
-    show: 0,//中间显示 0:时长 1:事项
-    todo: [
-      { s: false, c: "123" },
-      { s: true, c: "fdasdfsa" },
-      { s: false, c: "6c6sa5dxxxxc4" }
+    btnType: 0, //下方按钮 0:坐下 1:签退 2:被占用
+    show: 0, //中间显示 0:时长 1:事项
+    todo: [{
+        s: false,
+        c: "123"
+      },
+      {
+        s: true,
+        c: "fdasdfsa"
+      },
+      {
+        s: false,
+        c: "6c6sa5dxxxxc4"
+      }
     ],
     mapShow: false,
     quotes: '',
@@ -25,7 +36,7 @@ Page({
     longitude: '',
     // getTodoBool: false // 是否
     waitBool: false,
-    roomNotice:"",
+    roomNotice: "",
     rule: {
       latitude: '',
       size: '',
@@ -145,7 +156,10 @@ Page({
           let todo = that.data.todo || [];
 
           // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
-          todo.splice(0, 0, { s: false, c: response.replace(/(^\s*)|(\s*$)/g, "") })
+          todo.splice(0, 0, {
+            s: false,
+            c: response.replace(/(^\s*)|(\s*$)/g, "")
+          })
 
           that.setData({
             todo
@@ -194,6 +208,36 @@ Page({
   },
 
   trySignIn() {
+    console.log(getApp().globalData.isNewGuys);
+
+    if (getApp().globalData.isNewGuys) {
+      $wuxDialog().open({
+        resetOnClose: true,
+        title: '提示',
+        content: '当前用户未登记',
+        buttons: [{
+            text: '取消',
+            onTap(e) {
+              $wuxToptips().warn({
+                text: '未登记无法坐下',
+                duration: 2000
+              })
+            },
+          },
+          {
+            text: '前往登记',
+            type: 'primary',
+            onTap(e) {
+              wx.navigateTo({
+                url: '../signIn/signIn',
+              })
+            },
+          },
+        ],
+      })
+      return
+    }
+
     function GetDistance(lat1, lng1, lat2, lng2) {
       var radLat1 = lat1 * Math.PI / 180.0;
       var radLat2 = lat2 * Math.PI / 180.0;
@@ -201,7 +245,7 @@ Page({
       var b = lng1 * Math.PI / 180.0 - lng2 * Math.PI / 180.0;
       var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) +
         Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
-      s = s * 6378.137;// EARTH_RADIUS;
+      s = s * 6378.137; // EARTH_RADIUS;
       s = Math.round(s * 10000) / 10000;
       return s;
     }
@@ -325,7 +369,7 @@ Page({
         num: 1
       },
       success: (res) => {
-        // console.log(res)
+        console.log(res)
         if (res.result.data.length > 0) {
           // console.log(res.result.data[0])
           let val = res.result.data[0];
@@ -371,7 +415,7 @@ Page({
 
         this.setData({
           rule: rule,
-          roomNotice:res.result.data.roomNotice
+          roomNotice: res.result.data.roomNotice
         })
         if (rule.type == 1) {
           this.setData({
@@ -403,9 +447,9 @@ Page({
     }
 
 
-    wx.setNavigationBarTitle(
-      { title: '房间号' + roomId + ' 座位号' + (parseInt(chairIndex) + 1) }
-    )
+    wx.setNavigationBarTitle({
+      title: '房间号' + roomId + ' 座位号' + (parseInt(chairIndex) + 1)
+    })
 
     this.setData({
       roomId: roomId,
