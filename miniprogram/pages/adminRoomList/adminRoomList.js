@@ -58,7 +58,7 @@ Page({
       title: "新建自习室",
       content: '最长16位字符',
       fieldtype: 'text',
-      placeholder: "请输入房间名",
+      placeholder: "请输入自习室名",
       maxlength: 16,
       onConfirm(e, response) {
         wx.showLoading({

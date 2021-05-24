@@ -26,7 +26,7 @@ Page({
       type: 0
     },
     {
-      name: '房间码',
+      name: '自习室码',
       subname: '扫码后跳转对应自习室页面',
       type: 1
     }, {

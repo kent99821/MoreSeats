@@ -5,6 +5,6 @@
     "wux-button": "wux-weapp/button/index",
     "wux-toptips": "wux-weapp/toptips/index"
   },
-  "navigationBarTitleText": "共享自习室",
+  "navigationBarTitleText": "万席",
   "enablePullDownRefresh": true
 }

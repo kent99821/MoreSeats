@@ -125,7 +125,7 @@ Page({
       roomId: aId
     })
     wx.setNavigationBarTitle(
-      { title: '房间号 ' + aId  }
+      { title: '自习室 #' + aId  }
     )
     this.pageInit()
   },
