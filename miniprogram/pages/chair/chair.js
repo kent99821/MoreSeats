@@ -208,7 +208,9 @@ Page({
 
   trySignIn() {
     console.log(getApp().globalData.isNewGuys);
-
+    wx.showLoading({
+      title: '加载中',
+    })
     if (getApp().globalData.isNewGuys) {
       $wuxDialog().open({
         resetOnClose: true,
@@ -252,11 +254,12 @@ Page({
     // console.log(this.data.rule)
     if (this.data.rule.type == 1) {
       console.log('位置签到')
-      wx.getLocation({
+      wx.startLocationUpdateBackground({
+
         success: res => {
           // console.log(res)
-          console.log(res.latitude)
-          console.log(this.data.rule.latitude)
+          console.log(res)
+          console.log(this.data.rule)
           let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
           console.log(distance)
           if (distance > this.data.rule.size) {
@@ -274,12 +277,38 @@ Page({
             this.signIn();
           }
         },
-        fail: err => {
-          wx.showToast({
-            title: '请开启位置信息',
-            icon: 'error',
-            duration: 2000
-          })
+        fail: res => {
+          console.log(res)
+          //用户未授权小程序获取地理位置
+          wx.hideLoading()
+          wx.showModal({
+            content:
+              "获取地理位置失败！\r\n请前往设置\r\n在小程序期间和离开小程序后\r\n使用您的地理位置",
+            showCancel: true, //是否显示取消按钮
+            cancelText: "取消", //默认是“取消”
+            cancelColor: "#3296fa", //取消文字的颜色
+            confirmText: "设置", //默认是“确定”
+            confirmColor: "#3296fa", //确定文字的颜色
+            success: res => {
+              console.log(res)
+              if(res.confirm){
+                wx.openSetting({
+                  withSubscriptions: true,
+                })
+              }
+
+              // wx.getSetting({
+              //   success: resSetting => {
+              //     if (!resSetting.authSetting["scope.userLocation"]) {
+              //       wx.openSetting({
+              //         success: res => {
+              //         }
+              //       });
+              //     }
+              //   }
+              // });
+            }
+          });
         }
       })
     } else {
@@ -289,9 +318,7 @@ Page({
 
   },
   signIn() {
-    wx.showLoading({
-      title: '加载中',
-    })
+
     wx.cloud.callFunction({
       name: 'signIn',
       data: {
@@ -301,6 +328,7 @@ Page({
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
+        wx.stopLocationUpdate()
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
@@ -317,6 +345,8 @@ Page({
 
       },
       fail: err => {
+        wx.hideLoading()
+        wx.stopLocationUpdate()
         console.log('调用失败：', err)
       }
     })
