@@ -185,18 +185,17 @@ Page({
       todo
     })
   },
-  getQuotes() {
+  t: function () {
+    console.log(t);
+  },
+  getQuotes: function () {
+    console.log('quotes');
     wx.request({
-      url: 'https://v1.hitokoto.cn',
-      data: {
-        c: 'k',
-        encode: 'text',
-        charset: "utf-8",
-        max_length: 15
-      },
+      url: 'https://v1.hitokoto.cn/?max_length=18encode=text&charset=utf-8&c=d&c=i&c=k&c=e',
       success: (res) => {
+        console.log(res);
         this.setData({
-          quotes: res.data
+          quotes: res.data.hitokoto
         })
 
 
@@ -402,7 +401,6 @@ Page({
     this.getQuotes();
   },
   getRoomRule() {
-
     wx.cloud.callFunction({
       name: 'getRoomInfo',
       data: {
@@ -422,15 +420,23 @@ Page({
             rule: rule,
             latitude: rule.latitude,
             longitude: rule.longitude,
+            size: rule.size
           })
         }
+        wx.hideLoading()
+
       },
       fail: err => {
+        wx.hideLoading()
+
         console.log('调用失败：', err)
       }
     })
   },
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     console.log('参数值')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
@@ -446,10 +452,9 @@ Page({
       chairIndex = options.chairIndex;
     }
 
-
-    wx.setNavigationBarTitle({
-      title: '房间号' + roomId + ' 座位号' + (parseInt(chairIndex) + 1)
-    })
+    wx.setNavigationBarTitle(
+      { title: (parseInt(chairIndex) + 1) + ' 号座位 ' }
+    )
 
     this.setData({
       roomId: roomId,

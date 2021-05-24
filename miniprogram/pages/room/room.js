@@ -124,6 +124,9 @@ Page({
     this.setData({
       roomId: aId
     })
+    wx.setNavigationBarTitle(
+      { title: '房间号 ' + aId  }
+    )
     this.pageInit()
   },
   toChair(e) {

@@ -42,7 +42,7 @@
 <view class="to-room FRCC">
   <view class="to-room-side FRCC" bindtap="toTypeInVisible">
     <image mode="aspectFit" class="to-room-side-icon" src="/images/idgo.png" />
-    <view>输入自习室号</view>
+    <view>输入房间号</view>
   </view>
   <view class="to-room-center"></view>
   <view class="to-room-side FRCC" bindtap="scanQR">

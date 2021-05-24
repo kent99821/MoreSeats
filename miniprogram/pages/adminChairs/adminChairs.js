@@ -119,10 +119,7 @@ Page({
       typeName: e.detail.name,
       show: false,
       type: e.detail.type,
-      group: [{
-        groupSize: this.data.chairNum,
-        groupName: "无分组"
-      }]
+      group: []
     })
   },
   openSelect: function () {

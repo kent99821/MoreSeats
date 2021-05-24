@@ -1,13 +1,13 @@
-
 <wux-dialog id='wux-dialog' />
 <wux-toptips id="wux-toptips" />
 
 <wux-notice-bar id="ntc" class="ntc" loop content="{{roomNotice}}" mode="closable" />
 
-<wux-popup class="FCCC" closable visible="{{ mapShow }}"  ititle="确保在自习室范围内" bind:close="mapClose">
-  <!-- <map id= 'the-id' latitude='{{latitude}}' longitude= '{{longitude}}'>
-  </map> -->
-  <view class="mapbody">1</view>
+<wux-popup visible="{{ mapShow }}" ititle="确保在自习室范围内" bind:close="mapClose">
+  <map wx:if="{{ mapShow }}" id='the-id' show-scale
+    circles="{{[{latitude,longitude,radius:size,color:'#ff795b',strokeWidth:3,fillColor:'#ffc4b788'}]}}"
+    latitude='{{latitude}}' scale="17.5" show-location longitude='{{longitude}}'>
+  </map>
 </wux-popup>
 
 
@@ -18,7 +18,7 @@
   <view class="cont FCCC">
     <block wx:if="{{show===0}}">
       <view class="time-img">
-        <image mode="aspectFit" class="time-img-body" src="/images/people.jpg"></image>
+        <image bindtap="getQuotes" mode="aspectFit" class="time-img-body" src="/images/people.jpg"></image>
       </view>
       <view class="time-text">{{time}}</view>
     </block>
@@ -34,7 +34,7 @@
                   <block wx:if="{{!item.s}}">
                     <wux-icon type="md-square-outline" size="20" color="#ff795b" />
                   </block>
-                  <block wx:else >
+                  <block wx:else>
                     <wux-icon type="md-checkbox-outline" size="20" color="#ffb4a3" />
                   </block>
                 </view>
