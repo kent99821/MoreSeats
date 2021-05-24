@@ -56,6 +56,7 @@ Page({
   postConfig: async function () {
     wx.showLoading({
       title: '请求中',
+      mask: true
     })
     console.log({
       type: this.data.islimit ? 1 : 0,

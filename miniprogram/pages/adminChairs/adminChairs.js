@@ -9,23 +9,7 @@ Page({
    */
   data: {
     typeName: "平铺",
-    group: [{
-        groupName: "A",
-        groupSize: 10
-      },
-      {
-        groupName: "B",
-        groupSize: 1
-      },
-      {
-        groupName: "C",
-        groupSize: 10
-      },
-      {
-        groupName: "D",
-        groupSize: 10
-      },
-    ],
+    group: [],
     newGroup: {
       groupName: "",
       groupSize: 0
@@ -35,20 +19,20 @@ Page({
     chairNum: 0,
     show: false,
     actions: [{
-        name: '平铺',
-        subname: '适用于小型自习室',
-        type: 0
-      },
-      {
-        name: '分组',
-        subname: '适用于大型自习室',
-        type: 1
-      }, {
-        name: '平面图（开发中）',
-        disabled: true,
-        subname: '按真实座位排布显示',
-        type: 2
-      },
+      name: '平铺',
+      subname: '适用于小型自习室',
+      type: 0
+    },
+    {
+      name: '分组',
+      subname: '适用于大型自习室',
+      type: 1
+    }, {
+      name: '平面图（开发中）',
+      disabled: true,
+      subname: '按真实座位排布显示',
+      type: 2
+    },
     ],
     roomId: ""
   },
@@ -83,6 +67,7 @@ Page({
   postConfig: async function () {
     wx.showLoading({
       title: '请求中',
+      mask: true
     })
 
     await wx.cloud.callFunction({

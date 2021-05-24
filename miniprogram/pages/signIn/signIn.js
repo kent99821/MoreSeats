@@ -70,6 +70,7 @@ Page({
   ok: function (e) {
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     let n = this.data.name.replace(/(^\s*)|(\s*$)/g, "")
     if (n.length == 0 || n.length > 15) {

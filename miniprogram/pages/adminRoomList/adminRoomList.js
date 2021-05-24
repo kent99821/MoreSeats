@@ -63,6 +63,7 @@ Page({
       onConfirm(e, response) {
         wx.showLoading({
           title: '创建中',
+          mask: true
         })
         let n = response.replace(/(^\s*)|(\s*$)/g, "");
 
@@ -101,6 +102,7 @@ Page({
   deleteItem(e) {
     wx.showLoading({
       title: '删除中',
+      mask: true
     })
     let index = e.currentTarget.dataset.index;
     let roomId = this.data.roomsList[index].roomId;
@@ -222,6 +224,7 @@ Page({
       onConfirm(e, response) {
         wx.showLoading({
           title: '修改中',
+          mask: true
         })
         if (type == 0) postData.data.roomName = response.replace(/(^\s*)|(\s*$)/g, "");
         else if (type == 1) postData.data.openTime = response.replace(/(^\s*)|(\s*$)/g, "");

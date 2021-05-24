@@ -98,12 +98,14 @@ Page({
   postConfig: function () {
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     if (this.data.type == -1) {
       $wuxToptips().warn({
         text: '请选择类型',
         duration: 3000
       })
+      wx.hideLoading()
       return
     }
     if (this.data.codeIn != this.data.code) {
@@ -111,10 +113,12 @@ Page({
         text: '请检查验证码',
         duration: 3000
       })
+      wx.hideLoading()
       return
     }
     wx.showLoading({
       title: '生成中',
+      mask: true
     })
     wx.cloud.callFunction({
       name: 'getQR',
@@ -137,6 +141,7 @@ Page({
         })
       },
       fail: (res) => {
+        wx.hideLoading()
         wx.showToast({
           title: '云开发出现了些问题，请联系管理员排查！',
           icon: "none"

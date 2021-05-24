@@ -1,2 +1,4 @@
 <!--pages/about/about.wxml-->
-<text>开发中</text>
+<text class="logo">
+<image class="img" src="/images/logo.png"></image>
+</text>

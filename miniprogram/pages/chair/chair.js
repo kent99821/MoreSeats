@@ -210,6 +210,7 @@ Page({
     console.log(getApp().globalData.isNewGuys);
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     if (getApp().globalData.isNewGuys) {
       $wuxDialog().open({
@@ -389,6 +390,7 @@ Page({
     })
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     wx.cloud.callFunction({
       name: 'signOut',
@@ -497,6 +499,7 @@ Page({
   onLoad: function (options) {
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     console.log('参数值')
     let a = wx.getLaunchOptionsSync()
