@@ -170,3 +170,95 @@ view {
   font-size: 20rpx;
   align-self: flex-end;
 }
+
+
+
+
+
+
+.ppp{
+  background-color: #00000000!important;
+}
+
+.todo {
+  /* border: 1px solid #000; */
+  box-shadow: 0px 5px 18px -4px #000000;
+  background-color: #fff;
+  border-radius: 35rpx;
+  height: 600rpx;
+  width: 500rpx;
+  overflow: hidden;
+}
+
+.todo-top {
+  font-size: 40rpx;
+  color: #fff;
+  width: 100%;
+  /* height: 20%; */
+  text-align: center;
+  background-color: #ff795b;
+}
+
+.todo-cont {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color: aqua; */
+}
+
+.todo-one {
+  height: 70rpx;
+  width: 100%;
+  background-color: #fff;
+  /* border: 1px solid #000; */
+}
+
+.todo-one-1 {
+  height: 70rpx;
+  width: 100%;
+}
+
+.right-button {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.right-button-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.todo-one-left {
+  width: 70rpx;
+  /* background-color: aquamarine; */
+  height: 70rpx;
+}
+
+.todo-one-right {
+  /* background-color: aquamarine; */
+  width: 750rpx;
+  height: 70rpx;
+  border-bottom: 1px solid #ccc;
+  /* margin-left: 20rpx; */
+}
+
+.is-finish {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-one-edit {
+  /* background-color: aqua; */
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.todo-one-text {
+  font-size: 40rpx;
+  /* background-color: #ff795b; */
+  max-width: 545rpx;
+}
+
+.todo-last {
+  height: 100rpx;
+}

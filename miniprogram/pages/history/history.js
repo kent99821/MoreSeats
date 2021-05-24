@@ -6,27 +6,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    historyList:[],
+    historyList: [],
     skip: 0,
-    showTop:false,
-    topData:{},
+    showTop: false,
+    topData: {},
+    popShow: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  navigateToChair(){
+  navigateToChair() {
 
     // console.log(this.data.topData)
     wx.navigateTo({
-      url: '../chair/chair?roomId='+this.data.topData.roomId+'&chairIndex='+this.data.topData.chairIndex,
+      url: '../chair/chair?roomId=' + this.data.topData.roomId + '&chairIndex=' + this.data.topData.chairIndex,
     })
   },
-  getHistoryList(){
-    let len  = this.data.historyList.length;
-    let num =  15;
-    if(len>10) num = 10;
-    if(this.data.showTop==true) {
+  getHistoryList() {
+    let len = this.data.historyList.length;
+    let num = 15;
+    if (len > 10) num = 10;
+    if (this.data.showTop == true) {
       len++;
     };
     wx.cloud.callFunction({
@@ -34,22 +35,22 @@ Page({
       data: {
         flag: 1,
         skip: len,
-        num:num
+        num: num
       },
       success: res => {
         console.log(res);
         let changeData = res.result.data;
-        changeData.map((item)=>{
+        changeData.map((item) => {
           item.sDate = item.ssTime.split('T')[0].split('-').join('.');
         })
         this.setData({
           historyList: [...this.data.historyList, ...changeData],
         })
         // console.log(changeData)
-        if(this.data.showTop==false && this.data.historyList.length>0 &&  this.data.historyList[0].isOver== false){
-          let cData =[]
-          this.data.historyList.forEach((item,index)=>{
-            if(index>=1){
+        if (this.data.showTop == false && this.data.historyList.length > 0 && this.data.historyList[0].isOver == false) {
+          let cData = []
+          this.data.historyList.forEach((item, index) => {
+            if (index >= 1) {
               cData.push(item)
             }
           })
@@ -70,6 +71,13 @@ Page({
     })
 
   },
+  todo(e) {
+    console.log(e.currentTarget.dataset.todo);
+    this.setData({
+      todo: e.currentTarget.dataset.todo,
+      popShow: true
+    })
+  },
   onLoad: function (options) {
     this.getHistoryList();
   },
@@ -85,7 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getHistoryList();
   },
 
   /**
@@ -121,5 +129,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  popClose: function () {
+    this.setData({
+      popShow: false
+    })
   }
 })

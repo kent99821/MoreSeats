@@ -166,10 +166,10 @@ exports.main = async (event, context) => {
                 },
                 isOpen: true,
                 openId: wxContext.OPENID,
-                openTime: "点击编辑自习室开放时间",
+                openTime: "点击编辑房间开放时间",
                 roomId: PageData.croomId,
                 roomName: event.roomName,
-                roomNotice: "点击编辑自习室公告",
+                roomNotice: "点击编辑房间公告",
                 rule: {
                   type: 0,
                   size: 0,

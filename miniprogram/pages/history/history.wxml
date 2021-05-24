@@ -1,3 +1,33 @@
+<wux-popup wux-content-class="ppp" hasHeader="{{false}}" hasFooter="{{false}}" visible="{{ popShow }}"
+  bind:close="popClose">
+  <view class="todo">
+    <view class="todo-top FCCC">学习事项</view>
+    <scroll-view scroll-y class="todo-cont">
+      <wux-swipe-action-group>
+        <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC">
+          <view class="todo-one-1 FRSC">
+            <view class="todo-one-left FCCC" data-index="{{index}}">
+              <block wx:if="{{!item.s}}">
+                <wux-icon type="md-square-outline" size="20" color="#ff795b" />
+              </block>
+              <block wx:else>
+                <wux-icon type="md-checkbox-outline" size="20" color="#ffb4a3" />
+              </block>
+            </view>
+            <view class="todo-one-right FRSC">
+              <view class="todo-one-text wux-ellipsis {{!item.s?'':'is-finish'}}">{{item.c}}
+              </view>
+            </view>
+          </view>
+        </wux-swipe-action>
+      </wux-swipe-action-group>
+    </scroll-view>
+  </view>
+
+</wux-popup>
+
+
+
 <view wx:if="{{showTop}}" bindtap="navigateToChair" class="top-body FCCC">
   <view class="top-body-2 FRCC">
     <view class="top-body-left FCCS">
@@ -16,7 +46,7 @@
 </view>
 <view wx:if="{{showTop}}" class="tips">已完成</view>
 <view class="{{showTop?'':'noTop'}}"></view>
-<view wx:for="{{historyList}}" class="cards FRCC">
+<view wx:for="{{historyList}}" bindtap="todo" data-todo="{{item.todo}}" class="cards FRCC">
   <view class="cards-body FRSC">
     <view class="cards-body-left FCCS">
       <view class="cards-body-left-roomName FCCC">{{item.roomName}}</view>
