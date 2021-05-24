@@ -259,23 +259,40 @@ Page({
         success: res => {
           // console.log(res)
           console.log(res)
-          console.log(this.data.rule)
-          let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
-          console.log(distance)
-          if (distance > this.data.rule.size) {
-            this.setData({
-              latitude: this.data.rule.latitude,
-              longitude: this.data.rule.longitude,
-              mapShow: true
-            })
-            wx.showToast({
-              title: '不在自习室范围',
-              icon: 'error',
-              duration: 2000
-            })
-          } else {
-            this.signIn();
-          }
+          console.log('aaaa')
+          wx.onLocationChange(
+              (res)=> {
+              // console.log(res)
+              console.log('-------')
+              console.log(res)
+              console.log(this.data.rule)
+              let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
+              console.log(distance)
+              if (distance > this.data.rule.size) {
+                this.setData({
+                  latitude: this.data.rule.latitude,
+                  longitude: this.data.rule.longitude,
+                  mapShow: true
+                })
+                wx.showToast({
+                  title: '不在自习室范围',
+                  icon: 'error',
+                  duration: 2000
+                })
+                wx.stopLocationUpdate({
+                  success:res=>{
+                    console.log(res)
+                  },
+                  fail: err=>{
+                    console.log(err)
+                  }
+                })
+              } else {
+                this.signIn();
+              }
+            }
+          )
+
         },
         fail: res => {
           console.log(res)
@@ -328,7 +345,14 @@ Page({
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
-        wx.stopLocationUpdate()
+        wx.stopLocationUpdate({
+          success:res=>{
+            console.log(res)
+          },
+          fail: err=>{
+            console.log(err)
+          }
+        })
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
@@ -346,7 +370,14 @@ Page({
       },
       fail: err => {
         wx.hideLoading()
-        wx.stopLocationUpdate()
+        wx.stopLocationUpdate({
+          success:res=>{
+            console.log(res)
+          },
+          fail: err=>{
+            console.log(err)
+          }
+        })
         console.log('调用失败：', err)
       }
     })
