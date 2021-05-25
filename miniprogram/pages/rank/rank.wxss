@@ -7,7 +7,7 @@ view {
   background-color: #fff;
   height: 140rpx;
   width: 100%;
-  box-shadow: 0px 5px 12px -4px #ccc;
+  box-shadow: 0rpx 5rpx 12rpx -4rpx #ccc;
   /* position: relative; */
   position: fixed;
   top: 0;

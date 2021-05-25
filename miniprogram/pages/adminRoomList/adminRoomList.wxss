@@ -15,7 +15,7 @@ view {
   margin-left: 35rpx;
   background-color: #fff;
   border-radius: 30rpx;
-  box-shadow: 0px 5px 12px -4px #696969;
+  box-shadow: 0rpx 5rpx 12rpx -4rpx #696969;
   overflow: hidden;
 }
 

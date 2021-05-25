@@ -49,6 +49,9 @@ Page({
           ...res.result.data.chairs,
           typeName: this.data.actions.find(i => i.type === res.result.data.chairs.type).name
         })
+        this.setData({
+          activeTab: this.data.group.length
+        })
         if (res.result.data.rule.size === 0) {
           this.setData({
             size: 5

@@ -14,17 +14,17 @@ Page({
     btnType: 0, //下方按钮 0:坐下 1:签退 2:被占用
     show: 0, //中间显示 0:时长 1:事项
     todo: [{
-        s: false,
-        c: "123"
-      },
-      {
-        s: true,
-        c: "fdasdfsa"
-      },
-      {
-        s: false,
-        c: "6c6sa5dxxxxc4"
-      }
+      s: false,
+      c: "123"
+    },
+    {
+      s: true,
+      c: "fdasdfsa"
+    },
+    {
+      s: false,
+      c: "6c6sa5dxxxxc4"
+    }
     ],
     mapShow: false,
     quotes: '',
@@ -213,28 +213,29 @@ Page({
       mask: true
     })
     if (getApp().globalData.isNewGuys) {
+      wx.hideLoading()
       $wuxDialog().open({
         resetOnClose: true,
         title: '提示',
         content: '当前用户未登记',
         buttons: [{
-            text: '取消',
-            onTap(e) {
-              $wuxToptips().warn({
-                text: '未登记无法坐下',
-                duration: 2000
-              })
-            },
+          text: '取消',
+          onTap(e) {
+            $wuxToptips().warn({
+              text: '未登记无法坐下',
+              duration: 2000
+            })
           },
-          {
-            text: '前往登记',
-            type: 'primary',
-            onTap(e) {
-              wx.navigateTo({
-                url: '../signIn/signIn',
-              })
-            },
+        },
+        {
+          text: '前往登记',
+          type: 'primary',
+          onTap(e) {
+            wx.navigateTo({
+              url: '../signIn/signIn',
+            })
           },
+        },
         ],
       })
       return
@@ -262,7 +263,7 @@ Page({
           console.log(res)
           console.log('aaaa')
           wx.onLocationChange(
-              (res)=> {
+            (res) => {
               // console.log(res)
               console.log('-------')
               console.log(res)
@@ -275,20 +276,22 @@ Page({
                   longitude: this.data.rule.longitude,
                   mapShow: true
                 })
+                wx.hideLoading()
                 wx.showToast({
                   title: '不在自习室范围',
                   icon: 'error',
                   duration: 2000
                 })
                 wx.stopLocationUpdate({
-                  success:res=>{
+                  success: res => {
                     console.log(res)
                   },
-                  fail: err=>{
+                  fail: err => {
                     console.log(err)
                   }
                 })
               } else {
+                wx.hideLoading()
                 this.signIn();
               }
             }
@@ -309,7 +312,7 @@ Page({
             confirmColor: "#3296fa", //确定文字的颜色
             success: res => {
               console.log(res)
-              if(res.confirm){
+              if (res.confirm) {
                 wx.openSetting({
                   withSubscriptions: true,
                 })
@@ -330,13 +333,17 @@ Page({
         }
       })
     } else {
+      wx.hideLoading()
       this.signIn();
     }
 
 
   },
   signIn() {
-
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.cloud.callFunction({
       name: 'signIn',
       data: {
@@ -347,10 +354,10 @@ Page({
       },
       success: res => {
         wx.stopLocationUpdate({
-          success:res=>{
+          success: res => {
             console.log(res)
           },
-          fail: err=>{
+          fail: err => {
             console.log(err)
           }
         })
@@ -372,10 +379,10 @@ Page({
       fail: err => {
         wx.hideLoading()
         wx.stopLocationUpdate({
-          success:res=>{
+          success: res => {
             console.log(res)
           },
-          fail: err=>{
+          fail: err => {
             console.log(err)
           }
         })
