@@ -1,3 +1,6 @@
+import {
+  $wuxToptips
+} from '../../miniprogram_npm/wux-weapp/index.js'
 var app = getApp();
 Page({
 
@@ -15,9 +18,61 @@ Page({
     tim: -1,
     test: [{
 
-    }]
-  },
+    }],
 
+    // isOP:false,
+    isOP: false,
+    cps: false,
+    cts: false
+  },
+  // 清除排名
+  cleanRank() {
+    wx.showLoading({
+      title: '重置中',
+      mask: true,
+    })
+    wx.cloud.callFunction({
+      name: 'adminAction',
+      data: {
+        flag: 6,
+        roomId: this.data.roomId,
+        cleanPepSum: this.data.cps,
+        cleanTimeSum: this.data.cts
+      },
+      success: res => {
+        $wuxToptips().success({
+          text: '重置成功',
+          duration: 2000
+        })
+        console.log(res)
+        wx.hideLoading()
+        setTimeout(function () {
+          wx.navigateBack()
+        }, 1000)
+      },
+      fail: err => {
+        $wuxToptips().warn({
+          text: '重置失败',
+          duration: 2000
+        })
+        wx.hideLoading()
+        console.log('调用失败：', err)
+
+      }
+    })
+  },
+  cpsChange(event) {
+    console.log(event);
+    this.setData({
+      cps: !this.data.cps
+    });
+  },
+  ctsChange(event) {
+    console.log(event);
+    this.setData({
+      cts: !this.data.cts
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -54,10 +109,14 @@ Page({
 
   },
   onLoad: function (options) {
+    console.log(getCurrentPages()[getCurrentPages().length - 2].route == "pages/adminRoomList/adminRoomList");
+    if (getCurrentPages()[getCurrentPages().length - 2].route == "pages/adminRoomList/adminRoomList") {
+      this.setData({ isOP: true })
+    }
     this.setData({
       roomId: options.roomId,
       pep: options.pep,
-      tim: (options.tim/60).toFixed(1)
+      tim: (options.tim / 60).toFixed(1)
     })
     console.log(options.roomId);
     this.getHistoryList();

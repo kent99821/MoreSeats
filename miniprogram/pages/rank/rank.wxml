@@ -1,9 +1,10 @@
+<wux-toptips id="wux-toptips" />
 <wxs module="m1">
   var numberToFix= function (value) {
   return value.toFixed(1)
   }
   var stringToFix= function (value) {
-  return value.slice(0,6)
+  return value.slice(-6)
   }
   module.exports.numberToFix=numberToFix;
   module.exports.stringToFix=stringToFix;
@@ -22,10 +23,24 @@
         {{tim}}
       </view>
     </view>
-
   </view>
 </view>
+
 <view class="tips"></view>
+<view wx:if="{{isOP}}" class="op FCSC">
+  <view class="optit">管理员操作</view>
+  <view class="opselc FRCC">
+    <view class="nnnn">同时置零：</view>
+    <van-radio-group value="{{ cps }}" bind:change="cpsChange">
+      <van-radio name="{{true}}" checked-color="#ff795b" shape="square">已签到人次</van-radio>
+    </van-radio-group>
+    <view class="air" />
+    <van-radio-group value="{{ cts }}" bind:change="ctsChange">
+      <van-radio name="{{true}}" checked-color="#ff795b" shape="square">产生总时长</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="czpm FCCC" bindtap="cleanRank">重置排名</view>
+</view>
 <view wx:for="{{historyList}}" class="cards FRCC card-{{index}}">
   <wux-swipe-action-group>
     <wux-swipe-action autoClose useSlots>
@@ -53,3 +68,4 @@
     </wux-swipe-action>
   </wux-swipe-action-group>
 </view>
+<view class="tips"></view>

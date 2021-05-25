@@ -12,7 +12,7 @@ view {
   position: fixed;
   top: 0;
   margin-top: 0;
-  z-index: 99999;
+  z-index: 99;
 }
 
 .top-body-2 {
@@ -59,6 +59,39 @@ view {
   margin-left: 75rpx;
   margin-bottom: 10rpx;
   color: #535353;
+}
+
+.op {
+  height: 230rpx;
+  width: 100vw;
+  /* background-color: yellowgreen; */
+}
+
+.nnnn {
+  font-size: 30rpx;
+}
+
+.air {
+  width: 40rpx;
+}
+
+.optit {
+  color: #888;
+}
+
+.czpm {
+  width: 500rpx;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+  height: 70rpx;
+  border-radius: 15rpx;
+  color: #fff;
+  background-color: #ff795b;
+}
+
+.opselc {
+  margin-top: 20rpx;
+  font-size: 25rpx;
 }
 
 .noTop {
@@ -196,4 +229,8 @@ view {
 
 .cards-right-btn-2 {
   width: 50%;
+}
+
+#wux-toptips {
+  z-index: 999;
 }

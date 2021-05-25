@@ -2,7 +2,10 @@
   "usingComponents": {
     "wux-icon": "wux-weapp/icon/index",
     "wux-swipe-action-group": "wux-weapp/swipe-action-group/index",
-    "wux-swipe-action": "wux-weapp/swipe-action/index"
+    "wux-swipe-action": "wux-weapp/swipe-action/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "wux-toptips": "wux-weapp/toptips/index"
   },
   "navigationBarTitleText": "自习室统计排名"
 }
