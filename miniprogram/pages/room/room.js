@@ -40,6 +40,10 @@ Page({
     // if (options.roomName) {
     //   save();
     // } else {
+    wx.showLoading({
+      title: '数据请求中',
+      mask: true
+    })
     wx.cloud.callFunction({
       name: 'getRoomInfo',
       data: {
@@ -47,6 +51,7 @@ Page({
         roomId: aId
       },
       success: res => {
+        wx.hideLoading()
         aName = res.result.data.roomName;
         save();
         console.log(res.result.data)
@@ -87,6 +92,7 @@ Page({
         this.selectComponent('#tabs').resize();
       },
       fail: err => {
+        wx.hideLoading()
         console.log('调用失败：', err)
       }
     })
@@ -109,6 +115,10 @@ Page({
 
   },
   onLoad: function (options) {
+    wx.showLoading({
+      title: '请求中',
+      mask: true
+    })
     console.log('参数值')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
@@ -125,7 +135,7 @@ Page({
       roomId: aId
     })
     wx.setNavigationBarTitle(
-      { title: '自习室 #' + aId  }
+      { title: '自习室 #' + aId }
     )
     this.pageInit()
   },
@@ -170,7 +180,7 @@ Page({
     // console.log(e.currentTarget.dataset.chairindex);
 
   },
-  handleContact(){
+  handleContact() {
 
   },
   getIsAdmin() {

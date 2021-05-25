@@ -23,7 +23,9 @@
   margin: 20rpx;
   border-bottom: 1px solid #888;
 }
-
+.co{
+  margin-left: 20rpx;
+}
 .btn {
   width: 180rpx;
   height: 70rpx;
@@ -31,6 +33,7 @@
   color: #fff;
   border-radius: 15rpx;
   font-size: 28rpx;
+  margin-right: 20rpx;
 }
 
 .dn {

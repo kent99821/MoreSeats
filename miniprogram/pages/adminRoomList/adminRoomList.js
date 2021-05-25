@@ -14,6 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.cloud.callFunction({
       name: 'getUserInfo',
       data: {
@@ -24,7 +28,10 @@ Page({
         let val = res.result.data.roomAdminList.map((item) => {
           return item.roomId;
         })
-
+        wx.showLoading({
+          title: '加载房间信息',
+          mask: true
+        })
         wx.cloud.callFunction({
           name: 'getRoomInfo',
           data: {
@@ -38,14 +45,17 @@ Page({
             this.setData({
               roomsList: res.result.data
             })
+            wx.hideLoading()
             console.log(this.data.roomsList)
           },
           fail: err => {
+            wx.hideLoading()
             console.log('调用失败：', err)
           }
         })
       },
       fail: err => {
+        wx.hideLoading()
         console.log('调用失败：', err)
       }
     })

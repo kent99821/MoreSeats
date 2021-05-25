@@ -1,4 +1,66 @@
-<!--pages/about/about.wxml-->
-<text class="logo">
-<image class="img" src="/images/logo.png"></image>
-</text>
+<van-popup show="{{ TR }}" round position="bottom" custom-style="height: 60%" bind:close="cTR">
+  <view class="TR FCSC">
+    <view class="TRl FRSC">
+      <image mode="widthFix" src="/images/turing.jpg" class="TRl-icon"></image>
+      <view class="TRl-n">图灵智创</view>
+
+    </view>
+    <view class="TRt FCCC">
+      一支研究当今最热门的人工智能技术的创新团队，立足于计算机视觉、自然语言处理和前端&后台三个领域研究和开发，团队拥有完善的管理机制、合理的人员配置和多项专利技术，已在学科专业竞赛中，取得多项省级和国家级奖励的优异成绩。
+    </view>
+    <view class="TRGZH">
+      <image mode="widthFix" show-menu-by-longpress src="/images/turingGZH.jpg" class="TRGZHQR"></image>
+    </view>
+  </view>
+</van-popup>
+<van-popup show="{{ C1 }}" round position="bottom" custom-style="height: 60%" bind:close="cC1">
+  <view class="C1t FCCC">
+    用户可作为管理员快速创建和管理自己的房间，小程序提供设置打卡规则、划分座位显示，操作座位状态、追溯打卡记录、查看统计排名等功能，拥有实体房间座位的管理者还可生成对应的房间物料资源，张贴于座位，提高打卡效率。
+  </view>
+</van-popup>
+<van-popup show="{{ C2 }}" round position="bottom" custom-style="height: 60%" bind:close="cC2">
+  <view class="C2t FCSS">
+    <view class="one">
+      <view class="o1">wux</view>
+      <view>一套组件化、可复用、易扩展的微信小程序 UI 组件库</view>
+      <view>https://github.com/wux-weapp/wux-weapp/</view>
+      <view>MIT License</view>
+    </view>
+    <view class="one">
+      <view class="o1">vant-weapp</view>
+      <view>轻量、可靠的小程序 UI 组件库</view>
+      <view>https://github.com/youzan/vant-weapp</view>
+      <view>MIT License</view>
+    </view>
+    <view class="one">
+      <view class="o1">jszip</view>
+      <view>Create, read and edit .zip files with Javascript</view>
+      <view>https://github.com/Stuk/jszip</view>
+      <view>MIT License</view>
+    </view>
+    <view class="one">
+      <view class="o1">sms-code</view>
+      <view>短信验证码输入框</view>
+      <view>https://github.com/weapp-commponent/sms-code</view>
+      <view>MIT License</view>
+    </view>
+  </view>
+</van-popup>
+<view class="FCSC root">
+  <view class=" top FCSC">
+    <image mode="widthFix" src="/images/logo.png" class="img"></image>
+    <view class="n">万席</view>
+    <view class="t">More Seats</view>
+    <view class="c FCCC">
+      旨在提供高效便捷的座位共享管理服务。
+    </view>
+    <view bindtap="sC1" class="c1 FRSC">功能介绍</view>
+    <view bindtap="sC2" class="c2 FRSC">开源软件许可</view>
+
+
+  </view>
+  <view bindtap="sTR" class="ft FRCC">
+    <image mode="widthFix" src="/images/turing.jpg" class="turing"></image>
+    <view class="tl">图灵智创</view>
+  </view>
+</view>
