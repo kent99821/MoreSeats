@@ -51,7 +51,7 @@
         {
           "name": "pages/adminRoomNow/adminRoomNow",
           "pathName": "pages/adminRoomNow/adminRoomNow",
-          "query": "",
+          "query": "roomId=123456",
           "scene": null
         },
         {
