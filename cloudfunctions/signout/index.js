@@ -105,7 +105,7 @@ exports.main = async (event, context) => {
     }).update({
       data:{
       'chairs.infos':PageData.rresult.data[0].chairs.infos,
-      'chairs.sitDown':PageData.rresult.data[0].chairs.sitDown-1,
+      'chairs.sitDown':_.inc(-1),
       'count.timeSum':_.inc(PageData.howlong)
       }
     })
