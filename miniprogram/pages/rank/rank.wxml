@@ -9,7 +9,7 @@
   module.exports.numberToFix=numberToFix;
   module.exports.stringToFix=stringToFix;
 </wxs>
-<view bindtap="navigateToChair" class="top-body FCCC">
+<view class="top-body FCCC">
   <view class="top-body-2 FRCC">
     <view class="top-body-side FCCC">
       <view class="top-body-side-text FCCC">已签到人次</view>

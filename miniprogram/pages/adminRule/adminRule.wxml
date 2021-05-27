@@ -12,7 +12,7 @@
 <wux-cell-group class="f" title="范围设定" wx:if="{{islimit}}">
   <wux-cell title="范围中心定位" bindtap="mapSelect" is-link extra="{{ hasMap?'已':'未' }}选择" />
   <wux-cell title="范围半径（米）">
-    <van-stepper slot="footer" value="{{ size }}" disable-input step="5" min="5" max="100"  bind:change="sizeChange" />
+    <van-stepper slot="footer" value="{{ size }}" disable-input step="5" min="5" max="500" bind:change="sizeChange" />
   </wux-cell>
 </wux-cell-group>
 <view class="b FCCC">

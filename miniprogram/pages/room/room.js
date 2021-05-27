@@ -15,6 +15,11 @@ Page({
     tabChairsIndex: 0,
     roomData: {},
     chairsStates: [],
+    roomId: "000000",
+    count: {
+      pep: -1,
+      tim: -1
+    }
   },
 
   /**
@@ -25,11 +30,7 @@ Page({
       url: '../adminRoomList/adminRoomList',
     })
   },
-  toRank() {
-    wx.navigateTo({
-      url: '../rank/rank?roomId' + this.data.roomId + '&pep=123&tim=154234',
-    })
-  },
+
   pageInit() {
     let adminList = app.globalData.roomAdminList.map((item) => {
       return item.roomId;
@@ -63,8 +64,13 @@ Page({
         // let group = this.data.chairs.group
         let group = res.result.data.chairs.group
         console.log(group)
+        let count = {
+          pep: res.result.data.count.timeSum,
+          tim: res.result.data.count.pepSum
+        }
         this.setData({
-          roomData: roomData
+          roomData: roomData,
+          count
         })
 
         group.forEach((item, index) => {
@@ -111,8 +117,6 @@ Page({
       wx.setStorageSync('rooms', val);
     }
     this.getIsAdmin()
-
-
   },
   onLoad: function (options) {
     wx.showLoading({
@@ -194,23 +198,9 @@ Page({
     })
   },
   toRank() {
-    wx.cloud.callFunction({
-      name: 'getRoomInfo',
-      data: {
-        flag: 0,
-        roomIds: ['123456']
-      },
-      success: (res) => {
-        console.log(res.result.data[0])
-        let roomId = res.result.data[0].roomId;
-        let pep = res.result.data[0].count.pepSum;
-        let tim = res.result.data[0].count.timeSum;
-        wx.navigateTo({
-          url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
-        })
-      }
+    wx.navigateTo({
+      url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
     })
-
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
