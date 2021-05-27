@@ -67,15 +67,6 @@ exports.main = async (event, context) => {
     case 1:
       PageData.result = await db.collection('rooms').where({
         roomId: event.roomId
-      }).field({
-        chairs:true,
-        isOpen:true,
-        openId:true,
-        openTime:true,
-        roomId:true,
-        roomName:true,
-        roomNotice:true,
-        rule:true
       }).get()
       if(PageData.result.data.length===0){
         PageData.resCode=404
