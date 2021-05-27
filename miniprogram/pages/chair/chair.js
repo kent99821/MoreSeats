@@ -13,6 +13,7 @@ Page({
     chairIndex: -1,
     btnType: 0, //下方按钮 0:坐下 1:签退 2:被占用
     show: 0, //中间显示 0:时长 1:事项
+    isSent: false,//解决重复发送请求
     todo: [{
       s: false,
       c: "123"
@@ -240,7 +241,6 @@ Page({
       })
       return
     }
-
     function GetDistance(lat1, lng1, lat2, lng2) {
       var radLat1 = lat1 * Math.PI / 180.0;
       var radLat2 = lat2 * Math.PI / 180.0;
@@ -257,7 +257,6 @@ Page({
     if (this.data.rule.type == 1) {
       console.log('位置签到')
       wx.startLocationUpdateBackground({
-
         success: res => {
           // console.log(res)
           console.log(res)
@@ -340,6 +339,13 @@ Page({
 
   },
   signIn() {
+    console.log('触发');
+    if (this.data.isSent) {
+      return
+    }
+    this.setData({
+      isSent: true
+    })
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -420,6 +426,7 @@ Page({
           time: '00:00:00',
           waitBool: false,
           todo: [],
+          isSent: false
         })
       },
       fail: (err) => {
@@ -459,9 +466,17 @@ Page({
               this.getTodoData();
             } else {
               console.log('上次未结束')
-              wx.navigateTo({
-                url: '../chair/chair?roomId=' + val.roomId + '&chairIndex=' + val.chairIndex,
+              wx.showToast({
+                title: '返回座位',
+                mask: true,
+                icon: "error",
+                duration: 2000
               })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../chair/chair?roomId=' + val.roomId + '&chairIndex=' + val.chairIndex,
+                })
+              }, 1000)
             }
           }
         }

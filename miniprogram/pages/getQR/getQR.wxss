@@ -23,9 +23,11 @@
   margin: 20rpx;
   border-bottom: 1px solid #888;
 }
-.co{
+
+.co {
   margin-left: 20rpx;
 }
+
 .btn {
   width: 180rpx;
   height: 70rpx;

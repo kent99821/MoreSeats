@@ -119,6 +119,7 @@ Page({
     this.getIsAdmin()
   },
   onLoad: function (options) {
+    wx.hideLoading()
     wx.showLoading({
       title: '请求中',
       mask: true

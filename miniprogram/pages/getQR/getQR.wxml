@@ -1,7 +1,6 @@
 <wux-toptips id="wux-toptips" />
 
-<van-action-sheet show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="选择需生成的物料类型"
-  bind:select="onSelect" />
+
 <wux-cell-group class="f">
   <wux-cell title="物料类型" bindtap="openSelect" is-link extra="{{  typeName }}" />
 </wux-cell-group>
@@ -40,3 +39,6 @@
   <view class="ut"></view>
   <view class="url FCCC">{{res}}</view>
 </view>
+
+<van-action-sheet z-index="2147483647" show="{{ show }}" bind:click-overlay="closeSelect" actions="{{ actions }}" description="选择需生成的物料类型"
+  bind:select="onSelect" />
