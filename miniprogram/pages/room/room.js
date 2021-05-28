@@ -15,6 +15,10 @@ Page({
     tabChairsIndex: 0,
     roomData: {},
     chairsStates: [],
+    count:{
+      pep:'',
+      tim:''
+    }
   },
 
   /**
@@ -71,11 +75,15 @@ Page({
         // res.result.data.chairs.group.
         // let group = this.data.chairs.group
         let group = res.result.data.chairs.group
-        console.log(group)
-        this.setData({
-          roomData: roomData
-        })
 
+        let count = { 
+          pep: res.result.data.count.timeSum, 
+          tim: res.result.data.count.pepSum 
+        } 
+        this.setData({ 
+          roomData: roomData,
+          count 
+        }) 
         group.forEach((item, index) => {
           let temp = item.groupSize + lastChairsIndex
           // console.log(temp);
@@ -227,22 +235,25 @@ Page({
     })
   },
   toRank() {
-    wx.cloud.callFunction({
-      name: 'getRoomInfo',
-      data: {
-        flag: 0,
-        roomIds: [this.data.roomId]
-      },
-      success: (res) => {
-        console.log(res.result.data[0])
-        let roomId = res.result.data[0].roomId;
-        let pep = res.result.data[0].count.pepSum;
-        let tim = res.result.data[0].count.timeSum;
-        wx.navigateTo({
-          url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
-        })
-      }
+    wx.navigateTo({
+      url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
     })
+    // wx.cloud.callFunction({
+    //   name: 'getRoomInfo',
+    //   data: {
+    //     flag: 0,
+    //     roomIds: [this.data.roomId]
+    //   },
+    //   success: (res) => {
+    //     console.log(res.result.data[0])
+    //     let roomId = res.result.data[0].roomId;
+    //     let pep = res.result.data[0].count.pepSum;
+    //     let tim = res.result.data[0].count.timeSum;
+    //     wx.navigateTo({
+    //       url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
+    //     })
+    //   }
+    // })
 
   },
   /**
