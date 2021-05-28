@@ -15,11 +15,6 @@ Page({
     tabChairsIndex: 0,
     roomData: {},
     chairsStates: [],
-    roomId: "000000",
-    count: {
-      pep: -1,
-      tim: -1
-    }
   },
 
   /**
@@ -30,12 +25,16 @@ Page({
       url: '../adminRoomList/adminRoomList',
     })
   },
-
+  toRank() {
+    wx.navigateTo({
+      url: '../rank/rank?roomId' + this.data.roomId + '&pep=123&tim=154234',
+    })
+  },
   pageInit() {
     let adminList = app.globalData.roomAdminList.map((item) => {
       return item.roomId;
     })
-    console.log(adminList)
+
     let aId = this.data.roomId;
     let aName = "";
     // if (options.roomName) {
@@ -55,7 +54,20 @@ Page({
         wx.hideLoading()
         aName = res.result.data.roomName;
         save();
-        console.log(res.result.data)
+        // console.log(res.result)
+        if(res.result.resCode==404){ 
+ 
+          wx.showToast({ 
+            title: '该自习室不存在', 
+            icon: 'error', 
+            duration:3000 
+          }) 
+          setTimeout(()=>{wx.switchTab({ 
+            url: '../index/index', 
+          })},3000) 
+       
+          return ; 
+        } 
         // this.setData({ value: res.result.data })
         const roomData = res.result.data;
         let tabChairsIndex = []
@@ -64,13 +76,8 @@ Page({
         // let group = this.data.chairs.group
         let group = res.result.data.chairs.group
         console.log(group)
-        let count = {
-          pep: res.result.data.count.timeSum,
-          tim: res.result.data.count.pepSum
-        }
         this.setData({
-          roomData: roomData,
-          count
+          roomData: roomData
         })
 
         group.forEach((item, index) => {
@@ -117,9 +124,11 @@ Page({
       wx.setStorageSync('rooms', val);
     }
     this.getIsAdmin()
+
+
   },
   onLoad: function (options) {
-    wx.hideLoading()
+    wx.hideLoading() 
     wx.showLoading({
       title: '请求中',
       mask: true
@@ -199,9 +208,23 @@ Page({
     })
   },
   toRank() {
-    wx.navigateTo({
-      url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
+    wx.cloud.callFunction({
+      name: 'getRoomInfo',
+      data: {
+        flag: 0,
+        roomIds: ['123456']
+      },
+      success: (res) => {
+        console.log(res.result.data[0])
+        let roomId = res.result.data[0].roomId;
+        let pep = res.result.data[0].count.pepSum;
+        let tim = res.result.data[0].count.timeSum;
+        wx.navigateTo({
+          url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
+        })
+      }
     })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
