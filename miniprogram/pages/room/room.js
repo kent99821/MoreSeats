@@ -127,6 +127,28 @@ Page({
 
 
   },
+  getUserValue() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        console.log(res)
+        if (!res.result.data.isNewGuys) {
+          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
+        } 
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
+    })
+
+  },
   onLoad: function (options) {
     wx.hideLoading() 
     wx.showLoading({
@@ -141,6 +163,7 @@ Page({
     let aId;
     if (options.scene) {
       aId = options.scene.split('%3D')[1];
+      this.getUserValue();
     } else {
       aId = options.roomId;
     }

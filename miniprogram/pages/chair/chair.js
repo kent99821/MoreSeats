@@ -1,8 +1,10 @@
 // pages/chair/chair.js
+
 import {
   $wuxDialog,
   $wuxToptips
 } from '../../miniprogram_npm/wux-weapp/index.js'
+var app = getApp();
 Page({
 
   /**
@@ -494,6 +496,17 @@ Page({
       },
       success: res => {
         console.log(res)
+        if(res.result.resCode==404){
+          wx.showToast({ 
+            title: '该座位不存在', 
+            icon: 'error', 
+            duration:3000 
+          }) 
+          setTimeout(()=>{wx.navigateTo({ 
+            url: '../room/room?roomId='+this.data.roomId, 
+          })},3000) 
+          return ;
+        }
         let rule = res.result.data.rule
 
         this.setData({
@@ -518,11 +531,33 @@ Page({
       }
     })
   },
-  onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
+  getUserValue() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        console.log(res)
+        if (!res.result.data.isNewGuys) {
+          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
+        } 
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
     })
+
+  },
+  onLoad: function (options) {
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
     console.log('参数值')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
@@ -533,6 +568,7 @@ Page({
       console.log(options.scene)
       chairIndex = options.scene.split('%26')[0].split('%3D')[1];
       roomId = options.scene.split('%26')[1].split('%3D')[1];
+      this.getUserValue()
     } else {
       roomId = options.roomId;
       chairIndex = options.chairIndex;
