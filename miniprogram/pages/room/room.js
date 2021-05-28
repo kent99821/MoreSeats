@@ -25,11 +25,7 @@ Page({
       url: '../adminRoomList/adminRoomList',
     })
   },
-  toRank() {
-    wx.navigateTo({
-      url: '../rank/rank?roomId' + this.data.roomId + '&pep=123&tim=154234',
-    })
-  },
+
   pageInit() {
     let adminList = app.globalData.roomAdminList.map((item) => {
       return item.roomId;
@@ -235,7 +231,7 @@ Page({
       name: 'getRoomInfo',
       data: {
         flag: 0,
-        roomIds: ['123456']
+        roomIds: [this.data.roomId]
       },
       success: (res) => {
         console.log(res.result.data[0])
