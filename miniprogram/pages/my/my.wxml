@@ -26,10 +26,20 @@
       <open-data type="userAvatarUrl" bindtap="test"></open-data>
       <!-- <view class="top-user-icon-text">点击获取</view> -->
     </view>
-    <view class="top-user-name wux-ellipsis">
-      {{userName}}
+    <view class="FCSS">
+      <view class="FRSC">
+        <view class="top-user-name wux-ellipsis">
+          {{userName}}
+        </view>
+        <image mode="aspectFit" class="top-user-pen" src="/images/pen-disable.png" />
+      </view>
+      <view class="top-user-opid FRCC">
+        User:
+        <view class="top-user-opid-t">
+          {{openId}}
+        </view>
+      </view>
     </view>
-    <image mode="aspectFit" class="top-user-pen" src="/images/pen-disable.png" />
   </view>
 </view>
 <!-- <button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo"></button> -->

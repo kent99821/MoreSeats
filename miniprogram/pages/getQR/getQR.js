@@ -16,7 +16,7 @@ Page({
     show: false,
     codeShow: true,
     roomId: "",
-    typeName: "",
+    typeName: "请选择",
     type: -1,
     isRes: false,
     res: "请点击生成",
