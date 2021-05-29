@@ -40,10 +40,11 @@ Page({
         cleanTimeSum: this.data.cts
       },
       success: res => {
-        $wuxToptips().success({
-          text: '重置成功',
-          duration: 2000
+        wx.showToast({
+          title: '重置成功',
+          icon:'success'
         })
+
         console.log(res)
         wx.hideLoading()
         setTimeout(function () {
@@ -51,10 +52,11 @@ Page({
         }, 1000)
       },
       fail: err => {
-        $wuxToptips().warn({
-          text: '重置失败',
-          duration: 2000
+        wx.showToast({
+          title: '重置失败',
+          icon:'error'
         })
+
         wx.hideLoading()
         console.log('调用失败：', err)
 

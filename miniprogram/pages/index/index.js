@@ -185,6 +185,10 @@ Page({
       key: 'rooms',
     })
     this.setData({ rooms: val });
+    wx.showToast({
+      title: '删除成功',
+      icon: 'success'
+    })
   },
 
   /*
@@ -298,6 +302,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     wx.startPullDownRefresh()
     this.getHistory();
     this.getUserValue();

@@ -80,13 +80,14 @@ Page({
         console.log(res);
         wx.hideLoading()
         //
-        $wuxToptips().success({
-          text: '修改成功',
-          duration: 3000
+        wx.showToast({
+          title: '修改成功',
+          icon:'success'
         })
 
       },
       fail: (res) => {
+
         wx.showToast({
           title: '云开发出现了些问题，请联系管理员排查！',
           icon: "none"

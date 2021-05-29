@@ -101,17 +101,20 @@ Page({
       mask: true
     })
     if (this.data.type == -1) {
-      $wuxToptips().warn({
-        text: '请选择类型',
-        duration: 3000
+      wx.showToast({
+        title: '请选择类型',
+        icon:'error'
       })
+      
       wx.hideLoading()
       return
     }
     if (this.data.codeIn != this.data.code) {
-      $wuxToptips().warn({
-        text: '请检查验证码',
-        duration: 3000
+
+      wx.showToast({
+        title: '请检查验证码',
+        icon:'error',
+        duration:3000
       })
       wx.hideLoading()
       return
@@ -135,10 +138,12 @@ Page({
           res: res.result.tempFileURL,
         })
         wx.hideLoading()
-        $wuxToptips().success({
-          text: '点击下方复制链接，前往浏览器下载',
-          duration: 3000
+        wx.showToast({
+          title: '点击下方复制链接，前往浏览器下载',
+          duration:3000,
+          icon:'none'
         })
+
       },
       fail: (res) => {
         wx.hideLoading()

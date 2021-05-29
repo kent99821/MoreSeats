@@ -146,9 +146,9 @@ Page({
               that.setData({
                 userName: response.replace(/(^\s*)|(\s*$)/g, "")
               })
-              $wuxToptips().success({
-                text: '修改成功',
-                duration: 3000
+              wx.showToast({
+                title: '修改成功',
+                icon:'success'
               })
             },
             fail: (res) => {
@@ -161,10 +161,14 @@ Page({
           })
         } else
           //失败通知
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
+          wx.showToast({
+            title: '修改失败',
+            icon:'error'
           })
+          // $wuxToptips().warn({
+          //   text: '修改失败',
+          //   duration: 3000
+          // })
       },
     })
   },

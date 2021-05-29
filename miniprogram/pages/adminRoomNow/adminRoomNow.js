@@ -81,6 +81,10 @@ Page({
         chairIndex: parseInt(item.chairIndex)
       },
       success: res => {
+        wx.showToast({
+          title: '签退成功',
+          icon: 'success'
+        })
         console.log(res)
         let userList = this.data.userList;
         userList.splice(index, 1);
@@ -89,6 +93,10 @@ Page({
         })
       },
       fail: err => {
+        wx.showToast({
+          title: '签退失败',
+          icon: 'error'
+        })
         console.log('调用失败：', err)
       }
     })
@@ -106,8 +114,16 @@ Page({
         },
         success:res=>{
           console.log(res)
+          wx.showToast({
+            title: '清退成功',
+            icon: 'success'
+          })
         },
         fail:err=>{
+          wx.showToast({
+            title: '清退失败',
+            icon: 'error'
+          })
           console.log('调用失败：',err)
         }
       })

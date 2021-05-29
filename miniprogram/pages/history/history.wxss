@@ -187,6 +187,7 @@ view {
   height: 600rpx;
   width: 500rpx;
   overflow: hidden;
+  padding-bottom: 70rpx;
 }
 
 .todo-top {

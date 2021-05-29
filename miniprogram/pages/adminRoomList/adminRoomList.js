@@ -85,10 +85,11 @@ Page({
             success: res => {
               that.onLoad0()
               wx.hideLoading()
-              $wuxToptips().success({
-                text: '创建成功',
-                duration: 3000
+              wx.showToast({
+                title: '创建成功',
+                icon: 'success'
               })
+ 
             },
             fail: (res) => {
               wx.showToast({
@@ -100,10 +101,11 @@ Page({
           })
         } else
           //失败通知
-          $wuxToptips().warn({
-            text: '新建失败',
-            duration: 3000
+          wx.showToast({
+            title: '新建失败',
+            icon:'error'
           })
+
       },
     })
   },
@@ -129,17 +131,19 @@ Page({
         this.setData({
           roomsList: changeList
         })
-        $wuxToptips().success({
-          text: '删除成功',
-          duration: 3000
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success'
         })
+
       },
       fail: err => {
         wx.hideLoading()
-        $wuxToptips().warn({
-          text: '删除失败',
-          duration: 3000
+        wx.showToast({
+          title: '删除失败',
+          icon:'error'
         })
+
         console.log('调用失败：', err)
       }
     })
@@ -272,17 +276,19 @@ Page({
                 roomsList: changeList
               })
               wx.hideLoading()
-              $wuxToptips().success({
-                text: '修改成功',
-                duration: 3000
+              wx.showToast({
+                title: '修改成功',
+                icon: 'success'
               })
+   
             },
             fail: (res) => {
               wx.hideLoading()
-              $wuxToptips().success({
-                text: '修改失败',
-                duration: 3000
+              wx.showToast({
+                title: '修改失败',
+                icon:'error'
               })
+
               // console.log(res);
             }
           })
@@ -290,9 +296,9 @@ Page({
         //失败通知
         {
           wx.hideLoading()
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
+          wx.showToast({
+            title: '修改失败',
+            icon:'error'
           })
         }
       },

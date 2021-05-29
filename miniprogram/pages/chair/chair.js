@@ -101,17 +101,19 @@ Page({
             todo
           })
           wx.setStorageSync('todo', todo)
-          $wuxToptips().success({
-            text: '修改成功',
-            duration: 3000
+
+          wx.showToast({
+            title: '修改成功',
+            icon:'success'
           })
 
         } else
           //失败通知
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
+          wx.showToast({
+            title: '修改失败',
+            icon: 'error'
           })
+ 
       },
     })
 
@@ -156,16 +158,19 @@ Page({
               todo
             })
             wx.setStorageSync('todo', todo)
-            $wuxToptips().success({
-              text: '添加成功',
-              duration: 3000
+            wx.showToast({
+              title: '添加成功',
+              duration:3000,
+              icon:'success'
             })
+
           } else
             //失败通知
-            $wuxToptips().warn({
-              text: '修改失败',
-              duration: 3000
+            wx.showToast({
+              title: '修改失败',
+              icon: 'error'
             })
+ 
         },
       })
     }
@@ -214,10 +219,11 @@ Page({
         buttons: [{
           text: '取消',
           onTap(e) {
-            $wuxToptips().warn({
-              text: '未登记无法坐下',
-              duration: 2000
+            wx.showToast({
+              title: '未登记无法坐下',
+              icon: 'error'
             })
+
           },
         },
         {

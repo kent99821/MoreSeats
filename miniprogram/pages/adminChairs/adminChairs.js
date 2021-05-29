@@ -86,10 +86,11 @@ Page({
         console.log(res);
         wx.hideLoading()
         //
-        $wuxToptips().success({
-          text: '修改成功',
-          duration: 3000
+        wx.showToast({
+          title: '修改成功',
+          icon: 'success'
         })
+
 
       },
       fail: (res) => {
@@ -161,9 +162,13 @@ Page({
   newGroup: function (e) {
     // this.data.group.push(this.data.newGroup)
     if (this.data.newGroup.groupName.length == 0) {
-      $wuxToptips().warn({
-        text: '新建失败，名称不可为空',
-        duration: 3000
+      // $wuxToptips().warn({
+      //   text: '新建失败，名称不可为空',
+      //   duration: 3000
+      // })
+      wx.showToast({
+        title: '新建失败，名称不可为空',
+        icon:'none'
       })
       return
     }

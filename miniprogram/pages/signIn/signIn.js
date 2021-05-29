@@ -75,10 +75,12 @@ Page({
     let n = this.data.name.replace(/(^\s*)|(\s*$)/g, "")
     if (n.length == 0 || n.length > 15) {
       wx.hideLoading()
-      $wuxToptips().warn({
-        text: '长度限制1~15位字符',
-        duration: 2000
+      wx.showToast({
+        title: '长度限制1~15位字符',
+        duration:2000,
+        icon:'none'
       })
+
       return
     }
     wx.cloud.callFunction({
@@ -91,15 +93,19 @@ Page({
         console.log(res)
         // console.log(res.result.resCode === 200)
         if (res.result.resCode === 200) {
-          $wuxToptips().success({
-            text: '登记成功',
-            duration: 2000
-          })
+        wx.showToast({
+          title: '登记成功',
+          duration:2000,
+          icon:'success'
+        })
+
         } else {
-          $wuxToptips().warn({
-            text: '重复登记或登记失败',
-            duration: 2000
+          wx.showToast({
+            title: '重复登记或登记失败',
+            duration:2000,
+            icon:'none'
           })
+
         }
         getApp().globalData.isNewGuys = false
         setTimeout(function () {
