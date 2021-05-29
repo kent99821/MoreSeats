@@ -78,7 +78,7 @@ Page({
         flag: 1,
         openId: item.openId,
         roomId: this.data.roomId,
-        chairIndex: item.chairIndex
+        chairIndex: parseInt(item.chairIndex)
       },
       success: res => {
         console.log(res)

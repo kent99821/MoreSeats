@@ -347,7 +347,7 @@ Page({
       data: {
         // roomId:this.data.roomId,
         roomId: this.data.roomId,
-        chairIndex: this.data.chairIndex,
+        chairIndex: parseInt(this.data.chairIndex),
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
@@ -399,7 +399,7 @@ Page({
       name: 'signOut',
       data: {
         flag: 0,
-        chairIndex: this.data.chairIndex,
+        chairIndex: parseInt(this.data.chairIndex),
         roomId: this.data.roomId,
         todo: this.data.todo
       },
