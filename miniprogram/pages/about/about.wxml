@@ -3,7 +3,6 @@
     <view class="TRl FRSC">
       <image mode="widthFix" src="/images/turing.jpg" class="TRl-icon"></image>
       <view class="TRl-n">图灵智创</view>
-
     </view>
     <view class="TRt FCCC">
       一支研究当今最热门的人工智能技术的创新团队，立足于计算机视觉、自然语言处理和前端&后台三个领域研究和开发，团队拥有完善的管理机制、合理的人员配置和多项专利技术，已在学科专业竞赛中，取得多项省级和国家级奖励的优异成绩。
@@ -13,12 +12,12 @@
     </view>
   </view>
 </van-popup>
-<van-popup show="{{ C1 }}" round position="bottom" custom-style="height: 60%" bind:close="cC1">
+<van-popup show="{{ C1 }}" round position="bottom" custom-style="height: 40%" bind:close="cC1">
   <view class="C1t FCCC">
     用户可作为管理员快速创建和管理自己的房间，小程序提供设置打卡规则、划分座位显示，操作座位状态、追溯打卡记录、查看统计排名等功能，拥有实体房间座位的管理者还可生成对应的房间物料资源，张贴于座位，提高打卡效率。
   </view>
 </van-popup>
-<van-popup show="{{ C2 }}" round position="bottom" custom-style="height: 60%" bind:close="cC2">
+<van-popup show="{{ C2 }}" round position="bottom" custom-style="height: 80%" bind:close="cC2">
   <view class="C2t FCSS">
     <view class="one">
       <view class="o1">wux</view>
@@ -37,6 +36,12 @@
       <view>Create, read and edit .zip files with Javascript</view>
       <view>https://github.com/Stuk/jszip</view>
       <view>MIT License</view>
+    </view>
+    <view class="one">
+      <view class="o1">一言</view>
+      <view>提供一句话服务</view>
+      <view>https://github.com/hitokoto-osc/hitokoto-api</view>
+      <view>Apache-2.0 License</view>
     </view>
     <view class="one">
       <view class="o1">sms-code</view>

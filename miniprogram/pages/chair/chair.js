@@ -1,8 +1,10 @@
 // pages/chair/chair.js
+
 import {
   $wuxDialog,
   $wuxToptips
 } from '../../miniprogram_npm/wux-weapp/index.js'
+var app = getApp();
 Page({
 
   /**
@@ -11,8 +13,10 @@ Page({
   data: {
     roomId: '',
     chairIndex: -1,
+    signState: false,
     btnType: 0, //下方按钮 0:坐下 1:签退 2:被占用
     show: 0, //中间显示 0:时长 1:事项
+    isSent: false,//解决重复发送请求
     todo: [{
       s: false,
       c: "123"
@@ -50,7 +54,7 @@ Page({
    */
   setTime() {
     if (!this.data.sTime) return;
-    let a = '21:34:00';
+    let a = '00:00:00';
     a = this.data.sTime;
     let val = (Date.now() - a) / 1000;
     let h, m, s;
@@ -66,25 +70,7 @@ Page({
     })
 
   },
-  // displayMap(){
-  //   const query = wx.createSelectorQuery()
-  //   query.select('#the-id').boundingClientRect()
-  //   query.selectViewport().scrollOffset()
-  //   query.exec(function(res){
-  //     res[0].top       // #the-id节点的上边界坐标
-  //     res[1].scrollTop // 显示区域的竖直滚动位置
-  //   })
 
-  //   wx.getLocation({
-  //     success: res=>{
-  //       console.log(res)
-  //       this.setData({
-  //         latitude: res.latitude,
-  //         longitude: res.longitude
-  //       })
-  //     }
-  //   })
-  // },
   deleteCard(e) {
     let todo = this.data.todo;
     let index = e.currentTarget.dataset.index;
@@ -141,42 +127,49 @@ Page({
     wx.setStorageSync('todo', todo)
   },
   addToDo(e) {
+    if(!this.data.signState){
+      wx.showToast({
+        title: '请先坐下',
+        icon: 'error'
+      })
+    }else{
+      let that = this;
+      $wuxDialog().prompt({
+        resetOnClose: true,
+        title: '事项内容',
+        // content: '最长16位字符',
+        fieldtype: 'text',
+        defaultText: '',
+        placeholder: that.data.userName,
+        maxlength: -1,
+        onConfirm(e, response) {
+          if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
+            let todo = that.data.todo || [];
+  
+            // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
+            todo.splice(0, 0, {
+              s: false,
+              c: response.replace(/(^\s*)|(\s*$)/g, "")
+            })
+            
+            that.setData({
+              todo
+            })
+            wx.setStorageSync('todo', todo)
+            $wuxToptips().success({
+              text: '添加成功',
+              duration: 3000
+            })
+          } else
+            //失败通知
+            $wuxToptips().warn({
+              text: '修改失败',
+              duration: 3000
+            })
+        },
+      })
+    }
 
-    let that = this;
-    $wuxDialog().prompt({
-      resetOnClose: true,
-      title: '事项内容',
-      // content: '最长16位字符',
-      fieldtype: 'text',
-      defaultText: '',
-      placeholder: that.data.userName,
-      maxlength: -1,
-      onConfirm(e, response) {
-        if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
-          let todo = that.data.todo || [];
-
-          // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
-          todo.splice(0, 0, {
-            s: false,
-            c: response.replace(/(^\s*)|(\s*$)/g, "")
-          })
-
-          that.setData({
-            todo
-          })
-          wx.setStorageSync('todo', todo)
-          $wuxToptips().success({
-            text: '添加成功',
-            duration: 3000
-          })
-        } else
-          //失败通知
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
-          })
-      },
-    })
   },
 
   getTodoData() {
@@ -240,7 +233,6 @@ Page({
       })
       return
     }
-
     function GetDistance(lat1, lng1, lat2, lng2) {
       var radLat1 = lat1 * Math.PI / 180.0;
       var radLat2 = lat2 * Math.PI / 180.0;
@@ -256,9 +248,10 @@ Page({
     // console.log(this.data.rule)
     if (this.data.rule.type == 1) {
       console.log('位置签到')
+      let getPositionTotal = 0;
       wx.startLocationUpdateBackground({
-
         success: res => {
+
           // console.log(res)
           console.log(res)
           console.log('aaaa')
@@ -271,26 +264,27 @@ Page({
               let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
               console.log(distance)
               if (distance > this.data.rule.size) {
-                this.setData({
-                  latitude: this.data.rule.latitude,
-                  longitude: this.data.rule.longitude,
-                  mapShow: true
-                })
+
                 wx.hideLoading()
-                wx.showToast({
-                  title: '不在自习室范围',
-                  icon: 'error',
-                  duration: 2000
-                })
-                wx.stopLocationUpdate({
-                  success: res => {
-                    console.log(res)
-                  },
-                  fail: err => {
-                    console.log(err)
-                  }
-                })
+                if(getPositionTotal==0){
+                  this.setData({
+                    latitude: this.data.rule.latitude,
+                    longitude: this.data.rule.longitude,
+                    mapShow: true
+                  })
+                  wx.showToast({
+                    title: '不在自习室范围',
+                    icon: 'error',
+                    duration: 2000
+                  })
+                }
+                getPositionTotal++;
+
+
               } else {
+                this.setData({
+                  mapShow: false,
+                })
                 wx.hideLoading()
                 this.signIn();
               }
@@ -317,17 +311,6 @@ Page({
                   withSubscriptions: true,
                 })
               }
-
-              // wx.getSetting({
-              //   success: resSetting => {
-              //     if (!resSetting.authSetting["scope.userLocation"]) {
-              //       wx.openSetting({
-              //         success: res => {
-              //         }
-              //       });
-              //     }
-              //   }
-              // });
             }
           });
         }
@@ -340,6 +323,21 @@ Page({
 
   },
   signIn() {
+    wx.stopLocationUpdate({
+      success: res => {
+        console.log(res)
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
+    console.log('触发');
+    if (this.data.isSent) {
+      return
+    }
+    this.setData({
+      isSent: true
+    })
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -353,23 +351,25 @@ Page({
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
-        wx.stopLocationUpdate({
-          success: res => {
-            console.log(res)
-          },
-          fail: err => {
-            console.log(err)
-          }
-        })
+  
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
         if (res.result.resCode == 200) {
+          wx.showToast({
+            title: '签到成功',
+            icon:'success'
+          })
           this.setData({
             btnType: 1,
-            sTime: new Date()
+            sTime: new Date(),
+            signState: true
           })
         } else if (res.result.resCode == 300) {
+          wx.showToast({
+            title: '座位已被占用',
+            icon:'error'
+          })
           this.setData({
             btnType: 2
           })
@@ -378,13 +378,9 @@ Page({
       },
       fail: err => {
         wx.hideLoading()
-        wx.stopLocationUpdate({
-          success: res => {
-            console.log(res)
-          },
-          fail: err => {
-            console.log(err)
-          }
+        wx.showToast({
+          title: '签到失败',
+          icon:'error'
         })
         console.log('调用失败：', err)
       }
@@ -393,7 +389,7 @@ Page({
   trySignOut() {
     if (this.data.waitBool) return;
     this.setData({
-      waitBool: true
+      waitBool: true,
     })
     wx.showLoading({
       title: '加载中',
@@ -420,9 +416,28 @@ Page({
           time: '00:00:00',
           waitBool: false,
           todo: [],
+          isSent: false,
+          signState: false,
         })
+        if(res.result.resCode==201){
+          wx.showToast({
+            title: '已被签退',
+            icon:'error'
+          })
+        }else if(res.result.resCode==200){
+          wx.showToast({
+            title: '签退成功',
+            icon: 'success'
+          })
+        }
+
+
       },
       fail: (err) => {
+        wx.showToast({
+          title: '签退失败',
+          icon:'error'
+        })
         console.log(err);
       }
     })
@@ -444,10 +459,14 @@ Page({
           let val = res.result.data[0];
           if (val.isOver) {
             wx.setStorageSync('todo', [])
-            // console.log('---')
-            // console.log(wx.getStorageSync('todo'))
+            this.setData({
+              signState: false
+            })
             this.getTodoData()
           } else {
+            this.setData({
+              signState: true
+            })
             if (this.data.roomId == val.roomId && this.data.chairIndex == val.chairIndex) {
               this.setData({
                 btnType: 1
@@ -459,9 +478,17 @@ Page({
               this.getTodoData();
             } else {
               console.log('上次未结束')
-              wx.navigateTo({
-                url: '../chair/chair?roomId=' + val.roomId + '&chairIndex=' + val.chairIndex,
+              wx.showToast({
+                title: '返回座位',
+                mask: true,
+                icon: "error",
+                duration: 2000
               })
+              setTimeout(function () {
+                wx.redirectTo({
+                  url: '../chair/chair?roomId=' + val.roomId + '&chairIndex=' + val.chairIndex,
+                })
+              }, 1000)
             }
           }
         }
@@ -479,6 +506,17 @@ Page({
       },
       success: res => {
         console.log(res)
+        if(res.result.resCode==404){
+          wx.showToast({ 
+            title: '该座位不存在', 
+            icon: 'error', 
+            duration:3000 
+          }) 
+          setTimeout(()=>{wx.navigateTo({ 
+            url: '../room/room?roomId='+this.data.roomId, 
+          })},3000) 
+          return ;
+        }
         let rule = res.result.data.rule
 
         this.setData({
@@ -503,11 +541,33 @@ Page({
       }
     })
   },
-  onLoad: function (options) {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
+  getUserValue() {
+    wx.cloud.callFunction({
+      name: 'getUserInfo',
+      data: {
+        flag: 0,
+      },
+      success: res => {
+        console.log(res)
+        if (!res.result.data.isNewGuys) {
+          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
+        } 
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '云开发出现了些问题，请联系管理员排查！',
+          icon: "none"
+        })
+        console.log(res);
+      }
     })
+
+  },
+  onLoad: function (options) {
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
     console.log('参数值')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
@@ -518,6 +578,7 @@ Page({
       console.log(options.scene)
       chairIndex = options.scene.split('%26')[0].split('%3D')[1];
       roomId = options.scene.split('%26')[1].split('%3D')[1];
+      this.getUserValue()
     } else {
       roomId = options.roomId;
       chairIndex = options.chairIndex;
@@ -546,7 +607,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (options) {
+    
     this.readyPage()
   },
 
@@ -554,14 +616,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    wx.stopLocationUpdate({ 
+      success: res => { 
+        console.log(res) 
+      }, 
+      fail: err => { 
+        console.log(err) 
+      } 
+    }) 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.stopLocationUpdate({ 
+      success: res => { 
+        console.log(res) 
+      }, 
+      fail: err => { 
+        console.log(err) 
+      } 
+    }) 
   },
 
   /**
@@ -593,16 +669,7 @@ Page({
       show: e.detail.key
     })
   },
-  /**
-   * 坐下
-   */
 
-  /**
-   * 签退
-   */
-  signOut: function () {
-
-  },
   /**
    * 被占用提示
    */

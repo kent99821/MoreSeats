@@ -1,4 +1,14 @@
 <view class="tips"></view>
+<wxs module="m1">
+  var numberToFix= function (value) {
+  return value.toFixed(1)
+  }
+  var stringToFix= function (value) {
+  return value.slice(-6)
+  }
+  module.exports.numberToFix=numberToFix;
+  module.exports.stringToFix=stringToFix;
+</wxs>
 <view class="top-body FCCC">
   <wux-cell class="f" title="正在学习" bindtap="navigateToNow" hasLine="{{false}}" is-link extra="管理" />
 </view>
@@ -26,12 +36,12 @@
       </view>
       <view slot="left" class="cards-left FCCC">
         <view class="cards-left-body">
-          User:oU2sas
+          User:{{m1.stringToFix(item.openId)}}
         </view>
       </view>
       <view slot="right" class="cards-left FCCC">
         <view class="cards-left-body-o">
-          User:oU2sas
+          User:{{m1.stringToFix(item.openId)}}
         </view>
       </view>
     </wux-swipe-action>

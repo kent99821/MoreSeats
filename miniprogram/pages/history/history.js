@@ -41,7 +41,11 @@ Page({
         console.log(res);
         let changeData = res.result.data;
         changeData.map((item) => {
-          item.sDate = item.ssTime.split('T')[0].split('-').join('.');
+          let sTime = item.ssTime;
+          item.sDate = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+          console.log(item.sDate)
+          // item.sDate='2021.05.29 16:48'
+          // item.sDate = item.ssTime.split('T')[0].split('-').join('.');
         })
         this.setData({
           historyList: [...this.data.historyList, ...changeData],

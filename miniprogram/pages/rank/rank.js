@@ -108,6 +108,20 @@ Page({
     })
 
   },
+  getIsAdmin() {
+    let getState =  setInterval(()=>{
+    // console.log(app.globalData.roomAdminList)
+    if(app.globalData.responseState){
+      app.globalData.roomAdminList.forEach(item => {
+        if (item.roomId == this.data.roomId) {
+          this.setData({ isOP: true })
+        }
+      })
+      clearInterval(getState)
+    } 
+  },100)
+  
+    },
   onLoad: function (options) {
     console.log(getCurrentPages()[getCurrentPages().length - 2].route == "pages/adminRoomList/adminRoomList");
     if (getCurrentPages()[getCurrentPages().length - 2].route == "pages/adminRoomList/adminRoomList") {
@@ -120,6 +134,7 @@ Page({
     })
     console.log(options.roomId);
     this.getHistoryList();
+    this.getIsAdmin()
   },
 
   /**

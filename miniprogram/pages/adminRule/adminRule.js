@@ -36,7 +36,7 @@ Page({
         this.setData({
           islimit: res.result.data.rule.type !== 0,
           ...res.result.data.rule,
-          hasMap: res.result.data.latitude !== 0
+          hasMap: res.result.data.rule.latitude !== 0
         })
         if (res.result.data.rule.size === 0) {
           this.setData({

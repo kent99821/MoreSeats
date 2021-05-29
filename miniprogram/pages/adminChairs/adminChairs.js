@@ -15,7 +15,7 @@ Page({
       groupSize: 0
     },
     activeTab: 0,
-    type: 1,
+    type: 0,
     chairNum: 0,
     show: false,
     actions: [{

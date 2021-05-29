@@ -15,6 +15,11 @@ Page({
     tabChairsIndex: 0,
     roomData: {},
     chairsStates: [],
+    count:{
+      pep:'',
+      tim:''
+    },
+    roomId: "000000", 
   },
 
   /**
@@ -25,16 +30,10 @@ Page({
       url: '../adminRoomList/adminRoomList',
     })
   },
-  toRank() {
-    wx.navigateTo({
-      url: '../rank/rank?roomId' + this.data.roomId + '&pep=123&tim=154234',
-    })
-  },
+
   pageInit() {
-    let adminList = app.globalData.roomAdminList.map((item) => {
-      return item.roomId;
-    })
-    console.log(adminList)
+
+
     let aId = this.data.roomId;
     let aName = "";
     // if (options.roomName) {
@@ -53,8 +52,24 @@ Page({
       success: res => {
         wx.hideLoading()
         aName = res.result.data.roomName;
-        save();
-        console.log(res.result.data)
+       console.log(res)
+        // console.log(res.result)
+        if(res.result.resCode==404){ 
+ 
+          wx.showToast({ 
+            title: '该自习室不存在', 
+            icon: 'error', 
+            duration:3000 
+          }) 
+          setTimeout(()=>{wx.switchTab({ 
+            url: '../index/index', 
+          })},3000) 
+       
+          return ; 
+        }else{
+          save();
+        } 
+
         // this.setData({ value: res.result.data })
         const roomData = res.result.data;
         let tabChairsIndex = []
@@ -62,11 +77,15 @@ Page({
         // res.result.data.chairs.group.
         // let group = this.data.chairs.group
         let group = res.result.data.chairs.group
-        console.log(group)
-        this.setData({
-          roomData: roomData
-        })
 
+        let count = { 
+          pep: res.result.data.count.timeSum, 
+          tim: res.result.data.count.pepSum 
+        } 
+        this.setData({ 
+          roomData: roomData,
+          count 
+        }) 
         group.forEach((item, index) => {
           let temp = item.groupSize + lastChairsIndex
           // console.log(temp);
@@ -74,7 +93,7 @@ Page({
           lastChairsIndex = temp
         });
         if (group.length == 0) {
-          console.log(666);
+  
           tabChairsIndex = [{
             name: res.result.data.roomName,
             start: 0,
@@ -90,6 +109,8 @@ Page({
           chairsStates: roomData.chairs.infos
         })
         this.selectComponent('#tabs').resize();
+        wx.stopPullDownRefresh()
+
       },
       fail: err => {
         wx.hideLoading()
@@ -107,19 +128,19 @@ Page({
       } else {
         val = [{ roomId: aId, roomName: aName }]
       }
-      console.log(val)
+      // console.log(val)
       wx.setStorageSync('rooms', val);
     }
     this.getIsAdmin()
-
-
   },
+
   onLoad: function (options) {
+    wx.hideLoading() 
     wx.showLoading({
       title: '请求中',
       mask: true
     })
-    console.log('参数值')
+    console.log('参数值a')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
     console.log('-----------------')
@@ -127,6 +148,7 @@ Page({
     let aId;
     if (options.scene) {
       aId = options.scene.split('%3D')[1];
+    
     } else {
       aId = options.roomId;
     }
@@ -184,7 +206,9 @@ Page({
 
   },
   getIsAdmin() {
-    console.log(app.globalData.roomAdminList)
+  let getState =  setInterval(()=>{
+  // console.log(app.globalData.roomAdminList)
+  if(app.globalData.responseState){
     app.globalData.roomAdminList.forEach(item => {
       if (item.roomId == this.data.roomId) {
         this.setData({
@@ -192,24 +216,36 @@ Page({
         })
       }
     })
+    clearInterval(getState)
+  } 
+},100)
+
   },
   toRank() {
-    wx.cloud.callFunction({
-      name: 'getRoomInfo',
-      data: {
-        flag: 0,
-        roomIds: ['123456']
-      },
-      success: (res) => {
-        console.log(res.result.data[0])
-        let roomId = res.result.data[0].roomId;
-        let pep = res.result.data[0].count.pepSum;
-        let tim = res.result.data[0].count.timeSum;
-        wx.navigateTo({
-          url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
-        })
-      }
+    console.log("加载中轻松的")
+    wx.showLoading({
+      title: '加载中',
+      mask: true
     })
+    wx.navigateTo({
+      url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
+    })
+    // wx.cloud.callFunction({
+    //   name: 'getRoomInfo',
+    //   data: {
+    //     flag: 0,
+    //     roomIds: [this.data.roomId]
+    //   },
+    //   success: (res) => {
+    //     console.log(res.result.data[0])
+    //     let roomId = res.result.data[0].roomId;
+    //     let pep = res.result.data[0].count.pepSum;
+    //     let tim = res.result.data[0].count.timeSum;
+    //     wx.navigateTo({
+    //       url: `../rank/rank?roomId=${roomId}&pep=${pep}&tim=${tim}`,
+    //     })
+    //   }
+    // })
 
   },
   /**
@@ -244,7 +280,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.pageInit()
   },
 
   /**

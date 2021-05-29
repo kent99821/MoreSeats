@@ -10,10 +10,8 @@ Page({
     roomsList: [],
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+
+  onLoad0: function (options) {
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -85,7 +83,7 @@ Page({
               roomName: n,
             },
             success: res => {
-              that.onLoad()
+              that.onLoad0()
               wx.hideLoading()
               $wuxToptips().success({
                 text: '创建成功',
@@ -311,7 +309,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.onLoad0()
   },
 
   /**

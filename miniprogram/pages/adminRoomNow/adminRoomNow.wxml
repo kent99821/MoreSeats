@@ -1,10 +1,20 @@
 <view class="tips"></view>
+<wxs module="m1">
+  var numberToFix= function (value) {
+  return value.toFixed(1)
+  }
+  var stringToFix= function (value) {
+  return value.slice(-6)
+  }
+  module.exports.numberToFix=numberToFix;
+  module.exports.stringToFix=stringToFix;
+</wxs>
 <wux-swipe-action-group>
   <view wx:for="{{userList}}" class="cards FRCC">
     <wux-swipe-action useSlots>
       <view class="cards-body FRSC">
         <view class="cards-body-left FCCS">
-          <view class="cards-body-left-roomName  wux-ellipsis">用户名{{item.userName}}</view>
+          <view class="cards-body-left-roomName  wux-ellipsis">{{item.userName}}</view>
           <view class="cards-body-left-tags FCCC">
             <view class="cards-body-left-tags-2 FCCC">{{item.chairIndex-(-1)}}号座</view>
           </view>
@@ -21,17 +31,15 @@
       </view>
       <view slot="left" class="cards-left FCCC">
         <view class="cards-left-body">
-          User:oU2sas
+          User:{{m1.stringToFix(item.openId)}}
         </view>
       </view>
       <view slot="right" class="cards-right-btns FRSC">
-        <view class="cards-right-btn-1 FCCC">
-          强退
-        </view>
         <view class="cards-right-btn-2 FCCC" bindtap="signOut" data-index="{{index}}">
           结束
         </view>
       </view>
     </wux-swipe-action>
   </view>
+  <button type="warn" bindtap="clearAll">清退</button>
 </wux-swipe-action-group>

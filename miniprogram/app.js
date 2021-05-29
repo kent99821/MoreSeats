@@ -21,6 +21,11 @@ App({
       success: res => {
         console.log(res)
         this.globalData.isNewGuys = res.result.data.isNewGuys
+        if (!res.result.data.isNewGuys) {
+          this.globalData.roomAdminList = res.result.data.roomAdminList;
+          console.log(res.result.data.roomAdminList )
+        } 
+        this.globalData.responseState = true
       },
       fail: (res) => {
         wx.showToast({
@@ -34,8 +39,9 @@ App({
   },
   globalData: {
     roomAdminList:[
-      {roomId: "454914", roomName: "前端"},
+     
     ],
-    isNewGuys:false
+    isNewGuys:false,
+    responseState: false
   }
 })
