@@ -32,9 +32,7 @@ Page({
   },
 
   pageInit() {
-    let adminList = app.globalData.roomAdminList.map((item) => {
-      return item.roomId;
-    })
+
 
     let aId = this.data.roomId;
     let aName = "";
@@ -54,7 +52,7 @@ Page({
       success: res => {
         wx.hideLoading()
         aName = res.result.data.roomName;
-       
+       console.log(res)
         // console.log(res.result)
         if(res.result.resCode==404){ 
  
@@ -95,7 +93,7 @@ Page({
           lastChairsIndex = temp
         });
         if (group.length == 0) {
-          console.log(666);
+  
           tabChairsIndex = [{
             name: res.result.data.roomName,
             start: 0,
@@ -130,42 +128,19 @@ Page({
       } else {
         val = [{ roomId: aId, roomName: aName }]
       }
-      console.log(val)
+      // console.log(val)
       wx.setStorageSync('rooms', val);
     }
     this.getIsAdmin()
-
-
   },
-  getUserValue() {
-    wx.cloud.callFunction({
-      name: 'getUserInfo',
-      data: {
-        flag: 0,
-      },
-      success: res => {
-        console.log(res)
-        if (!res.result.data.isNewGuys) {
-          getApp().globalData.roomAdminList = res.result.data.roomAdminList;
-        } 
-      },
-      fail: (res) => {
-        wx.showToast({
-          title: '云开发出现了些问题，请联系管理员排查！',
-          icon: "none"
-        })
-        console.log(res);
-      }
-    })
 
-  },
   onLoad: function (options) {
     wx.hideLoading() 
     wx.showLoading({
       title: '请求中',
       mask: true
     })
-    console.log('参数值')
+    console.log('参数值a')
     let a = wx.getLaunchOptionsSync()
     console.log(a)
     console.log('-----------------')
@@ -173,7 +148,7 @@ Page({
     let aId;
     if (options.scene) {
       aId = options.scene.split('%3D')[1];
-      this.getUserValue();
+    
     } else {
       aId = options.roomId;
     }
@@ -231,7 +206,9 @@ Page({
 
   },
   getIsAdmin() {
-    console.log(app.globalData.roomAdminList)
+  let getState =  setInterval(()=>{
+  // console.log(app.globalData.roomAdminList)
+  if(app.globalData.responseState){
     app.globalData.roomAdminList.forEach(item => {
       if (item.roomId == this.data.roomId) {
         this.setData({
@@ -239,6 +216,10 @@ Page({
         })
       }
     })
+    clearInterval(getState)
+  } 
+},100)
+
   },
   toRank() {
     // console.log(this.data.count)

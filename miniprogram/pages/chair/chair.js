@@ -69,25 +69,7 @@ Page({
     })
 
   },
-  // displayMap(){
-  //   const query = wx.createSelectorQuery()
-  //   query.select('#the-id').boundingClientRect()
-  //   query.selectViewport().scrollOffset()
-  //   query.exec(function(res){
-  //     res[0].top       // #the-id节点的上边界坐标
-  //     res[1].scrollTop // 显示区域的竖直滚动位置
-  //   })
 
-  //   wx.getLocation({
-  //     success: res=>{
-  //       console.log(res)
-  //       this.setData({
-  //         latitude: res.latitude,
-  //         longitude: res.longitude
-  //       })
-  //     }
-  //   })
-  // },
   deleteCard(e) {
     let todo = this.data.todo;
     let index = e.currentTarget.dataset.index;
@@ -583,7 +565,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function (options) {
+    
     this.readyPage()
   },
 
@@ -644,16 +627,7 @@ Page({
       show: e.detail.key
     })
   },
-  /**
-   * 坐下
-   */
 
-  /**
-   * 签退
-   */
-  signOut: function () {
-
-  },
   /**
    * 被占用提示
    */
