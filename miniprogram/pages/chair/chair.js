@@ -160,7 +160,6 @@ Page({
             wx.setStorageSync('todo', todo)
             wx.showToast({
               title: '添加成功',
-              duration:3000,
               icon:'success'
             })
 
@@ -488,7 +487,7 @@ Page({
                 title: '返回座位',
                 mask: true,
                 icon: "error",
-                duration: 2000
+    
               })
               setTimeout(function () {
                 wx.redirectTo({
@@ -516,7 +515,7 @@ Page({
           wx.showToast({ 
             title: '该座位不存在', 
             icon: 'error', 
-            duration:3000 
+
           }) 
           setTimeout(()=>{wx.navigateTo({ 
             url: '../room/room?roomId='+this.data.roomId, 
