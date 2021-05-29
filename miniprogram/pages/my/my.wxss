@@ -57,6 +57,7 @@ view {
   border-radius: 80rpx;
   overflow: hidden;
   margin-left: 60rpx;
+  box-shadow: 0rpx 5rpx 12rpx -4rpx #696969;
 }
 
 .top-user-icon-text {
@@ -66,10 +67,21 @@ view {
 
 .top-user-name {
   margin-left: 30rpx;
-  font-size: 36rpx;
+  font-size: 40rpx;
   /* background-color: aqua; */
   color: #fff;
   max-width: 390rpx;
+}
+
+.top-user-opid {
+  margin-left: 30rpx;
+  font-size: 27rpx;
+  /* background-color: aqua; */
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.top-user-opid-t {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .top-user-pen {

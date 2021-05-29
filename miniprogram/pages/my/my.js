@@ -12,6 +12,7 @@ Page({
     userTotalVal: '',
     userName: '',
     isNewGuys: false,
+    openId:"XXXXXX"
   },
   test(e) {
     console.log(e)
@@ -37,7 +38,8 @@ Page({
             userTotalTime: res.result.data.sumTime,
             userTotalVal: res.result.data.recordNum,
             userName: res.result.data.userName,
-            isNewGuys: res.result.data.isNewGuys
+            isNewGuys: res.result.data.isNewGuys,
+            openId:res.result.data.openId.slice(-6)
           })
           console.log(res.result.data.roomAdminList);
           getApp().globalData.roomAdminList = res.result.data.roomAdminList;
