@@ -53,7 +53,7 @@ Page({
    */
   setTime() {
     if (!this.data.sTime) return;
-    let a = '21:34:00';
+    let a = '00:00:00';
     a = this.data.sTime;
     let val = (Date.now() - a) / 1000;
     let h, m, s;
@@ -258,8 +258,10 @@ Page({
     // console.log(this.data.rule)
     if (this.data.rule.type == 1) {
       console.log('位置签到')
+      let getPositionTotal = 0;
       wx.startLocationUpdateBackground({
         success: res => {
+
           // console.log(res)
           console.log(res)
           console.log('aaaa')
@@ -272,26 +274,27 @@ Page({
               let distance = GetDistance(res.latitude, res.longitude, this.data.rule.latitude, this.data.rule.longitude) * 1000;
               console.log(distance)
               if (distance > this.data.rule.size) {
-                this.setData({
-                  latitude: this.data.rule.latitude,
-                  longitude: this.data.rule.longitude,
-                  mapShow: true
-                })
+
                 wx.hideLoading()
-                wx.showToast({
-                  title: '不在自习室范围',
-                  icon: 'error',
-                  duration: 2000
-                })
-                wx.stopLocationUpdate({
-                  success: res => {
-                    console.log(res)
-                  },
-                  fail: err => {
-                    console.log(err)
-                  }
-                })
+                if(getPositionTotal==0){
+                  this.setData({
+                    latitude: this.data.rule.latitude,
+                    longitude: this.data.rule.longitude,
+                    mapShow: true
+                  })
+                  wx.showToast({
+                    title: '不在自习室范围',
+                    icon: 'error',
+                    duration: 2000
+                  })
+                }
+                getPositionTotal++;
+
+
               } else {
+                this.setData({
+                  mapShow: false,
+                })
                 wx.hideLoading()
                 this.signIn();
               }
@@ -318,17 +321,6 @@ Page({
                   withSubscriptions: true,
                 })
               }
-
-              // wx.getSetting({
-              //   success: resSetting => {
-              //     if (!resSetting.authSetting["scope.userLocation"]) {
-              //       wx.openSetting({
-              //         success: res => {
-              //         }
-              //       });
-              //     }
-              //   }
-              // });
             }
           });
         }
@@ -341,6 +333,14 @@ Page({
 
   },
   signIn() {
+    wx.stopLocationUpdate({
+      success: res => {
+        console.log(res)
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
     console.log('触发');
     if (this.data.isSent) {
       return
@@ -361,14 +361,7 @@ Page({
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
-        wx.stopLocationUpdate({
-          success: res => {
-            console.log(res)
-          },
-          fail: err => {
-            console.log(err)
-          }
-        })
+
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
@@ -386,14 +379,7 @@ Page({
       },
       fail: err => {
         wx.hideLoading()
-        wx.stopLocationUpdate({
-          success: res => {
-            console.log(res)
-          },
-          fail: err => {
-            console.log(err)
-          }
-        })
+
         console.log('调用失败：', err)
       }
     })
@@ -605,14 +591,28 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    wx.stopLocationUpdate({ 
+      success: res => { 
+        console.log(res) 
+      }, 
+      fail: err => { 
+        console.log(err) 
+      } 
+    }) 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.stopLocationUpdate({ 
+      success: res => { 
+        console.log(res) 
+      }, 
+      fail: err => { 
+        console.log(err) 
+      } 
+    }) 
   },
 
   /**

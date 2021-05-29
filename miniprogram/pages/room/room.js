@@ -18,7 +18,8 @@ Page({
     count:{
       pep:'',
       tim:''
-    }
+    },
+    roomId: "000000", 
   },
 
   /**
@@ -53,7 +54,7 @@ Page({
       success: res => {
         wx.hideLoading()
         aName = res.result.data.roomName;
-        save();
+       
         // console.log(res.result)
         if(res.result.resCode==404){ 
  
@@ -67,7 +68,10 @@ Page({
           })},3000) 
        
           return ; 
+        }else{
+          save();
         } 
+
         // this.setData({ value: res.result.data })
         const roomData = res.result.data;
         let tabChairsIndex = []
@@ -235,6 +239,7 @@ Page({
     })
   },
   toRank() {
+    // console.log(this.data.count)
     wx.navigateTo({
       url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
     })

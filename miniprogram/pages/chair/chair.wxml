@@ -3,7 +3,7 @@
 
 <wux-notice-bar id="ntc" class="ntc" loop content="{{roomNotice}}" mode="closable" />
 
-<wux-popup visible="{{ mapShow }}" hasFooter="{{false}}"   title="确保范围内，再次坐下" bind:close="mapClose">
+<wux-popup visible="{{ mapShow }}" hasFooter="{{false}}"   title="检测到不在范围，正在尝试签到" bind:close="mapClose">
   <map wx:if="{{ mapShow }}" id='the-id' show-scale
     circles="{{[{latitude,longitude,radius:size,color:'#ff795b',strokeWidth:3,fillColor:'#ffc4b788'}]}}"
     latitude='{{latitude}}' scale="17.5" show-location longitude='{{longitude}}'>
