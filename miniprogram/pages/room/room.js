@@ -222,7 +222,11 @@ Page({
 
   },
   toRank() {
-    // console.log(this.data.count)
+    console.log("加载中轻松的")
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.navigateTo({
       url: `../rank/rank?roomId=${this.data.roomId}&pep=${this.data.count.pep}&tim=${this.data.count.tim}`,
     })

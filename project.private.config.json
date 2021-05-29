@@ -33,7 +33,7 @@
         {
           "name": "pages/adminRoomHistory/adminRoomHistory",
           "pathName": "pages/adminRoomHistory/adminRoomHistory",
-          "query": "roomId=123456",
+          "query": "roomId=660244",
           "scene": null
         },
         {
@@ -81,7 +81,7 @@
         {
           "name": "pages/room/room",
           "pathName": "pages/room/room",
-          "query": "roomId=123456",
+          "query": "roomId=660244",
           "scene": null
         },
         {

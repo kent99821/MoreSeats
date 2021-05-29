@@ -132,9 +132,8 @@ view {
 }
 
 .cards-body-right {
-  width: 30%;
-  /* margin-top: 7rpx; */
-  /* height: 100%rpx; */
+  width: 37%;
+  /* margin-right: 40rpx; */
 }
 
 .cards-body-right-date {

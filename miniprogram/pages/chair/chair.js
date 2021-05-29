@@ -419,10 +419,18 @@ Page({
           isSent: false,
           signState: false,
         })
-        wx.showToast({
-          title: '签退成功',
-          icon:'success'
-        })
+        if(res.result.resCode==201){
+          wx.showToast({
+            title: '已被签退',
+            icon:'error'
+          })
+        }else if(res.result.resCode==200){
+          wx.showToast({
+            title: '签退成功',
+            icon: 'success'
+          })
+        }
+
 
       },
       fail: (err) => {

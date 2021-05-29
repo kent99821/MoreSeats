@@ -102,7 +102,7 @@ Page({
         name:'adminAction',
         data:{
         flag:7,
-        roomId:'660244',
+        roomId:this.data.roomId,
         },
         success:res=>{
           console.log(res)

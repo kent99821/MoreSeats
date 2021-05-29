@@ -130,7 +130,7 @@ Page({
       title: '修改姓名',
       content: '最长16位字符',
       fieldtype: 'text',
-      defaultText: '',
+      defaultText: that.data.userName,
       placeholder: that.data.userName,
       maxlength: 16,
       onConfirm(e, response) {
