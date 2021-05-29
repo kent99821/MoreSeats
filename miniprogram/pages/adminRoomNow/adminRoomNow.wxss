@@ -134,5 +134,5 @@ view {
 }
 
 .cards-right-btn-2 {
-  width: 50%;
+  width: 100%;
 }

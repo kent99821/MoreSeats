@@ -13,6 +13,7 @@ Page({
   data: {
     roomId: '',
     chairIndex: -1,
+    signState: false,
     btnType: 0, //下方按钮 0:坐下 1:签退 2:被占用
     show: 0, //中间显示 0:时长 1:事项
     isSent: false,//解决重复发送请求
@@ -126,42 +127,49 @@ Page({
     wx.setStorageSync('todo', todo)
   },
   addToDo(e) {
+    if(!this.data.signState){
+      wx.showToast({
+        title: '请先坐下',
+        icon: 'error'
+      })
+    }else{
+      let that = this;
+      $wuxDialog().prompt({
+        resetOnClose: true,
+        title: '事项内容',
+        // content: '最长16位字符',
+        fieldtype: 'text',
+        defaultText: '',
+        placeholder: that.data.userName,
+        maxlength: -1,
+        onConfirm(e, response) {
+          if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
+            let todo = that.data.todo || [];
+  
+            // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
+            todo.splice(0, 0, {
+              s: false,
+              c: response.replace(/(^\s*)|(\s*$)/g, "")
+            })
+            
+            that.setData({
+              todo
+            })
+            wx.setStorageSync('todo', todo)
+            $wuxToptips().success({
+              text: '添加成功',
+              duration: 3000
+            })
+          } else
+            //失败通知
+            $wuxToptips().warn({
+              text: '修改失败',
+              duration: 3000
+            })
+        },
+      })
+    }
 
-    let that = this;
-    $wuxDialog().prompt({
-      resetOnClose: true,
-      title: '事项内容',
-      // content: '最长16位字符',
-      fieldtype: 'text',
-      defaultText: '',
-      placeholder: that.data.userName,
-      maxlength: -1,
-      onConfirm(e, response) {
-        if (response.replace(/(^\s*)|(\s*$)/g, "").length !== 0) {
-          let todo = that.data.todo || [];
-
-          // todo[todo.length]= {s: false, c:response.replace(/(^\s*)|(\s*$)/g, "") }
-          todo.splice(0, 0, {
-            s: false,
-            c: response.replace(/(^\s*)|(\s*$)/g, "")
-          })
-
-          that.setData({
-            todo
-          })
-          wx.setStorageSync('todo', todo)
-          $wuxToptips().success({
-            text: '添加成功',
-            duration: 3000
-          })
-        } else
-          //失败通知
-          $wuxToptips().warn({
-            text: '修改失败',
-            duration: 3000
-          })
-      },
-    })
   },
 
   getTodoData() {
@@ -343,16 +351,25 @@ Page({
         // chairIndex:this.data.chairIndex,
       },
       success: res => {
-
+  
         console.log(res)
         console.log('这边还要改')
         wx.hideLoading()
         if (res.result.resCode == 200) {
+          wx.showToast({
+            title: '签到成功',
+            icon:'success'
+          })
           this.setData({
             btnType: 1,
-            sTime: new Date()
+            sTime: new Date(),
+            signState: true
           })
         } else if (res.result.resCode == 300) {
+          wx.showToast({
+            title: '座位已被占用',
+            icon:'error'
+          })
           this.setData({
             btnType: 2
           })
@@ -361,7 +378,10 @@ Page({
       },
       fail: err => {
         wx.hideLoading()
-
+        wx.showToast({
+          title: '签到失败',
+          icon:'error'
+        })
         console.log('调用失败：', err)
       }
     })
@@ -369,7 +389,7 @@ Page({
   trySignOut() {
     if (this.data.waitBool) return;
     this.setData({
-      waitBool: true
+      waitBool: true,
     })
     wx.showLoading({
       title: '加载中',
@@ -396,10 +416,20 @@ Page({
           time: '00:00:00',
           waitBool: false,
           todo: [],
-          isSent: false
+          isSent: false,
+          signState: false,
         })
+        wx.showToast({
+          title: '签退成功',
+          icon:'success'
+        })
+
       },
       fail: (err) => {
+        wx.showToast({
+          title: '签退失败',
+          icon:'error'
+        })
         console.log(err);
       }
     })
@@ -421,10 +451,14 @@ Page({
           let val = res.result.data[0];
           if (val.isOver) {
             wx.setStorageSync('todo', [])
-            // console.log('---')
-            // console.log(wx.getStorageSync('todo'))
+            this.setData({
+              signState: false
+            })
             this.getTodoData()
           } else {
+            this.setData({
+              signState: true
+            })
             if (this.data.roomId == val.roomId && this.data.chairIndex == val.chairIndex) {
               this.setData({
                 btnType: 1

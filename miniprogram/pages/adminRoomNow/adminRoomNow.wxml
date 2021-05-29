@@ -35,13 +35,11 @@
         </view>
       </view>
       <view slot="right" class="cards-right-btns FRSC">
-        <view class="cards-right-btn-1 FCCC">
-          强退
-        </view>
         <view class="cards-right-btn-2 FCCC" bindtap="signOut" data-index="{{index}}">
           结束
         </view>
       </view>
     </wux-swipe-action>
   </view>
+  <button type="warn" bindtap="clearAll">清退</button>
 </wux-swipe-action-group>

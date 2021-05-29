@@ -96,7 +96,24 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  clearAll(){
+      console.log(this.data.roomId)
+      wx.cloud.callFunction({
+        name:'adminAction',
+        data:{
+        flag:7,
+        roomId:'660244',
+        },
+        success:res=>{
+          console.log(res)
+        },
+        fail:err=>{
+          console.log('调用失败：',err)
+        }
+      })
+
+  },
+   onLoad: function (options) {
 
     console.log(options)
     let roomId = options.roomId
