@@ -129,10 +129,6 @@ Page({
           title: '清退成功',
           icon: 'success'
         })
-<<<<<<< HEAD
-        this.setData({userList:[]})
-=======
->>>>>>> bc3ea96f78ed17a13e769e646789fc925b2f91f7
         wx.navigateBack({
           delta: 1,
         })
