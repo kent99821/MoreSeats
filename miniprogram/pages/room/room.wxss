@@ -77,7 +77,7 @@ view {
 }
 
 .room-center-openTime {
-  font-size: 35rpx;
+  font-size: 30rpx;
   max-width: 400rpx;
 }
 
