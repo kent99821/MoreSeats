@@ -126,15 +126,30 @@ Page({
       success: res => {
         console.log(res)
         wx.hideLoading()
-        let changeList = this.data.roomsList;
-        changeList.splice(index, 1);
-        this.setData({
-          roomsList: changeList
-        })
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success'
-        })
+
+        if(res.result.resCode ==200){
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success'
+          })
+          let changeList = this.data.roomsList;
+          changeList.splice(index, 1);
+          this.setData({
+            roomsList: changeList
+          })
+        }
+        else if(res.result.resCode==201){
+          wx.showToast({
+            title: '删除失败',
+            icon:'error',
+          })
+        }else{
+          wx.showToast({
+            title: '座位未清退',
+            icon: 'error'
+          })
+        }
+
 
       },
       fail: err => {

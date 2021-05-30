@@ -114,6 +114,9 @@ Page({
         },
         success:res=>{
           console.log(res)
+          this.setData({
+            userList:[]
+          })
           wx.showToast({
             title: '清退成功',
             icon: 'success'
