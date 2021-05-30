@@ -3,6 +3,10 @@ view {
   /* border: 1px solid #63636396; */
 }
 
+.c-all {
+  margin-bottom: 20rpx;
+}
+
 .tips {
   font-size: 34rpx;
   /* width: 100%; */
@@ -135,4 +139,5 @@ view {
 
 .cards-right-btn-2 {
   width: 100%;
+  color: red;
 }

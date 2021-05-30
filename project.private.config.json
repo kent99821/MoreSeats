@@ -51,7 +51,7 @@
         {
           "name": "pages/adminRoomNow/adminRoomNow",
           "pathName": "pages/adminRoomNow/adminRoomNow",
-          "query": "roomId=660244",
+          "query": "roomId=201061",
           "scene": null
         },
         {
@@ -105,6 +105,12 @@
         {
           "name": "pages/about/about",
           "pathName": "pages/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "query": "",
           "scene": null
         }

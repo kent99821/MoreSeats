@@ -9,10 +9,10 @@ Page({
     roomId: ''
   },
 
-  getHistoryList(){
+  getHistoryList() {
     let len = this.data.userList.length;
     let num = 15;
-   
+
     if (len > 10) num = 10;
     console.log(this.data.roomId)
     wx.cloud.callFunction({
@@ -30,13 +30,13 @@ Page({
         if (userList.length > 0) {
           userList = userList.map((item) => {
             let sTime = item.ssTime
-            item.howlong= getTime((new Date(sTime)).valueOf());
+            item.howlong = getTime((new Date(sTime)).valueOf());
 
-            item.ssTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] +":"+ sTime.split('T')[1].split('.')[0].split(':')[1];
+            item.ssTime = sTime.split('T')[0].split('-').join('.') + ' ' + sTime.split('T')[1].split('.')[0].split(':')[0] + ":" + sTime.split('T')[1].split('.')[0].split(':')[1];
             return item;
           })
           this.setData({
-            userList: [...this.data.userList,...userList ]
+            userList: [...this.data.userList, ...userList]
           })
         }
 
@@ -46,26 +46,30 @@ Page({
       }
     })
 
-   function getTime(aTime){
+    function getTime(aTime) {
 
       let a = '21:34:00';
       a = aTime;
-      let val = (Date.now()- a)/1000;
- 
-      return parseInt(val/60);
-    //   let h, m, s;
-    //   h = parseInt(val/(60*60));
-    //   m = parseInt((val-(h*60*60))/(60));
-    //   s = parseInt(val%60);
-    //   let parseTime= (h)=>{
-    //     return (h<10?('0'+h):(h))
-    //   }
-    //   console.log(parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))
-    //  return  (parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))/60
-  
+      let val = (Date.now() - a) / 1000;
+
+      return parseInt(val / 60);
+      //   let h, m, s;
+      //   h = parseInt(val/(60*60));
+      //   m = parseInt((val-(h*60*60))/(60));
+      //   s = parseInt(val%60);
+      //   let parseTime= (h)=>{
+      //     return (h<10?('0'+h):(h))
+      //   }
+      //   console.log(parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))
+      //  return  (parseTime(h) +":"+ parseTime(m) + ':'+parseTime(s))/60
+
     }
   },
   signOut(e) {
+    wx.showLoading({
+      title: '正在清退',
+      mask:true
+    })
     console.log(e.currentTarget.dataset.index);
     let index = e.currentTarget.dataset.index;
     let item = this.data.userList[index];
@@ -81,6 +85,7 @@ Page({
         chairIndex: parseInt(item.chairIndex)
       },
       success: res => {
+        wx.hideLoading()
         wx.showToast({
           title: '签退成功',
           icon: 'success'
@@ -93,6 +98,7 @@ Page({
         })
       },
       fail: err => {
+        wx.hideLoading()
         wx.showToast({
           title: '签退失败',
           icon: 'error'
@@ -104,35 +110,42 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  clearAll(){
-      console.log(this.data.roomId)
-      wx.cloud.callFunction({
-        name:'adminAction',
-        data:{
-        flag:7,
-        roomId:this.data.roomId,
-        },
-        success:res=>{
-          console.log(res)
-          this.setData({
-            userList:[]
-          })
-          wx.showToast({
-            title: '清退成功',
-            icon: 'success'
-          })
-        },
-        fail:err=>{
-          wx.showToast({
-            title: '清退失败',
-            icon: 'error'
-          })
-          console.log('调用失败：',err)
-        }
-      })
+  clearAll() {
+    wx.showLoading({
+      title: '正在清退',
+      mask:true
+    })
+    console.log(this.data.roomId)
+    wx.cloud.callFunction({
+      name: 'adminAction',
+      data: {
+        flag: 7,
+        roomId: this.data.roomId,
+      },
+      success: res => {
+        wx.hideLoading()
+        console.log(res)
+        wx.showToast({
+          title: '清退成功',
+          icon: 'success'
+        })
+        this.setData({userList:[]})
+        wx.navigateBack({
+          delta: 1,
+        })
+      },
+      fail: err => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '清退失败',
+          icon: 'error'
+        })
+        console.log('调用失败：', err)
+      }
+    })
 
   },
-   onLoad: function (options) {
+  onLoad: function (options) {
 
     console.log(options)
     let roomId = options.roomId
