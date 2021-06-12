@@ -14,9 +14,9 @@
 <button class="top" type="primary" bindtap="getInfo" >查询用户信息</button>
 </block> -->
 
-<!-- <block>
+<block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
-</block> -->
+</block>
 <!-- <block>
 <button type="primary" bindtap="updateUser">修改用户名</button>
 </block>
@@ -34,9 +34,9 @@
 </block> -->
 
 <!-- 签到 -->
- <block >
+ <!-- <block >
 <button class="top" type="primary" bindtap="signIn" >签到</button>
-</block>
+</block> -->
 
 <!-- <block>
 <button type="primary" bindtap="getHistory">查询学习记录</button>
@@ -48,9 +48,9 @@
 <!-- <block>
 <button class="top" type="primary" bindtap="signout">用户签退</button>
 </block>  -->
-<!-- <block>
+<block>
 <button type="primary" bindtap="atsignout">管理员签退</button>
-</block>  -->
+</block> 
 <!-- 大boss 管理自习室相关 -->
 <block >
 <button class="top" type="primary" bindtap="addroom" >新建自习室</button>
@@ -84,6 +84,6 @@
 <block>
 <button type="primary" bindtap="removeRoom">注销自习室</button>
 </block> 
-<!-- <block>
+<block>
 <button type="primary" bindtap="getRank">获取排行榜</button>
-</block>  -->
+</block> 

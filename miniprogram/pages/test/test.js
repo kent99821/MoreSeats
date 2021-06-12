@@ -226,9 +226,9 @@ atsignout(){
     name:'signOut',
     data:{
     flag:1,
-    openId:"oU2sR5EK2DilhkExj2LhgSPHszAQ",
-    roomId:"123456",
-    chairIndex:2
+    openId:"oU2sR5Jtl90iGs9zzxFx9mE_lCmQ",
+    roomId:"201061",
+    chairIndex:1
     },
     success:res=>{
       console.log(res)
@@ -383,7 +383,7 @@ forceOut(){
     name:'adminAction',
     data:{
     flag:7,
-    roomId:"729067",
+    roomId:"201061",
 
     },
     success:res=>{

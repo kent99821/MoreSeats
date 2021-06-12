@@ -109,36 +109,7 @@ async function update(event, flag) {
     }
   }
 }
-// 清退
-async function forceOut(event) {
-  PageData.find = await db.collection('rooms').where({
-    roomId: event.roomId
-  }).field({
-    "chairs.infos": true,
-  }).get()
-  PageData.chairsInfo = PageData.find.data[0].chairs.infos
-  //  对每一个位置进行签退
-  for (let i = 0; i < PageData.chairsInfo.length; i++) {
-    if (PageData.chairsInfo[i].state === true) {
-      cloud.callFunction({
-        name: 'signOut',
-        data: {
-          flag: 1,
-          openId: PageData.chairsInfo[i].openId,
-          roomId: event.roomId,
-          chairIndex: i
-        },
-        success: res => {
-          console.log(res)
-        },
-        fail: err => {
-          console.log('调用失败：', err)
-        }
-      })
-    }
 
-  }
-}
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -331,7 +302,31 @@ exports.main = async (event, context) => {
             }
             //强制清退 只能从前端判别是否成功
             case 7:
-              forceOut(event)
+              PageData.find = await db.collection('rooms').where({
+                roomId: event.roomId
+              }).get()
+              PageData.chairsInfo = PageData.find.data[0].chairs.infos
+              //  对每一个位置进行签退
+              for (let i = 0; i < PageData.chairsInfo.length; i++) {
+                if (PageData.chairsInfo[i].state === true) {
+                  cloud.callFunction({
+                    name: 'signOut',
+                    data: {
+                      flag: 1,
+                      openId: PageData.chairsInfo[i].openId,
+                      roomId: event.roomId,
+                      chairIndex: i
+                    },
+                    success: res => {
+                      console.log(res)
+                    },
+                    fail: err => {
+                      console.log('调用失败：', err)
+                    }
+                  })
+                }
+            
+              }
               break;
               // 注销自习室
             case 8:

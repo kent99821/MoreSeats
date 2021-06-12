@@ -1,5 +1,5 @@
 /**
- * date:2021.05.27
+ * date:2021.06.12
  * author:kent
  * state:finished
  * content:update flag:0
@@ -87,7 +87,7 @@ exports.main = async (event, context) => {
         chairIndex: event.chairIndex
       }).update({
         data: {
-          "eTime": PageData.hresult.data[0].eTime,
+          "eTime": new Date(),
           "howlong": PageData.hresult.data[0].howlong,
           "isOver": true
         }
