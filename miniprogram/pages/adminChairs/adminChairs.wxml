@@ -44,7 +44,7 @@
         </wux-cell>
       </wux-cell-group>
       <view class="btni FCCC">
-        <view class="btnii2 FCCC" bindtap="newGroup"> 新建 </view>
+        <view class="btnii2 FCCC" bindtap="createItem"> 新建 </view>
       </view>
     </block>
   </view>

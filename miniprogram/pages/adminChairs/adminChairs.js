@@ -159,7 +159,7 @@ Page({
       ['newGroup.groupSize']: e.detail,
     })
   },
-  newGroup: function (e) {
+  createItem: function (e) {
     // this.data.group.push(this.data.newGroup)
     if (this.data.newGroup.groupName.length == 0) {
       // $wuxToptips().warn({
@@ -172,9 +172,16 @@ Page({
       })
       return
     }
-
+    // console.log('before')
+    // console.log(this.data.group);
+    // console.log(this.data.newGroup);
+    let group = this.data.group;
+    const newItem = {groupName:this.data.newGroup.groupName, groupSize: this.data.newGroup.groupSize};
+    group.push(newItem);
+    // console.log(group);
     this.setData({
-      [`group[${this.data.group.length}]`]: this.data.newGroup,
+      // [`group[${this.data.group.length}]`]: this.data.newGroup,
+     group: group,
       activeTab: this.data.activeTab + 1
     })
     this.count()
@@ -191,7 +198,10 @@ Page({
   },
   count: function () {
     let sum = 0
+    console.log('----')
+    console.log(this.data.group)
     this.data.group.forEach(i => {
+      console.log(i.groupSize)
       sum += i.groupSize
     })
     this.setData({
