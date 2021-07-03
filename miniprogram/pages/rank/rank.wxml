@@ -41,7 +41,7 @@
   </view>
   <view class="czpm FCCC" bindtap="cleanRank">重置排名</view>
 </view>
-<view wx:for="{{historyList}}" class="cards FRCC card-{{index}}">
+<view wx:for="{{historyList}}" class="cards FRCC card-{{index}}" wx:key='key'>
   <wux-swipe-action-group>
     <wux-swipe-action autoClose useSlots>
       <view class="cards-body FRSC">

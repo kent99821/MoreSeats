@@ -4,7 +4,7 @@
     <view class="todo-top FCCC">学习事项</view>
     <scroll-view scroll-y class="todo-cont">
       <wux-swipe-action-group>
-        <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC">
+        <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC" wx:key='key'>
           <view class="todo-one-1 FRSC">
             <view class="todo-one-left FCCC" data-index="{{index}}">
               <block wx:if="{{!item.s}}">
@@ -46,7 +46,7 @@
 </view>
 <view wx:if="{{showTop}}" class="tips">已完成</view>
 <view class="{{showTop?'':'noTop'}}"></view>
-<view wx:for="{{historyList}}" bindtap="todo" data-todo="{{item.todo}}" class="cards FRCC">
+<view wx:for="{{historyList}}" bindtap="todo" data-todo="{{item.todo}}" class="cards FRCC" wx:key='key'>
   <view class="cards-body FRSC">
     <view class="cards-body-left FCCS">
       <view class="cards-body-left-roomName FCCC">{{item.roomName}}</view>

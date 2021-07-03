@@ -27,7 +27,7 @@
         <view class="todo-top FCCC" bindtap="addToDo">学习事项＋</view>
         <scroll-view scroll-y class="todo-cont">
           <wux-swipe-action-group>
-            <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC">
+            <wux-swipe-action autoClose useSlots wx:for="{{todo}}" class="todo-one FRSC" wx:key='key'>
 
               <view class="todo-one-1 FRSC">
                 <view class="todo-one-left FCCC" bindtap="changStatus" data-index="{{index}}">

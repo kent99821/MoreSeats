@@ -11,7 +11,7 @@
 </wxs>
 <button wx:if="{{userList.length!=0}}" class="c-all" type="warn" bindtap="clearAll">清退所有</button>
 <wux-swipe-action-group>
-  <view wx:for="{{userList}}" class="cards FRCC">
+  <view wx:for="{{userList}}" class="cards FRCC" wx:key='key'>
     <wux-swipe-action useSlots>
       <view class="cards-body FRSC">
         <view class="cards-body-left FCCS">

@@ -33,10 +33,10 @@
 </view>
 <view class="chairs-body">
   <van-tabs id="tabs" animated swipeable active="{{tabIndex}}" sticky>
-    <block wx:for="{{tabChairsIndex}}">
+    <block wx:for="{{tabChairsIndex}}" wx:key='key'>
       <van-tab class="oneTab FRCS" title="{{item.name}}">
         <view class="FRCSW oneTab-body">
-          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"
+          <view wx:for="{{item.size}}" class="oneTab-chair FCCC" wx:for-index="chairTabIndex" wx:for-item="itemless"  wx:key='key'
             bindtap="toChair" data-chairIndex="{{chairTabIndex+item.start+1}}">
             <!-- {{chairTabIndex+item.start+1}}-{{chairsStates[chairTabIndex+item.start].state}} -->
             <view class="oneTab-chair-icon FCCC">

@@ -13,7 +13,7 @@
   <wux-cell class="f" title="正在学习" bindtap="navigateToNow" hasLine="{{false}}" is-link extra="管理" />
 </view>
 
-<view wx:for="{{historyList}}" class="cards FRCC">
+<view wx:for="{{historyList}}" wx:key='key' class="cards FRCC">
   <wux-swipe-action-group>
 
     <wux-swipe-action autoClose useSlots>
